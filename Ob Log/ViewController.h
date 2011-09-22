@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShortCell.h"
+#import "NoteCell.h"
+#import "DateHeader.h"
 
 @interface ViewController : UIViewController
+{
+    UIImageView *bg;
+    UIScrollView *scrollView;
+    DateHeader *dateHeader;
+}
+
+@property (nonatomic, retain) UIImageView *bg;
+@property (nonatomic, retain) UIScrollView *scrollView;
+@property (nonatomic, retain) DateHeader *dateHeader;
 
 @end

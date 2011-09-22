@@ -1,0 +1,68 @@
+//
+//  ActionButton.m
+//  ObLog
+//
+//  Created by David Alkire on 9/21/11.
+//  Copyright (c) 2011 Harvard Medical School. All rights reserved.
+//
+
+#import "ActionButton.h"
+#import "NoteCell.h"
+
+@implementation ActionButton
+
+@synthesize icon;
+@synthesize name;
+@synthesize isExtended;
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];/*colorWithRed:(float)0xEE/0xFF 
+                                               green:(float)0xEE/0xFF 
+                                                blue:(float)0xEE/0xFF 
+                                               alpha:1];*/
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    
+}
+
+- (void)createButtonOfType:(NSString *)type
+{
+    if ([type isEqualToString:@"toggle"]) {
+        icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        icon.image = [UIImage imageNamed:@"slideInBtn.png"];
+        [self addSubview:icon];
+        name = [[NSString alloc] initWithString:@"toggle"];
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (((NoteCell *)self.superview.superview).sliderIsExtended) {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.superview.frame = CGRectMake(self.superview.frame.size.width - 80, 
+                                    self.superview.frame.origin.y, 
+                                    self.superview.frame.size.width, 
+                                    self.superview.frame.size.height);
+        }];
+        ((NoteCell *)self.superview.superview).sliderIsExtended = NO;
+        icon.image = [UIImage imageNamed:@"slideOutBtn.png"];
+    }
+    else {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.superview.frame = CGRectMake(-6, 
+                                    self.superview.frame.origin.y, 
+                                    self.superview.frame.size.width, 
+                                    self.superview.frame.size.height);
+        }];
+        ((NoteCell *)self.superview.superview).sliderIsExtended = YES;
+        icon.image = [UIImage imageNamed:@"slideInBtn.png"];
+    }
+}
+
+@end
