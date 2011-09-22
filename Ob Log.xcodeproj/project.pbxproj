@@ -25,6 +25,9 @@
 		89C4B526142B6C1000D035BA /* ShortCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B51C142B6C1000D035BA /* ShortCell.m */; };
 		89C4B527142B6C1000D035BA /* slideInBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C4B51D142B6C1000D035BA /* slideInBtn.png */; };
 		89C4B528142B6C1000D035BA /* slideOutBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C4B51E142B6C1000D035BA /* slideOutBtn.png */; };
+		89C4B52C142BA1C800D035BA /* OptionsScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B52B142BA1C800D035BA /* OptionsScroll.m */; };
+		89C4B52F142BA1EF00D035BA /* OptionPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B52E142BA1EF00D035BA /* OptionPicker.m */; };
+		89C4B53B142BA87C00D035BA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C4B53A142BA87C00D035BA /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +60,11 @@
 		89C4B51C142B6C1000D035BA /* ShortCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortCell.m; sourceTree = "<group>"; };
 		89C4B51D142B6C1000D035BA /* slideInBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slideInBtn.png; sourceTree = "<group>"; };
 		89C4B51E142B6C1000D035BA /* slideOutBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slideOutBtn.png; sourceTree = "<group>"; };
+		89C4B52A142BA1C800D035BA /* OptionsScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsScroll.h; sourceTree = "<group>"; };
+		89C4B52B142BA1C800D035BA /* OptionsScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsScroll.m; sourceTree = "<group>"; };
+		89C4B52D142BA1EF00D035BA /* OptionPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionPicker.h; sourceTree = "<group>"; };
+		89C4B52E142BA1EF00D035BA /* OptionPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionPicker.m; sourceTree = "<group>"; };
+		89C4B53A142BA87C00D035BA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89C4B53B142BA87C00D035BA /* QuartzCore.framework in Frameworks */,
 				892C96A4142B67E000994EAB /* UIKit.framework in Frameworks */,
 				892C96A6142B67E000994EAB /* Foundation.framework in Frameworks */,
 				892C96A8142B67E000994EAB /* CoreGraphics.framework in Frameworks */,
@@ -76,6 +85,7 @@
 		892C9694142B67E000994EAB = {
 			isa = PBXGroup;
 			children = (
+				89C4B53A142BA87C00D035BA /* QuartzCore.framework */,
 				892C96A9142B67E000994EAB /* Ob Log */,
 				892C96A2142B67E000994EAB /* Frameworks */,
 				892C96A0142B67E000994EAB /* Products */,
@@ -103,6 +113,10 @@
 		892C96A9142B67E000994EAB /* Ob Log */ = {
 			isa = PBXGroup;
 			children = (
+				89C4B52A142BA1C800D035BA /* OptionsScroll.h */,
+				89C4B52B142BA1C800D035BA /* OptionsScroll.m */,
+				89C4B52D142BA1EF00D035BA /* OptionPicker.h */,
+				89C4B52E142BA1EF00D035BA /* OptionPicker.m */,
 				89C4B50F142B6C1000D035BA /* ActionButton.h */,
 				89C4B510142B6C1000D035BA /* ActionButton.m */,
 				89C4B511142B6C1000D035BA /* ActionsSlider.h */,
@@ -216,6 +230,8 @@
 				89C4B524142B6C1000D035BA /* DateHeader.m in Sources */,
 				89C4B525142B6C1000D035BA /* NoteCell.m in Sources */,
 				89C4B526142B6C1000D035BA /* ShortCell.m in Sources */,
+				89C4B52C142BA1C800D035BA /* OptionsScroll.m in Sources */,
+				89C4B52F142BA1EF00D035BA /* OptionPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

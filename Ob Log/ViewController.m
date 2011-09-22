@@ -65,8 +65,10 @@
                     nil];
 	
     int len = [arr count];
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 83, self.view.frame.size.width, 
-                                                                self.view.frame.size.height - 132)];
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
+                                                                84, 
+                                                                self.view.frame.size.width, 
+                                                                self.view.frame.size.height - 84)];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, CELL_HEIGHT*len);
     for (int i = 0; i < len; i++) {
         ShortCell *cell = [[ShortCell alloc] initWithFrame:CGRectMake(0, i*CELL_HEIGHT, SHORT_CELL_WIDTH, CELL_HEIGHT)];
@@ -81,18 +83,21 @@
         [cell setNeedsDisplay];
         [scrollView addSubview:cell];
         
-        NoteCell *noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(SHORT_CELL_WIDTH, i*CELL_HEIGHT, 
-                                                                        self.view.frame.size.width - SHORT_CELL_WIDTH, CELL_HEIGHT)];
+        NoteCell *noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(SHORT_CELL_WIDTH, 
+                                                                        i*CELL_HEIGHT, 
+                                                                        self.view.frame.size.width - SHORT_CELL_WIDTH, 
+                                                                        CELL_HEIGHT)];
         noteCell.tag = NOTE_CELL;
         
-        UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 
-                                                                    self.view.frame.size.width - SHORT_CELL_WIDTH - 40, CELL_HEIGHT - 10)];
+        UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 
+                                                                    5, 
+                                                                    self.view.frame.size.width - SHORT_CELL_WIDTH - 40, 
+                                                                    CELL_HEIGHT - 10)];
         label2.backgroundColor = [UIColor clearColor];
         label2.font = [UIFont systemFontOfSize:24];
         label2.text = [arr objectAtIndex:i];
         
         [noteCell insertSubview:label2 belowSubview:noteCell.slider];
-        //[noteCell exchangeSubviewAtIndex:[[noteCell subviews] count] withSubviewAtIndex:[[noteCell subviews] indexOfObject:noteCell.slider]];
         
         [noteCell setNeedsDisplay];
         [scrollView addSubview:noteCell];
@@ -144,7 +149,7 @@
         scrollView.frame = CGRectMake(scrollView.frame.origin.x, 
                                       scrollView.frame.origin.y, 
                                       768, 
-                                      1024 - 152);
+                                      1024 - 104);
         
         int len = [[scrollView subviews] count];
         NSLog(@"wr portrait, len=%d", len);
@@ -171,7 +176,7 @@
         scrollView.frame = CGRectMake(scrollView.frame.origin.x, 
                                       scrollView.frame.origin.y, 
                                       1024, 
-                                      768 - 152);
+                                      768 - 104);
         
         int len = [[scrollView subviews] count];
         NSLog(@"wr landscape, len=%d", len);
