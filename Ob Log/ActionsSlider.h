@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "ActionButton.h"
-#import "OptionsScroll.h"
+#import "OptionsScrollWrapper.h"
 
 @interface ActionsSlider : UIView
 {
-    OptionsScroll *optionsScroll;
+    OptionsScrollWrapper *optionsScrollWrapper;
     ActionButton *toggle;
 }
 
-@property (nonatomic, retain) OptionsScroll *optionsScroll;
+@property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
 @property (nonatomic, retain) ActionButton *toggle;
 
 @end

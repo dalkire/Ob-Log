@@ -10,7 +10,7 @@
 
 @implementation ActionsSlider
 
-@synthesize optionsScroll;
+@synthesize optionsScrollWrapper;
 @synthesize toggle;
 
 - (id)initWithFrame:(CGRect)frame
@@ -30,11 +30,11 @@
         [self addSubview:bg];
         [toggle createButtonOfType:@"toggle"];
         [self addSubview:toggle];
-        optionsScroll = [[OptionsScroll alloc] initWithFrame:CGRectMake(80, 
+        optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(80, 
                                                                         0, 
-                                                                        frame.size.width - 74, 
+                                                                        frame.size.width - 84, 
                                                                         frame.size.height)];
-        [self addSubview:optionsScroll];
+        [self addSubview:optionsScrollWrapper];
     }
     return self;
 }

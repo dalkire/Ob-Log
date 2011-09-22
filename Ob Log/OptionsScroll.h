@@ -10,16 +10,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import "OptionPicker.h"
 
-@interface OptionsScroll : UIView
+@interface OptionsScroll : UIScrollView
 {
-    UIScrollView *scrollView;
-    UIView *leftShadow;
-    UIView *rightShadow;
+    
 }
-
-@property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) UIView *leftShadow;
-@property (nonatomic, retain) UIView *rightShadow;
 
 - (void)addOptionPicker:(OptionPicker *)picker;
 

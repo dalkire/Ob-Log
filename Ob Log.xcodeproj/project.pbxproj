@@ -28,6 +28,7 @@
 		89C4B52C142BA1C800D035BA /* OptionsScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B52B142BA1C800D035BA /* OptionsScroll.m */; };
 		89C4B52F142BA1EF00D035BA /* OptionPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B52E142BA1EF00D035BA /* OptionPicker.m */; };
 		89C4B53B142BA87C00D035BA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C4B53A142BA87C00D035BA /* QuartzCore.framework */; };
+		89C4B53E142BB05000D035BA /* OptionsScrollWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B53D142BB05000D035BA /* OptionsScrollWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,8 @@
 		89C4B52D142BA1EF00D035BA /* OptionPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionPicker.h; sourceTree = "<group>"; };
 		89C4B52E142BA1EF00D035BA /* OptionPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionPicker.m; sourceTree = "<group>"; };
 		89C4B53A142BA87C00D035BA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		89C4B53C142BB05000D035BA /* OptionsScrollWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsScrollWrapper.h; sourceTree = "<group>"; };
+		89C4B53D142BB05000D035BA /* OptionsScrollWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsScrollWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,8 @@
 		892C96A9142B67E000994EAB /* Ob Log */ = {
 			isa = PBXGroup;
 			children = (
+				89C4B53C142BB05000D035BA /* OptionsScrollWrapper.h */,
+				89C4B53D142BB05000D035BA /* OptionsScrollWrapper.m */,
 				89C4B52A142BA1C800D035BA /* OptionsScroll.h */,
 				89C4B52B142BA1C800D035BA /* OptionsScroll.m */,
 				89C4B52D142BA1EF00D035BA /* OptionPicker.h */,
@@ -232,6 +237,7 @@
 				89C4B526142B6C1000D035BA /* ShortCell.m in Sources */,
 				89C4B52C142BA1C800D035BA /* OptionsScroll.m in Sources */,
 				89C4B52F142BA1EF00D035BA /* OptionPicker.m in Sources */,
+				89C4B53E142BB05000D035BA /* OptionsScrollWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
