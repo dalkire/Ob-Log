@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ActionButton.h"
 #import "OptionsScrollWrapper.h"
+#import "OptionPicker.h"
 
 @interface ActionsSlider : UIView
 {
@@ -18,5 +19,7 @@
 
 @property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
 @property (nonatomic, retain) ActionButton *toggle;
+
+- (void)loadOptionPickers;
 
 @end

@@ -19,10 +19,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];/*colorWithRed:(float)0xEE/0xFF 
-                                               green:(float)0xEE/0xFF 
-                                                blue:(float)0xEE/0xFF 
-                                               alpha:1];*/
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -35,7 +32,10 @@
 - (void)createButtonOfType:(NSString *)type
 {
     if ([type isEqualToString:@"toggle"]) {
-        icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        icon = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - 30)/2, 
+                                                             (self.frame.size.height - 30)/2, 
+                                                             30, 
+                                                             30)];
         icon.image = [UIImage imageNamed:@"slideInBtn.png"];
         [self addSubview:icon];
         name = [[NSString alloc] initWithString:@"toggle"];

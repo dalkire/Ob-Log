@@ -21,8 +21,8 @@
                                                green:(float)0xEE/0xFF 
                                                 blue:(float)0xEE/0xFF 
                                                alpha:1];*/
-        toggle = [[ActionButton alloc] initWithFrame:CGRectMake(30, (frame.size.height - 30)/2, 30, 30)];
-        UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(10, 0, frame.size.width - 10, frame.size.height)];
+        toggle = [[ActionButton alloc] initWithFrame:CGRectMake(20, 0, frame.size.height, frame.size.height)];
+        UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(20, 0, frame.size.width - 10, frame.size.height)];
         bg.backgroundColor = [UIColor colorWithRed:(float)0xEE/0xFF 
                                              green:(float)0xEE/0xFF 
                                               blue:(float)0xEE/0xFF 
@@ -32,11 +32,17 @@
         [self addSubview:toggle];
         optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(80, 
                                                                         0, 
-                                                                        frame.size.width - 84, 
+                                                                        frame.size.width - 82, 
                                                                         frame.size.height)];
+        [self loadOptionPickers];
         [self addSubview:optionsScrollWrapper];
     }
     return self;
+}
+
+- (void)loadOptionPickers
+{
+    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
 }
 
 - (void)drawRect:(CGRect)rect

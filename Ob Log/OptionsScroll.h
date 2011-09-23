@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 #import "OptionPicker.h"
 
 @interface OptionsScroll : UIScrollView
 {
-    
+    NSMutableArray *pickers;
 }
+
+@property (nonatomic, retain) NSMutableArray *pickers;
 
 - (void)addOptionPicker:(OptionPicker *)picker;
 

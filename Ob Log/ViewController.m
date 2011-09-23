@@ -10,7 +10,7 @@
 #define SHORT_CELL 776584
 #define SHORT_CELL_WIDTH 300
 #define NOTE_CELL  776585
-#define CELL_HEIGHT 70
+#define CELL_HEIGHT 50
 
 #import "ViewController.h"
 
@@ -62,6 +62,13 @@
                     @"Oprah Winfrey",
                     @"Steve Jobs",
                     @"Steve Wozniak",
+                    @"Jessie LLoyd",
+                    @"Metta World Peace",
+                    @"J.R. Martinez",
+                    @"Tom Bergeron",
+                    @"Howard Stern",
+                    @"Robin Quivers",
+                    @"Gary Dell'Abate",
                     nil];
 	
     int len = [arr count];

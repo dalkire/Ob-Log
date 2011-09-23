@@ -7,40 +7,41 @@
 //
 
 #import "OptionsScroll.h"
+#import "OptionsScrollWrapper.h"
 
 @implementation OptionsScroll
+
+@synthesize pickers;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+        pickers = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
 }
 
 - (void)addOptionPicker:(OptionPicker *)picker
 {
-    
+    [self addSubview:picker];
 }
 
-- (void)drawRect:(CGRect)rect
+- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view
 {
-    /*CGGradientRef myGradient;
-    CGColorSpaceRef myColorspace;
-    size_t num_locations = 2;
-    CGFloat locations[2] = { 0.0, 1.0 };
-    CGFloat components[8] = {   (float)0x88/0xFF, (float)0x88/0xFF, (float)0x88/0xFF, 0.6f,
-                                (float)0xFF/0xFF, (float)0xFF/0xFF, (float)0xFF/0xFF, 0.0f };
-    myColorspace = CGColorSpaceCreateDeviceRGB();
-    myGradient = CGGradientCreateWithColorComponents(myColorspace, components, locations, num_locations);
+    NSLog(@"touches should begin!!!!");
+    [super touchesShouldBegin:touches withEvent:event inContentView:view];
     
-    CGPoint myStartPoint, myEndPoint;
-    myStartPoint.x = 0;
-    myStartPoint.y = 0;
-    myEndPoint.x = 8;
-    myEndPoint.y = 0;
-    CGContextDrawLinearGradient (UIGraphicsGetCurrentContext(), myGradient, myStartPoint, myEndPoint, 0);*/
+    ((OptionsScrollWrapper *)self.superview).leftShadow.hidden = NO;
+    ((OptionsScrollWrapper *)self.superview).rightShadow.hidden = NO;
+    
+    return YES;
 }
+
+/*- (void)drawRect:(CGRect)rect
+{
+ 
+}*/
 
 @end

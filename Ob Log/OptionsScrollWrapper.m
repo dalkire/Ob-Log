@@ -18,10 +18,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        optionsScroll = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, 300, frame.size.height)];
-        optionsScroll.contentSize = CGSizeMake(3000, frame.size.height);
+        optionsScroll = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        optionsScroll.contentSize = CGSizeMake(700, frame.size.height);
         
-        self.backgroundColor = [UIColor yellowColor];
+        self.backgroundColor = [UIColor clearColor];
         [self addSubview:optionsScroll];
         
         leftShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
@@ -29,40 +29,45 @@
                                                               8, 
                                                               frame.size.height)];
         
-        rightShadow = [[UIView alloc] initWithFrame:CGRectMake(20, 
+        rightShadow = [[UIView alloc] initWithFrame:CGRectMake(190, 
                                                                0, 
                                                                8, 
                                                                frame.size.height)];
         
         CAGradientLayer *gradientL = [CAGradientLayer layer];
         [gradientL setFrame:[leftShadow frame]];
-        [gradientL setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0x88/0xFF 
-                                                                          green:(float)0x88/0xFF 
-                                                                           blue:(float)0x88/0xFF 
-                                                                          alpha:0.6f].CGColor, 
-                             (id)[UIColor colorWithRed:(float)0xFF/0xFF 
-                                                 green:(float)0xFF/0xFF 
-                                                  blue:(float)0xFF/0xFF 
+        [gradientL setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0x33/0xFF 
+                                                                          green:(float)0x33/0xFF 
+                                                                           blue:(float)0x33/0xFF 
+                                                                          alpha:0.4f].CGColor, 
+                             (id)[UIColor colorWithRed:(float)0x33/0xFF 
+                                                 green:(float)0x33/0xFF 
+                                                  blue:(float)0x33/0xFF 
                                                  alpha:0.0f].CGColor, 
                              nil]];
         gradientL.startPoint = CGPointMake(0, 0);
         gradientL.endPoint = CGPointMake(1, 0);
         [[leftShadow layer] addSublayer:gradientL];
+        leftShadow.backgroundColor = [UIColor clearColor];
         
         CAGradientLayer *gradientR = [CAGradientLayer layer];
-        [gradientR setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0x88/0xFF 
-                                                                           green:(float)0x88/0xFF 
-                                                                            blue:(float)0x88/0xFF 
-                                                                           alpha:0.6f].CGColor, 
-                              (id)[UIColor colorWithRed:(float)0xFF/0xFF 
-                                                  green:(float)0xFF/0xFF 
-                                                   blue:(float)0xFF/0xFF 
+        [gradientR setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0x33/0xFF 
+                                                                           green:(float)0x33/0xFF 
+                                                                            blue:(float)0x33/0xFF 
+                                                                           alpha:0.4f].CGColor, 
+                              (id)[UIColor colorWithRed:(float)0x33/0xFF 
+                                                  green:(float)0x33/0xFF 
+                                                   blue:(float)0x33/0xFF 
                                                   alpha:0.0f].CGColor, 
                               nil]];
         [gradientR setFrame:[rightShadow frame]];
         gradientR.startPoint = CGPointMake(1, 0);
         gradientR.endPoint = CGPointMake(0, 0);
         [[rightShadow layer] addSublayer:gradientR];
+        rightShadow.backgroundColor = [UIColor clearColor];
+        
+        //leftShadow.hidden = YES;
+        //rightShadow.hidden = YES;
         
         [self addSubview:leftShadow];
         [self addSubview:rightShadow];

@@ -46,8 +46,8 @@
     CGColorSpaceRef myColorspace;
     size_t num_locations = 2;
     CGFloat locations[2] = { 0.0, 1.0 };
-    CGFloat components[8] = {   (float)0xD3/0xFF, (float)0x1C/0xFF, (float)0x0C/0xFF, 1.0f,
-                                (float)0xA3/0xFF, (float)0x0F/0xFF, (float)0x05/0xFF, 1.0f };
+    CGFloat components[8] = {   (float)0x04/0xFF, (float)0x81/0xFF, (float)0xF2/0xFF, 1.0f,
+                                (float)0x02/0xFF, (float)0x69/0xFF, (float)0xEA/0xFF, 1.0f };
     myColorspace = CGColorSpaceCreateDeviceRGB();
     myGradient = CGGradientCreateWithColorComponents(myColorspace, components, locations, num_locations);
     

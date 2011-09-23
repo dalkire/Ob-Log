@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface OptionPicker : UIView
 {
     
 }
+
++ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSArray *)options;
 
 @end
