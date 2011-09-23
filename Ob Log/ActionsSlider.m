@@ -17,12 +17,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];/*colorWithRed:(float)0xEE/0xFF 
-                                               green:(float)0xEE/0xFF 
-                                                blue:(float)0xEE/0xFF 
-                                               alpha:1];*/
-        toggle = [[ActionButton alloc] initWithFrame:CGRectMake(20, 0, frame.size.height, frame.size.height)];
-        UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(20, 0, frame.size.width - 10, frame.size.height)];
+        self.backgroundColor = [UIColor clearColor];
+        toggle = [[ActionButton alloc] initWithFrame:CGRectMake(10, 0, frame.size.height, frame.size.height)];
+        UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(10, 0, frame.size.width - 10, frame.size.height)];
         bg.backgroundColor = [UIColor colorWithRed:(float)0xEE/0xFF 
                                              green:(float)0xEE/0xFF 
                                               blue:(float)0xEE/0xFF 
@@ -30,9 +27,9 @@
         [self addSubview:bg];
         [toggle createButtonOfType:@"toggle"];
         [self addSubview:toggle];
-        optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(80, 
+        optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(60, 
                                                                         0, 
-                                                                        frame.size.width - 82, 
+                                                                        frame.size.width - 60, 
                                                                         frame.size.height)];
         [self loadOptionPickers];
         [self addSubview:optionsScrollWrapper];

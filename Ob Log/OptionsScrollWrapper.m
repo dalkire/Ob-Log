@@ -29,7 +29,7 @@
                                                               8, 
                                                               frame.size.height)];
         
-        rightShadow = [[UIView alloc] initWithFrame:CGRectMake(190, 
+        rightShadow = [[UIView alloc] initWithFrame:CGRectMake(200, 
                                                                0, 
                                                                8, 
                                                                frame.size.height)];

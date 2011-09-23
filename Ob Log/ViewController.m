@@ -96,7 +96,7 @@
                                                                         CELL_HEIGHT)];
         noteCell.tag = NOTE_CELL;
         
-        UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 
+        /*UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 
                                                                     5, 
                                                                     self.view.frame.size.width - SHORT_CELL_WIDTH - 40, 
                                                                     CELL_HEIGHT - 10)];
@@ -104,7 +104,7 @@
         label2.font = [UIFont systemFontOfSize:24];
         label2.text = [arr objectAtIndex:i];
         
-        [noteCell insertSubview:label2 belowSubview:noteCell.slider];
+        [noteCell insertSubview:label2 belowSubview:noteCell.slider];*/
         
         [noteCell setNeedsDisplay];
         [scrollView addSubview:noteCell];

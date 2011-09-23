@@ -18,18 +18,19 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        dayOfWeek = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 270, 40)];
-        date = [[UILabel alloc] initWithFrame:CGRectMake(310, 20, 400, 40)];
-        dayOfWeek.backgroundColor = [UIColor clearColor];
+        date = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)];
+        NSLog(@"width: %f", date.frame.size.width);
         date.backgroundColor = [UIColor clearColor];
-        dayOfWeek.textColor = [UIColor whiteColor];
         date.textColor = [UIColor whiteColor];
-        dayOfWeek.font = [UIFont fontWithName:@"Helvetica-Bold" size:36];
         date.font = [UIFont fontWithName:@"Helvetica-Bold" size:36];
-        dayOfWeek.text = @"Wednesday";
-        date.text = @"21 September 2011";
-        dayOfWeek.textAlignment = UITextAlignmentRight;
-        [self addSubview:dayOfWeek];
+        date.text = @"Wednesday, 21 September 2011";
+        [date sizeToFit];
+        NSLog(@"width: %f", date.frame.size.width);
+        date.frame = CGRectMake((frame.size.width - date.frame.size.width)/2, 
+                                (frame.size.height - date.frame.size.height)/2, 
+                                date.frame.size.width, 
+                                date.frame.size.height);
+        
         [self addSubview:date];
     }
     return self;
@@ -59,8 +60,8 @@
     CGContextDrawLinearGradient (UIGraphicsGetCurrentContext(), myGradient, myStartPoint, myEndPoint, 0);
     
     CGFloat locations2[2] = { 0.0, 1.0 };
-    CGFloat components2[8] = {  (float)0x33/0xFF, (float)0x33/0xFF, (float)0x33/0xFF, 0.8f,
-                                (float)0xFF/0xFF, (float)0xFF/0xFF, (float)0xFF/0xFF, 0.0f };
+    CGFloat components2[8] = {  (float)0x33/0xFF, (float)0x33/0xFF, (float)0x33/0xFF, 0.6f,
+                                (float)0x33/0xFF, (float)0x33/0xFF, (float)0x33/0xFF, 0.0f };
     myColorspace = CGColorSpaceCreateDeviceRGB();
     myGradient = CGGradientCreateWithColorComponents(myColorspace, components2, locations2, num_locations);
     

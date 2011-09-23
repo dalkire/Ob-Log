@@ -46,7 +46,7 @@
 {
     if (((NoteCell *)self.superview.superview).sliderIsExtended) {
         [UIView animateWithDuration:0.4 animations:^{
-            self.superview.frame = CGRectMake(self.superview.frame.size.width - 80, 
+            self.superview.frame = CGRectMake(self.superview.frame.size.width - 60, 
                                     self.superview.frame.origin.y, 
                                     self.superview.frame.size.width, 
                                     self.superview.frame.size.height);

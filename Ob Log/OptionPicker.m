@@ -52,28 +52,16 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {  
-    NSLog(@"self.superview.superview.superview.superview.superview.superview.superview=%@", self.superview.superview.superview.superview.superview.superview.superview);
     PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
     self.optionPickerPopover = [[UIPopoverController alloc]
                                      initWithContentViewController:content];
     self.optionPickerPopover.delegate = self;
-    [self.optionPickerPopover presentPopoverFromRect:CGRectMake(
-                                                                self.superview.superview.superview.superview.superview.superview.superview.frame.origin.x +
-                                                                self.superview.superview.superview.superview.superview.superview.frame.origin.x +
-                                                                self.superview.superview.superview.superview.superview.frame.origin.x +
-                                                                self.superview.superview.superview.superview.frame.origin.x +
-                                                                self.superview.superview.superview.frame.origin.x +
-                                                                self.superview.superview.frame.origin.x +
-                                                                self.superview.frame.origin.x +
-                                                                self.frame.origin.x + self.frame.size.width/2, 
-                                                                self.superview.superview.superview.superview.superview.superview.superview.frame.origin.y +
-                                                                self.superview.superview.superview.superview.superview.superview.frame.origin.y +
-                                                                self.superview.superview.superview.superview.superview.frame.origin.y +
-                                                                self.superview.superview.superview.superview.frame.origin.y +
-                                                                self.superview.superview.superview.frame.origin.y +
-                                                                self.superview.superview.frame.origin.y +
-                                                                self.superview.frame.origin.y +
-                                                                self.frame.origin.y + self.frame.size.height/2, 
+    CGPoint convertedPoint = [self convertPoint:CGPointMake(self.frame.origin.x + self.frame.size.width/2, 
+                                                             self.frame.origin.y + self.frame.size.height/2) 
+                                          toView:[[[self window] rootViewController] view]];
+
+    [self.optionPickerPopover presentPopoverFromRect:CGRectMake(convertedPoint.x, 
+                                                                convertedPoint.y, 
                                                                 1, 
                                                                 1)
                                               inView:self.superview.superview.superview.superview.superview.superview.superview

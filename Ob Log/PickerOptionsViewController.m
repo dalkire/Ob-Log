@@ -10,14 +10,20 @@
 
 @implementation PickerOptionsViewController
 
+@synthesize tv;
 @synthesize arr;
+@synthesize previousIndexPath;
+@synthesize currentIndexPath;
+@synthesize previousIndex;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
+        previousIndex = -1;
         arr = [NSArray arrayWithObjects:@"Present", @"Late", @"Absent", nil];
-        UITableView *tv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 240, 180) style:style];
+        previousIndexPath = nil;
+        tv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 240, 180) style:style];
         tv.delegate = self;
         tv.dataSource = self;
         [self.view addSubview:tv];
@@ -95,6 +101,10 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
+    if (previousIndex > -1 && indexPath.row == previousIndex) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }
+    
     cell.textLabel.text = [arr objectAtIndex:indexPath.row];
     
     return cell;
@@ -141,16 +151,21 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    return @"attendance";
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{   
+    NSLog(@"%@", indexPath);
+    if (previousIndex > -1) {
+        [[tableView cellForRowAtIndexPath:[[indexPath indexPathByRemovingLastIndex] indexPathByAddingIndex:previousIndex]] 
+                    setAccessoryType:UITableViewCellAccessoryNone];
+    }
+    [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
+    previousIndex = [indexPath indexAtPosition:1];
+    //[tableView reloadData];
 }
 
 @end
