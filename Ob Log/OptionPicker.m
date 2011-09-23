@@ -10,6 +10,8 @@
 
 @implementation OptionPicker
 
+@synthesize optionPickerPopover;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -46,6 +48,28 @@
     label.backgroundColor = [UIColor clearColor];
     [picker addSubview:label];
     return picker;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{   NSLog(@"optionpicker touches began");
+    PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
+    self.optionPickerPopover = [[UIPopoverController alloc]
+                                     initWithContentViewController:content];
+    self.optionPickerPopover.delegate = self;
+    [self.optionPickerPopover presentPopoverFromRect:CGRectMake(0, 0, 300, 500)
+                                              inView:self.superview.superview
+                            permittedArrowDirections:UIPopoverArrowDirectionUp 
+                                            animated:YES];
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
+{
+    return YES;
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    
 }
 
 - (void)drawRect:(CGRect)rect

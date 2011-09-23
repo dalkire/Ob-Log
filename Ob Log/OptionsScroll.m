@@ -36,6 +36,8 @@
     ((OptionsScrollWrapper *)self.superview).leftShadow.hidden = NO;
     ((OptionsScrollWrapper *)self.superview).rightShadow.hidden = NO;
     
+    [view touchesBegan:touches withEvent:event];
+    
     return YES;
 }
 

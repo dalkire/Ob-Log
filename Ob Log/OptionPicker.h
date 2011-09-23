@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "PickerOptionsViewController.h"
 
-@interface OptionPicker : UIView
+@interface OptionPicker : UIView <UIPopoverControllerDelegate>
 {
-    
+    UIPopoverController *optionPickerPopover;
 }
+
+@property (nonatomic, retain) UIPopoverController *optionPickerPopover;
 
 + (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSArray *)options;
 

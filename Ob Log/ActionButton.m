@@ -42,7 +42,8 @@
     }
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
     if (((NoteCell *)self.superview.superview).sliderIsExtended) {
         [UIView animateWithDuration:0.4 animations:^{
             self.superview.frame = CGRectMake(self.superview.frame.size.width - 80, 
