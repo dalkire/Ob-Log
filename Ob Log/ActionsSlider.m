@@ -40,6 +40,7 @@
 - (void)loadOptionPickers
 {
     [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
+    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"participation" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
 }
 
 - (void)drawRect:(CGRect)rect
