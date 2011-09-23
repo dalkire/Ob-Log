@@ -51,14 +51,33 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{   NSLog(@"optionpicker touches began");
+{  
+    NSLog(@"self.superview.superview.superview.superview.superview.superview.superview=%@", self.superview.superview.superview.superview.superview.superview.superview);
     PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
     self.optionPickerPopover = [[UIPopoverController alloc]
                                      initWithContentViewController:content];
     self.optionPickerPopover.delegate = self;
-    [self.optionPickerPopover presentPopoverFromRect:CGRectMake(0, 0, 300, 500)
-                                              inView:self.superview.superview
-                            permittedArrowDirections:UIPopoverArrowDirectionUp 
+    [self.optionPickerPopover presentPopoverFromRect:CGRectMake(
+                                                                self.superview.superview.superview.superview.superview.superview.superview.frame.origin.x +
+                                                                self.superview.superview.superview.superview.superview.superview.frame.origin.x +
+                                                                self.superview.superview.superview.superview.superview.frame.origin.x +
+                                                                self.superview.superview.superview.superview.frame.origin.x +
+                                                                self.superview.superview.superview.frame.origin.x +
+                                                                self.superview.superview.frame.origin.x +
+                                                                self.superview.frame.origin.x +
+                                                                self.frame.origin.x + self.frame.size.width/2, 
+                                                                self.superview.superview.superview.superview.superview.superview.superview.frame.origin.y +
+                                                                self.superview.superview.superview.superview.superview.superview.frame.origin.y +
+                                                                self.superview.superview.superview.superview.superview.frame.origin.y +
+                                                                self.superview.superview.superview.superview.frame.origin.y +
+                                                                self.superview.superview.superview.frame.origin.y +
+                                                                self.superview.superview.frame.origin.y +
+                                                                self.superview.frame.origin.y +
+                                                                self.frame.origin.y + self.frame.size.height/2, 
+                                                                1, 
+                                                                1)
+                                              inView:self.superview.superview.superview.superview.superview.superview.superview
+                            permittedArrowDirections:UIPopoverArrowDirectionAny 
                                             animated:YES];
 }
 

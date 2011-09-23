@@ -17,11 +17,11 @@
     self = [super initWithStyle:style];
     if (self) {
         arr = [NSArray arrayWithObjects:@"Present", @"Late", @"Absent", nil];
-        UITableView *tv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 300, 500) style:style];
+        UITableView *tv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 240, 180) style:style];
         tv.delegate = self;
         tv.dataSource = self;
         [self.view addSubview:tv];
-        self.contentSizeForViewInPopover = CGSizeMake(300, 500);
+        self.contentSizeForViewInPopover = CGSizeMake(240, 180);
     }
     return self;
 }
