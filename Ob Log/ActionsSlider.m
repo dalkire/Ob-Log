@@ -18,8 +18,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        toggle = [[ActionButton alloc] initWithFrame:CGRectMake(10, 0, frame.size.height, frame.size.height)];
-        UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(10, 0, frame.size.width - 10, frame.size.height)];
+        toggle = [[[ActionButton alloc] initWithFrame:CGRectMake(10, 0, 50, frame.size.height)] autorelease];
+        UIView *bg = [[[UIView alloc] initWithFrame:CGRectMake(10, 0, frame.size.width - 10, frame.size.height)] autorelease];
         bg.backgroundColor = [UIColor colorWithRed:(float)0xEE/0xFF 
                                              green:(float)0xEE/0xFF 
                                               blue:(float)0xEE/0xFF 
@@ -41,6 +41,10 @@
 {
     [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
     [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"participation" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
+    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"follow up" andOptions:[NSArray arrayWithObjects:@"no follow up", @"needs follow up", nil]]];
+    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
+    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"participation" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
+    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"follow up" andOptions:[NSArray arrayWithObjects:@"no follow up", @"needs follow up", nil]]];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -60,6 +64,18 @@
     myEndPoint.x = 0;
     myEndPoint.y = 0;
     CGContextDrawLinearGradient (UIGraphicsGetCurrentContext(), myGradient, myStartPoint, myEndPoint, 0);
+    CGGradientRelease(myGradient);
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    NSLog(@"WILL ROTATE");
+    if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        self.toggle.hidden = NO;
+    }
+    else {
+        self.toggle.hidden = YES;
+    }
 }
 
 @end

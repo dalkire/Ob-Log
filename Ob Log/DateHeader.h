@@ -11,11 +11,9 @@
 
 @interface DateHeader : UIView
 {
-    UILabel *dayOfWeek;
     UILabel *date;
 }
 
-@property (nonatomic, retain) UILabel *dayOfWeek;
 @property (nonatomic, retain) UILabel *date;
 
 - (void)assignDate:(NSDate *)date;

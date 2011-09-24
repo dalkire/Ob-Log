@@ -12,6 +12,7 @@
 
 @synthesize tv;
 @synthesize arr;
+@synthesize popoverHeader;
 @synthesize previousIndexPath;
 @synthesize currentIndexPath;
 @synthesize previousIndex;
@@ -21,7 +22,7 @@
     self = [super initWithStyle:style];
     if (self) {
         previousIndex = -1;
-        arr = [NSArray arrayWithObjects:@"Present", @"Late", @"Absent", nil];
+        arr = [[NSMutableArray alloc] initWithCapacity:0];
         previousIndexPath = nil;
         tv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 240, 180) style:style];
         tv.delegate = self;
@@ -30,6 +31,12 @@
         self.contentSizeForViewInPopover = CGSizeMake(240, 180);
     }
     return self;
+}
+
+- (void)assignOptionsArray:(NSMutableArray *)options withHeader:(NSString *)header
+{
+    arr = options;
+    popoverHeader = header;
 }
 
 - (void)didReceiveMemoryWarning
@@ -153,7 +160,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"attendance";
+    return popoverHeader;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,7 +10,7 @@
 #define SHORT_CELL 776584
 #define SHORT_CELL_WIDTH 300
 #define NOTE_CELL  776585
-#define CELL_HEIGHT 50
+#define CELL_HEIGHT 70
 
 #import "ViewController.h"
 
@@ -72,16 +72,16 @@
                     nil];
 	
     int len = [arr count];
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
+    scrollView = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 
                                                                 84, 
                                                                 self.view.frame.size.width, 
-                                                                self.view.frame.size.height - 84)];
+                                                                self.view.frame.size.height - 84)] autorelease];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, CELL_HEIGHT*len);
     for (int i = 0; i < len; i++) {
-        ShortCell *cell = [[ShortCell alloc] initWithFrame:CGRectMake(0, i*CELL_HEIGHT, SHORT_CELL_WIDTH, CELL_HEIGHT)];
+        ShortCell *cell = [[[ShortCell alloc] initWithFrame:CGRectMake(0, i*CELL_HEIGHT, SHORT_CELL_WIDTH, CELL_HEIGHT)] autorelease];
         cell.tag = SHORT_CELL;
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, SHORT_CELL_WIDTH - 40, CELL_HEIGHT - 10)];
+        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(20, 5, SHORT_CELL_WIDTH - 40, CELL_HEIGHT - 10)] autorelease];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont fontWithName:@"Helvetica" size:28];
         label.text = [arr objectAtIndex:i];
@@ -90,10 +90,10 @@
         [cell setNeedsDisplay];
         [scrollView addSubview:cell];
         
-        NoteCell *noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(SHORT_CELL_WIDTH, 
+        NoteCell *noteCell = [[[NoteCell alloc] initWithFrame:CGRectMake(SHORT_CELL_WIDTH, 
                                                                         i*CELL_HEIGHT, 
                                                                         self.view.frame.size.width - SHORT_CELL_WIDTH, 
-                                                                        CELL_HEIGHT)];
+                                                                        CELL_HEIGHT)] autorelease];
         noteCell.tag = NOTE_CELL;
         
         /*UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 
@@ -119,8 +119,9 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    [bg release];
+    [scrollView release];
+    [dateHeader release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -145,7 +146,7 @@
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    self.view.hidden = YES;
+    //self.view.hidden = YES;
     
     if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         [bg removeFromSuperview];
@@ -212,7 +213,7 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    self.view.hidden = NO;
+    //self.view.hidden = NO;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

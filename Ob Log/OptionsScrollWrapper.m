@@ -18,7 +18,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        optionsScroll = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        optionsScroll = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, frame.size.width - 7, frame.size.height)];
         optionsScroll.contentSize = CGSizeMake(700, frame.size.height);
         
         self.backgroundColor = [UIColor clearColor];
@@ -29,7 +29,7 @@
                                                               8, 
                                                               frame.size.height)];
         
-        rightShadow = [[UIView alloc] initWithFrame:CGRectMake(200, 
+        rightShadow = [[UIView alloc] initWithFrame:CGRectMake(196, 
                                                                0, 
                                                                8, 
                                                                frame.size.height)];

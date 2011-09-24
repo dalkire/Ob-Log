@@ -45,8 +45,8 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (((NoteCell *)self.superview.superview).sliderIsExtended) {
-        [UIView animateWithDuration:0.4 animations:^{
-            self.superview.frame = CGRectMake(self.superview.frame.size.width - 60, 
+        [UIView animateWithDuration:0.3 animations:^{
+            self.superview.frame = CGRectMake(self.superview.frame.size.width - 61, 
                                     self.superview.frame.origin.y, 
                                     self.superview.frame.size.width, 
                                     self.superview.frame.size.height);
@@ -55,7 +55,7 @@
         icon.image = [UIImage imageNamed:@"slideOutBtn.png"];
     }
     else {
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             self.superview.frame = CGRectMake(-6, 
                                     self.superview.frame.origin.y, 
                                     self.superview.frame.size.width, 

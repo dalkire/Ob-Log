@@ -13,10 +13,14 @@
 @interface OptionPicker : UIView <UIPopoverControllerDelegate>
 {
     UIPopoverController *optionPickerPopover;
+    NSMutableArray *arr;
+    NSString *popoverHeader;
 }
 
 @property (nonatomic, retain) UIPopoverController *optionPickerPopover;
+@property (nonatomic, retain) NSMutableArray *arr;
+@property (nonatomic, retain) NSString *popoverHeader;
 
-+ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSArray *)options;
++ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSMutableArray *)options;
 
 @end

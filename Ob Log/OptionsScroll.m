@@ -38,6 +38,7 @@
                               picker.frame.size.width, 
                               picker.frame.size.height);
     [self addSubview:picker];
+    self.contentSize = CGSizeMake(originX + picker.frame.size.width + 2, picker.frame.size.height);
     [pickers addObject:picker];
 }
 
