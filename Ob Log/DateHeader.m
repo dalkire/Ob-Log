@@ -74,7 +74,7 @@
     myStartPoint.x = 0.0;
     myStartPoint.y = 0.0;
     myEndPoint.x = 0.0;
-    myEndPoint.y = self.frame.size.height - 7;
+    myEndPoint.y = self.frame.size.height - 6;
     CGContextDrawLinearGradient (UIGraphicsGetCurrentContext(), myGradient2, myStartPoint, myEndPoint, 0);
     CGColorSpaceRelease(myColorspace2);
     CGGradientRelease(myGradient2);

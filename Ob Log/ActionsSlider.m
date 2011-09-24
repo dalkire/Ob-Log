@@ -40,7 +40,7 @@
 - (void)loadOptionPickers
 {
     [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
-    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"participation" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
+    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"part" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
     [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"follow up" andOptions:[NSArray arrayWithObjects:@"no follow up", @"needs follow up", nil]]];
     [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
     [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"participation" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
