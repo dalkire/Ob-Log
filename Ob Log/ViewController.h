@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "/usr/include/sqlite3.h"
-#import "ShortCell.h"
+#import "Row.h"
+#import "NameCell.h"
 #import "NoteCell.h"
 #import "DateHeader.h"
 #import "EditModalViewController.h"
@@ -19,12 +19,14 @@
     UIImageView *bg;
     UIScrollView *scrollView;
     DateHeader *dateHeader;
+    UIView *dateHeaderDropShadow;
     EditModalViewController *editModal;
 }
 
 @property (nonatomic, retain) UIImageView *bg;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) DateHeader *dateHeader;
+@property (nonatomic, retain) UIView *dateHeaderDropShadow;
 @property (nonatomic, retain) EditModalViewController *editModal;
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;

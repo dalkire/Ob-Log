@@ -19,6 +19,7 @@
 @synthesize bg;
 @synthesize scrollView;
 @synthesize dateHeader;
+@synthesize dateHeaderDropShadow;
 @synthesize editModal;
 
 - (void)didReceiveMemoryWarning
@@ -42,6 +43,32 @@
     }
     
     [self.view addSubview:bg];
+    
+    dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
+    dateHeaderDropShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
+                                                                    dateHeader.frame.origin.y + dateHeader.frame.size.height, 
+                                                                    self.view.frame.size.width, 
+                                                                    8)];
+    dateHeaderDropShadow.backgroundColor = [UIColor clearColor];
+    
+    CAGradientLayer *headerDrop = [CAGradientLayer layer];
+    headerDrop.frame = CGRectMake(
+                                 0, 
+                                 0, 
+                                 dateHeaderDropShadow.frame.size.width, 
+                                 dateHeaderDropShadow.frame.size.height);
+    [headerDrop setColors:[NSArray arrayWithObjects: (id)[UIColor colorWithRed:(float)0x33/0xFF 
+                                                                       green:(float)0x33/0xFF 
+                                                                        blue:(float)0x33/0xFF 
+                                                                       alpha:0.4f].CGColor, 
+                                                    (id)[UIColor colorWithRed:(float)0x33/0xFF 
+                                                                        green:(float)0x33/0xFF 
+                                                                         blue:(float)0x33/0xFF 
+                                                                        alpha:0.0f].CGColor, 
+                                                                        nil]];
+    headerDrop.startPoint = CGPointMake(0, 0);
+    headerDrop.endPoint = CGPointMake(0, 1);
+    [[dateHeaderDropShadow layer] addSublayer:headerDrop];
     
     NSArray *arr = [[NSArray alloc] initWithObjects:
                     @"Melissa Alkire",
@@ -72,12 +99,22 @@
 	
     int len = [arr count];
     scrollView = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                84, 
+                                                                dateHeader.frame.size.height, 
                                                                 self.view.frame.size.width, 
-                                                                self.view.frame.size.height - 84)] autorelease];
+                                                                self.view.frame.size.height - dateHeader.frame.size.height)] autorelease];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, CELL_HEIGHT*len);
+    
     for (int i = 0; i < len; i++) {
-        ShortCell *cell = [[[ShortCell alloc] initWithFrame:CGRectMake(0, i*CELL_HEIGHT, SHORT_CELL_WIDTH, CELL_HEIGHT)] autorelease];
+        Row *row = [[Row alloc] initWithFrame:CGRectMake(0, 
+                                                         i*CELL_HEIGHT, 
+                                                         self.view.frame.size.width, 
+                                                         CELL_HEIGHT)];
+        [row setId:i];
+        [row setNeedsDisplay];
+        [scrollView addSubview:row];
+        
+        
+        /*ShortCell *cell = [[[ShortCell alloc] initWithFrame:CGRectMake(0, i*CELL_HEIGHT, SHORT_CELL_WIDTH, CELL_HEIGHT)] autorelease];
         cell.tag = SHORT_CELL;
         cell.controller = self;
         cell.name.text = [arr objectAtIndex:i];
@@ -91,23 +128,13 @@
                                                                         CELL_HEIGHT)] autorelease];
         noteCell.tag = NOTE_CELL;
         
-        /*UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 
-                                                                    5, 
-                                                                    self.view.frame.size.width - SHORT_CELL_WIDTH - 40, 
-                                                                    CELL_HEIGHT - 10)];
-        label2.backgroundColor = [UIColor clearColor];
-        label2.font = [UIFont systemFontOfSize:24];
-        label2.text = [arr objectAtIndex:i];
-        
-        [noteCell insertSubview:label2 belowSubview:noteCell.slider];*/
-        
         [noteCell setNeedsDisplay];
-        [scrollView addSubview:noteCell];
+        [scrollView addSubview:noteCell];*/
     }
     [self.view addSubview:scrollView];
     
-    dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
     [self.view insertSubview:dateHeader atIndex:[[self.view subviews] count]];
+    [self.view addSubview:dateHeaderDropShadow];
     
     [super viewDidLoad];
 }

@@ -11,11 +11,13 @@
 
 @interface DateHeader : UIView
 {
-    UILabel *date;
+    UILabel *dateTitle;
+    UILabel *sectionSubtitle;
 }
 
-@property (nonatomic, retain) UILabel *date;
+@property (nonatomic, retain) UILabel *dateTitle;
+@property (nonatomic, retain) UILabel *sectionSubtitle;
 
-- (void)assignDate:(NSDate *)date;
+- (void)assignDateTitle:(NSDate *)date;
 
 @end

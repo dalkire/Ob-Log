@@ -1,5 +1,5 @@
 //
-//  Row.h
+//  DailyEditRow.h
 //  Ob Log
 //
 //  Created by David Alkire on 9/25/11.
@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Row.h"
 
-@interface Row : UIView
+@interface DailyEditRow : Row
 {
-    NSUInteger id;
+    
 }
-
-@property NSUInteger id;
 
 @end
