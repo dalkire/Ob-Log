@@ -18,7 +18,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        optionsScroll = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, frame.size.width - 7, frame.size.height)];
+        optionsScroll = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         optionsScroll.contentSize = CGSizeMake(700, frame.size.height);
         
         self.backgroundColor = [UIColor clearColor];
@@ -27,15 +27,19 @@
         leftShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                               0, 
                                                               8, 
-                                                              frame.size.height)];
-        
-        rightShadow = [[UIView alloc] initWithFrame:CGRectMake(196, 
+                                                              frame.size.height - 1)];
+        NSLog(@"optionsScrollWrapper frame width = %f", frame.size.width);
+        rightShadow = [[UIView alloc] initWithFrame:CGRectMake(frame.size.width - 8, 
                                                                0, 
                                                                8, 
-                                                               frame.size.height)];
+                                                               frame.size.height - 1)];
         
         CAGradientLayer *gradientL = [CAGradientLayer layer];
-        [gradientL setFrame:[leftShadow frame]];
+        gradientL.frame = CGRectMake(
+                                     0, 
+                                     0, 
+                                     leftShadow.frame.size.width, 
+                                     leftShadow.frame.size.height);
         [gradientL setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0x33/0xFF 
                                                                           green:(float)0x33/0xFF 
                                                                            blue:(float)0x33/0xFF 
@@ -60,7 +64,11 @@
                                                    blue:(float)0x33/0xFF 
                                                   alpha:0.0f].CGColor, 
                               nil]];
-        [gradientR setFrame:[rightShadow frame]];
+        gradientR.frame = CGRectMake(
+                                     0, 
+                                     0, 
+                                     rightShadow.frame.size.width, 
+                                     rightShadow.frame.size.height);
         gradientR.startPoint = CGPointMake(1, 0);
         gradientR.endPoint = CGPointMake(0, 0);
         [[rightShadow layer] addSublayer:gradientR];

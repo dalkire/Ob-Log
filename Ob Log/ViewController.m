@@ -115,7 +115,7 @@
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date
 {
     NSLog(@"%d // %@", uid, date);
-    self.editModal = [[[EditEntryModalNavController alloc] initWithNibName:@"EditEntryModalNavController" bundle:nil] autorelease];
+    self.editModal = [[[EditModalViewController alloc] initWithNibName:nil bundle:nil] autorelease];
     self.editModal.modalPresentationStyle = UIModalPresentationFormSheet;
     //EditEntryModalNavController *editModal = [[EditEntryModalNavController alloc] initWithRootViewController:self];
     [self presentModalViewController:editModal animated:YES];

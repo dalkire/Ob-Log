@@ -27,6 +27,7 @@
         [self addSubview:bg];
         [toggle createButtonOfType:@"toggle"];
         [self addSubview:toggle];
+        NSLog(@"ActionsSlider frame width = %f", frame.size.width);
         optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(60, 
                                                                         0, 
                                                                         frame.size.width - 60, 

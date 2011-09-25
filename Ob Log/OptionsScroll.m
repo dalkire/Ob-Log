@@ -27,13 +27,19 @@
 {
     int len = [[self subviews] count];
     int originX = 0;
+    int currNumPickers = 0;
     for (int i = 0; i < len; i++) {
         if ([[[self subviews] objectAtIndex:i] isKindOfClass:[OptionPicker class]]) {
             int tempX = ((OptionPicker *)[[self subviews] objectAtIndex:i]).frame.origin.x + ((OptionPicker *)[[self subviews] objectAtIndex:i]).frame.size.width;
             originX = tempX > originX ? tempX : originX;
+            currNumPickers++;
         }
     }
-    picker.frame = CGRectMake(originX + 1, 
+    
+    if (currNumPickers > 0) {
+        originX += 1;
+    }
+    picker.frame = CGRectMake(originX, 
                               picker.frame.origin.y, 
                               picker.frame.size.width, 
                               picker.frame.size.height);

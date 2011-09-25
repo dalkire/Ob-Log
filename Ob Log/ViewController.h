@@ -10,20 +10,20 @@
 #import "ShortCell.h"
 #import "NoteCell.h"
 #import "DateHeader.h"
-#import "EditEntryModalNavController.h"
+#import "EditModalViewController.h"
 
 @interface ViewController : UIViewController
 {
     UIImageView *bg;
     UIScrollView *scrollView;
     DateHeader *dateHeader;
-    EditEntryModalNavController *editModal;
+    EditModalViewController *editModal;
 }
 
 @property (nonatomic, retain) UIImageView *bg;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) DateHeader *dateHeader;
-@property (nonatomic, retain) EditEntryModalNavController *editModal;
+@property (nonatomic, retain) EditModalViewController *editModal;
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;
 
