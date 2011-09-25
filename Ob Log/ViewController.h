@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "/usr/include/sqlite3.h"
 #import "ShortCell.h"
 #import "NoteCell.h"
 #import "DateHeader.h"

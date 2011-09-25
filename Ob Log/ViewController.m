@@ -31,8 +31,6 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
     bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     bg.tag = BG_UIIMAGEVIEW;
     bg.image = [UIImage imageNamed:@"blankwhite_vert.png"];
@@ -110,6 +108,8 @@
     
     dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
     [self.view insertSubview:dateHeader atIndex:[[self.view subviews] count]];
+    
+    [super viewDidLoad];
 }
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date

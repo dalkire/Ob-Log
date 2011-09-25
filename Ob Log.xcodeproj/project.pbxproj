@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		891AB1DA142F926400D0171B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 891AB1D8142F926400D0171B /* Model.xcdatamodeld */; };
+		89217A96142F84A5003FEC33 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89217A95142F84A5003FEC33 /* CoreData.framework */; };
 		892C96A4142B67E000994EAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892C96A3142B67E000994EAB /* UIKit.framework */; };
 		892C96A6142B67E000994EAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892C96A5142B67E000994EAB /* Foundation.framework */; };
 		892C96A8142B67E000994EAB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892C96A7142B67E000994EAB /* CoreGraphics.framework */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		891AB1D9142F926400D0171B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		89217A95142F84A5003FEC33 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		892C969F142B67E000994EAB /* Ob Log.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ob Log.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		892C96A3142B67E000994EAB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		892C96A5142B67E000994EAB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -81,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89217A96142F84A5003FEC33 /* CoreData.framework in Frameworks */,
 				89C4B53B142BA87C00D035BA /* QuartzCore.framework in Frameworks */,
 				892C96A4142B67E000994EAB /* UIKit.framework in Frameworks */,
 				892C96A6142B67E000994EAB /* Foundation.framework in Frameworks */,
@@ -94,6 +99,7 @@
 		892C9694142B67E000994EAB = {
 			isa = PBXGroup;
 			children = (
+				89217A95142F84A5003FEC33 /* CoreData.framework */,
 				89C4B53A142BA87C00D035BA /* QuartzCore.framework */,
 				892C96A9142B67E000994EAB /* Ob Log */,
 				892C96A2142B67E000994EAB /* Frameworks */,
@@ -154,6 +160,7 @@
 				895B5D97142EB99A007D7B9C /* EditModalViewController.h */,
 				895B5D98142EB99A007D7B9C /* EditModalViewController.m */,
 				892C96AA142B67E000994EAB /* Supporting Files */,
+				891AB1D8142F926400D0171B /* Model.xcdatamodeld */,
 			);
 			path = "Ob Log";
 			sourceTree = "<group>";
@@ -250,6 +257,7 @@
 				89C4B53E142BB05000D035BA /* OptionsScrollWrapper.m in Sources */,
 				89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */,
 				895B5D99142EB99A007D7B9C /* EditModalViewController.m in Sources */,
+				891AB1DA142F926400D0171B /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +372,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		891AB1D8142F926400D0171B /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				891AB1D9142F926400D0171B /* Model.xcdatamodel */,
+			);
+			currentVersion = 891AB1D9142F926400D0171B /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 892C9696142B67E000994EAB /* Project object */;
 }

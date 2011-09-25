@@ -19,6 +19,11 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.view.backgroundColor = [UIColor colorWithRed:(float)0xAA/0xFF
+                                                    green:(float)0xAA/0xFF 
+                                                     blue:(float)0xAA/0xFF 
+                                                    alpha:1.0f];
+        
         navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(
                                                                    0, 
                                                                    0, 
@@ -29,9 +34,9 @@
         [self.view addSubview:navBar];
         
         optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(
-                                                                                      0, 
+                                                                                      10, 
                                                                                       40, 
-                                                                                      540, 
+                                                                                      520, 
                                                                                       70)];
         
         [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
@@ -42,11 +47,14 @@
         [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"follow up" andOptions:[NSArray arrayWithObjects:@"no follow up", @"needs follow up", nil]]];
         [self.view addSubview:optionsScrollWrapper];
         
-        notesScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(
-                                                                     0, 
-                                                                     200, 
+        notesScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
+                                                                     optionsScrollWrapper.frame.origin.y + optionsScrollWrapper.frame.size.height, 
                                                                      540, 
-                                                                     400)];
+                                                                     510)];
+        notesScroll.backgroundColor = [UIColor colorWithRed:(float)0xEE/0xFF
+                                                      green:(float)0xEE/0xFF 
+                                                       blue:(float)0xEE/0xFF 
+                                                      alpha:1.0f];
         notes = [[UITextView alloc] initWithFrame:CGRectMake(
                                                              10, 
                                                              10, 
