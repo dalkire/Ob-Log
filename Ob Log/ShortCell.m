@@ -10,13 +10,32 @@
 
 @implementation ShortCell
 
+@synthesize controller;
+@synthesize name;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        name = [[UILabel alloc] initWithFrame:CGRectMake(20, 
+                                                          5, 
+                                                          frame.size.width - 40, 
+                                                          frame.size.height - 10)];
+        name.backgroundColor = [UIColor clearColor];
+        name.font = [UIFont fontWithName:@"Helvetica" size:28];
+        
+        [self addSubview:name];
     }
     return self;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    //NSLog(@"%@", self.superview.superview);
+    if (self.controller && [self.controller respondsToSelector:@selector(initModalForUser:andDate:)]) {
+        NSLog(@"RESPONDS TO SELECTOR");
+        [(ViewController *)self.controller initModalForUser:12234 andDate:[NSDate date]];
+    }
 }
 
 - (void)drawRect:(CGRect)rect

@@ -19,6 +19,7 @@
 @synthesize bg;
 @synthesize scrollView;
 @synthesize dateHeader;
+@synthesize editModal;
 
 - (void)didReceiveMemoryWarning
 {
@@ -80,13 +81,9 @@
     for (int i = 0; i < len; i++) {
         ShortCell *cell = [[[ShortCell alloc] initWithFrame:CGRectMake(0, i*CELL_HEIGHT, SHORT_CELL_WIDTH, CELL_HEIGHT)] autorelease];
         cell.tag = SHORT_CELL;
+        cell.controller = self;
+        cell.name.text = [arr objectAtIndex:i];
         
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(20, 5, SHORT_CELL_WIDTH - 40, CELL_HEIGHT - 10)] autorelease];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:@"Helvetica" size:28];
-        label.text = [arr objectAtIndex:i];
-        
-        [cell addSubview:label];
         [cell setNeedsDisplay];
         [scrollView addSubview:cell];
         
@@ -113,6 +110,15 @@
     
     dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
     [self.view insertSubview:dateHeader atIndex:[[self.view subviews] count]];
+}
+
+- (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date
+{
+    NSLog(@"%d // %@", uid, date);
+    self.editModal = [[[EditEntryModalNavController alloc] initWithNibName:@"EditEntryModalNavController" bundle:nil] autorelease];
+    self.editModal.modalPresentationStyle = UIModalPresentationFormSheet;
+    //EditEntryModalNavController *editModal = [[EditEntryModalNavController alloc] initWithRootViewController:self];
+    [self presentModalViewController:editModal animated:YES];
 }
 
 

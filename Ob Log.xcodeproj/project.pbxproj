@@ -15,6 +15,8 @@
 		892C96B4142B67E000994EAB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 892C96B3142B67E000994EAB /* AppDelegate.m */; };
 		892C96B7142B67E000994EAB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892C96B6142B67E000994EAB /* ViewController.m */; };
 		892C96BA142B67E000994EAB /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892C96B8142B67E000994EAB /* ViewController.xib */; };
+		895B5D92142DF883007D7B9C /* EditEntryModalNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B5D90142DF883007D7B9C /* EditEntryModalNavController.m */; };
+		895B5D93142DF883007D7B9C /* EditEntryModalNavController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 895B5D91142DF883007D7B9C /* EditEntryModalNavController.xib */; };
 		89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */; };
 		89C4B51F142B6C1000D035BA /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B510142B6C1000D035BA /* ActionButton.m */; };
 		89C4B520142B6C1000D035BA /* ActionsSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B512142B6C1000D035BA /* ActionsSlider.m */; };
@@ -46,6 +48,9 @@
 		892C96B5142B67E000994EAB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		892C96B6142B67E000994EAB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		892C96B9142B67E000994EAB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		895B5D8F142DF883007D7B9C /* EditEntryModalNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEntryModalNavController.h; sourceTree = "<group>"; };
+		895B5D90142DF883007D7B9C /* EditEntryModalNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEntryModalNavController.m; sourceTree = "<group>"; };
+		895B5D91142DF883007D7B9C /* EditEntryModalNavController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditEntryModalNavController.xib; sourceTree = "<group>"; };
 		89C15DEA142C86CF001C125C /* PickerOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerOptionsViewController.h; sourceTree = "<group>"; };
 		89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerOptionsViewController.m; sourceTree = "<group>"; };
 		89C4B50F142B6C1000D035BA /* ActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionButton.h; sourceTree = "<group>"; };
@@ -148,6 +153,9 @@
 				892C96B5142B67E000994EAB /* ViewController.h */,
 				892C96B6142B67E000994EAB /* ViewController.m */,
 				892C96B8142B67E000994EAB /* ViewController.xib */,
+				895B5D8F142DF883007D7B9C /* EditEntryModalNavController.h */,
+				895B5D90142DF883007D7B9C /* EditEntryModalNavController.m */,
+				895B5D91142DF883007D7B9C /* EditEntryModalNavController.xib */,
 				892C96AA142B67E000994EAB /* Supporting Files */,
 			);
 			path = "Ob Log";
@@ -221,6 +229,7 @@
 				89C4B522142B6C1000D035BA /* blankwhite_vert.png in Resources */,
 				89C4B527142B6C1000D035BA /* slideInBtn.png in Resources */,
 				89C4B528142B6C1000D035BA /* slideOutBtn.png in Resources */,
+				895B5D93142DF883007D7B9C /* EditEntryModalNavController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +253,7 @@
 				89C4B52F142BA1EF00D035BA /* OptionPicker.m in Sources */,
 				89C4B53E142BB05000D035BA /* OptionsScrollWrapper.m in Sources */,
 				89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */,
+				895B5D92142DF883007D7B9C /* EditEntryModalNavController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

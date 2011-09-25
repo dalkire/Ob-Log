@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "Cell.h"
+#import "ViewController.h"
 
 @interface ShortCell : Cell
+{
+    UIViewController *controller;
+    UILabel *name;
+}
+
+@property (nonatomic, retain) UIViewController *controller;
+@property (nonatomic, retain) UILabel *name;
 
 @end
