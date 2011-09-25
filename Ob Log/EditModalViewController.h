@@ -22,4 +22,7 @@
 @property (nonatomic, retain) UIScrollView *notesScroll;
 @property (nonatomic, retain) UITextView *notes;
 
+- (void)clickedCancelBtn;
+- (void)clickedSaveBtn;
+
 @end

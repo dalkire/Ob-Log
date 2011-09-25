@@ -29,8 +29,17 @@
                                                                    0, 
                                                                    540, 
                                                                    40)];
-        UINavigationItem *navBarTitle = [[UINavigationItem alloc] initWithTitle:@"David Alkire - 2011-09-25 01:35:27 +0000"];
-        [navBar pushNavigationItem:navBarTitle animated:NO];
+        
+        UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(clickedCancelBtn)];
+        
+        UIBarButtonItem *saveBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(clickedSaveBtn)];
+        
+        UINavigationItem *navBarItem = [[UINavigationItem alloc] initWithTitle:@"David Alkire - 2011-09-25 01:35:27 +0000"];
+        [navBarItem setLeftBarButtonItem:cancelBtn];
+        [navBarItem setRightBarButtonItem:saveBtn];
+        
+        [navBar pushNavigationItem:navBarItem animated:NO];
+        
         [self.view addSubview:navBar];
         
         optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(
@@ -72,6 +81,16 @@
         [self.view addSubview:notesScroll];
     }
     return self;
+}
+
+- (void)clickedCancelBtn
+{
+    NSLog(@"Clicked Cancel");
+}
+
+- (void)clickedSaveBtn
+{
+    NSLog(@"Clicked Save");
 }
 
 - (void)didReceiveMemoryWarning

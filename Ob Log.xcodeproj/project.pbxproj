@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		891AB1DA142F926400D0171B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 891AB1D8142F926400D0171B /* Model.xcdatamodeld */; };
+		891AB1DE142FB06C00D0171B /* Row.m in Sources */ = {isa = PBXBuildFile; fileRef = 891AB1DD142FB06C00D0171B /* Row.m */; };
 		89217A96142F84A5003FEC33 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89217A95142F84A5003FEC33 /* CoreData.framework */; };
 		892C96A4142B67E000994EAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892C96A3142B67E000994EAB /* UIKit.framework */; };
 		892C96A6142B67E000994EAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892C96A5142B67E000994EAB /* Foundation.framework */; };
@@ -37,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		891AB1D9142F926400D0171B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		891AB1DC142FB06C00D0171B /* Row.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Row.h; sourceTree = "<group>"; };
+		891AB1DD142FB06C00D0171B /* Row.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Row.m; sourceTree = "<group>"; };
 		89217A95142F84A5003FEC33 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		892C969F142B67E000994EAB /* Ob Log.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ob Log.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		892C96A3142B67E000994EAB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -96,6 +99,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		891AB1DF142FB16600D0171B /* Note Cell */ = {
+			isa = PBXGroup;
+			children = (
+				89C4B519142B6C1000D035BA /* NoteCell.h */,
+				89C4B51A142B6C1000D035BA /* NoteCell.m */,
+				89C4B511142B6C1000D035BA /* ActionsSlider.h */,
+				89C4B512142B6C1000D035BA /* ActionsSlider.m */,
+				89C4B50F142B6C1000D035BA /* ActionButton.h */,
+				89C4B510142B6C1000D035BA /* ActionButton.m */,
+				89C4B53C142BB05000D035BA /* OptionsScrollWrapper.h */,
+				89C4B53D142BB05000D035BA /* OptionsScrollWrapper.m */,
+				89C4B52A142BA1C800D035BA /* OptionsScroll.h */,
+				89C4B52B142BA1C800D035BA /* OptionsScroll.m */,
+				89C4B52D142BA1EF00D035BA /* OptionPicker.h */,
+				89C4B52E142BA1EF00D035BA /* OptionPicker.m */,
+				89C15DEA142C86CF001C125C /* PickerOptionsViewController.h */,
+				89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */,
+			);
+			name = "Note Cell";
+			sourceTree = "<group>";
+		};
+		891AB1E0142FB1C800D0171B /* Row */ = {
+			isa = PBXGroup;
+			children = (
+				891AB1DC142FB06C00D0171B /* Row.h */,
+				891AB1DD142FB06C00D0171B /* Row.m */,
+				89C4B515142B6C1000D035BA /* Cell.h */,
+				89C4B516142B6C1000D035BA /* Cell.m */,
+				89C4B51B142B6C1000D035BA /* ShortCell.h */,
+				89C4B51C142B6C1000D035BA /* ShortCell.m */,
+				891AB1DF142FB16600D0171B /* Note Cell */,
+			);
+			name = Row;
+			sourceTree = "<group>";
+		};
 		892C9694142B67E000994EAB = {
 			isa = PBXGroup;
 			children = (
@@ -128,28 +166,11 @@
 		892C96A9142B67E000994EAB /* Ob Log */ = {
 			isa = PBXGroup;
 			children = (
-				89C15DEA142C86CF001C125C /* PickerOptionsViewController.h */,
-				89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */,
-				89C4B53C142BB05000D035BA /* OptionsScrollWrapper.h */,
-				89C4B53D142BB05000D035BA /* OptionsScrollWrapper.m */,
-				89C4B52A142BA1C800D035BA /* OptionsScroll.h */,
-				89C4B52B142BA1C800D035BA /* OptionsScroll.m */,
-				89C4B52D142BA1EF00D035BA /* OptionPicker.h */,
-				89C4B52E142BA1EF00D035BA /* OptionPicker.m */,
-				89C4B50F142B6C1000D035BA /* ActionButton.h */,
-				89C4B510142B6C1000D035BA /* ActionButton.m */,
-				89C4B511142B6C1000D035BA /* ActionsSlider.h */,
-				89C4B512142B6C1000D035BA /* ActionsSlider.m */,
+				891AB1E0142FB1C800D0171B /* Row */,
 				89C4B513142B6C1000D035BA /* blankwhite_hrzn.png */,
 				89C4B514142B6C1000D035BA /* blankwhite_vert.png */,
-				89C4B515142B6C1000D035BA /* Cell.h */,
-				89C4B516142B6C1000D035BA /* Cell.m */,
 				89C4B517142B6C1000D035BA /* DateHeader.h */,
 				89C4B518142B6C1000D035BA /* DateHeader.m */,
-				89C4B519142B6C1000D035BA /* NoteCell.h */,
-				89C4B51A142B6C1000D035BA /* NoteCell.m */,
-				89C4B51B142B6C1000D035BA /* ShortCell.h */,
-				89C4B51C142B6C1000D035BA /* ShortCell.m */,
 				89C4B51D142B6C1000D035BA /* slideInBtn.png */,
 				89C4B51E142B6C1000D035BA /* slideOutBtn.png */,
 				892C96B2142B67E000994EAB /* AppDelegate.h */,
@@ -258,6 +279,7 @@
 				89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */,
 				895B5D99142EB99A007D7B9C /* EditModalViewController.m in Sources */,
 				891AB1DA142F926400D0171B /* Model.xcdatamodeld in Sources */,
+				891AB1DE142FB06C00D0171B /* Row.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
