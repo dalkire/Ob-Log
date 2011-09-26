@@ -5,6 +5,7 @@
 //  Created by David Alkire on 9/22/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
+
 #define CELL_HEIGHT 70
 
 #import "OptionPicker.h"
@@ -17,24 +18,29 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
     if (self) {
-        self.arr = [[NSMutableArray alloc] initWithCapacity:0];
+        self = [super initWithFrame:frame];
+        
+        self.backgroundColor = [Theme getThemeColor];
+        
         CAGradientLayer *gradient = [CAGradientLayer layer];
         [gradient setFrame:frame];
-        [gradient setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0x04/0xFF 
-                                                                           green:(float)0x81/0xFF 
-                                                                            blue:(float)0xF2/0xFF 
-                                                                           alpha:1].CGColor, 
-                              (id)[UIColor colorWithRed:(float)0x02/0xFF 
-                                                  green:(float)0x69/0xFF 
-                                                   blue:(float)0xEA/0xFF 
-                                                  alpha:1].CGColor, 
-                              nil]];
+        [gradient setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0xCC/0xFF 
+                                                                           green:(float)0xCC/0xFF 
+                                                                            blue:(float)0xCC/0xFF 
+                                                                           alpha:0.1f].CGColor, 
+                              (id)[UIColor colorWithRed:(float)0x99/0xFF 
+                                                  green:(float)0x99/0xFF 
+                                                   blue:(float)0x99/0xFF 
+                                                  alpha:0.1f].CGColor, 
+                             nil]];
         gradient.startPoint = CGPointMake(0, 0);
         gradient.endPoint = CGPointMake(0, 1);
         [[self layer] addSublayer:gradient];
+        
+        self.arr = [[NSMutableArray alloc] initWithCapacity:0];
     }
+    
     return self;
 }
 
@@ -90,9 +96,26 @@
     
 }
 
-- (void)drawRect:(CGRect)rect
+/*- (void)drawRect:(CGRect)rect
 {
-    // Drawing code
-}
+    CGGradientRef myGradient;
+    CGColorSpaceRef myColorspace;
+    size_t num_locations = 2;
+    
+    CGFloat locations2[2] = { 0.0, 1.0 };
+    CGFloat components2[8] = {  (float)0xFF/0xFF, (float)0xFF/0xFF, (float)0xFF/0xFF, 0.2f,
+        (float)0x33/0xFF, (float)0x33/0xFF, (float)0x33/0xFF, 0.2f };
+    myColorspace = CGColorSpaceCreateDeviceRGB();
+    myGradient = CGGradientCreateWithColorComponents(myColorspace, components2, locations2, num_locations);
+    
+    CGPoint myStartPoint, myEndPoint;
+    myStartPoint.x = 0.0;
+    myStartPoint.y = 0;
+    myEndPoint.x = 0.0;
+    myEndPoint.y = self.frame.size.height;
+    CGContextDrawLinearGradient (UIGraphicsGetCurrentContext(), myGradient, myStartPoint, myEndPoint, 0);
+    CGColorSpaceRelease(myColorspace);
+    CGGradientRelease(myGradient);
+}*/
 
 @end

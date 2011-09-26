@@ -16,7 +16,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 
+                                                              14, 
+                                                              frame.size.width - 28, 
+                                                              frame.size.height - 28)];
+        nameLabel.font = [UIFont fontWithName:@"Helvetica" size:28];
+        nameLabel.backgroundColor = [UIColor clearColor];
+        nameLabel.textColor = [UIColor blackColor];
+        [self addSubview:nameLabel];
     }
     return self;
 }

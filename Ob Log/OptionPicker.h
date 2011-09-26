@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "PickerOptionsViewController.h"
+#import "Theme.h"
 
 @interface OptionPicker : UIView <UIPopoverControllerDelegate>
 {

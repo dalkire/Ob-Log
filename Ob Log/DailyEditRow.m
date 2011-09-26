@@ -28,18 +28,18 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        //nameCell = [[[NameCell alloc] initWithFrame:CGRectMake(0, 
-          //                                                     0, 
-            //                                                   299, 
-              //                                                 frame.size.height - 2)] autorelease];
-        //nameCell.backgroundColor = [UIColor redColor];
+        nameCell = [[[NameCell alloc] initWithFrame:CGRectMake(0, 
+                                                               0, 
+                                                               299, 
+                                                               frame.size.height - 2)] autorelease];
+        nameCell.backgroundColor = [UIColor clearColor];
          
         noteCell = [[[NoteCell alloc] initWithFrame:CGRectMake(302, 
                                                                0, 
                                                                frame.size.width - 308, 
                                                                frame.size.height)] autorelease];
          
-        //[self addSubview:nameCell];
+        [self addSubview:nameCell];
         [self addSubview:noteCell];
         
         optionsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 

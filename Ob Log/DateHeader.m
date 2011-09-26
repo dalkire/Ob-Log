@@ -17,10 +17,22 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:(float)0x03/0xFF 
-                                               green:(float)0x75/0xFF 
-                                                blue:(float)0xEE/0xFF 
-                                               alpha:1];
+        self.backgroundColor = [Theme getThemeColor];
+        
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        [gradient setFrame:frame];
+        [gradient setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0xCC/0xFF 
+                                                                          green:(float)0xCC/0xFF 
+                                                                           blue:(float)0xCC/0xFF 
+                                                                          alpha:0.1f].CGColor, 
+                             (id)[UIColor colorWithRed:(float)0x99/0xFF 
+                                                 green:(float)0x99/0xFF 
+                                                  blue:(float)0x99/0xFF 
+                                                 alpha:0.1f].CGColor, 
+                             nil]];
+        gradient.startPoint = CGPointMake(0, 0);
+        gradient.endPoint = CGPointMake(0, 1);
+        [[self layer] addSublayer:gradient];
         
         dateTitle = [[[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)] autorelease];
         dateTitle.backgroundColor = [UIColor clearColor];
@@ -54,7 +66,7 @@
     
 }
 
-- (void)drawRect:(CGRect)rect
+/*- (void)drawRect:(CGRect)rect
 {
     CGGradientRef myGradient;
     CGColorSpaceRef myColorspace;
@@ -74,6 +86,6 @@
     CGContextDrawLinearGradient (UIGraphicsGetCurrentContext(), myGradient, myStartPoint, myEndPoint, 0);
     CGColorSpaceRelease(myColorspace);
     CGGradientRelease(myGradient);
-}
+}*/
 
 @end
