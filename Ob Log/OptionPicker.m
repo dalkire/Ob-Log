@@ -15,6 +15,9 @@
 @synthesize optionPickerPopover;
 @synthesize arr;
 @synthesize popoverHeader;
+@synthesize headerLabel;
+@synthesize rowId;
+@synthesize rowPos;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -39,12 +42,36 @@
         [[self layer] addSublayer:gradient];
         
         self.arr = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 
+                                                                10, 
+                                                                frame.size.width - 40, 
+                                                                frame.size.height - 20)];
+        headerLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+        headerLabel.textColor = [UIColor whiteColor];
+        [headerLabel setBackgroundColor:[UIColor clearColor]]; 
+        [self addSubview:headerLabel];
     }
     
     return self;
 }
 
-+ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSMutableArray *)options
+- (void)setPickerHeader:(NSString *)header andOptions:(NSMutableArray *)options
+{
+    [headerLabel setText:header];
+    [headerLabel sizeToFit];
+    [headerLabel setFrame:CGRectMake(headerLabel.frame.origin.x, 
+                                     (self.frame.size.height - headerLabel.frame.size.height)/2, 
+                                     headerLabel.frame.size.width, 
+                                     headerLabel.frame.size.height)];
+    [self setFrame:CGRectMake(self.frame.origin.x, 
+                              self.frame.origin.y, 
+                              headerLabel.frame.size.width + 40, 
+                              self.frame.size.height)];
+    [self setArr:options];
+}
+
+/*+ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSMutableArray *)options
 {
     UILabel *label = [[[UILabel alloc] init] autorelease];
     label.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
@@ -61,11 +88,11 @@
     picker.popoverHeader = header;
     
     return picker;
-}
+}*/
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
-    NSLog(@"optionpicker touchesbegan");
+    NSLog(@"optionpicker in rowPos %d", self.rowPos);
     /*PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
     [content assignOptionsArray:arr withHeader:popoverHeader];
     self.optionPickerPopover = [[UIPopoverController alloc]

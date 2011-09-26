@@ -12,6 +12,8 @@
 
 @synthesize optionsScrollWrapper;
 @synthesize toggle;
+@synthesize rowId;
+@synthesize rowPos;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -32,7 +34,6 @@
                                                                         0, 
                                                                         frame.size.width - 60, 
                                                                         frame.size.height)];
-        [self loadOptionPickers];
         [self addSubview:optionsScrollWrapper];
     }
     return self;
@@ -40,12 +41,20 @@
 
 - (void)loadOptionPickers
 {
-    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
-    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"part" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
-    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"follow up" andOptions:[NSArray arrayWithObjects:@"no follow up", @"needs follow up", nil]]];
-    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
-    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"participation" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
-    [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"follow up" andOptions:[NSArray arrayWithObjects:@"no follow up", @"needs follow up", nil]]];
+    for (int i = 0; i < 15; i++) {
+        OptionPicker *p = [[OptionPicker alloc] initWithFrame:CGRectMake(0, 
+                                                                         0, 
+                                                                         100, 
+                                                                         self.frame.size.height)];
+        [p setPickerHeader:[NSString stringWithFormat:@"attendance %d", i*1000] 
+                andOptions:[NSArray arrayWithObjects:[NSString stringWithFormat:@"present %d", i], 
+                                                        [NSString stringWithFormat:@"late %d", i],
+                                                        [NSString stringWithFormat:@"absent %d", i], 
+                                                        nil]];
+        [p setRowId:rowId];
+        [p setRowPos:rowPos];
+        [optionsScrollWrapper.optionsScroll addOptionPicker:p];
+    }
 }
 
 - (void)drawRect:(CGRect)rect

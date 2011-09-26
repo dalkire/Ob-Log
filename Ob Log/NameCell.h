@@ -11,8 +11,12 @@
 @interface NameCell : UIView
 {
     UILabel *nameLabel;
+    NSUInteger rowId;
+    NSUInteger rowPos;
 }
 
 @property (nonatomic, retain) UILabel *nameLabel;
+@property NSUInteger rowId;
+@property NSUInteger rowPos;
 
 @end

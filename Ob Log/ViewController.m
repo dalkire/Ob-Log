@@ -109,7 +109,7 @@
                                                                            i*CELL_HEIGHT, 
                                                                            self.view.frame.size.width, 
                                                                            CELL_HEIGHT)];
-        [row setId:i];
+        [row propogateRowId:i andPosition:i];
         row.nameCell.nameLabel.text = [array objectAtIndex:i];
         [row setNeedsDisplay];
         [scrollView addSubview:row];

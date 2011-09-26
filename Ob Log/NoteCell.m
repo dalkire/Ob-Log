@@ -14,6 +14,8 @@
 @synthesize sliderIsExtended;
 @synthesize scrollView;
 @synthesize textView;
+@synthesize rowId;
+@synthesize rowPos;
 
 - (id)initWithFrame:(CGRect)frame
 {

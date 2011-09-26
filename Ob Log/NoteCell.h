@@ -15,11 +15,15 @@
     BOOL sliderIsExtended;
     UIScrollView *scrollView;
     UITextView *textView;
+    NSUInteger rowId;
+    NSUInteger rowPos;
 }
 
 @property (nonatomic, retain) ActionsSlider *slider;
 @property BOOL sliderIsExtended;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UITextView *textView;
+@property NSUInteger rowId;
+@property NSUInteger rowPos;
 
 @end

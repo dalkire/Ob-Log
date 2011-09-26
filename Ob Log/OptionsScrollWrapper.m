@@ -27,12 +27,12 @@
         leftShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                               0, 
                                                               8, 
-                                                              frame.size.height - 1)];
+                                                              frame.size.height)];
         NSLog(@"optionsScrollWrapper frame width = %f", frame.size.width);
         rightShadow = [[UIView alloc] initWithFrame:CGRectMake(frame.size.width - 8, 
                                                                0, 
                                                                8, 
-                                                               frame.size.height - 1)];
+                                                               frame.size.height)];
         
         CAGradientLayer *gradientL = [CAGradientLayer layer];
         gradientL.frame = CGRectMake(
@@ -73,9 +73,6 @@
         gradientR.endPoint = CGPointMake(0, 0);
         [[rightShadow layer] addSublayer:gradientR];
         rightShadow.backgroundColor = [UIColor clearColor];
-        
-        //leftShadow.hidden = YES;
-        //rightShadow.hidden = YES;
         
         [self addSubview:leftShadow];
         [self addSubview:rightShadow];

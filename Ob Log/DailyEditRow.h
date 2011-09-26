@@ -15,7 +15,8 @@
     NameCell *nameCell;
     NoteCell *noteCell;
     UITableView *optionsTable;
-    
+    NSUInteger rowId;
+    NSUInteger rowPos;
     
     
     
@@ -30,7 +31,8 @@
 @property (nonatomic, retain) NameCell *nameCell;
 @property (nonatomic, retain) NoteCell *noteCell;
 @property (nonatomic, retain) UITableView *optionsTable;
-
+@property NSUInteger rowId;
+@property NSUInteger rowPos;
 
 
 
@@ -43,7 +45,7 @@
 
 
 
-
+- (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos;
 - (void)assignOptionsArray:(NSMutableArray *)options withHeader:(NSString *)header;
 
 @end

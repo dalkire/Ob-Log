@@ -48,13 +48,13 @@
                                                                                       520, 
                                                                                       70)];
         
-        [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
+        /*[optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
         [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"part" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
         [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"follow up" andOptions:[NSArray arrayWithObjects:@"no follow up", @"needs follow up", nil]]];
         [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"attendance" andOptions:[NSArray arrayWithObjects:@"present", @"late", @"absent", nil]]];
         [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"participation" andOptions:[NSArray arrayWithObjects:@"participated", @"did not participate", nil]]];
         [optionsScrollWrapper.optionsScroll addOptionPicker:[OptionPicker pickerWithHeader:@"follow up" andOptions:[NSArray arrayWithObjects:@"no follow up", @"needs follow up", nil]]];
-        [self.view addSubview:optionsScrollWrapper];
+        [self.view addSubview:optionsScrollWrapper];*/
         
         notesScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
                                                                      optionsScrollWrapper.frame.origin.y + optionsScrollWrapper.frame.size.height, 

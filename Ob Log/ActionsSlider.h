@@ -15,10 +15,14 @@
 {
     OptionsScrollWrapper *optionsScrollWrapper;
     ActionButton *toggle;
+    NSUInteger rowId;
+    NSUInteger rowPos;
 }
 
 @property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
 @property (nonatomic, retain) ActionButton *toggle;
+@property NSUInteger rowId;
+@property NSUInteger rowPos;
 
 - (void)loadOptionPickers;
 

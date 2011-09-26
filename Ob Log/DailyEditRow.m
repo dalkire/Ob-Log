@@ -13,7 +13,8 @@
 @synthesize nameCell;
 @synthesize noteCell;
 @synthesize optionsTable;
-
+@synthesize rowId;
+@synthesize rowPos;
 
 
 
@@ -37,8 +38,7 @@
         noteCell = [[[NoteCell alloc] initWithFrame:CGRectMake(302, 
                                                                0, 
                                                                frame.size.width - 308, 
-                                                               frame.size.height)] autorelease];
-         
+                                                               frame.size.height)] autorelease];         
         [self addSubview:nameCell];
         [self addSubview:noteCell];
         
@@ -63,8 +63,18 @@
 */
 
 
-
-
+- (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos
+{
+    [self setRowId:rid];
+    [self setRowPos:rpos];
+    [nameCell setRowId:rid];
+    [nameCell setRowPos:rpos];
+    [noteCell setRowId:rid];
+    [noteCell setRowPos:rpos];
+    [noteCell.slider setRowId:rid];
+    [noteCell.slider setRowPos:rpos];
+    [noteCell.slider loadOptionPickers];
+}
 
 
 - (void)assignOptionsArray:(NSMutableArray *)options withHeader:(NSString *)header

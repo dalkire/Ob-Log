@@ -11,6 +11,8 @@
 @implementation NameCell
 
 @synthesize nameLabel;
+@synthesize rowId;
+@synthesize rowPos;
 
 - (id)initWithFrame:(CGRect)frame
 {

@@ -16,12 +16,19 @@
     UIPopoverController *optionPickerPopover;
     NSMutableArray *arr;
     NSString *popoverHeader;
+    UILabel *headerLabel;
+    NSUInteger rowID;
+    NSUInteger rowPos;
 }
 
 @property (nonatomic, retain) UIPopoverController *optionPickerPopover;
 @property (nonatomic, retain) NSMutableArray *arr;
 @property (nonatomic, retain) NSString *popoverHeader;
+@property (nonatomic, retain) UILabel *headerLabel;
+@property NSUInteger rowId;
+@property NSUInteger rowPos;
 
-+ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSMutableArray *)options;
+- (void)setPickerHeader:(NSString *)header andOptions:(NSMutableArray *)options;
+//+ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSMutableArray *)options;
 
 @end
