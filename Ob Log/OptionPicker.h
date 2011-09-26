@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PickerOptionsViewController.h"
 #import "Theme.h"
+#import "DailyEditRow.h"
 
 @interface OptionPicker : UIView <UIPopoverControllerDelegate>
 {

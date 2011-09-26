@@ -93,6 +93,15 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
     NSLog(@"optionpicker in rowPos %d", self.rowPos);
+    int len = [[[[[self window] rootViewController] view] subviews] count];
+    for (int i = 0; i < len; i++) {
+        if ([[[[[[self window] rootViewController] view] subviews] objectAtIndex:i] isKindOfClass:[DailyEditRow class]]) {
+            if (((DailyEditRow *)[[[[[self window] rootViewController] view] subviews] objectAtIndex:i]).rowPos > self.rowPos) {
+                ((DailyEditRow *)[[[[[self window] rootViewController] view] subviews] objectAtIndex:i]).center = CGPointMake(((DailyEditRow *)[[[[[self window] rootViewController] view] subviews] objectAtIndex:i]).center.x, ((DailyEditRow *)[[[[[self window] rootViewController] view] subviews] objectAtIndex:i]).center.y + 70);
+            }
+        }
+    }
+    
     /*PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
     [content assignOptionsArray:arr withHeader:popoverHeader];
     self.optionPickerPopover = [[UIPopoverController alloc]
