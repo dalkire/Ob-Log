@@ -70,7 +70,7 @@
     headerDrop.endPoint = CGPointMake(0, 1);
     [[dateHeaderDropShadow layer] addSublayer:headerDrop];
     
-    NSArray *arr = [[NSArray alloc] initWithObjects:
+    NSArray *array = [[NSArray alloc] initWithObjects:
                     @"Melissa Alkire",
                     @"David Alkire",
                     @"Bryan Catarra",
@@ -97,7 +97,7 @@
                     @"Gary Dell'Abate",
                     nil];
 	
-    int len = [arr count];
+    int len = [array count];
     scrollView = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 
                                                                 dateHeader.frame.size.height, 
                                                                 self.view.frame.size.width, 
@@ -105,31 +105,14 @@
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, CELL_HEIGHT*len);
     
     for (int i = 0; i < len; i++) {
-        Row *row = [[Row alloc] initWithFrame:CGRectMake(0, 
-                                                         i*CELL_HEIGHT, 
-                                                         self.view.frame.size.width, 
-                                                         CELL_HEIGHT)];
+        DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
+                                                                           i*CELL_HEIGHT, 
+                                                                           self.view.frame.size.width, 
+                                                                           CELL_HEIGHT)];
         [row setId:i];
+        //[row.nameCell setName:[array objectAtIndex:i]];
         [row setNeedsDisplay];
         [scrollView addSubview:row];
-        
-        
-        /*ShortCell *cell = [[[ShortCell alloc] initWithFrame:CGRectMake(0, i*CELL_HEIGHT, SHORT_CELL_WIDTH, CELL_HEIGHT)] autorelease];
-        cell.tag = SHORT_CELL;
-        cell.controller = self;
-        cell.name.text = [arr objectAtIndex:i];
-        
-        [cell setNeedsDisplay];
-        [scrollView addSubview:cell];
-        
-        NoteCell *noteCell = [[[NoteCell alloc] initWithFrame:CGRectMake(SHORT_CELL_WIDTH, 
-                                                                        i*CELL_HEIGHT, 
-                                                                        self.view.frame.size.width - SHORT_CELL_WIDTH, 
-                                                                        CELL_HEIGHT)] autorelease];
-        noteCell.tag = NOTE_CELL;
-        
-        [noteCell setNeedsDisplay];
-        [scrollView addSubview:noteCell];*/
     }
     [self.view addSubview:scrollView];
     
@@ -144,7 +127,6 @@
     NSLog(@"%d // %@", uid, date);
     self.editModal = [[[EditModalViewController alloc] initWithNibName:nil bundle:nil] autorelease];
     self.editModal.modalPresentationStyle = UIModalPresentationFormSheet;
-    //EditEntryModalNavController *editModal = [[EditEntryModalNavController alloc] initWithRootViewController:self];
     [self presentModalViewController:editModal animated:YES];
 }
 

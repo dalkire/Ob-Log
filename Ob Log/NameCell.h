@@ -1,21 +1,18 @@
 //
 //  NameCell.h
-//  oblog
+//  Ob Log
 //
-//  Created by David Alkire on 9/20/11.
+//  Created by David Alkire on 9/25/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "ViewController.h"
 
 @interface NameCell : UIView
 {
-    UIViewController *controller;
-    UILabel *name;
+    UILabel *nameLabel;
 }
 
-@property (nonatomic, retain) UIViewController *controller;
-@property (nonatomic, retain) UILabel *name;
+@property (nonatomic, retain) UILabel *nameLabel;
 
 @end

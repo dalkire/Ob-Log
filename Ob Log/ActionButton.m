@@ -8,6 +8,7 @@
 
 #import "ActionButton.h"
 #import "NoteCell.h"
+#import "NameCell.h"
 
 @implementation ActionButton
 

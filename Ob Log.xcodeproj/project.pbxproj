@@ -20,6 +20,7 @@
 		892C96B7142B67E000994EAB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892C96B6142B67E000994EAB /* ViewController.m */; };
 		892C96BA142B67E000994EAB /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892C96B8142B67E000994EAB /* ViewController.xib */; };
 		895B5D99142EB99A007D7B9C /* EditModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B5D98142EB99A007D7B9C /* EditModalViewController.m */; };
+		897728DA1430212D00B6D985 /* NameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 897728D91430212D00B6D985 /* NameCell.m */; };
 		89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */; };
 		89C4B51F142B6C1000D035BA /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B510142B6C1000D035BA /* ActionButton.m */; };
 		89C4B520142B6C1000D035BA /* ActionsSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B512142B6C1000D035BA /* ActionsSlider.m */; };
@@ -27,7 +28,6 @@
 		89C4B522142B6C1000D035BA /* blankwhite_vert.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C4B514142B6C1000D035BA /* blankwhite_vert.png */; };
 		89C4B524142B6C1000D035BA /* DateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B518142B6C1000D035BA /* DateHeader.m */; };
 		89C4B525142B6C1000D035BA /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B51A142B6C1000D035BA /* NoteCell.m */; };
-		89C4B526142B6C1000D035BA /* NameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B51C142B6C1000D035BA /* NameCell.m */; };
 		89C4B527142B6C1000D035BA /* slideInBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C4B51D142B6C1000D035BA /* slideInBtn.png */; };
 		89C4B528142B6C1000D035BA /* slideOutBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C4B51E142B6C1000D035BA /* slideOutBtn.png */; };
 		89C4B52C142BA1C800D035BA /* OptionsScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B52B142BA1C800D035BA /* OptionsScroll.m */; };
@@ -58,6 +58,8 @@
 		892C96B9142B67E000994EAB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		895B5D97142EB99A007D7B9C /* EditModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditModalViewController.h; sourceTree = "<group>"; };
 		895B5D98142EB99A007D7B9C /* EditModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditModalViewController.m; sourceTree = "<group>"; };
+		897728D81430212D00B6D985 /* NameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameCell.h; sourceTree = "<group>"; };
+		897728D91430212D00B6D985 /* NameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameCell.m; sourceTree = "<group>"; };
 		89C15DEA142C86CF001C125C /* PickerOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerOptionsViewController.h; sourceTree = "<group>"; };
 		89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerOptionsViewController.m; sourceTree = "<group>"; };
 		89C4B50F142B6C1000D035BA /* ActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionButton.h; sourceTree = "<group>"; };
@@ -70,8 +72,6 @@
 		89C4B518142B6C1000D035BA /* DateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHeader.m; sourceTree = "<group>"; };
 		89C4B519142B6C1000D035BA /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
 		89C4B51A142B6C1000D035BA /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
-		89C4B51B142B6C1000D035BA /* NameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameCell.h; sourceTree = "<group>"; };
-		89C4B51C142B6C1000D035BA /* NameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameCell.m; sourceTree = "<group>"; };
 		89C4B51D142B6C1000D035BA /* slideInBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slideInBtn.png; sourceTree = "<group>"; };
 		89C4B51E142B6C1000D035BA /* slideOutBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slideOutBtn.png; sourceTree = "<group>"; };
 		89C4B52A142BA1C800D035BA /* OptionsScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsScroll.h; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 				891AB1DD142FB06C00D0171B /* Row.m */,
 				891AB1E1142FC66D00D0171B /* DailyEditRow.h */,
 				891AB1E2142FC66D00D0171B /* DailyEditRow.m */,
-				89C4B51B142B6C1000D035BA /* NameCell.h */,
-				89C4B51C142B6C1000D035BA /* NameCell.m */,
+				897728D81430212D00B6D985 /* NameCell.h */,
+				897728D91430212D00B6D985 /* NameCell.m */,
 				891AB1DF142FB16600D0171B /* Note Cell */,
 			);
 			name = Row;
@@ -271,7 +271,6 @@
 				89C4B520142B6C1000D035BA /* ActionsSlider.m in Sources */,
 				89C4B524142B6C1000D035BA /* DateHeader.m in Sources */,
 				89C4B525142B6C1000D035BA /* NoteCell.m in Sources */,
-				89C4B526142B6C1000D035BA /* NameCell.m in Sources */,
 				89C4B52C142BA1C800D035BA /* OptionsScroll.m in Sources */,
 				89C4B52F142BA1EF00D035BA /* OptionPicker.m in Sources */,
 				89C4B53E142BB05000D035BA /* OptionsScrollWrapper.m in Sources */,
@@ -280,6 +279,7 @@
 				891AB1DA142F926400D0171B /* Model.xcdatamodeld in Sources */,
 				891AB1DE142FB06C00D0171B /* Row.m in Sources */,
 				891AB1E3142FC66D00D0171B /* DailyEditRow.m in Sources */,
+				897728DA1430212D00B6D985 /* NameCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

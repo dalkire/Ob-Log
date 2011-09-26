@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "Row.h"
+#import "DailyEditRow.h"
 #import "NameCell.h"
 #import "NoteCell.h"
 #import "DateHeader.h"

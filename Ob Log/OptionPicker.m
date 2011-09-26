@@ -60,7 +60,7 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
     NSLog(@"optionpicker touchesbegan");
-    PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
+    /*PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
     [content assignOptionsArray:arr withHeader:popoverHeader];
     self.optionPickerPopover = [[UIPopoverController alloc]
                                      initWithContentViewController:content];
@@ -75,7 +75,9 @@
                                                                 1)
                                               inView:self.superview.superview.superview.superview.superview.superview.superview
                             permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                            animated:YES];
+                                            animated:YES];*/
+    
+    
 }
 
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController

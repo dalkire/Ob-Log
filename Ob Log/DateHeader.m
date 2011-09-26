@@ -36,7 +36,7 @@
         sectionSubtitle = [[[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)] autorelease];
         sectionSubtitle.backgroundColor = [UIColor clearColor];
         sectionSubtitle.textColor = [UIColor whiteColor];
-        sectionSubtitle.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+        sectionSubtitle.font = [UIFont fontWithName:@"Helvetica" size:18];
         sectionSubtitle.text = @"American History: 1800-1940";
         [sectionSubtitle sizeToFit];
         sectionSubtitle.frame = CGRectMake((frame.size.width - sectionSubtitle.frame.size.width)/2, 
