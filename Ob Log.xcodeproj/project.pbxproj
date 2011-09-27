@@ -37,6 +37,7 @@
 		89C4B53E142BB05000D035BA /* OptionsScrollWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B53D142BB05000D035BA /* OptionsScrollWrapper.m */; };
 		89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4EF143158A70035CE24 /* SelectionTable.m */; };
 		89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */; };
+		89C7C4F714317FE60035CE24 /* Container.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4F614317FE50035CE24 /* Container.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,8 @@
 		89C7C4EF143158A70035CE24 /* SelectionTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionTable.m; sourceTree = "<group>"; };
 		89C7C4F214316ADB0035CE24 /* SelectionTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionTableRow.h; sourceTree = "<group>"; };
 		89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionTableRow.m; sourceTree = "<group>"; };
+		89C7C4F514317FE50035CE24 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Container.h; sourceTree = "<group>"; };
+		89C7C4F614317FE50035CE24 /* Container.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Container.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +146,8 @@
 				89C7C4EF143158A70035CE24 /* SelectionTable.m */,
 				89C7C4F214316ADB0035CE24 /* SelectionTableRow.h */,
 				89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */,
+				89C7C4F514317FE50035CE24 /* Container.h */,
+				89C7C4F614317FE50035CE24 /* Container.m */,
 			);
 			name = Row;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				89417F891430BDBA002EABBA /* Theme.m in Sources */,
 				89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */,
 				89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */,
+				89C7C4F714317FE60035CE24 /* Container.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

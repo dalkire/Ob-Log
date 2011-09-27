@@ -52,7 +52,7 @@
                                                         [NSString stringWithFormat:@"absent %d", i], 
                                                         nil]];
         [p setRowId:rowId];
-        [p setRowPos:rowPos];
+        [p setRowPos:i];
         [optionsScrollWrapper.optionsScroll addOptionPicker:p];
     }
 }

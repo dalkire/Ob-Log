@@ -96,19 +96,24 @@
 {  
     int selectionTableHeight = 0;
     BOOL extendScrollView = NO;
-    NSLog(@"optionpicker in rowPos %d", self.rowPos);
-    int len = [[((ViewController *)self.window.rootViewController).scrollView subviews] count];
+    
+    //NSIndexPath *indexPath = [[NSIndexPath alloc] in
+    
+    NSLog(@"optionpicker in rowId %d", self.rowId);
+    NSUInteger indexes[] = { self.rowId, self.rowPos };
+    [(ViewController *)self.window.rootViewController 
+     showOptionsForIndexPath:[NSIndexPath indexPathWithIndexes:indexes length:2]];
+    
+    /*int len = [[((ViewController *)self.window.rootViewController).scrollView subviews] count];
     for (int i = 0; i < len; i++) {
-        NSLog(@"len=%d", len);
         if ([[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i] isKindOfClass:[DailyEditRow class]]) {
-            NSLog(@"is Row");
             if (((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).rowPos == self.rowPos) {
                 [((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).selectionTable createTableWithOptions:arr];
                 [((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]) addSubview:((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).selectionTable];
                 selectionTableHeight = ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).selectionTable.frame.size.height;
                 
                 [((ViewController *)self.window.rootViewController).scrollView bringSubviewToFront:((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i])];
-            }
+            }*/
            /* else if (((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).rowPos > self.rowPos) {
                 //[UIView animateWithDuration:0.5 animations:^{
                     ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame =
@@ -117,14 +122,14 @@
                 //}];
                 extendScrollView = YES;
             }*/
-        }
+        /*}
     }
     
     if (extendScrollView) {
         ((ViewController *)self.window.rootViewController).scrollView.contentSize = 
                                     CGSizeMake(((ViewController *)self.window.rootViewController).scrollView.contentSize.width, 
                                                ((ViewController *)self.window.rootViewController).scrollView.contentSize.height + selectionTableHeight);
-    }
+    }*/
     
     /*PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
     [content assignOptionsArray:arr withHeader:popoverHeader];

@@ -74,7 +74,7 @@
                     @"Melissa Alkire",
                     @"David Alkire",
                     @"Bryan Catarra",
-                    @"Jessie LLoyd",
+                    @"Jessie Lloyd",
                     @"Metta World Peace",
                     @"J.R. Martinez",
                     @"Tom Bergeron",
@@ -88,7 +88,7 @@
                     @"Oprah Winfrey",
                     @"Steve Jobs",
                     @"Steve Wozniak",
-                    @"Jessie LLoyd",
+                    @"Jessie Lloyd",
                     @"Metta World Peace",
                     @"J.R. Martinez",
                     @"Tom Bergeron",
@@ -105,15 +105,27 @@
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, CELL_HEIGHT*len);
     
     for (int i = 0; i < len; i++) {
+        Container *container = [[Container alloc] initWithFrame:CGRectMake(0, 
+                                                                           i ? CELL_HEIGHT : 0, 
+                                                                           self.view.frame.size.width, 
+                                                                           CELL_HEIGHT*len)];
+        [container setTag:9000+i];
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
-                                                                           i*CELL_HEIGHT, 
+                                                                           0, 
                                                                            self.view.frame.size.width, 
                                                                            CELL_HEIGHT)];
         [row propogateRowId:i andPosition:i];
         row.nameCell.nameLabel.text = [array objectAtIndex:i];
         [row setNeedsDisplay];
-        [scrollView addSubview:row];
+        [container addSubview:row];
+        if (i == 0) {
+            [scrollView addSubview:container];
+        }
+        else {
+            [[scrollView viewWithTag:9000 + i - 1] addSubview:container];
+        }
     }
+    
     [self.view addSubview:scrollView];
     
     [self.view insertSubview:dateHeader atIndex:[[self.view subviews] count]];
@@ -130,6 +142,17 @@
     [self presentModalViewController:editModal animated:YES];
 }
 
+- (void)showOptionsForIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%@", indexPath);
+    [UIView animateWithDuration:0.5 animations:^{
+       ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame = 
+        CGRectMake(((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.origin.x, 
+                   ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.origin.y + 80, 
+                   ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.size.width, 
+                   ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.size.height);
+    }];
+}
 
 - (void)viewDidUnload
 {

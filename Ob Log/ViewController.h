@@ -13,6 +13,7 @@
 #import "NoteCell.h"
 #import "DateHeader.h"
 #import "EditModalViewController.h"
+#import "Container.h"
 
 @interface ViewController : UIViewController
 {
@@ -30,5 +31,6 @@
 @property (nonatomic, retain) EditModalViewController *editModal;
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;
+- (void)showOptionsForIndexPath:(NSIndexPath *)indexPath;
 
 @end
