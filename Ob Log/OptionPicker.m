@@ -94,15 +94,15 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
-    int selectionTableHeight = 0;
-    BOOL extendScrollView = NO;
+    //int selectionTableHeight = 0;
+    //BOOL extendScrollView = NO;
     
     //NSIndexPath *indexPath = [[NSIndexPath alloc] in
     
     NSLog(@"optionpicker in rowId %d", self.rowId);
     NSUInteger indexes[] = { self.rowId, self.rowPos };
     [(ViewController *)self.window.rootViewController 
-     showOptionsForIndexPath:[NSIndexPath indexPathWithIndexes:indexes length:2]];
+     showOptionsForPickerAtIndexPath:[NSIndexPath indexPathWithIndexes:indexes length:2]];
     
     /*int len = [[((ViewController *)self.window.rootViewController).scrollView subviews] count];
     for (int i = 0; i < len; i++) {

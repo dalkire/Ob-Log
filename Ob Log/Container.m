@@ -10,6 +10,8 @@
 
 @implementation Container
 
+@synthesize mainRow;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

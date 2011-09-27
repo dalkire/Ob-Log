@@ -118,6 +118,7 @@
         row.nameCell.nameLabel.text = [array objectAtIndex:i];
         [row setNeedsDisplay];
         [container addSubview:row];
+        [container setMainRow:row];
         if (i == 0) {
             [scrollView addSubview:container];
         }
@@ -142,9 +143,10 @@
     [self presentModalViewController:editModal animated:YES];
 }
 
-- (void)showOptionsForIndexPath:(NSIndexPath *)indexPath
+- (void)showOptionsForPickerAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%@", indexPath);
+    [((DailyEditRow *)((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000])).selectionTable createTableWithOptions:[NSMutableArray arrayWithObjects:@"one", @"two", @"three", @"four", nil]];
     [UIView animateWithDuration:0.5 animations:^{
        ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame = 
         CGRectMake(((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.origin.x, 

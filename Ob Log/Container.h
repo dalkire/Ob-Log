@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DailyEditRow.h"
 
 @interface Container : UIView
 {
+    DailyEditRow *mainRow;
 }
+
+@property (nonatomic, retain) DailyEditRow *mainRow;
 
 @end
