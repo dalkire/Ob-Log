@@ -9,6 +9,8 @@
 #define CELL_HEIGHT 70
 
 #import "OptionPicker.h"
+#import "ViewController.h"
+#import "DailyEditRow.h"
 
 @implementation OptionPicker
 
@@ -92,14 +94,36 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
+    int selectionTableHeight = 0;
+    BOOL extendScrollView = NO;
     NSLog(@"optionpicker in rowPos %d", self.rowPos);
-    int len = [[[[[self window] rootViewController] view] subviews] count];
+    int len = [[((ViewController *)self.window.rootViewController).scrollView subviews] count];
     for (int i = 0; i < len; i++) {
-        if ([[[[[[self window] rootViewController] view] subviews] objectAtIndex:i] isKindOfClass:[DailyEditRow class]]) {
-            if (((DailyEditRow *)[[[[[self window] rootViewController] view] subviews] objectAtIndex:i]).rowPos > self.rowPos) {
-                ((DailyEditRow *)[[[[[self window] rootViewController] view] subviews] objectAtIndex:i]).center = CGPointMake(((DailyEditRow *)[[[[[self window] rootViewController] view] subviews] objectAtIndex:i]).center.x, ((DailyEditRow *)[[[[[self window] rootViewController] view] subviews] objectAtIndex:i]).center.y + 70);
+        NSLog(@"len=%d", len);
+        if ([[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i] isKindOfClass:[DailyEditRow class]]) {
+            NSLog(@"is Row");
+            if (((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).rowPos == self.rowPos) {
+                [((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).selectionTable createTableWithOptions:arr];
+                [((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]) addSubview:((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).selectionTable];
+                selectionTableHeight = ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).selectionTable.frame.size.height;
+                
+                [((ViewController *)self.window.rootViewController).scrollView bringSubviewToFront:((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i])];
             }
+           /* else if (((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).rowPos > self.rowPos) {
+                //[UIView animateWithDuration:0.5 animations:^{
+                    ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame =
+                    CGRectMake(((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame.origin.x, 
+                               ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame.origin.y + selectionTableHeight, ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame.size.width, ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame.size.height);
+                //}];
+                extendScrollView = YES;
+            }*/
         }
+    }
+    
+    if (extendScrollView) {
+        ((ViewController *)self.window.rootViewController).scrollView.contentSize = 
+                                    CGSizeMake(((ViewController *)self.window.rootViewController).scrollView.contentSize.width, 
+                                               ((ViewController *)self.window.rootViewController).scrollView.contentSize.height + selectionTableHeight);
     }
     
     /*PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];

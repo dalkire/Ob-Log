@@ -10,17 +10,15 @@
 #import "Row.h"
 #import "NameCell.h"
 #import "NoteCell.h"
+#import "SelectionTable.h"
 
-@interface DailyEditRow : Row <UITableViewDelegate, UITableViewDataSource> {
+@interface DailyEditRow : Row 
+{
     NameCell *nameCell;
     NoteCell *noteCell;
-    UITableView *optionsTable;
+    SelectionTable *selectionTable;
     NSUInteger rowId;
     NSUInteger rowPos;
-    
-    
-    
-    UITableView *tv;
     NSMutableArray *arr;
     NSString *popoverHeader;
     NSIndexPath *previousIndexPath;
@@ -30,13 +28,9 @@
 
 @property (nonatomic, retain) NameCell *nameCell;
 @property (nonatomic, retain) NoteCell *noteCell;
-@property (nonatomic, retain) UITableView *optionsTable;
+@property (nonatomic, retain) SelectionTable *selectionTable;
 @property NSUInteger rowId;
 @property NSUInteger rowPos;
-
-
-
-@property (nonatomic, retain) UITableView *tv;
 @property (nonatomic, retain) NSMutableArray *arr;
 @property (nonatomic, retain) NSString *popoverHeader;
 @property (nonatomic, retain) NSIndexPath *previousIndexPath;
@@ -46,6 +40,6 @@
 
 
 - (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos;
-- (void)assignOptionsArray:(NSMutableArray *)options withHeader:(NSString *)header;
+- (void)assignOptionsArray:(NSMutableArray *)options;
 
 @end

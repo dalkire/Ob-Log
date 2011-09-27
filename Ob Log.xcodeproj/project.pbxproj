@@ -35,6 +35,8 @@
 		89C4B52F142BA1EF00D035BA /* OptionPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B52E142BA1EF00D035BA /* OptionPicker.m */; };
 		89C4B53B142BA87C00D035BA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C4B53A142BA87C00D035BA /* QuartzCore.framework */; };
 		89C4B53E142BB05000D035BA /* OptionsScrollWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B53D142BB05000D035BA /* OptionsScrollWrapper.m */; };
+		89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4EF143158A70035CE24 /* SelectionTable.m */; };
+		89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +86,10 @@
 		89C4B53A142BA87C00D035BA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		89C4B53C142BB05000D035BA /* OptionsScrollWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsScrollWrapper.h; sourceTree = "<group>"; };
 		89C4B53D142BB05000D035BA /* OptionsScrollWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsScrollWrapper.m; sourceTree = "<group>"; };
+		89C7C4EE143158A70035CE24 /* SelectionTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionTable.h; sourceTree = "<group>"; };
+		89C7C4EF143158A70035CE24 /* SelectionTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionTable.m; sourceTree = "<group>"; };
+		89C7C4F214316ADB0035CE24 /* SelectionTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionTableRow.h; sourceTree = "<group>"; };
+		89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionTableRow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +139,10 @@
 				897728D81430212D00B6D985 /* NameCell.h */,
 				897728D91430212D00B6D985 /* NameCell.m */,
 				891AB1DF142FB16600D0171B /* Note Cell */,
+				89C7C4EE143158A70035CE24 /* SelectionTable.h */,
+				89C7C4EF143158A70035CE24 /* SelectionTable.m */,
+				89C7C4F214316ADB0035CE24 /* SelectionTableRow.h */,
+				89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */,
 			);
 			name = Row;
 			sourceTree = "<group>";
@@ -286,6 +296,8 @@
 				891AB1E3142FC66D00D0171B /* DailyEditRow.m in Sources */,
 				897728DA1430212D00B6D985 /* NameCell.m in Sources */,
 				89417F891430BDBA002EABBA /* Theme.m in Sources */,
+				89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */,
+				89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

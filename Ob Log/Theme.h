@@ -61,7 +61,7 @@
 #define BLUE_G      (float)0xA2/0xFF 
 #define BLUE_B      (float)0xC6/0xFF
 
-#define COLOR       BLUE
+#define COLOR       PINK
 
 #import <Foundation/Foundation.h>
 

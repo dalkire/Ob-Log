@@ -12,13 +12,9 @@
 
 @synthesize nameCell;
 @synthesize noteCell;
-@synthesize optionsTable;
+@synthesize selectionTable;
 @synthesize rowId;
 @synthesize rowPos;
-
-
-
-@synthesize tv;
 @synthesize arr;
 @synthesize popoverHeader;
 @synthesize previousIndexPath;
@@ -42,12 +38,11 @@
         [self addSubview:nameCell];
         [self addSubview:noteCell];
         
-        optionsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 
-                                                                     frame.size.height - 30, 
+        selectionTable = [[SelectionTable alloc] initWithFrame:CGRectMake(0, 
+                                                                     frame.size.height, 
                                                                      frame.size.width, 
-                                                                     frame.size.height*2)];
-        optionsTable.delegate = self;
-        optionsTable.dataSource = self;
+                                                                     60)];
+        
     }
     return self;
 }
@@ -77,10 +72,9 @@
 }
 
 
-- (void)assignOptionsArray:(NSMutableArray *)options withHeader:(NSString *)header
+- (void)assignOptionsArray:(NSMutableArray *)options
 {
     arr = options;
-    popoverHeader = header;
 }
 
 
