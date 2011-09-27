@@ -94,71 +94,11 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
-    //int selectionTableHeight = 0;
-    //BOOL extendScrollView = NO;
-    
-    //NSIndexPath *indexPath = [[NSIndexPath alloc] in
-    
-    NSLog(@"optionpicker in rowId %d", self.rowId);
+    NSLog(@"optionpicker in rowId %d, %@", self.rowId, [super class]);
     NSUInteger indexes[] = { self.rowId, self.rowPos };
     [(ViewController *)self.window.rootViewController 
      showOptionsForPickerAtIndexPath:[NSIndexPath indexPathWithIndexes:indexes length:2]];
-    
-    /*int len = [[((ViewController *)self.window.rootViewController).scrollView subviews] count];
-    for (int i = 0; i < len; i++) {
-        if ([[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i] isKindOfClass:[DailyEditRow class]]) {
-            if (((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).rowPos == self.rowPos) {
-                [((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).selectionTable createTableWithOptions:arr];
-                [((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]) addSubview:((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).selectionTable];
-                selectionTableHeight = ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).selectionTable.frame.size.height;
-                
-                [((ViewController *)self.window.rootViewController).scrollView bringSubviewToFront:((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i])];
-            }*/
-           /* else if (((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).rowPos > self.rowPos) {
-                //[UIView animateWithDuration:0.5 animations:^{
-                    ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame =
-                    CGRectMake(((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame.origin.x, 
-                               ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame.origin.y + selectionTableHeight, ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame.size.width, ((DailyEditRow *)[[((ViewController *)self.window.rootViewController).scrollView subviews] objectAtIndex:i]).frame.size.height);
-                //}];
-                extendScrollView = YES;
-            }*/
-        /*}
-    }
-    
-    if (extendScrollView) {
-        ((ViewController *)self.window.rootViewController).scrollView.contentSize = 
-                                    CGSizeMake(((ViewController *)self.window.rootViewController).scrollView.contentSize.width, 
-                                               ((ViewController *)self.window.rootViewController).scrollView.contentSize.height + selectionTableHeight);
-    }*/
-    
-    /*PickerOptionsViewController *content = [[PickerOptionsViewController alloc] initWithStyle:UITableViewStylePlain];
-    [content assignOptionsArray:arr withHeader:popoverHeader];
-    self.optionPickerPopover = [[UIPopoverController alloc]
-                                     initWithContentViewController:content];
-    self.optionPickerPopover.delegate = self;
-    CGPoint convertedPoint = [self convertPoint:CGPointMake(self.frame.origin.x + self.frame.size.width/2, 
-                                                             self.frame.origin.y + self.frame.size.height/2) 
-                                          toView:[[[self window] rootViewController] view]];
-
-    [self.optionPickerPopover presentPopoverFromRect:CGRectMake(convertedPoint.x, 
-                                                                convertedPoint.y, 
-                                                                1, 
-                                                                1)
-                                              inView:self.superview.superview.superview.superview.superview.superview.superview
-                            permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                            animated:YES];*/
-    
-    
-}
-
-- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
-{
-    return YES;
-}
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    
+    [super touchesEnded:touches withEvent:event];
 }
 
 /*- (void)drawRect:(CGRect)rect

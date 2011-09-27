@@ -7,6 +7,7 @@
 //
 
 #import "SelectionTableRow.h"
+#import "SelectionTable.h"
 
 @implementation SelectionTableRow
 
@@ -17,9 +18,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:(float)0x88/0xFF 
-                                               green:(float)0x88/0xFF 
-                                                blue:(float)0x88/0xFF 
+        self.backgroundColor = [UIColor colorWithRed:(float)0xAA/0xFF 
+                                               green:(float)0xAA/0xFF 
+                                                blue:(float)0xAA/0xFF 
                                                alpha:1];
         rowLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 
                                                              10, 
@@ -29,22 +30,43 @@
         rowLabel.textColor = [UIColor whiteColor];
         [rowLabel setBackgroundColor:[UIColor clearColor]];
         [self addSubview:rowLabel];
+        rowSelected = NO;
     }
     return self;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"touchesEnded for %@", self.rowLabel.text);
+    if ([self.superview respondsToSelector:@selector(deselectRows)]) {
+        [self.superview deselectRows];
+    }
+    
+    rowSelected = !rowSelected;
+    
+    if (rowSelected) {
+        self.backgroundColor = [Theme getThemeColor];
+    }
+    
+    NSLog(@"touchesENDED selectionTableRow");//, rowId %@", self.rowLabel.text);
+    
+    [super touchesEnded:touches withEvent:event];
+}
+
+- (void)deselectRow
+{
+    self.backgroundColor = [UIColor colorWithRed:(float)0xAA/0xFF 
+                                           green:(float)0xAA/0xFF 
+                                            blue:(float)0xAA/0xFF 
+                                           alpha:1];
 }
 
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context1 = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context1, 2.0);
-    CGContextSetStrokeColorWithColor(context1, [UIColor colorWithRed:(float)0x66/0xFF 
-                                                               green:(float)0x66/0xFF 
-                                                                blue:(float)0x66/0xFF 
+    CGContextSetStrokeColorWithColor(context1, [UIColor colorWithRed:(float)0x88/0xFF 
+                                                               green:(float)0x88/0xFF 
+                                                                blue:(float)0x88/0xFF 
                                                                alpha:1.0f].CGColor);
     CGContextMoveToPoint(context1, 0, self.frame.size.height);
     CGContextAddLineToPoint(context1, self.frame.size.width, self.frame.size.height);

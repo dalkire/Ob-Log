@@ -48,17 +48,10 @@
     [pickers addObject:picker];
 }
 
-- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"touches should begin!!!!");
-    [super touchesShouldBegin:touches withEvent:event inContentView:view];
-    
-    ((OptionsScrollWrapper *)self.superview).leftShadow.hidden = NO;
-    ((OptionsScrollWrapper *)self.superview).rightShadow.hidden = NO;
-    
-    [view touchesBegan:touches withEvent:event];
-    
-    return YES;
+     NSLog(@"touchesENDED in OptionsScroll");
+    [super touchesEnded:touches withEvent:event];
 }
 
 /*- (void)drawRect:(CGRect)rect

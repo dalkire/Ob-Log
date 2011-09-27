@@ -38,7 +38,7 @@
 @property NSInteger previousIndex;
 
 
-
+- (void)addSelectionTableForOptions:(NSMutableArray *)options;
 - (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos;
 - (void)assignOptionsArray:(NSMutableArray *)options;
 

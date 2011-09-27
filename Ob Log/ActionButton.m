@@ -45,9 +45,10 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"touchesENDED in ActionButton");
     if (((NoteCell *)self.superview.superview).sliderIsExtended) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.superview.frame = CGRectMake(self.superview.frame.size.width - 61, 
+            self.superview.frame = CGRectMake(self.superview.frame.size.width - 54, 
                                     self.superview.frame.origin.y, 
                                     self.superview.frame.size.width, 
                                     self.superview.frame.size.height);
@@ -65,6 +66,7 @@
         ((NoteCell *)self.superview.superview).sliderIsExtended = YES;
         icon.image = [UIImage imageNamed:@"slideInBtn.png"];
     }
+    [super touchesEnded:touches withEvent:event];
 }
 
 @end

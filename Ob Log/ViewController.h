@@ -31,6 +31,6 @@
 @property (nonatomic, retain) EditModalViewController *editModal;
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;
-- (void)showOptionsForIndexPath:(NSIndexPath *)indexPath;
+- (void)showOptionsForPickerAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

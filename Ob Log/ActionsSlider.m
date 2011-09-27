@@ -20,8 +20,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        toggle = [[[ActionButton alloc] initWithFrame:CGRectMake(10, 0, 50, frame.size.height)] autorelease];
-        UIView *bg = [[[UIView alloc] initWithFrame:CGRectMake(10, 0, frame.size.width - 10, frame.size.height)] autorelease];
+        toggle = [[ActionButton alloc] initWithFrame:CGRectMake(10, 0, 50, frame.size.height)];
+        UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(10, 0, frame.size.width - 10, frame.size.height)];
         bg.backgroundColor = [UIColor colorWithRed:(float)0xEE/0xFF 
                                              green:(float)0xEE/0xFF 
                                               blue:(float)0xEE/0xFF 
@@ -29,7 +29,7 @@
         [self addSubview:bg];
         [toggle createButtonOfType:@"toggle"];
         [self addSubview:toggle];
-        NSLog(@"ActionsSlider frame width = %f", frame.size.width);
+        
         optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(60, 
                                                                         0, 
                                                                         frame.size.width - 60, 

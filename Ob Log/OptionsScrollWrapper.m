@@ -28,7 +28,7 @@
                                                               0, 
                                                               8, 
                                                               frame.size.height)];
-        NSLog(@"optionsScrollWrapper frame width = %f", frame.size.width);
+        
         rightShadow = [[UIView alloc] initWithFrame:CGRectMake(frame.size.width - 8, 
                                                                0, 
                                                                8, 
@@ -43,7 +43,7 @@
         [gradientL setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0x33/0xFF 
                                                                           green:(float)0x33/0xFF 
                                                                            blue:(float)0x33/0xFF 
-                                                                          alpha:0.4f].CGColor, 
+                                                                          alpha:0.2f].CGColor, 
                              (id)[UIColor colorWithRed:(float)0x33/0xFF 
                                                  green:(float)0x33/0xFF 
                                                   blue:(float)0x33/0xFF 
@@ -58,7 +58,7 @@
         [gradientR setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0x33/0xFF 
                                                                            green:(float)0x33/0xFF 
                                                                             blue:(float)0x33/0xFF 
-                                                                           alpha:0.4f].CGColor, 
+                                                                           alpha:0.2f].CGColor, 
                               (id)[UIColor colorWithRed:(float)0x33/0xFF 
                                                   green:(float)0x33/0xFF 
                                                    blue:(float)0x33/0xFF 

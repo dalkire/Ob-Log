@@ -25,28 +25,46 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        nameCell = [[[NameCell alloc] initWithFrame:CGRectMake(0, 
+        nameCell = [[NameCell alloc] initWithFrame:CGRectMake(0, 
                                                                0, 
                                                                299, 
-                                                               frame.size.height - 2)] autorelease];
+                                                               frame.size.height - 2)];
         nameCell.backgroundColor = [UIColor clearColor];
          
-        noteCell = [[[NoteCell alloc] initWithFrame:CGRectMake(302, 
+        noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(302, 
                                                                0, 
                                                                frame.size.width - 308, 
-                                                               frame.size.height)] autorelease];         
+                                                               frame.size.height)];         
         [self addSubview:nameCell];
         [self addSubview:noteCell];
         
-        selectionTable = [[SelectionTable alloc] initWithFrame:CGRectMake(0, 
-                                                                     frame.size.height, 
-                                                                     frame.size.width, 
-                                                                     60)];
+        /*NSMutableArray *options = [[NSMutableArray alloc] initWithObjects:@"one 1", @"two 2", @"tree <-", @"fore", nil];
         
+        selectionTable = [[SelectionTable alloc] initWithFrame:CGRectMake(0, 
+                                                                           self.frame.size.height - 1, 
+                                                                           self.frame.size.width, 
+                                                                           [options count]*40)];
+        [selectionTable createTableWithOptions:options];
+        [self addSubview:selectionTable];*/
     }
     return self;
 }
 
+- (void)addSelectionTableForOptions:(NSMutableArray *)options
+{
+    self.selectionTable = [[SelectionTable alloc] initWithFrame:CGRectMake(0, 
+                                                                      self.frame.size.height - 1, 
+                                                                      self.frame.size.width, 
+                                                                      [options count]*40)];
+    [selectionTable createTableWithOptions:options];
+    
+    self.frame = CGRectMake(self.frame.origin.x, 
+                            self.frame.origin.y, 
+                            self.frame.size.width, 
+                            self.frame.size.height + [options count]*40);
+    
+    [self addSubview:selectionTable];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -69,6 +87,12 @@
     [noteCell.slider setRowId:rid];
     [noteCell.slider setRowPos:rpos];
     [noteCell.slider loadOptionPickers];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touches ended for daily edit row");
+    [super touchesEnded:touches withEvent:event];
 }
 
 

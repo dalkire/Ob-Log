@@ -34,7 +34,7 @@
         gradient.endPoint = CGPointMake(0, 1);
         [[self layer] addSublayer:gradient];
         
-        dateTitle = [[[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)] autorelease];
+        dateTitle = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)];
         dateTitle.backgroundColor = [UIColor clearColor];
         dateTitle.textColor = [UIColor whiteColor];
         dateTitle.font = [UIFont fontWithName:@"Helvetica-Bold" size:36];
@@ -45,7 +45,7 @@
                                      dateTitle.frame.size.width, 
                                      dateTitle.frame.size.height);
         
-        sectionSubtitle = [[[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)] autorelease];
+        sectionSubtitle = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)];
         sectionSubtitle.backgroundColor = [UIColor clearColor];
         sectionSubtitle.textColor = [UIColor whiteColor];
         sectionSubtitle.font = [UIFont fontWithName:@"Helvetica" size:18];

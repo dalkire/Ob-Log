@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Theme.h"
 
 @interface SelectionTableRow : UIView
 {
@@ -16,5 +17,7 @@
 
 @property (nonatomic, retain) UILabel *rowLabel;
 @property BOOL rowSelected;
+
+- (void)deselectRow;
 
 @end

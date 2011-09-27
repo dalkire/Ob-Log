@@ -32,12 +32,18 @@
         scrollView.contentSize = CGSizeMake(frame.size.width - 52, textView.frame.size.height - 5);
         [scrollView addSubview:textView];
         [self addSubview:scrollView];
-        NSLog(@"NoteCell frame width = %f", frame.size.width);
+        
         slider = [[ActionsSlider alloc] initWithFrame:CGRectMake(-6, 0, frame.size.width, frame.size.height - 1)];
         [self addSubview:slider];
         sliderIsExtended = YES;
     }
     return self;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"TOUCHES ENDED FOR NOTE CELL");
+    [super touchesEnded:touches withEvent:event];
 }
 
 /*

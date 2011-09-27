@@ -98,10 +98,10 @@
                     nil];
 	
     int len = [array count];
-    scrollView = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
                                                                 dateHeader.frame.size.height, 
                                                                 self.view.frame.size.width, 
-                                                                self.view.frame.size.height - dateHeader.frame.size.height)] autorelease];
+                                                                self.view.frame.size.height - dateHeader.frame.size.height)];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, CELL_HEIGHT*len);
     
     for (int i = 0; i < len; i++) {
@@ -138,7 +138,7 @@
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date
 {
     NSLog(@"%d // %@", uid, date);
-    self.editModal = [[[EditModalViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    self.editModal = [[EditModalViewController alloc] initWithNibName:nil bundle:nil];
     self.editModal.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentModalViewController:editModal animated:YES];
 }
@@ -146,11 +146,24 @@
 - (void)showOptionsForPickerAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%@", indexPath);
-    [((DailyEditRow *)((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000])).selectionTable createTableWithOptions:[NSMutableArray arrayWithObjects:@"one", @"two", @"three", @"four", nil]];
+    DailyEditRow *main = (DailyEditRow *)((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000]).mainRow;
+    
+    [main addSelectionTableForOptions:[NSMutableArray 
+                                       arrayWithObjects:@"one", @"two", @"three", @"four", nil]];
+    
+    /*float selectionTableFrameHeight = [main.selectionTable createTableWithOptions:[NSMutableArray 
+                                                                                   arrayWithObjects:@"one", @"two", @"three", @"four", nil]];
+    main.selectionTable.frame = CGRectMake(main.selectionTable.frame.origin.x, 
+                                           main.selectionTable.frame.origin.y, 
+                                           main.selectionTable.frame.size.width, 
+                                           selectionTableFrameHeight);*/
+    
+    //[main addSubview:main.selectionTable];
+    
     [UIView animateWithDuration:0.5 animations:^{
        ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame = 
         CGRectMake(((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.origin.x, 
-                   ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.origin.y + 80, 
+                   ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.origin.y + main.selectionTable.frame.size.height - 1, 
                    ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.size.width, 
                    ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.size.height);
     }];

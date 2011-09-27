@@ -7,15 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "SelectionTableRow.h"
 
 @interface SelectionTable : UIView
 {
     NSMutableArray *optionsArray;
+    UIView *topShadow;
+    UIView *bottomShadow;
+    NSMutableArray *rowsArray;
 }
 
 @property (nonatomic, retain) NSMutableArray *optionsArray;
+@property (nonatomic, retain) UIView *topShadow;
+@property (nonatomic, retain) UIView *bottomShadow;
+@property (nonatomic, retain) NSMutableArray *rowsArray;
 
+- (void)deselectRows;
 - (void)createTableWithOptions:(NSMutableArray *)options;
 
 @end
