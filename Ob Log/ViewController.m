@@ -135,10 +135,12 @@
     [self presentModalViewController:editModal animated:YES];
 }
 
-- (void)showOptionsForPickerAtIndexPath:(NSIndexPath *)indexPath
+- (void)showOptionsForPicker:(OptionPicker *)picker
 {
     [self collapseActiveRow];
-    activeRow = (DailyEditRow *)((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000]).mainRow;
+    activeRow = (DailyEditRow *)((Container *)[scrollView viewWithTag:picker.rowId + 9000]).mainRow;
+    
+    activeRow.activePicker = picker;
     
     [activeRow addSelectionTableForOptions:[NSMutableArray 
                                        arrayWithObjects:@"one", @"two", @"three", @"four", nil]];
@@ -154,7 +156,7 @@
             expandedContainer = nil;
             NSLog(@"tried to collapse container activeRow.selectionTable.frame.size.height=%f", activeRow.selectionTable.frame.size.height);
         }
-        expandedContainer = (Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1];
+        expandedContainer = (Container *)[scrollView viewWithTag:picker.rowId + 9000 + 1];
         expandedContainer.frame =  CGRectMake(expandedContainer.frame.origin.x, 
                                              expandedContainer.frame.origin.y + activeRow.selectionTable.frame.size.height - 1, 
                                              expandedContainer.frame.size.width, 
@@ -165,6 +167,14 @@
 - (void)collapseActiveRow
 {
     if (activeRow) {
+        activeRow.activePicker.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
+                                                                 green:(float)0xDD/0xFF 
+                                                                  blue:(float)0xDD/0xFF 
+                                                                 alpha:1];
+        activeRow.activePicker.headerLabel.textColor = [UIColor colorWithRed:(float)0x22/0xFF 
+                                                                       green:(float)0x22/0xFF 
+                                                                        blue:(float)0x22/0xFF 
+                                                                       alpha:1];
         [activeRow collapseRow];
     }
 }

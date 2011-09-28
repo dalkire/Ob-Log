@@ -76,7 +76,7 @@
                             self.frame.size.height - selectionTable.frame.size.height);
     [selectionTable removeFromSuperview];
     selectionTable = nil;
-    [selectionTable release];
+    //[selectionTable release];
 }
 
 - (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos

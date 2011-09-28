@@ -28,7 +28,10 @@
     if (self) {
         self = [super initWithFrame:frame];
         
-        self.backgroundColor = [Theme getThemeColor];
+        self.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
+                                               green:(float)0xDD/0xFF 
+                                                blue:(float)0xDD/0xFF 
+                                               alpha:1];
         
         gradient = [CAGradientLayer layer];
         [gradient setFrame:frame];
@@ -51,8 +54,11 @@
                                                                 10, 
                                                                 frame.size.width - 40, 
                                                                 frame.size.height - 20)];
-        headerLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
-        headerLabel.textColor = [UIColor whiteColor];
+        headerLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
+        headerLabel.textColor = [UIColor colorWithRed:(float)0x22/0xFF 
+                                                green:(float)0x22/0xFF 
+                                                 blue:(float)0x22/0xFF 
+                                                alpha:1];
         [headerLabel setBackgroundColor:[UIColor clearColor]]; 
         [self addSubview:headerLabel];
         self.expanded = NO;
@@ -99,13 +105,9 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
     if (!self.expanded) {
-        self.backgroundColor = [UIColor colorWithRed:(float)0xAA/0xFF 
-                                               green:(float)0xAA/0xFF 
-                                                blue:(float)0xAA/0xFF 
-                                               alpha:1];
-        NSUInteger indexes[] = { self.rowId, self.rowPos };
-        [(ViewController *)self.window.rootViewController 
-            showOptionsForPickerAtIndexPath:[NSIndexPath indexPathWithIndexes:indexes length:2]];
+        self.backgroundColor = [Theme getThemeColor];
+        self.headerLabel.textColor = [UIColor whiteColor];
+        [(ViewController *)self.window.rootViewController showOptionsForPicker:self];
         [super touchesEnded:touches withEvent:event];
         self.expanded = YES;
     }

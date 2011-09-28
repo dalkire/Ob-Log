@@ -36,7 +36,7 @@
 @property (nonatomic, retain) Container *expandedContainer;
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;
-- (void)showOptionsForPickerAtIndexPath:(NSIndexPath *)indexPath;
+- (void)showOptionsForPicker:(OptionPicker *)picker;
 - (void)collapseActiveRow;
 
 @end
