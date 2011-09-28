@@ -19,6 +19,8 @@
     UILabel *headerLabel;
     NSUInteger rowID;
     NSUInteger rowPos;
+    BOOL expanded;
+    CAGradientLayer *gradient;
 }
 
 @property (nonatomic, retain) UIPopoverController *optionPickerPopover;
@@ -27,6 +29,8 @@
 @property (nonatomic, retain) UILabel *headerLabel;
 @property NSUInteger rowId;
 @property NSUInteger rowPos;
+@property BOOL expanded;
+@property (nonatomic, retain) CAGradientLayer *gradient;
 
 - (void)setPickerHeader:(NSString *)header andOptions:(NSMutableArray *)options;
 //+ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSMutableArray *)options;

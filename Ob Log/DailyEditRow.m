@@ -20,6 +20,7 @@
 @synthesize previousIndexPath;
 @synthesize currentIndexPath;
 @synthesize previousIndex;
+@synthesize activePicker;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -46,6 +47,7 @@
                                                                            [options count]*40)];
         [selectionTable createTableWithOptions:options];
         [self addSubview:selectionTable];*/
+        activePicker = nil;
     }
     return self;
 }
@@ -66,15 +68,16 @@
     [self addSubview:selectionTable];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)collapseRow
 {
-    // Drawing code
+    self.frame = CGRectMake(self.frame.origin.x, 
+                            self.frame.origin.y, 
+                            self.frame.size.width, 
+                            self.frame.size.height - selectionTable.frame.size.height);
+    [selectionTable removeFromSuperview];
+    selectionTable = nil;
+    [selectionTable release];
 }
-*/
-
 
 - (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos
 {

@@ -21,6 +21,8 @@
 @synthesize dateHeader;
 @synthesize dateHeaderDropShadow;
 @synthesize editModal;
+@synthesize activeRow;
+@synthesize expandedContainer;
 
 - (void)didReceiveMemoryWarning
 {
@@ -32,18 +34,8 @@
 
 - (void)viewDidLoad
 {
-    bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    bg.tag = BG_UIIMAGEVIEW;
-    bg.image = [UIImage imageNamed:@"blankwhite_vert.png"];
-    if (self.view.frame.size.width < self.view.frame.size.height) {
-        bg.image = [UIImage imageNamed:@"blankwhite_vert.png"];
-    }
-    else {
-        bg.image = [UIImage imageNamed:@"blankwhite_hrzn.png"];
-    }
-    
-    [self.view addSubview:bg];
-    
+    activeRow = nil;
+    expandedContainer = nil;
     dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
     dateHeaderDropShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                                     dateHeader.frame.origin.y + dateHeader.frame.size.height, 
@@ -145,28 +137,36 @@
 
 - (void)showOptionsForPickerAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@", indexPath);
-    DailyEditRow *main = (DailyEditRow *)((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000]).mainRow;
+    [self collapseActiveRow];
+    activeRow = (DailyEditRow *)((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000]).mainRow;
     
-    [main addSelectionTableForOptions:[NSMutableArray 
+    [activeRow addSelectionTableForOptions:[NSMutableArray 
                                        arrayWithObjects:@"one", @"two", @"three", @"four", nil]];
     
-    /*float selectionTableFrameHeight = [main.selectionTable createTableWithOptions:[NSMutableArray 
-                                                                                   arrayWithObjects:@"one", @"two", @"three", @"four", nil]];
-    main.selectionTable.frame = CGRectMake(main.selectionTable.frame.origin.x, 
-                                           main.selectionTable.frame.origin.y, 
-                                           main.selectionTable.frame.size.width, 
-                                           selectionTableFrameHeight);*/
-    
-    //[main addSubview:main.selectionTable];
-    
     [UIView animateWithDuration:0.5 animations:^{
-       ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame = 
-        CGRectMake(((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.origin.x, 
-                   ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.origin.y + main.selectionTable.frame.size.height - 1, 
-                   ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.size.width, 
-                   ((Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1]).frame.size.height);
+        if (expandedContainer) {
+          //[UIView animateWithDuration:0.3 animations:^{
+                expandedContainer.frame =  CGRectMake(expandedContainer.frame.origin.x, 
+                                                      expandedContainer.frame.origin.y - activeRow.selectionTable.frame.size.height + 1, 
+                                                      expandedContainer.frame.size.width, 
+                                                      expandedContainer.frame.size.height);
+          //}];
+            expandedContainer = nil;
+            NSLog(@"tried to collapse container activeRow.selectionTable.frame.size.height=%f", activeRow.selectionTable.frame.size.height);
+        }
+        expandedContainer = (Container *)[scrollView viewWithTag:[indexPath indexAtPosition:0] + 9000 + 1];
+        expandedContainer.frame =  CGRectMake(expandedContainer.frame.origin.x, 
+                                             expandedContainer.frame.origin.y + activeRow.selectionTable.frame.size.height - 1, 
+                                             expandedContainer.frame.size.width, 
+                                             expandedContainer.frame.size.height);
     }];
+}
+
+- (void)collapseActiveRow
+{
+    if (activeRow) {
+        [activeRow collapseRow];
+    }
 }
 
 - (void)viewDidUnload

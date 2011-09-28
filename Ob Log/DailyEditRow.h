@@ -11,6 +11,7 @@
 #import "NameCell.h"
 #import "NoteCell.h"
 #import "SelectionTable.h"
+#import "OptionPicker.h"
 
 @interface DailyEditRow : Row 
 {
@@ -24,6 +25,7 @@
     NSIndexPath *previousIndexPath;
     NSIndexPath *currentIndexPath;
     NSInteger previousIndex;
+    OptionPicker *activePicker;
 }
 
 @property (nonatomic, retain) NameCell *nameCell;
@@ -36,9 +38,11 @@
 @property (nonatomic, retain) NSIndexPath *previousIndexPath;
 @property (nonatomic, retain) NSIndexPath *currentIndexPath;
 @property NSInteger previousIndex;
+@property (nonatomic, retain) OptionPicker *activePicker;
 
 
 - (void)addSelectionTableForOptions:(NSMutableArray *)options;
+- (void)collapseRow;
 - (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos;
 - (void)assignOptionsArray:(NSMutableArray *)options;
 

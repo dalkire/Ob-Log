@@ -20,6 +20,8 @@
 @synthesize headerLabel;
 @synthesize rowId;
 @synthesize rowPos;
+@synthesize expanded;
+@synthesize gradient;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,7 +30,7 @@
         
         self.backgroundColor = [Theme getThemeColor];
         
-        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient = [CAGradientLayer layer];
         [gradient setFrame:frame];
         [gradient setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0xCC/0xFF 
                                                                            green:(float)0xCC/0xFF 
@@ -53,6 +55,7 @@
         headerLabel.textColor = [UIColor whiteColor];
         [headerLabel setBackgroundColor:[UIColor clearColor]]; 
         [self addSubview:headerLabel];
+        self.expanded = NO;
     }
     
     return self;
@@ -70,6 +73,7 @@
                               self.frame.origin.y, 
                               headerLabel.frame.size.width + 40, 
                               self.frame.size.height)];
+    gradient.frame = self.frame;
     [self setArr:options];
 }
 
@@ -94,11 +98,17 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
-    NSLog(@"optionpicker in rowId %d, %@", self.rowId, [super class]);
-    NSUInteger indexes[] = { self.rowId, self.rowPos };
-    [(ViewController *)self.window.rootViewController 
-     showOptionsForPickerAtIndexPath:[NSIndexPath indexPathWithIndexes:indexes length:2]];
-    [super touchesEnded:touches withEvent:event];
+    if (!self.expanded) {
+        self.backgroundColor = [UIColor colorWithRed:(float)0xAA/0xFF 
+                                               green:(float)0xAA/0xFF 
+                                                blue:(float)0xAA/0xFF 
+                                               alpha:1];
+        NSUInteger indexes[] = { self.rowId, self.rowPos };
+        [(ViewController *)self.window.rootViewController 
+            showOptionsForPickerAtIndexPath:[NSIndexPath indexPathWithIndexes:indexes length:2]];
+        [super touchesEnded:touches withEvent:event];
+        self.expanded = YES;
+    }
 }
 
 /*- (void)drawRect:(CGRect)rect

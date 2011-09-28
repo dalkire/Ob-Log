@@ -25,8 +25,6 @@
 		89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */; };
 		89C4B51F142B6C1000D035BA /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B510142B6C1000D035BA /* ActionButton.m */; };
 		89C4B520142B6C1000D035BA /* ActionsSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B512142B6C1000D035BA /* ActionsSlider.m */; };
-		89C4B521142B6C1000D035BA /* blankwhite_hrzn.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C4B513142B6C1000D035BA /* blankwhite_hrzn.png */; };
-		89C4B522142B6C1000D035BA /* blankwhite_vert.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C4B514142B6C1000D035BA /* blankwhite_vert.png */; };
 		89C4B524142B6C1000D035BA /* DateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B518142B6C1000D035BA /* DateHeader.m */; };
 		89C4B525142B6C1000D035BA /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B51A142B6C1000D035BA /* NoteCell.m */; };
 		89C4B527142B6C1000D035BA /* slideInBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C4B51D142B6C1000D035BA /* slideInBtn.png */; };
@@ -72,8 +70,6 @@
 		89C4B510142B6C1000D035BA /* ActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionButton.m; sourceTree = "<group>"; };
 		89C4B511142B6C1000D035BA /* ActionsSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionsSlider.h; sourceTree = "<group>"; };
 		89C4B512142B6C1000D035BA /* ActionsSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionsSlider.m; sourceTree = "<group>"; };
-		89C4B513142B6C1000D035BA /* blankwhite_hrzn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blankwhite_hrzn.png; sourceTree = "<group>"; };
-		89C4B514142B6C1000D035BA /* blankwhite_vert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blankwhite_vert.png; sourceTree = "<group>"; };
 		89C4B517142B6C1000D035BA /* DateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHeader.h; sourceTree = "<group>"; };
 		89C4B518142B6C1000D035BA /* DateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHeader.m; sourceTree = "<group>"; };
 		89C4B519142B6C1000D035BA /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
@@ -185,17 +181,15 @@
 			isa = PBXGroup;
 			children = (
 				891AB1E0142FB1C800D0171B /* Row */,
-				89C4B513142B6C1000D035BA /* blankwhite_hrzn.png */,
-				89C4B514142B6C1000D035BA /* blankwhite_vert.png */,
+				892C96B5142B67E000994EAB /* ViewController.h */,
+				892C96B6142B67E000994EAB /* ViewController.m */,
+				892C96B8142B67E000994EAB /* ViewController.xib */,
 				89C4B517142B6C1000D035BA /* DateHeader.h */,
 				89C4B518142B6C1000D035BA /* DateHeader.m */,
 				89C4B51D142B6C1000D035BA /* slideInBtn.png */,
 				89C4B51E142B6C1000D035BA /* slideOutBtn.png */,
 				892C96B2142B67E000994EAB /* AppDelegate.h */,
 				892C96B3142B67E000994EAB /* AppDelegate.m */,
-				892C96B5142B67E000994EAB /* ViewController.h */,
-				892C96B6142B67E000994EAB /* ViewController.m */,
-				892C96B8142B67E000994EAB /* ViewController.xib */,
 				895B5D97142EB99A007D7B9C /* EditModalViewController.h */,
 				895B5D98142EB99A007D7B9C /* EditModalViewController.m */,
 				892C96AA142B67E000994EAB /* Supporting Files */,
@@ -270,8 +264,6 @@
 			files = (
 				892C96AE142B67E000994EAB /* InfoPlist.strings in Resources */,
 				892C96BA142B67E000994EAB /* ViewController.xib in Resources */,
-				89C4B521142B6C1000D035BA /* blankwhite_hrzn.png in Resources */,
-				89C4B522142B6C1000D035BA /* blankwhite_vert.png in Resources */,
 				89C4B527142B6C1000D035BA /* slideInBtn.png in Resources */,
 				89C4B528142B6C1000D035BA /* slideOutBtn.png in Resources */,
 			);
