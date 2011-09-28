@@ -13,6 +13,7 @@
 
 @synthesize rowLabel;
 @synthesize rowSelected;
+@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -45,6 +46,9 @@
     
     if (rowSelected) {
         self.backgroundColor = [Theme getThemeColor];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectRow:)]) {
+            [self.delegate didSelectRow:self];
+        }
     }
     
     NSLog(@"touchesENDED selectionTableRow");//, rowId %@", self.rowLabel.text);

@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "PickerOptionsViewController.h"
+#import "SelectionTableRow.h"
 #import "Theme.h"
 
-@interface OptionPicker : UIView <UIPopoverControllerDelegate>
+@interface OptionPicker : UIView <UIPopoverControllerDelegate, SelectionTableRowDelegate>
 {
     UIPopoverController *optionPickerPopover;
     NSMutableArray *arr;

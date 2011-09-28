@@ -10,7 +10,7 @@
 
 @implementation NoteCell
 
-@synthesize slider;
+@synthesize actionsSlider;
 @synthesize sliderIsExtended;
 @synthesize scrollView;
 @synthesize textView;
@@ -32,12 +32,21 @@
         scrollView.contentSize = CGSizeMake(frame.size.width - 52, textView.frame.size.height - 5);
         [scrollView addSubview:textView];
         [self addSubview:scrollView];
-        
-        slider = [[ActionsSlider alloc] initWithFrame:CGRectMake(-6, 0, frame.size.width, frame.size.height - 1)];
-        [self addSubview:slider];
-        sliderIsExtended = YES;
     }
     return self;
+}
+
+- (ActionsSlider *)createActionsSlider
+{
+    actionsSlider = nil;
+    actionsSlider = [[ActionsSlider alloc] initWithFrame:CGRectMake(-6, 
+                                                                    0, 
+                                                                    self.frame.size.width, 
+                                                                    self.frame.size.height - 1)];
+    [self addSubview:actionsSlider];
+    sliderIsExtended = YES;
+    
+    return actionsSlider;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

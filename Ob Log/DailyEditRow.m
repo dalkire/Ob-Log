@@ -12,7 +12,14 @@
 
 @synthesize nameCell;
 @synthesize noteCell;
+@synthesize actionsSlider;
+@synthesize actionButton;
+@synthesize optionsScrollWrapper;
+@synthesize optionsScroll;
+@synthesize activeOptionPicker;
 @synthesize selectionTable;
+@synthesize activeSelectionTableRow;
+
 @synthesize rowId;
 @synthesize rowPos;
 @synthesize arr;
@@ -26,30 +33,40 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        nameCell = [[NameCell alloc] initWithFrame:CGRectMake(0, 
-                                                               0, 
-                                                               299, 
-                                                               frame.size.height - 2)];
-        nameCell.backgroundColor = [UIColor clearColor];
-         
-        noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(302, 
-                                                               0, 
-                                                               frame.size.width - 308, 
-                                                               frame.size.height)];         
-        [self addSubview:nameCell];
-        [self addSubview:noteCell];
-        
-        /*NSMutableArray *options = [[NSMutableArray alloc] initWithObjects:@"one 1", @"two 2", @"tree <-", @"fore", nil];
-        
-        selectionTable = [[SelectionTable alloc] initWithFrame:CGRectMake(0, 
-                                                                           self.frame.size.height - 1, 
-                                                                           self.frame.size.width, 
-                                                                           [options count]*40)];
-        [selectionTable createTableWithOptions:options];
-        [self addSubview:selectionTable];*/
+        nameCell = nil;
+        noteCell = nil;
         activePicker = nil;
+        [self createNoteCellWithObject:[[NSObject alloc] init]];
     }
     return self;
+}
+
+- (NameCell *)createNameCellWithName:(NSString *)name
+{
+    nameCell = nil;
+    nameCell = [[NameCell alloc] initWithFrame:CGRectMake(0, 
+                                                          0, 
+                                                          299, 
+                                                          self.frame.size.height - 2) 
+                                       andName:name];
+    [self addSubview:nameCell];
+    
+    return nameCell;
+}
+
+- (NoteCell *)createNoteCellWithObject:(NSObject *)object
+{
+    noteCell = nil;
+    noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(302, 
+                                                          0, 
+                                                          self.frame.size.width - 308, 
+                                                          self.frame.size.height)];
+    actionsSlider = [noteCell createActionsSlider];
+    [actionsSlider loadOptionPickers];
+    
+    [self addSubview:noteCell];
+    
+    return noteCell;
 }
 
 - (void)addSelectionTableForOptions:(NSMutableArray *)options
@@ -81,7 +98,7 @@
 
 - (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos
 {
-    [self setRowId:rid];
+    /*[self setRowId:rid];
     [self setRowPos:rpos];
     [nameCell setRowId:rid];
     [nameCell setRowPos:rpos];
@@ -89,7 +106,7 @@
     [noteCell setRowPos:rpos];
     [noteCell.slider setRowId:rid];
     [noteCell.slider setRowPos:rpos];
-    [noteCell.slider loadOptionPickers];
+    [noteCell.slider loadOptionPickers];*/
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
