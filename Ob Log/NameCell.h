@@ -11,12 +11,10 @@
 @interface NameCell : UIView
 {
     UILabel *nameLabel;
-    NSUInteger rowId;
-    NSUInteger rowPos;
 }
 
 @property (nonatomic, retain) UILabel *nameLabel;
-@property NSUInteger rowId;
-@property NSUInteger rowPos;
+
+- (id)initWithFrame:(CGRect)frame andName:(NSString *)name;
 
 @end

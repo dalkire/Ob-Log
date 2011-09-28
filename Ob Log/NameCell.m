@@ -11,13 +11,12 @@
 @implementation NameCell
 
 @synthesize nameLabel;
-@synthesize rowId;
-@synthesize rowPos;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame andName:(NSString *)name
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 
                                                               14, 
                                                               frame.size.width - 28, 
@@ -25,6 +24,7 @@
         nameLabel.font = [UIFont fontWithName:@"Helvetica" size:28];
         nameLabel.backgroundColor = [UIColor clearColor];
         nameLabel.textColor = [UIColor blackColor];
+        nameLabel.text = name;
         [self addSubview:nameLabel];
     }
     return self;

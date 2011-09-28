@@ -12,14 +12,22 @@
 
 @interface SelectionTableRow : UIView
 {
+    id delegate;
     UILabel *rowLabel;
     BOOL rowSelected;
     id<SelectionTableRowDelegate> picker;
 }
 
+@property (nonatomic, retain) id delegate;
 @property (nonatomic, retain) UILabel *rowLabel;
 @property BOOL rowSelected;
 
 - (void)deselectRow;
+
+@end
+
+@protocol SelectionTableRowDelegate
+
+- (void)didSelectRow:(SelectionTableRow *)row;
 
 @end

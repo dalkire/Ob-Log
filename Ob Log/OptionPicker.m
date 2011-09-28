@@ -107,6 +107,11 @@
     return picker;
 }*/
 
+- (void)didSelectRow:(SelectionTableRow *)row
+{
+    NSLog(@"DID SELECT ROW: %@", row);
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
     if (!self.expanded) {

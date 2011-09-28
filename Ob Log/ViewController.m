@@ -107,7 +107,8 @@
                                                                            self.view.frame.size.width, 
                                                                            CELL_HEIGHT)];
         [row propogateRowId:i andPosition:i];
-        row.nameCell.nameLabel.text = [array objectAtIndex:i];
+        [row createNameCellWithName:[array objectAtIndex:i]];
+        //row.nameCell.nameLabel.text = [array objectAtIndex:i];
         [row setNeedsDisplay];
         [container addSubview:row];
         [container setMainRow:row];
