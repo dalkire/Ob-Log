@@ -89,6 +89,7 @@
 		89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionTableRow.m; sourceTree = "<group>"; };
 		89C7C4F514317FE50035CE24 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Container.h; sourceTree = "<group>"; };
 		89C7C4F614317FE50035CE24 /* Container.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Container.m; sourceTree = "<group>"; };
+		89C7C4F814333AC90035CE24 /* SelectionTableRowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionTableRowDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +141,7 @@
 				891AB1DF142FB16600D0171B /* Note Cell */,
 				89C7C4EE143158A70035CE24 /* SelectionTable.h */,
 				89C7C4EF143158A70035CE24 /* SelectionTable.m */,
+				89C7C4F814333AC90035CE24 /* SelectionTableRowDelegate.h */,
 				89C7C4F214316ADB0035CE24 /* SelectionTableRow.h */,
 				89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */,
 				89C7C4F514317FE50035CE24 /* Container.h */,

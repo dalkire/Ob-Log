@@ -83,6 +83,11 @@
     [self setArr:options];
 }
 
+- (void)didSelectOption:(NSString *)option
+{
+    NSLog(@"DID SELECT OPTION: %@", option);
+}
+
 /*+ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSMutableArray *)options
 {
     UILabel *label = [[[UILabel alloc] init] autorelease];
