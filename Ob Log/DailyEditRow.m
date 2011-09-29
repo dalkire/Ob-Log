@@ -7,8 +7,12 @@
 //
 
 #import "DailyEditRow.h"
+#import "ViewController.h"
 
 @implementation DailyEditRow
+
+@synthesize delegate;
+@synthesize containerTag;
 
 @synthesize nameCell;
 @synthesize noteCell;
@@ -16,8 +20,10 @@
 @synthesize actionButton;
 @synthesize optionsScrollWrapper;
 @synthesize optionsScroll;
+@synthesize optionPickers;
 @synthesize activeOptionPicker;
 @synthesize selectionTable;
+@synthesize selectionTableRows;
 @synthesize activeSelectionTableRow;
 
 @synthesize rowId;
@@ -37,6 +43,24 @@
         noteCell = nil;
         activePicker = nil;
         [self createNoteCellWithObject:[[NSObject alloc] init]];
+        actionsSlider = noteCell.actionsSlider;
+        optionsScrollWrapper = noteCell.actionsSlider.optionsScrollWrapper;
+        optionsScroll = noteCell.actionsSlider.optionsScrollWrapper.optionsScroll;
+        optionPickers = noteCell.actionsSlider.optionsScrollWrapper.optionsScroll.optionPickers;
+        
+        int len = [optionPickers count];
+        for (int i = 0; i < len; i++) {
+            [(OptionPicker *)[optionPickers objectAtIndex:i] setDelegate:self];
+        }
+        UIView *blueLine = [[UIView alloc] initWithFrame:CGRectMake(0, 
+                                                                    frame.size.height - 1, 
+                                                                    frame.size.width, 
+                                                                    1)];
+        blueLine.backgroundColor = [UIColor colorWithRed:(float)0x77/0xFF 
+                                                    green:(float)0x9D/0xFF 
+                                                     blue:(float)0xE8/0xFF 
+                                                    alpha:1];
+        [self addSubview:blueLine];
     }
     return self;
 }
@@ -61,58 +85,86 @@
                                                           0, 
                                                           self.frame.size.width - 308, 
                                                           self.frame.size.height)];
-    actionsSlider = [noteCell actionsSlider];
-    //[actionsSlider loadOptionPickers];
     
     [self addSubview:noteCell];
     
     return noteCell;
 }
 
-- (void)addSelectionTableForOptions:(NSMutableArray *)options
+- (void)createSelectionTableForOptionPicker:(OptionPicker *)optionPicker
 {
+    self.selectionTableRows = nil;
+    self.selectionTable = nil;
     self.selectionTable = [[SelectionTable alloc] initWithFrame:CGRectMake(0, 
                                                                       self.frame.size.height - 1, 
                                                                       self.frame.size.width, 
-                                                                      [options count]*40)];
-    [selectionTable createTableWithOptions:options];
+                                                                      [optionPicker.options count]*40)];
+    [selectionTable createTableWithOptions:optionPicker.options];
+    self.selectionTableRows = self.selectionTable.rowsArray;
+    int len = [self.selectionTableRows count];
+    for (int i = 0; i < len; i++) {
+        [(SelectionTableRow *)[self.selectionTableRows objectAtIndex:i] setDelegate:self];
+    }
     
-    self.frame = CGRectMake(self.frame.origin.x, 
-                            self.frame.origin.y, 
-                            self.frame.size.width, 
-                            self.frame.size.height + [options count]*40);
+    self.frame = CGRectMake(self.frame.origin.x,
+                            self.frame.origin.y,
+                            self.frame.size.width,
+                            self.frame.size.height + self.selectionTable.frame.size.height);
     
     [self addSubview:selectionTable];
+    [delegate didAddSelectionTableToRow:self];
 }
 
-- (void)collapseRow
+- (void)removeSelectionTable
 {
-    self.frame = CGRectMake(self.frame.origin.x, 
-                            self.frame.origin.y, 
-                            self.frame.size.width, 
-                            self.frame.size.height - selectionTable.frame.size.height);
-    [selectionTable removeFromSuperview];
-    selectionTable = nil;
-    //[selectionTable release];
+    //[delegate didRemoveSelectionTableFromRow:self];
+    if (self.selectionTable) {
+        self.frame = CGRectMake(self.frame.origin.x, 
+                                self.frame.origin.y, 
+                                self.frame.size.width, 
+                                self.frame.size.height - self.selectionTable.frame.size.height);
+        [self.selectionTable removeFromSuperview];
+        self.selectionTable = nil;
+    }
 }
 
-- (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos
+- (void)didSelectOptionPicker:(OptionPicker *)picker
 {
-    /*[self setRowId:rid];
-    [self setRowPos:rpos];
-    [nameCell setRowId:rid];
-    [nameCell setRowPos:rpos];
-    [noteCell setRowId:rid];
-    [noteCell setRowPos:rpos];
-    [noteCell.actionsSlider setRowId:rid];
-    [noteCell.actionsSlider setRowPos:rpos];
-    [noteCell.actionsSlider loadOptionPickers];*/
+    NSLog(@"didSelectOptionPicker active:%@", picker.active ? @"YES" : @"NO");
+    if (picker.active) {
+        self.activeOptionPicker = picker;
+        [self deselectOptionPickers];
+        [self removeSelectionTable];
+        [self selectOptionPicker:picker];
+        [self createSelectionTableForOptionPicker:picker];
+    }
+    else {
+        self.activeOptionPicker = nil;
+        [picker deselectPicker];
+        //[(ViewController *)delegate collapseActiveRow];
+    }
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)selectOptionPicker:(OptionPicker *)picker
 {
-    NSLog(@"touches ended for daily edit row");
-    [super touchesEnded:touches withEvent:event];
+    [picker selectPicker];
+}
+
+- (void)deselectOptionPickers
+{
+    int len = [self.optionPickers count];
+    for (int i = 0; i < len; i++) {
+        [(OptionPicker *)[self.optionPickers objectAtIndex:i] deselectPicker];
+    }
+}
+
+- (void)didSelectSelectionTableRow:(SelectionTableRow *)row
+{
+    self.activeSelectionTableRow.backgroundColor = [UIColor colorWithRed:(float)0xAA/0xFF 
+                                                                   green:(float)0xAA/0xFF 
+                                                                    blue:(float)0xAA/0xFF 
+                                                                   alpha:1];
+    self.activeSelectionTableRow = row;
 }
 
 

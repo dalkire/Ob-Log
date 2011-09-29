@@ -22,6 +22,7 @@
 @synthesize dateHeaderDropShadow;
 @synthesize editModal;
 @synthesize activeRow;
+@synthesize activePicker;
 @synthesize expandedContainer;
 
 - (void)didReceiveMemoryWarning
@@ -106,7 +107,9 @@
                                                                            0, 
                                                                            self.view.frame.size.width, 
                                                                            CELL_HEIGHT)];
-        [row propogateRowId:i andPosition:i];
+        [row setContainerTag:container.tag];
+        [row setDelegate:self];
+        //[row propogateRowId:i andPosition:i];
         [row createNameCellWithName:[array objectAtIndex:i]];
         //row.nameCell.nameLabel.text = [array objectAtIndex:i];
         [row setNeedsDisplay];
@@ -120,11 +123,14 @@
         }
     }
     
+    scrollView.backgroundColor = [UIColor colorWithRed:(float)0x99/0xFF 
+                                                 green:(float)0x99/0xFF 
+                                                  blue:(float)0x99/0xFF 
+                                                 alpha:1];
     [self.view addSubview:scrollView];
     
     [self.view insertSubview:dateHeader atIndex:[[self.view subviews] count]];
     [self.view addSubview:dateHeaderDropShadow];
-    
     [super viewDidLoad];
 }
 
@@ -138,12 +144,12 @@
 
 - (void)showOptionsForPicker:(OptionPicker *)picker
 {
-    [self collapseActiveRow];
+    /*[self collapseActiveRow];
     activeRow = (DailyEditRow *)((Container *)[scrollView viewWithTag:picker.rowId + 9000]).mainRow;
     
     activeRow.activePicker = picker;
     
-    [activeRow addSelectionTableForOptions:picker.options];
+    //[activeRow addSelectionTableForOptions:picker.options];
     
     [UIView animateWithDuration:0.5 animations:^{
         if (expandedContainer) {
@@ -161,12 +167,42 @@
                                              expandedContainer.frame.origin.y + activeRow.selectionTable.frame.size.height - 1, 
                                              expandedContainer.frame.size.width, 
                                              expandedContainer.frame.size.height);
+    }];*/
+}
+
+- (void)didAddSelectionTableToRow:(DailyEditRow *)row
+{
+    [self collapseActiveRow];
+    
+    self.activeRow = row;
+    NSLog(@"DID add SELECTION table To ROW in container: %d", row.containerTag);
+    [UIView animateWithDuration:0.4 animations:^{
+        expandedContainer = (Container *)[scrollView viewWithTag:row.containerTag + 1];
+        expandedContainer.frame =  CGRectMake(expandedContainer.frame.origin.x, 
+                                              expandedContainer.frame.origin.y + row.selectionTable.frame.size.height, 
+                                              expandedContainer.frame.size.width, 
+                                              expandedContainer.frame.size.height);
     }];
+}
+
+- (void)didRemoveSelectionTableFromRow:(DailyEditRow *)row
+{
+    NSLog(@"did remove selectiontablefromrow");
+    [self collapseActiveRow];
 }
 
 - (void)collapseActiveRow
 {
-    if (activeRow) {
+    NSLog(@"activeRow.containerTag=%d & activeRow.selectionTable=%@", activeRow.containerTag, activeRow.selectionTable);
+    if (activeRow && activeRow.selectionTable) {    
+        [UIView animateWithDuration:0.1 animations:^{
+            expandedContainer.frame =  CGRectMake(expandedContainer.frame.origin.x, 
+                                                  expandedContainer.frame.origin.y - activeRow.selectionTable.frame.size.height, 
+                                                  expandedContainer.frame.size.width, 
+                                                  expandedContainer.frame.size.height);
+        }];
+        expandedContainer = nil;
+         
         activeRow.activePicker.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
                                                                  green:(float)0xDD/0xFF 
                                                                   blue:(float)0xDD/0xFF 
@@ -175,7 +211,9 @@
                                                                        green:(float)0x22/0xFF 
                                                                         blue:(float)0x22/0xFF 
                                                                        alpha:1];
-        [activeRow collapseRow];
+        [activeRow deselectOptionPickers];
+        [activeRow removeSelectionTable];
+        activeRow = nil;
     }
 }
 

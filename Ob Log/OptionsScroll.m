@@ -46,17 +46,17 @@
                                                      andHeader:header andOptions:options];
     currX = picker.frame.origin.x + picker.frame.size.width + 1;
     [self addSubview:picker];
-    //NSLog(@"self.contentSize = (%f, %f)", self.f)
+    
     self.contentSize = CGSizeMake(self.contentSize.width + picker.frame.size.width + 1, self.contentSize.height);
     
     return picker;
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+/*- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
      NSLog(@"touchesENDED in OptionsScroll");
     [super touchesEnded:touches withEvent:event];
-}
+}*/
 
 /*- (void)drawRect:(CGRect)rect
 {

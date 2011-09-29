@@ -17,17 +17,22 @@
 #import "OptionPicker.h"
 #import "SelectionTable.h"
 
-@interface DailyEditRow : Row 
+@interface DailyEditRow : Row <OptionPickerDelegate>
 {
+    id delegate;
+    NSUInteger containerTag;
+    
     NameCell *nameCell;
     NoteCell *noteCell;
     ActionsSlider *actionsSlider;
     ActionButton *actionButton;
     OptionsScrollWrapper *optionsScrollWrapper;
     OptionsScroll *optionsScroll;
+    NSMutableArray *optionPickers;
     OptionPicker *activeOptionPicker;
     SelectionTable *selectionTable;
-    SelectionTable *activeSelectionTableRow;
+    NSMutableArray *selectionTableRows;
+    SelectionTableRow *activeSelectionTableRow;
     
     NSUInteger rowId;
     NSUInteger rowPos;
@@ -40,6 +45,8 @@
 }
 
 
+@property (nonatomic, retain) id delegate;
+@property NSUInteger containerTag;
 
 @property (nonatomic, retain) NameCell *nameCell;
 @property (nonatomic, retain) NoteCell *noteCell;
@@ -47,9 +54,11 @@
 @property (nonatomic, retain) ActionButton *actionButton;
 @property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
 @property (nonatomic, retain) OptionsScroll *optionsScroll;
+@property (nonatomic, retain) NSMutableArray *optionPickers;
 @property (nonatomic, retain) OptionPicker *activeOptionPicker;
 @property (nonatomic, retain) SelectionTable *selectionTable;
-@property (nonatomic, retain) SelectionTable *activeSelectionTableRow;
+@property (nonatomic, retain) NSMutableArray *selectionTableRows;
+@property (nonatomic, retain) SelectionTableRow *activeSelectionTableRow;
 @property NSUInteger rowId;
 @property NSUInteger rowPos;
 @property (nonatomic, retain) NSMutableArray *arr;
@@ -61,9 +70,17 @@
 
 - (NameCell *)createNameCellWithName:(NSString *)name;
 - (NoteCell *)createNoteCellWithObject:(NSObject *)object;
-- (void)addSelectionTableForOptions:(NSMutableArray *)options;
-- (void)collapseRow;
-- (void)propogateRowId:(NSUInteger)rid andPosition:(NSUInteger)rpos;
+- (void)createSelectionTableForOptionPicker:(OptionPicker *)optionPicker;
+- (void)removeSelectionTable;
+- (void)selectOptionPicker:(OptionPicker *)picker;
+- (void)deselectOptionPickers;
 - (void)assignOptionsArray:(NSMutableArray *)options;
+
+@end
+
+@protocol DailyEditRowDelegate <NSObject>
+
+- (void)didAddSelectionTableToRow:(DailyEditRow *)row;
+- (void)didRemoveSelectionTableFromRow:(DailyEditRow *)row;
 
 @end

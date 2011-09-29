@@ -19,7 +19,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:(float)0x88/0xFF 
+        self.backgroundColor = [UIColor colorWithRed:(float)0xFF/0xFF 
                                                green:(float)0x88/0xFF 
                                                 blue:(float)0x88/0xFF 
                                                alpha:1];
@@ -104,11 +104,11 @@
     }
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+/*- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"touches ended for selection table");
     [super touchesEnded:touches withEvent:event];
-}
+}*/
 
 /*
 // Only override drawRect: if you perform custom drawing.

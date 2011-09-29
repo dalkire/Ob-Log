@@ -12,13 +12,15 @@
 @interface SelectionTableRow : UIView
 {
     id delegate;
+    
     UILabel *rowLabel;
-    BOOL rowSelected;
+    BOOL active;
 }
 
 @property (nonatomic, retain) id delegate;
+
 @property (nonatomic, retain) UILabel *rowLabel;
-@property BOOL rowSelected;
+@property BOOL active;
 
 - (void)deselectRow;
 
@@ -26,6 +28,6 @@
 
 @protocol SelectionTableRowDelegate
 
-- (void)didSelectRow:(SelectionTableRow *)row;
+- (void)didSelectSelectionTableRow:(SelectionTableRow *)row;
 
 @end

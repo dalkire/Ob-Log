@@ -30,11 +30,11 @@
     return self;
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+/*- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"Name CELL touches ENDED");
     [super touchesEnded:touches withEvent:event];
-}
+}*/
 
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -57,11 +57,11 @@
 
 
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+/*- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"TOUCHES ENDED FOR NOTE CELL");
     [super touchesEnded:touches withEvent:event];
-}
+}*/
 
 /*
 // Only override drawRect: if you perform custom drawing.

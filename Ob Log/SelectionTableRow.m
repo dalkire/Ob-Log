@@ -11,14 +11,16 @@
 
 @implementation SelectionTableRow
 
-@synthesize rowLabel;
-@synthesize rowSelected;
 @synthesize delegate;
+
+@synthesize rowLabel;
+@synthesize active;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        delegate = nil;
         self.backgroundColor = [UIColor colorWithRed:(float)0xAA/0xFF 
                                                green:(float)0xAA/0xFF 
                                                 blue:(float)0xAA/0xFF 
@@ -31,29 +33,23 @@
         rowLabel.textColor = [UIColor whiteColor];
         [rowLabel setBackgroundColor:[UIColor clearColor]];
         [self addSubview:rowLabel];
-        rowSelected = NO;
+        active = NO;
     }
     return self;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if ([self.superview respondsToSelector:@selector(deselectRows)]) {
-        [self.superview deselectRows];
-    }
+    active = !active;
     
-    rowSelected = !rowSelected;
-    
-    if (rowSelected) {
+    if (active) {
         self.backgroundColor = [Theme getThemeColor];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectRow:)]) {
-            [self.delegate didSelectRow:self];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectSelectionTableRow:)]) {
+            [self.delegate didSelectSelectionTableRow:self];
         }
     }
     
-    NSLog(@"touchesENDED selectionTableRow");//, rowId %@", self.rowLabel.text);
-    
-    [super touchesEnded:touches withEvent:event];
+    //[super touchesEnded:touches withEvent:event];
 }
 
 - (void)deselectRow

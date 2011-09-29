@@ -16,7 +16,7 @@
 #import "Container.h"
 #import "OptionPicker.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <DailyEditRowDelegate>
 {
     UIImageView *bg;
     UIScrollView *scrollView;
@@ -24,6 +24,7 @@
     UIView *dateHeaderDropShadow;
     EditModalViewController *editModal;
     DailyEditRow *activeRow;
+    OptionPicker *activePicker;
     Container *expandedContainer;
 }
 
@@ -33,6 +34,7 @@
 @property (nonatomic, retain) UIView *dateHeaderDropShadow;
 @property (nonatomic, retain) EditModalViewController *editModal;
 @property (nonatomic, retain) DailyEditRow *activeRow;
+@property (nonatomic, retain) OptionPicker *activePicker;
 @property (nonatomic, retain) Container *expandedContainer;
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;

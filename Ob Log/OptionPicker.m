@@ -14,6 +14,8 @@
 
 @implementation OptionPicker
 
+@synthesize delegate;
+
 @synthesize optionPickerPopover;
 @synthesize options;
 @synthesize popoverHeader;
@@ -22,11 +24,15 @@
 @synthesize rowPos;
 @synthesize expanded;
 @synthesize gradient;
+@synthesize active;
 
 - (id)initWithFrame:(CGRect)frame andHeader:(NSMutableString *)header andOptions:(NSMutableArray *)localOptions
 {
     if (self) {
         self = [super initWithFrame:frame];
+        
+        delegate = nil;
+        active = NO;
         
         self.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
                                                green:(float)0xDD/0xFF 
@@ -46,7 +52,7 @@
                              nil]];
         gradient.startPoint = CGPointMake(0, 0);
         gradient.endPoint = CGPointMake(0, 1);
-        [[self layer] addSublayer:gradient];
+        //[[self layer] addSublayer:gradient];
         
         headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 
                                                                 10, 
@@ -87,42 +93,28 @@
     return self;
 }
 
-- (void)didSelectRow:(SelectionTableRow *)row
+- (void)selectPicker
 {
-    NSLog(@"DID SELECT ROW: %@", row);
+    active = YES;
+    self.backgroundColor = [Theme getThemeColor];
+}
+
+- (void)deselectPicker
+{
+    active = NO;
+    self.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
+                                           green:(float)0xDD/0xFF 
+                                            blue:(float)0xDD/0xFF 
+                                           alpha:1];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {  
-    if (!self.expanded) {
-        self.backgroundColor = [Theme getThemeColor];
-        self.headerLabel.textColor = [UIColor whiteColor];
-        [(ViewController *)self.window.rootViewController showOptionsForPicker:self];
-        [super touchesEnded:touches withEvent:event];
-        self.expanded = YES;
+    self.active = !self.active;
+    
+    if (delegate && [delegate respondsToSelector:@selector(didSelectOptionPicker:)]) {
+        [delegate didSelectOptionPicker:self];
     }
 }
-
-/*- (void)drawRect:(CGRect)rect
-{
-    CGGradientRef myGradient;
-    CGColorSpaceRef myColorspace;
-    size_t num_locations = 2;
-    
-    CGFloat locations2[2] = { 0.0, 1.0 };
-    CGFloat components2[8] = {  (float)0xFF/0xFF, (float)0xFF/0xFF, (float)0xFF/0xFF, 0.2f,
-        (float)0x33/0xFF, (float)0x33/0xFF, (float)0x33/0xFF, 0.2f };
-    myColorspace = CGColorSpaceCreateDeviceRGB();
-    myGradient = CGGradientCreateWithColorComponents(myColorspace, components2, locations2, num_locations);
-    
-    CGPoint myStartPoint, myEndPoint;
-    myStartPoint.x = 0.0;
-    myStartPoint.y = 0;
-    myEndPoint.x = 0.0;
-    myEndPoint.y = self.frame.size.height;
-    CGContextDrawLinearGradient (UIGraphicsGetCurrentContext(), myGradient, myStartPoint, myEndPoint, 0);
-    CGColorSpaceRelease(myColorspace);
-    CGGradientRelease(myGradient);
-}*/
 
 @end

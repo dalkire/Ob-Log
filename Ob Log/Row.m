@@ -26,6 +26,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    /*NSLog(@"drawRect in ROW.m");
     CGContextRef context1 = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context1, 2.0);
     CGContextSetStrokeColorWithColor(context1, [UIColor colorWithRed:(float)0x77/0xFF 
@@ -34,7 +35,7 @@
                                                                alpha:1.0f].CGColor);
     CGContextMoveToPoint(context1, 0, self.frame.size.height);
     CGContextAddLineToPoint(context1, self.frame.size.width, self.frame.size.height);
-    CGContextStrokePath(context1);
+    CGContextStrokePath(context1);*/
     
     CGContextRef context2 = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context2, 3.0);
