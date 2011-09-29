@@ -61,8 +61,8 @@
                                                           0, 
                                                           self.frame.size.width - 308, 
                                                           self.frame.size.height)];
-    actionsSlider = [noteCell createActionsSlider];
-    [actionsSlider loadOptionPickers];
+    actionsSlider = [noteCell actionsSlider];
+    //[actionsSlider loadOptionPickers];
     
     [self addSubview:noteCell];
     
@@ -104,9 +104,9 @@
     [nameCell setRowPos:rpos];
     [noteCell setRowId:rid];
     [noteCell setRowPos:rpos];
-    [noteCell.slider setRowId:rid];
-    [noteCell.slider setRowPos:rpos];
-    [noteCell.slider loadOptionPickers];*/
+    [noteCell.actionsSlider setRowId:rid];
+    [noteCell.actionsSlider setRowPos:rpos];
+    [noteCell.actionsSlider loadOptionPickers];*/
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

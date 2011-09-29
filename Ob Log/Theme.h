@@ -6,6 +6,8 @@
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
+#define CELL_HEIGHT 70
+
 /*#define BLUE        1
 #define BLUE_R   (float)0x03/0xFF 
 #define BLUE_G   (float)0x75/0xFF 

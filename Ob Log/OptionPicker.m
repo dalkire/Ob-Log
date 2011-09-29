@@ -15,7 +15,7 @@
 @implementation OptionPicker
 
 @synthesize optionPickerPopover;
-@synthesize arr;
+@synthesize options;
 @synthesize popoverHeader;
 @synthesize headerLabel;
 @synthesize rowId;
@@ -23,7 +23,7 @@
 @synthesize expanded;
 @synthesize gradient;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame andHeader:(NSMutableString *)header andOptions:(NSMutableArray *)localOptions
 {
     if (self) {
         self = [super initWithFrame:frame];
@@ -48,8 +48,6 @@
         gradient.endPoint = CGPointMake(0, 1);
         [[self layer] addSublayer:gradient];
         
-        self.arr = [[NSMutableArray alloc] initWithCapacity:0];
-        
         headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 
                                                                 10, 
                                                                 frame.size.width - 40, 
@@ -59,53 +57,35 @@
                                                 green:(float)0x22/0xFF 
                                                  blue:(float)0x22/0xFF 
                                                 alpha:1];
-        [headerLabel setBackgroundColor:[UIColor clearColor]]; 
+        [headerLabel setBackgroundColor:[UIColor clearColor]];
+        [headerLabel setText:header];
+        [headerLabel sizeToFit];
+        /**/
+        //NSLog(@"pickerFRAME 1: %f", self.frame.size.width);
+        [self setFrame:CGRectMake(self.frame.origin.x, 
+                                  self.frame.origin.y, 
+                                  headerLabel.frame.size.width + 40, 
+                                  self.frame.size.height)];
+        
+        [headerLabel setFrame:CGRectMake((self.frame.size.width - headerLabel.frame.size.width)/2, 
+                                         (self.frame.size.height - headerLabel.frame.size.height)/2, 
+                                         headerLabel.frame.size.width, 
+                                         headerLabel.frame.size.height)];
+        
+        gradient.frame = CGRectMake(self.frame.origin.x, 
+                                    self.frame.origin.y, 
+                                    self.frame.size.width, 
+                                    self.frame.size.height);
+        //NSLog(@"pickerFRAME 2: %f", self.frame.size.width);
+        
+        self.options = localOptions;
+        
         [self addSubview:headerLabel];
         self.expanded = NO;
     }
     
     return self;
 }
-
-- (void)setPickerHeader:(NSString *)header andOptions:(NSMutableArray *)options
-{
-    [headerLabel setText:header];
-    [headerLabel sizeToFit];
-    [headerLabel setFrame:CGRectMake(headerLabel.frame.origin.x, 
-                                     (self.frame.size.height - headerLabel.frame.size.height)/2, 
-                                     headerLabel.frame.size.width, 
-                                     headerLabel.frame.size.height)];
-    [self setFrame:CGRectMake(self.frame.origin.x, 
-                              self.frame.origin.y, 
-                              headerLabel.frame.size.width + 40, 
-                              self.frame.size.height)];
-    gradient.frame = self.frame;
-    [self setArr:options];
-}
-
-- (void)didSelectOption:(NSString *)option
-{
-    NSLog(@"DID SELECT OPTION: %@", option);
-}
-
-/*+ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSMutableArray *)options
-{
-    UILabel *label = [[[UILabel alloc] init] autorelease];
-    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
-    label.text = header;
-    label.textColor = [UIColor whiteColor];
-    [label sizeToFit];
-    OptionPicker *picker = [[OptionPicker alloc] initWithFrame:CGRectMake(0, 0, label.frame.size.width + 40, CELL_HEIGHT - 1)];
-    label.frame = CGRectMake(20, (CELL_HEIGHT - label.frame.size.height)/2, 
-                                  label.frame.size.width, 
-                                  label.frame.size.height);
-    label.backgroundColor = [UIColor clearColor];
-    [picker addSubview:label];
-    picker.arr = options;
-    picker.popoverHeader = header;
-    
-    return picker;
-}*/
 
 - (void)didSelectRow:(SelectionTableRow *)row
 {

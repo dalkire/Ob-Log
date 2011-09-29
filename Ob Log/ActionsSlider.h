@@ -13,17 +13,24 @@
 
 @interface ActionsSlider : UIView
 {
+    ActionButton *actionButton;
     OptionsScrollWrapper *optionsScrollWrapper;
-    ActionButton *toggle;
+    OptionsScroll *optionsScroll;
+    NSMutableArray *pickers;
+    
     NSUInteger rowId;
     NSUInteger rowPos;
 }
 
+@property (nonatomic, retain) ActionButton *actionButton;
 @property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
-@property (nonatomic, retain) ActionButton *toggle;
+@property (nonatomic, retain) OptionsScroll *optionsScroll;
+@property (nonatomic, retain) NSMutableArray *optionPickers;
+
 @property NSUInteger rowId;
 @property NSUInteger rowPos;
 
-- (void)loadOptionPickers;
+- (ActionButton *)createActionButton;
+- (OptionsScrollWrapper *)createOptionsScrollWrapper;
 
 @end

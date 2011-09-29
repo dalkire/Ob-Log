@@ -18,11 +18,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        optionsScroll = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        optionsScroll.contentSize = CGSizeMake(700, frame.size.height);
-        
         self.backgroundColor = [UIColor clearColor];
-        [self addSubview:optionsScroll];
         
         leftShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                               0, 
@@ -74,10 +70,21 @@
         [[rightShadow layer] addSublayer:gradientR];
         rightShadow.backgroundColor = [UIColor clearColor];
         
+        optionsScroll = [self createOptionsScroll];
+        [self addSubview:optionsScroll];
+        
         [self addSubview:leftShadow];
         [self addSubview:rightShadow];
     }
     return self;
+}
+
+- (OptionsScroll *)createOptionsScroll
+{
+    self.optionsScroll = nil;
+    OptionsScroll *os = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    
+    return os;
 }
 
 /*

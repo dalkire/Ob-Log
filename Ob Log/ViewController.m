@@ -143,8 +143,7 @@
     
     activeRow.activePicker = picker;
     
-    [activeRow addSelectionTableForOptions:[NSMutableArray 
-                                       arrayWithObjects:@"one", @"two", @"three", @"four", nil]];
+    [activeRow addSelectionTableForOptions:picker.options];
     
     [UIView animateWithDuration:0.5 animations:^{
         if (expandedContainer) {

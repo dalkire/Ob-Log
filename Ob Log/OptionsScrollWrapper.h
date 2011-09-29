@@ -21,4 +21,6 @@
 @property (nonatomic, retain) UIView *leftShadow;
 @property (nonatomic, retain) UIView *rightShadow;
 
+- (OptionsScroll *)createOptionsScroll;
+
 @end

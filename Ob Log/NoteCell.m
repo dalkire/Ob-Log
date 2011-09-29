@@ -11,6 +11,11 @@
 @implementation NoteCell
 
 @synthesize actionsSlider;
+@synthesize actionButton;
+@synthesize optionsScrollWrapper;
+@synthesize optionsScroll;
+@synthesize optionPicker;
+
 @synthesize sliderIsExtended;
 @synthesize scrollView;
 @synthesize textView;
@@ -32,6 +37,7 @@
         scrollView.contentSize = CGSizeMake(frame.size.width - 52, textView.frame.size.height - 5);
         [scrollView addSubview:textView];
         [self addSubview:scrollView];
+        actionsSlider = [self createActionsSlider];
     }
     return self;
 }
@@ -48,6 +54,8 @@
     
     return actionsSlider;
 }
+
+
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {

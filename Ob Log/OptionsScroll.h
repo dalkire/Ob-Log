@@ -11,11 +11,14 @@
 
 @interface OptionsScroll : UIScrollView
 {
-    NSMutableArray *pickers;
+    NSMutableArray *optionPickers;
+    NSUInteger currX;
 }
 
-@property (nonatomic, retain) NSMutableArray *pickers;
+@property (nonatomic, retain) NSMutableArray *optionPickers;
+@property NSUInteger currX;
 
-- (void)addOptionPicker:(OptionPicker *)picker;
+- (NSMutableArray *)createOptionPickersFromArray:(NSMutableArray *)pickersData;
+- (OptionPicker *)createOptionPickerWithHeader:(NSMutableString *)header andOptions:(NSMutableArray *)options;
 
 @end

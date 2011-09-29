@@ -10,8 +10,11 @@
 
 @implementation ActionsSlider
 
+@synthesize actionButton;
 @synthesize optionsScrollWrapper;
-@synthesize toggle;
+@synthesize optionsScroll;
+@synthesize optionPickers;
+
 @synthesize rowId;
 @synthesize rowPos;
 
@@ -20,41 +23,37 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        toggle = [[ActionButton alloc] initWithFrame:CGRectMake(10, 0, 50, frame.size.height)];
         UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(10, 0, frame.size.width - 10, frame.size.height)];
         bg.backgroundColor = [UIColor colorWithRed:(float)0xEE/0xFF 
                                              green:(float)0xEE/0xFF 
                                               blue:(float)0xEE/0xFF 
                                              alpha:1];
         [self addSubview:bg];
-        [toggle createButtonOfType:@"toggle"];
-        [self addSubview:toggle];
         
-        optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(60, 
-                                                                        0, 
-                                                                        frame.size.width - 60, 
-                                                                        frame.size.height)];
+        actionButton = [self createActionButton];
+        [self addSubview:actionButton];
+        
+        optionsScrollWrapper = [self createOptionsScrollWrapper];
         [self addSubview:optionsScrollWrapper];
     }
     return self;
 }
 
-- (void)loadOptionPickers
+- (ActionButton *)createActionButton
 {
-    for (int i = 0; i < 15; i++) {
-        OptionPicker *p = [[OptionPicker alloc] initWithFrame:CGRectMake(0, 
-                                                                         0, 
-                                                                         100, 
-                                                                         self.frame.size.height)];
-        [p setPickerHeader:[NSString stringWithFormat:@"attendance %d", i*1000] 
-                andOptions:[NSArray arrayWithObjects:[NSString stringWithFormat:@"present %d", i], 
-                                                        [NSString stringWithFormat:@"late %d", i],
-                                                        [NSString stringWithFormat:@"absent %d", i], 
-                                                        nil]];
-        [p setRowId:rowId];
-        [p setRowPos:i];
-        [optionsScrollWrapper.optionsScroll addOptionPicker:p];
-    }
+    ActionButton *ab = [[ActionButton alloc] initWithFrame:CGRectMake(10, 0, 50, self.frame.size.height)];
+    [ab createButtonOfType:@"toggle"];
+    
+    return ab;
+}
+
+- (OptionsScrollWrapper *)createOptionsScrollWrapper
+{
+    OptionsScrollWrapper *osw = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(60, 
+                                                                                       0, 
+                                                                                       self.frame.size.width - 60, 
+                                                                                       self.frame.size.height)];
+    return osw;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -81,10 +80,10 @@
 {
     NSLog(@"WILL ROTATE");
     if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        self.toggle.hidden = NO;
+        self.actionButton.hidden = NO;
     }
     else {
-        self.toggle.hidden = YES;
+        self.actionButton.hidden = YES;
     }
 }
 

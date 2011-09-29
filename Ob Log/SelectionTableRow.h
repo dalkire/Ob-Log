@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Theme.h"
-#import "SelectionTableRowDelegate.h"
 
 @interface SelectionTableRow : UIView
 {
     id delegate;
     UILabel *rowLabel;
     BOOL rowSelected;
-    id<SelectionTableRowDelegate> picker;
 }
 
 @property (nonatomic, retain) id delegate;

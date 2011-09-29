@@ -11,41 +11,45 @@
 
 @implementation OptionsScroll
 
-@synthesize pickers;
+@synthesize optionPickers;
+@synthesize currX;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        currX = 0;
         self.backgroundColor = [UIColor clearColor];
-        pickers = [[NSMutableArray alloc] initWithCapacity:0];
+        optionPickers = [self createOptionPickersFromArray:[[NSMutableArray alloc] initWithCapacity:0]];
     }
     return self;
 }
 
-- (void)addOptionPicker:(OptionPicker *)picker
+- (NSMutableArray *)createOptionPickersFromArray:(NSMutableArray *)pickersData
 {
-    int len = [[self subviews] count];
-    int originX = 0;
-    int currNumPickers = 0;
+    NSMutableArray *localOptionPickers = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableString *header = [[NSMutableString alloc] initWithString:@"participation"];
+    NSMutableArray *options = [[NSMutableArray alloc] initWithObjects:@"1ne", @"2wo", @"3hree", @"4our", @"5ive", nil];
+    
+    int len = 8;
     for (int i = 0; i < len; i++) {
-        if ([[[self subviews] objectAtIndex:i] isKindOfClass:[OptionPicker class]]) {
-            int tempX = ((OptionPicker *)[[self subviews] objectAtIndex:i]).frame.origin.x + ((OptionPicker *)[[self subviews] objectAtIndex:i]).frame.size.width;
-            originX = tempX > originX ? tempX : originX;
-            currNumPickers++;
-        }
+        [header appendFormat:@".%d", i];
+        [localOptionPickers addObject:[self createOptionPickerWithHeader:header andOptions:options]];
     }
     
-    if (currNumPickers > 0) {
-        originX += 1;
-    }
-    picker.frame = CGRectMake(originX, 
-                              picker.frame.origin.y, 
-                              picker.frame.size.width, 
-                              picker.frame.size.height);
+    return localOptionPickers;
+}
+
+- (OptionPicker *)createOptionPickerWithHeader:(NSMutableString *)header andOptions:(NSMutableArray *)options
+{
+    OptionPicker *picker = [[OptionPicker alloc] initWithFrame:CGRectMake(currX, 0, 100, CELL_HEIGHT) 
+                                                     andHeader:header andOptions:options];
+    currX = picker.frame.origin.x + picker.frame.size.width + 1;
     [self addSubview:picker];
-    self.contentSize = CGSizeMake(originX + picker.frame.size.width + 1, picker.frame.size.height);
-    [pickers addObject:picker];
+    //NSLog(@"self.contentSize = (%f, %f)", self.f)
+    self.contentSize = CGSizeMake(self.contentSize.width + picker.frame.size.width + 1, self.contentSize.height);
+    
+    return picker;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

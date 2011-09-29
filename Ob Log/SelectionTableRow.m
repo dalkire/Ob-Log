@@ -51,9 +51,6 @@
         }
     }
     
-    picker = [[OptionPickerDelegate alloc] init];
-    [picker didSelectOption:self.rowLabel.text];
-    
     NSLog(@"touchesENDED selectionTableRow");//, rowId %@", self.rowLabel.text);
     
     [super touchesEnded:touches withEvent:event];

@@ -11,12 +11,11 @@
 #import "PickerOptionsViewController.h"
 #import "SelectionTableRow.h"
 #import "Theme.h"
-#import "SelectionTableRowDelegate.h"
 
 @interface OptionPicker : UIView <UIPopoverControllerDelegate, SelectionTableRowDelegate>
 {
     UIPopoverController *optionPickerPopover;
-    NSMutableArray *arr;
+    NSMutableArray *options;
     NSString *popoverHeader;
     UILabel *headerLabel;
     NSUInteger rowID;
@@ -26,7 +25,7 @@
 }
 
 @property (nonatomic, retain) UIPopoverController *optionPickerPopover;
-@property (nonatomic, retain) NSMutableArray *arr;
+@property (nonatomic, retain) NSMutableArray *options;
 @property (nonatomic, retain) NSString *popoverHeader;
 @property (nonatomic, retain) UILabel *headerLabel;
 @property NSUInteger rowId;
@@ -34,7 +33,6 @@
 @property BOOL expanded;
 @property (nonatomic, retain) CAGradientLayer *gradient;
 
-- (void)setPickerHeader:(NSString *)header andOptions:(NSMutableArray *)options;
-//+ (OptionPicker *)pickerWithHeader:(NSString *)header andOptions:(NSMutableArray *)options;
+- (id)initWithFrame:(CGRect)frame andHeader:(NSMutableString *)header andOptions:(NSMutableArray *)localOptions;
 
 @end
