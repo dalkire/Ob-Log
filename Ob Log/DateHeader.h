@@ -13,13 +13,23 @@
 
 @interface DateHeader : UIView
 {
+    id delegate;
+    
     UILabel *dateTitle;
     UILabel *sectionSubtitle;
 }
+
+@property (nonatomic, retain) id delegate;
 
 @property (nonatomic, retain) UILabel *dateTitle;
 @property (nonatomic, retain) UILabel *sectionSubtitle;
 
 - (void)assignDateTitle:(NSDate *)date;
+
+@end
+
+@protocol DateHeaderDelegate <NSObject>
+
+- (void)didTouchDateHeader;
 
 @end

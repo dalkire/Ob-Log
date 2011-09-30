@@ -16,8 +16,11 @@
 #import "Container.h"
 #import "OptionPicker.h"
 
-@interface ViewController : UIViewController <DailyEditRowDelegate>
+@interface ViewController : UIViewController <DailyEditRowDelegate, DateHeaderDelegate>
 {
+    NSMutableArray *items;
+    NSManagedObjectContext *managedObjectContext;
+    
     UIImageView *bg;
     UIScrollView *scrollView;
     DateHeader *dateHeader;
@@ -27,6 +30,9 @@
     OptionPicker *activePicker;
     Container *expandedContainer;
 }
+
+@property (nonatomic, retain) NSMutableArray *items;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 @property (nonatomic, retain) UIImageView *bg;
 @property (nonatomic, retain) UIScrollView *scrollView;

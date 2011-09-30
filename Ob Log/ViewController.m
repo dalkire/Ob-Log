@@ -12,9 +12,14 @@
 #define NOTE_CELL  776585
 #define CELL_HEIGHT 70
 
+#import "AppDelegate.h"
 #import "ViewController.h"
+#import "Item.h"
 
 @implementation ViewController
+
+@synthesize items;
+@synthesize managedObjectContext;
 
 @synthesize bg;
 @synthesize scrollView;
@@ -35,14 +40,25 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
+    if (managedObjectContext == nil) 
+    { 
+        managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
+        NSLog(@"After managedObjectContext: %@",  managedObjectContext);
+    }
+    
     activeRow = nil;
     expandedContainer = nil;
+    
     dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
     dateHeaderDropShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                                     dateHeader.frame.origin.y + dateHeader.frame.size.height, 
                                                                     self.view.frame.size.width, 
                                                                     8)];
     dateHeaderDropShadow.backgroundColor = [UIColor clearColor];
+    
+    [dateHeader setDelegate:self];
     
     CAGradientLayer *headerDrop = [CAGradientLayer layer];
     headerDrop.frame = CGRectMake(
@@ -132,7 +148,22 @@
     
     [self.view insertSubview:dateHeader atIndex:[[self.view subviews] count]];
     [self.view addSubview:dateHeaderDropShadow];
-    [super viewDidLoad];
+}
+
+- (void)didTouchDateHeader
+{
+    NSLog(@"DID Touch Date Header");
+    
+    Item *item = (Item *)[NSEntityDescription 
+                          insertNewObjectForEntityForName:@"Item" 
+                          inManagedObjectContext:managedObjectContext];
+    [item setId:[NSNumber numberWithInt:5]];
+    [item setName:[NSString stringWithFormat:@"%@", [NSDate date]]];
+    
+    NSError *error = nil;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"An error occurred while attempting to save data.");
+    }
 }
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date

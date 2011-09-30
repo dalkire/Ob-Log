@@ -12,6 +12,10 @@
 
 @implementation AppDelegate
 
+@synthesize managedObjectContext;
+@synthesize managedObjectModel;
+@synthesize persistentStoreCoordinator;
+
 @synthesize window = _window;
 @synthesize viewController = _viewController;
 
@@ -27,9 +31,27 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    if (!context) {
+        // Handle the error.
+        NSLog(@"NO MANAGED OBJECT CONTEXT AVAILABLE IN AppDelegate");
+    }
+    self.viewController.managedObjectContext = context;
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (NSURL *)applicationDocumentsDirectory
+{
+    
+}
+
+- (void)saveContext
+{
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
