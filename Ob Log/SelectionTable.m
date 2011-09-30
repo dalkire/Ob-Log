@@ -19,7 +19,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:(float)0xFF/0xFF 
+        self.backgroundColor = [UIColor colorWithRed:(float)0x88/0xFF 
                                                green:(float)0x88/0xFF 
                                                 blue:(float)0x88/0xFF 
                                                alpha:1];

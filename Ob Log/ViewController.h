@@ -39,6 +39,7 @@
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;
 - (void)showOptionsForPicker:(OptionPicker *)picker;
-- (void)collapseActiveRow;
+- (void)expandContainer:(Container *)container;
+- (void)collapseContainer:(Container *)container;
 
 @end

@@ -114,7 +114,8 @@
         //row.nameCell.nameLabel.text = [array objectAtIndex:i];
         [row setNeedsDisplay];
         [container addSubview:row];
-        [container setMainRow:row];
+        container.mainRow = row;
+        NSLog(@"1)container.mainRow %@", container.mainRow);
         if (i == 0) {
             [scrollView addSubview:container];
         }
@@ -172,38 +173,48 @@
 
 - (void)didAddSelectionTableToRow:(DailyEditRow *)row
 {
-    [self collapseActiveRow];
+    NSLog(@"didAddSelectionTableToRow");
+    if (expandedContainer) {
+        [self collapseContainer:expandedContainer];
+    }
     
     self.activeRow = row;
-    NSLog(@"DID add SELECTION table To ROW in container: %d", row.containerTag);
-    [UIView animateWithDuration:0.4 animations:^{
-        expandedContainer = (Container *)[scrollView viewWithTag:row.containerTag + 1];
-        expandedContainer.frame =  CGRectMake(expandedContainer.frame.origin.x, 
-                                              expandedContainer.frame.origin.y + row.selectionTable.frame.size.height, 
-                                              expandedContainer.frame.size.width, 
-                                              expandedContainer.frame.size.height);
-    }];
+    [self expandContainer:(Container *)[scrollView viewWithTag:self.activeRow.containerTag + 1]];
 }
 
 - (void)didRemoveSelectionTableFromRow:(DailyEditRow *)row
 {
     NSLog(@"did remove selectiontablefromrow");
-    [self collapseActiveRow];
+    [self collapseContainer:(Container *)[scrollView viewWithTag:row.containerTag + 1]];
 }
 
-- (void)collapseActiveRow
+- (void)expandContainer:(Container *)container
+{
+    NSLog(@"2)container.mainRow.selectionTable %@", container.mainRow.selectionTable);
+    
+    NSLog(@"expandContainer: %f", container.mainRow.selectionTable.frame.size.height);
+    [UIView animateWithDuration:0.4 animations:^{
+        expandedContainer = container;
+        container.frame =  CGRectMake(container.frame.origin.x, 
+                                      container.frame.origin.y + self.activeRow.selectionTable.frame.size.height, 
+                                      container.frame.size.width, 
+                                      container.frame.size.height);
+    }];
+}
+
+- (void)collapseContainer:(Container *)container
 {
     NSLog(@"activeRow.containerTag=%d & activeRow.selectionTable=%@", activeRow.containerTag, activeRow.selectionTable);
-    if (activeRow && activeRow.selectionTable) {    
+    //if (activeRow && activeRow.selectionTable) {    
         [UIView animateWithDuration:0.1 animations:^{
-            expandedContainer.frame =  CGRectMake(expandedContainer.frame.origin.x, 
-                                                  expandedContainer.frame.origin.y - activeRow.selectionTable.frame.size.height, 
-                                                  expandedContainer.frame.size.width, 
-                                                  expandedContainer.frame.size.height);
+            container.frame =  CGRectMake(container.frame.origin.x, 
+                                          container.frame.origin.y - self.activeRow.selectionTable.frame.size.height, 
+                                          container.frame.size.width, 
+                                          container.frame.size.height);
         }];
         expandedContainer = nil;
          
-        activeRow.activePicker.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
+        /*activeRow.activePicker.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
                                                                  green:(float)0xDD/0xFF 
                                                                   blue:(float)0xDD/0xFF 
                                                                  alpha:1];
@@ -211,10 +222,10 @@
                                                                        green:(float)0x22/0xFF 
                                                                         blue:(float)0x22/0xFF 
                                                                        alpha:1];
-        [activeRow deselectOptionPickers];
-        [activeRow removeSelectionTable];
-        activeRow = nil;
-    }
+        //[activeRow deselectOptionPickers];*/
+        //[activeRow removeSelectionTable];
+        //activeRow = nil;
+    //}
 }
 
 - (void)viewDidUnload

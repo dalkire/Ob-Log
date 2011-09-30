@@ -99,6 +99,7 @@
                                                                       self.frame.size.height - 1, 
                                                                       self.frame.size.width, 
                                                                       [optionPicker.options count]*40)];
+    NSLog(@"createSelectionTableForOptionPicker -> self.selectionTable %@", self.selectionTable);
     [selectionTable createTableWithOptions:optionPicker.options];
     self.selectionTableRows = self.selectionTable.rowsArray;
     int len = [self.selectionTableRows count];
@@ -123,26 +124,28 @@
                                 self.frame.origin.y, 
                                 self.frame.size.width, 
                                 self.frame.size.height - self.selectionTable.frame.size.height);
+        [delegate didRemoveSelectionTableFromRow:self];
         [self.selectionTable removeFromSuperview];
         self.selectionTable = nil;
+        self.selectionTableRows = nil;
     }
 }
 
 - (void)didSelectOptionPicker:(OptionPicker *)picker
 {
-    NSLog(@"didSelectOptionPicker active:%@", picker.active ? @"YES" : @"NO");
-    if (picker.active) {
-        self.activeOptionPicker = picker;
-        [self deselectOptionPickers];
-        [self removeSelectionTable];
-        [self selectOptionPicker:picker];
-        [self createSelectionTableForOptionPicker:picker];
-    }
-    else {
-        self.activeOptionPicker = nil;
-        [picker deselectPicker];
-        //[(ViewController *)delegate collapseActiveRow];
-    }
+    NSLog(@"didSelectOptionPicker");
+    self.activeOptionPicker = picker;
+    [self deselectOptionPickers];
+    [self removeSelectionTable];
+    [self selectOptionPicker:picker];
+    [self createSelectionTableForOptionPicker:picker];
+}
+
+- (void)didDeselectOptionPicker:(OptionPicker *)picker
+{
+    NSLog(@"didDESELECTOptionPicker");
+    self.activeOptionPicker = nil;
+    [self removeSelectionTable];
 }
 
 - (void)selectOptionPicker:(OptionPicker *)picker
@@ -165,6 +168,7 @@
                                                                     blue:(float)0xAA/0xFF 
                                                                    alpha:1];
     self.activeSelectionTableRow = row;
+    self.activeOptionPicker.headerLabel.text = row.rowLabel.text;
 }
 
 
