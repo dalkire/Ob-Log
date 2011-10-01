@@ -42,11 +42,17 @@
 {
     [super viewDidLoad];
     
-    if (managedObjectContext == nil) 
-    { 
-        managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]; 
-        NSLog(@"After managedObjectContext: %@",  managedObjectContext);
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        NSLog(@"fetchResults error");
     }
+    
+    
     
     activeRow = nil;
     expandedContainer = nil;
@@ -79,7 +85,7 @@
     headerDrop.endPoint = CGPointMake(0, 1);
     [[dateHeaderDropShadow layer] addSublayer:headerDrop];
     
-    NSArray *array = [[NSArray alloc] initWithObjects:
+    /*NSArray *array = [[NSArray alloc] initWithObjects:
                     @"Melissa Alkire",
                     @"David Alkire",
                     @"Bryan Catarra",
@@ -104,9 +110,9 @@
                     @"Howard Stern",
                     @"Robin Quivers",
                     @"Gary Dell'Abate",
-                    nil];
+                    nil];*/
 	
-    int len = [array count];
+    int len = [mutableFetchResults count];
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
                                                                 dateHeader.frame.size.height, 
                                                                 self.view.frame.size.width, 
@@ -126,12 +132,12 @@
         [row setContainerTag:container.tag];
         [row setDelegate:self];
         //[row propogateRowId:i andPosition:i];
-        [row createNameCellWithName:[array objectAtIndex:i]];
+        [row createNameCellWithName:[[mutableFetchResults objectAtIndex:i] valueForKey:@"name"]];
         //row.nameCell.nameLabel.text = [array objectAtIndex:i];
         [row setNeedsDisplay];
         [container addSubview:row];
         container.mainRow = row;
-        NSLog(@"1)container.mainRow %@", container.mainRow);
+        
         if (i == 0) {
             [scrollView addSubview:container];
         }
@@ -154,15 +160,17 @@
 {
     NSLog(@"DID Touch Date Header");
     
+    for (int i = 0; i < 25; i++) {
     Item *item = (Item *)[NSEntityDescription 
                           insertNewObjectForEntityForName:@"Item" 
                           inManagedObjectContext:managedObjectContext];
-    [item setId:[NSNumber numberWithInt:5]];
-    [item setName:[NSString stringWithFormat:@"%@", [NSDate date]]];
+    [item setId:[NSNumber numberWithInt:i]];
+    [item setName:[NSString stringWithFormat:@"Hello %d", i]];
     
     NSError *error = nil;
     if (![managedObjectContext save:&error]) {
         NSLog(@"An error occurred while attempting to save data.");
+    }
     }
 }
 
@@ -236,27 +244,13 @@
 - (void)collapseContainer:(Container *)container
 {
     NSLog(@"activeRow.containerTag=%d & activeRow.selectionTable=%@", activeRow.containerTag, activeRow.selectionTable);
-    //if (activeRow && activeRow.selectionTable) {    
-        [UIView animateWithDuration:0.1 animations:^{
-            container.frame =  CGRectMake(container.frame.origin.x, 
-                                          container.frame.origin.y - self.activeRow.selectionTable.frame.size.height, 
-                                          container.frame.size.width, 
-                                          container.frame.size.height);
-        }];
-        expandedContainer = nil;
-         
-        /*activeRow.activePicker.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
-                                                                 green:(float)0xDD/0xFF 
-                                                                  blue:(float)0xDD/0xFF 
-                                                                 alpha:1];
-        activeRow.activePicker.headerLabel.textColor = [UIColor colorWithRed:(float)0x22/0xFF 
-                                                                       green:(float)0x22/0xFF 
-                                                                        blue:(float)0x22/0xFF 
-                                                                       alpha:1];
-        //[activeRow deselectOptionPickers];*/
-        //[activeRow removeSelectionTable];
-        //activeRow = nil;
-    //}
+    [UIView animateWithDuration:0.1 animations:^{
+        container.frame =  CGRectMake(container.frame.origin.x, 
+                                      container.frame.origin.y - self.activeRow.selectionTable.frame.size.height, 
+                                      container.frame.size.width, 
+                                      container.frame.size.height);
+    }];
+    expandedContainer = nil;
 }
 
 - (void)viewDidUnload
