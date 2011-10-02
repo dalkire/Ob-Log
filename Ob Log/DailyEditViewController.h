@@ -1,8 +1,8 @@
 //
-//  ViewController.h
+//  DailyEditViewController.h
 //  Ob Log
 //
-//  Created by David Alkire on 9/22/11.
+//  Created by David Alkire on 10/2/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
@@ -16,7 +16,7 @@
 #import "Container.h"
 #import "OptionPicker.h"
 
-@interface ViewController : UIViewController <DailyEditRowDelegate, DateHeaderDelegate>
+@interface DailyEditViewController : UIViewController <DailyEditRowDelegate, DateHeaderDelegate>
 {
     NSMutableArray *items;
     NSManagedObjectContext *managedObjectContext;
