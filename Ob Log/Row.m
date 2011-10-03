@@ -11,6 +11,8 @@
 @implementation Row
 
 @synthesize id;
+@synthesize blueLine;
+@synthesize marginLine;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -20,23 +22,32 @@
                                                green:(float)0xEE/0xFF 
                                                 blue:(float)0xEE/0xFF 
                                                alpha:1];
+        
+        blueLine = [[UIView alloc] initWithFrame:CGRectMake(0, 
+                                                            frame.size.height - 1, 
+                                                            frame.size.width, 
+                                                            1)];
+        blueLine.backgroundColor = [UIColor colorWithRed:(float)0x77/0xFF 
+                                                   green:(float)0x9D/0xFF 
+                                                    blue:(float)0xE8/0xFF 
+                                                   alpha:1];
+        [self addSubview:blueLine];
+        
+        marginLine = [[UIView alloc] initWithFrame:CGRectMake(300, 
+                                                              0, 
+                                                              3, 
+                                                              frame.size.height)];
+        marginLine.backgroundColor = [UIColor colorWithRed:(float)0xFF/0xFF 
+                                                     green:(float)0xA0/0xFF 
+                                                      blue:(float)0xC8/0xFF 
+                                                     alpha:1.0f];
+        [self addSubview:marginLine];
     }
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
+/*- (void)drawRect:(CGRect)rect
 {
-    /*NSLog(@"drawRect in ROW.m");
-    CGContextRef context1 = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context1, 2.0);
-    CGContextSetStrokeColorWithColor(context1, [UIColor colorWithRed:(float)0x77/0xFF 
-                                                               green:(float)0x9D/0xFF 
-                                                                blue:(float)0xE8/0xFF 
-                                                               alpha:1.0f].CGColor);
-    CGContextMoveToPoint(context1, 0, self.frame.size.height);
-    CGContextAddLineToPoint(context1, self.frame.size.width, self.frame.size.height);
-    CGContextStrokePath(context1);*/
-    
     CGContextRef context2 = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context2, 3.0);
     CGContextSetStrokeColorWithColor(context2, [UIColor colorWithRed:(float)0xFF/0xFF 
@@ -48,6 +59,6 @@
     CGContextStrokePath(context2);
     
     [super drawRect:rect];
-}
+}*/
 
 @end

@@ -9,7 +9,6 @@
 #define CELL_HEIGHT 70
 
 #import "OptionPicker.h"
-#import "ViewController.h"
 #import "DailyEditRow.h"
 
 @implementation OptionPicker

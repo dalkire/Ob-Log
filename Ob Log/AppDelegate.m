@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 
-#import "RootViewController.h"
-#import "ViewController.h"
 #import "NavigationController.h"
 #import "DailyEditViewController.h"
 
@@ -20,16 +18,11 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
 @synthesize window = _window;
-@synthesize rootViewController = _rootViewController;
-@synthesize viewController = _viewController;
 @synthesize navigationController = _navigationController;
-@synthesize devc;
 
 - (void)dealloc
 {
     [_window release];
-    [_rootViewController release];
-    [_viewController release];
     [_navigationController release];
     [super dealloc];
 }
@@ -38,17 +31,14 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.rootViewController = [[[RootViewController alloc] initWithNibName:nil bundle:nil] autorelease];
     self.navigationController = [[NavigationController alloc] initWithNibName:nil bundle:nil];
-    //self.viewController = self.navigationController.viewController;
-    self.devc = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
     
-    NSManagedObjectContext *context = [self managedObjectContext];
+    /*NSManagedObjectContext *context = [self managedObjectContext];
     if (!context) {
         // Handle the error.
         NSLog(@"NO MANAGED OBJECT CONTEXT AVAILABLE IN AppDelegate");
     }
-    //self.viewController.managedObjectContext = context;
+    self.navigationController.managedObjectContext = context;*/
     
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
@@ -57,7 +47,7 @@
 
 - (void)switchViewControllers
 {
-    self.window.rootViewController = self.rootViewController;
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
 }
 

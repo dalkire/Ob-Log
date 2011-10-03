@@ -13,6 +13,7 @@
 #define CELL_HEIGHT 70
 
 #import "AppDelegate.h"
+#import "NavigationController.h"
 #import "DailyEditViewController.h"
 #import "Item.h"
 
@@ -39,7 +40,7 @@
                                       target:self 
                                       action:@selector(didTouchDone)];
         [done setStyle:UIBarButtonItemStyleBordered];
-        [self.navigationItem setLeftBarButtonItem:done];
+        [self.navigationItem setRightBarButtonItem:done];
         [self.navigationItem setTitle:@"Class Title"];
         
         [self loadView];
@@ -49,7 +50,7 @@
 
 - (void)didTouchDone
 {
-    NSLog(@"did touch done");
+    [(NavigationController *)self.navigationController didTouchDoneFromDailyEditViewController];
 }
 
 - (void)didReceiveMemoryWarning

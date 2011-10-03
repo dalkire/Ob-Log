@@ -8,19 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class ViewController;
-@class RootViewController;
 @class NavigationController;
-@class DailyEditViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) ViewController *viewController;
-@property (strong, nonatomic) RootViewController *rootViewController;
 @property (strong, nonatomic) NavigationController *navigationController;
-@property (strong, nonatomic) DailyEditViewController *devc;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

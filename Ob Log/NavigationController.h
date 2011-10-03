@@ -7,16 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeViewController.h"
+#import "ClassesViewController.h"
 #import "DailyEditViewController.h"
 
 @interface NavigationController : UINavigationController
 {
+    NSManagedObjectContext *managedObjectContext;
+    
+    HomeViewController *homeViewController;
+    ClassesViewController *classesViewController;
     DailyEditViewController *viewController;
-    RootViewController *rootViewController;
 }
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+@property (nonatomic, retain) HomeViewController *homeViewController;
+@property (nonatomic, retain) ClassesViewController *classesViewController;
 @property (nonatomic, retain) DailyEditViewController *dailyEditViewController;
 
-- (void)didTouchDone;
+- (void)didTouchDoneFromDailyEditViewController;
 
 @end

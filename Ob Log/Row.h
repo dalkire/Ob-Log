@@ -11,8 +11,12 @@
 @interface Row : UIView
 {
     NSUInteger id;
+    UIView *blueLine;
+    UIView *marginLine;
 }
 
 @property NSUInteger id;
+@property (nonatomic, retain) UIView *blueLine;
+@property (nonatomic, retain) UIView *marginLine;
 
 @end

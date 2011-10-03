@@ -7,7 +7,6 @@
 //
 
 #import "DailyEditRow.h"
-#import "ViewController.h"
 
 @implementation DailyEditRow
 
@@ -52,15 +51,6 @@
         for (int i = 0; i < len; i++) {
             [(OptionPicker *)[optionPickers objectAtIndex:i] setDelegate:self];
         }
-        UIView *blueLine = [[UIView alloc] initWithFrame:CGRectMake(0, 
-                                                                    frame.size.height - 1, 
-                                                                    frame.size.width, 
-                                                                    1)];
-        blueLine.backgroundColor = [UIColor colorWithRed:(float)0x77/0xFF 
-                                                    green:(float)0x9D/0xFF 
-                                                     blue:(float)0xE8/0xFF 
-                                                    alpha:1];
-        [self addSubview:blueLine];
     }
     return self;
 }

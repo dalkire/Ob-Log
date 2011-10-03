@@ -10,6 +10,10 @@
 
 @implementation NavigationController
 
+@synthesize managedObjectContext;
+
+@synthesize homeViewController;
+@synthesize classesViewController;
 @synthesize dailyEditViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -20,15 +24,28 @@
                                                     green:(float)0xEE/0xFF 
                                                      blue:(float)0xEE/0xFF 
                                                     alpha:1];
-        dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
-        [self pushViewController:dailyEditViewController animated:YES];
+        self.homeViewController = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
+        
+        self.dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
+        
+        [self pushViewController:self.homeViewController animated:NO];
+        [self pushViewController:self.dailyEditViewController animated:NO];
     }
     return self;
 }
 
-- (void)didTouchDone
+- (void)didTouchDoneFromDailyEditViewController
 {
+    self.classesViewController = [[ClassesViewController alloc] 
+                                  initWithNibName:nil
+                                  bundle:nil];
+    if (self.managedObjectContext)
+        self.classesViewController.managedObjectContext = self.managedObjectContext;
+    else
+        NSLog(@"managedObjectContext is NIL");
     
+    
+    [self pushViewController:self.classesViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
