@@ -10,6 +10,7 @@
 
 @implementation AddClassViewController
 
+@synthesize delegate;
 @synthesize header;
 @synthesize textField;
 @synthesize cancelBtn;
@@ -65,6 +66,7 @@
 
 - (void)touchedSubmit
 {
+    [delegate addCourse:self.textField.text];
     [self dismissModalViewControllerAnimated:YES];
 }
 

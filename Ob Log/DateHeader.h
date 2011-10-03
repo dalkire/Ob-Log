@@ -27,9 +27,3 @@
 - (void)assignDateTitle:(NSDate *)date;
 
 @end
-
-@protocol DateHeaderDelegate <NSObject>
-
-- (void)didTouchDateHeader;
-
-@end

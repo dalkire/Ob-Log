@@ -22,14 +22,14 @@
 @synthesize items;
 @synthesize managedObjectContext;
 
+@synthesize optionsPopoverController;
+
 @synthesize bg;
 @synthesize scrollView;
 @synthesize dateHeader;
 @synthesize dateHeaderDropShadow;
 @synthesize editModal;
-@synthesize activeRow;
 @synthesize activePicker;
-@synthesize expandedContainer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -80,11 +80,6 @@
     if (mutableFetchResults == nil) {
         NSLog(@"fetchResults error");
     }*/
-    
-    
-    
-    activeRow = nil;
-    expandedContainer = nil;
     
     dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
     dateHeaderDropShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
@@ -149,30 +144,21 @@
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, CELL_HEIGHT*len);
     
     for (int i = 0; i < len; i++) {
-        Container *container = [[Container alloc] initWithFrame:CGRectMake(0, 
-                                                                           i ? CELL_HEIGHT : 0, 
-                                                                           self.view.frame.size.width, 
-                                                                           CELL_HEIGHT*len)];
-        [container setTag:9000+i];
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
-                                                                           0, 
+                                                                           i*CELL_HEIGHT, 
                                                                            self.view.frame.size.width, 
                                                                            CELL_HEIGHT)];
-        [row setContainerTag:container.tag];
+        [row setTag:i];
         [row setDelegate:self];
-        //[row propogateRowId:i andPosition:i];
         [row createNameCellWithName:[array objectAtIndex:i]];
-        //row.nameCell.nameLabel.text = [array objectAtIndex:i];
-        [row setNeedsDisplay];
-        [container addSubview:row];
-        container.mainRow = row;
         
-        if (i == 0) {
-            [scrollView addSubview:container];
+        int length = [row.optionPickers count];
+        for (int j = 0; j < length; j++) {
+            [(OptionPicker *)[row.optionPickers objectAtIndex:j] setDelegate:self];
         }
-        else {
-            [[scrollView viewWithTag:9000 + i - 1] addSubview:container];
-        }
+        
+        [row setNeedsDisplay];
+        [scrollView addSubview:row];
     }
     
     scrollView.backgroundColor = [UIColor colorWithRed:(float)0x99/0xFF 
@@ -185,23 +171,31 @@
     [self.view addSubview:dateHeaderDropShadow];
 }
 
-- (void)didTouchDateHeader
+- (void)didSelectOptionPicker:(OptionPicker *)picker
 {
-    /*NSLog(@"DID Touch Date Header");
-     
-     for (int i = 0; i < 25; i++) {
-     Item *item = (Item *)[NSEntityDescription 
-     insertNewObjectForEntityForName:@"Item" 
-     inManagedObjectContext:managedObjectContext];
-     [item setId:[NSNumber numberWithInt:i]];
-     [item setName:[NSString stringWithFormat:@"Hello %d", i]];
-     
-     NSError *error = nil;
-     if (![managedObjectContext save:&error]) {
-     NSLog(@"An error occurred while attempting to save data.");
-     }
-     }*/
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] switchViewControllers];
+    [picker selectPicker];
+    if (self.activePicker) {
+        [self.activePicker deselectPicker];
+    }
+    self.activePicker = picker;
+    
+    NSLog(@"didSelectOptionPicker: %@", picker.headerLabel.text);
+    OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    self.optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsPopTVC];
+    CGPoint localOrigin = [self.view convertPoint:CGPointMake(0, 0) fromView:picker];
+    NSLog(@"localOrigin=(%f,%f)", localOrigin.x, localOrigin.y);
+    [self.optionsPopoverController setPopoverContentSize:CGSizeMake(200, 300) 
+                                                animated:YES];
+    [self.optionsPopoverController presentPopoverFromRect:[picker bounds] 
+                                                   inView:picker
+                                 permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [optionsPopTVC setDelegate:self];
+}
+
+- (void)didSelectOptionRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%@", indexPath);
+    [self.optionsPopoverController dismissPopoverAnimated:YES];
 }
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date
@@ -238,49 +232,6 @@
      expandedContainer.frame.size.width, 
      expandedContainer.frame.size.height);
      }];*/
-}
-
-- (void)didAddSelectionTableToRow:(DailyEditRow *)row
-{
-    NSLog(@"didAddSelectionTableToRow");
-    if (expandedContainer) {
-        [self collapseContainer:expandedContainer];
-    }
-    
-    self.activeRow = row;
-    [self expandContainer:(Container *)[scrollView viewWithTag:self.activeRow.containerTag + 1]];
-}
-
-- (void)didRemoveSelectionTableFromRow:(DailyEditRow *)row
-{
-    NSLog(@"did remove selectiontablefromrow");
-    [self collapseContainer:(Container *)[scrollView viewWithTag:row.containerTag + 1]];
-}
-
-- (void)expandContainer:(Container *)container
-{
-    NSLog(@"2)container.mainRow.selectionTable %@", container.mainRow.selectionTable);
-    
-    NSLog(@"expandContainer: %f", container.mainRow.selectionTable.frame.size.height);
-    [UIView animateWithDuration:0.4 animations:^{
-        expandedContainer = container;
-        container.frame =  CGRectMake(container.frame.origin.x, 
-                                      container.frame.origin.y + self.activeRow.selectionTable.frame.size.height, 
-                                      container.frame.size.width, 
-                                      container.frame.size.height);
-    }];
-}
-
-- (void)collapseContainer:(Container *)container
-{
-    NSLog(@"activeRow.containerTag=%d & activeRow.selectionTable=%@", activeRow.containerTag, activeRow.selectionTable);
-    [UIView animateWithDuration:0.1 animations:^{
-        container.frame =  CGRectMake(container.frame.origin.x, 
-                                      container.frame.origin.y - self.activeRow.selectionTable.frame.size.height, 
-                                      container.frame.size.width, 
-                                      container.frame.size.height);
-    }];
-    expandedContainer = nil;
 }
 
 /*

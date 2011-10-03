@@ -69,9 +69,4 @@
     
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [delegate didTouchDateHeader];
-}
-
 @end

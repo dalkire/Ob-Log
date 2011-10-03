@@ -20,10 +20,6 @@
 @synthesize optionsScrollWrapper;
 @synthesize optionsScroll;
 @synthesize optionPickers;
-@synthesize activeOptionPicker;
-@synthesize selectionTable;
-@synthesize selectionTableRows;
-@synthesize activeSelectionTableRow;
 
 @synthesize rowId;
 @synthesize rowPos;
@@ -32,7 +28,6 @@
 @synthesize previousIndexPath;
 @synthesize currentIndexPath;
 @synthesize previousIndex;
-@synthesize activePicker;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -40,17 +35,11 @@
     if (self) {
         nameCell = nil;
         noteCell = nil;
-        activePicker = nil;
         [self createNoteCellWithObject:[[NSObject alloc] init]];
         actionsSlider = noteCell.actionsSlider;
         optionsScrollWrapper = noteCell.actionsSlider.optionsScrollWrapper;
         optionsScroll = noteCell.actionsSlider.optionsScrollWrapper.optionsScroll;
         optionPickers = noteCell.actionsSlider.optionsScrollWrapper.optionsScroll.optionPickers;
-        
-        int len = [optionPickers count];
-        for (int i = 0; i < len; i++) {
-            [(OptionPicker *)[optionPickers objectAtIndex:i] setDelegate:self];
-        }
     }
     return self;
 }
@@ -80,87 +69,6 @@
     
     return noteCell;
 }
-
-- (void)createSelectionTableForOptionPicker:(OptionPicker *)optionPicker
-{
-    self.selectionTableRows = nil;
-    self.selectionTable = nil;
-    self.selectionTable = [[SelectionTable alloc] initWithFrame:CGRectMake(0, 
-                                                                      self.frame.size.height - 1, 
-                                                                      self.frame.size.width, 
-                                                                      [optionPicker.options count]*40)];
-    NSLog(@"createSelectionTableForOptionPicker -> self.selectionTable %@", self.selectionTable);
-    [selectionTable createTableWithOptions:optionPicker.options];
-    self.selectionTableRows = self.selectionTable.rowsArray;
-    int len = [self.selectionTableRows count];
-    for (int i = 0; i < len; i++) {
-        [(SelectionTableRow *)[self.selectionTableRows objectAtIndex:i] setDelegate:self];
-    }
-    
-    self.frame = CGRectMake(self.frame.origin.x,
-                            self.frame.origin.y,
-                            self.frame.size.width,
-                            self.frame.size.height + self.selectionTable.frame.size.height);
-    
-    [self addSubview:selectionTable];
-    [delegate didAddSelectionTableToRow:self];
-}
-
-- (void)removeSelectionTable
-{
-    //[delegate didRemoveSelectionTableFromRow:self];
-    if (self.selectionTable) {
-        self.frame = CGRectMake(self.frame.origin.x, 
-                                self.frame.origin.y, 
-                                self.frame.size.width, 
-                                self.frame.size.height - self.selectionTable.frame.size.height);
-        [delegate didRemoveSelectionTableFromRow:self];
-        [self.selectionTable removeFromSuperview];
-        self.selectionTable = nil;
-        self.selectionTableRows = nil;
-    }
-}
-
-- (void)didSelectOptionPicker:(OptionPicker *)picker
-{
-    NSLog(@"didSelectOptionPicker");
-    self.activeOptionPicker = picker;
-    [self deselectOptionPickers];
-    [self removeSelectionTable];
-    [self selectOptionPicker:picker];
-    [self createSelectionTableForOptionPicker:picker];
-}
-
-- (void)didDeselectOptionPicker:(OptionPicker *)picker
-{
-    NSLog(@"didDESELECTOptionPicker");
-    self.activeOptionPicker = nil;
-    [self removeSelectionTable];
-}
-
-- (void)selectOptionPicker:(OptionPicker *)picker
-{
-    [picker selectPicker];
-}
-
-- (void)deselectOptionPickers
-{
-    int len = [self.optionPickers count];
-    for (int i = 0; i < len; i++) {
-        [(OptionPicker *)[self.optionPickers objectAtIndex:i] deselectPicker];
-    }
-}
-
-- (void)didSelectSelectionTableRow:(SelectionTableRow *)row
-{
-    self.activeSelectionTableRow.backgroundColor = [UIColor colorWithRed:(float)0xAA/0xFF 
-                                                                   green:(float)0xAA/0xFF 
-                                                                    blue:(float)0xAA/0xFF 
-                                                                   alpha:1];
-    self.activeSelectionTableRow = row;
-    self.activeOptionPicker.headerLabel.text = row.rowLabel.text;
-}
-
 
 - (void)assignOptionsArray:(NSMutableArray *)options
 {

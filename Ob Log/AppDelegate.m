@@ -33,12 +33,12 @@
     // Override point for customization after application launch.
     self.navigationController = [[NavigationController alloc] initWithNibName:nil bundle:nil];
     
-    /*NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObjectContext *context = [self managedObjectContext];
     if (!context) {
         // Handle the error.
         NSLog(@"NO MANAGED OBJECT CONTEXT AVAILABLE IN AppDelegate");
     }
-    self.navigationController.managedObjectContext = context;*/
+    self.navigationController.managedObjectContext = context;
     
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
@@ -157,7 +157,7 @@
         return __persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"TestCoreData.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ObLog.sqlite"];
     
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

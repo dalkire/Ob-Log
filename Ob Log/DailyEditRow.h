@@ -15,9 +15,9 @@
 #import "OptionsScrollWrapper.h"
 #import "OptionsScroll.h"
 #import "OptionPicker.h"
-#import "SelectionTable.h"
+#import "DailyEditViewController.h"
 
-@interface DailyEditRow : Row <OptionPickerDelegate>
+@interface DailyEditRow : Row
 {
     id delegate;
     NSUInteger containerTag;
@@ -29,10 +29,6 @@
     OptionsScrollWrapper *optionsScrollWrapper;
     OptionsScroll *optionsScroll;
     NSMutableArray *optionPickers;
-    OptionPicker *activeOptionPicker;
-    SelectionTable *selectionTable;
-    NSMutableArray *selectionTableRows;
-    SelectionTableRow *activeSelectionTableRow;
     
     NSUInteger rowId;
     NSUInteger rowPos;
@@ -41,7 +37,6 @@
     NSIndexPath *previousIndexPath;
     NSIndexPath *currentIndexPath;
     NSInteger previousIndex;
-    OptionPicker *activePicker;
 }
 
 
@@ -55,10 +50,6 @@
 @property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
 @property (nonatomic, retain) OptionsScroll *optionsScroll;
 @property (nonatomic, retain) NSMutableArray *optionPickers;
-@property (nonatomic, retain) OptionPicker *activeOptionPicker;
-@property (nonatomic, retain) SelectionTable *selectionTable;
-@property (nonatomic, retain) NSMutableArray *selectionTableRows;
-@property (nonatomic, retain) SelectionTableRow *activeSelectionTableRow;
 @property NSUInteger rowId;
 @property NSUInteger rowPos;
 @property (nonatomic, retain) NSMutableArray *arr;
@@ -66,21 +57,9 @@
 @property (nonatomic, retain) NSIndexPath *previousIndexPath;
 @property (nonatomic, retain) NSIndexPath *currentIndexPath;
 @property NSInteger previousIndex;
-@property (nonatomic, retain) OptionPicker *activePicker;
 
 - (NameCell *)createNameCellWithName:(NSString *)name;
 - (NoteCell *)createNoteCellWithObject:(NSObject *)object;
-- (void)createSelectionTableForOptionPicker:(OptionPicker *)optionPicker;
-- (void)removeSelectionTable;
-- (void)selectOptionPicker:(OptionPicker *)picker;
-- (void)deselectOptionPickers;
 - (void)assignOptionsArray:(NSMutableArray *)options;
-
-@end
-
-@protocol DailyEditRowDelegate <NSObject>
-
-- (void)didAddSelectionTableToRow:(DailyEditRow *)row;
-- (void)didRemoveSelectionTableFromRow:(DailyEditRow *)row;
 
 @end

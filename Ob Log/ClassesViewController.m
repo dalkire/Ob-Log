@@ -13,6 +13,7 @@
 @implementation ClassesViewController
 
 @synthesize managedObjectContext;
+@synthesize nextCourseId;
 
 @synthesize header;
 @synthesize scrollView;
@@ -24,54 +25,9 @@
         UIBarButtonItem *add =[[UIBarButtonItem alloc] 
                                 initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
                                 target:self 
-                                action:@selector(addClass)];
+                                action:@selector(addCourseModal)];
         [add setStyle:UIBarButtonItemStyleBordered];
-        [self.navigationItem setRightBarButtonItem:add];
-        
-        /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Class" inManagedObjectContext:managedObjectContext];
-        [request setEntity:entity];
-        
-        NSError *error = nil;
-        NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-        if (mutableFetchResults == nil) {
-            NSLog(@"fetchResults error");
-        }*/
-        
-        self.view.backgroundColor = [UIColor colorWithRed:(float)0xEE/0XFF 
-                                                    green:(float)0xEE/0XFF 
-                                                     blue:(float)0xEE/0XFF 
-                                                    alpha:1];
-        
-        header = [[Header alloc] initWithFrame:CGRectMake(0, 
-                                                          0, 
-                                                          self.view.frame.size.width, 
-                                                          80)];
-        
-        scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                    header.frame.size.height, 
-                                                                    self.view.frame.size.width, 
-                                                                    self.view.frame.size.height - header.frame.size.height)];
-        
-        int min_cells = ceil((self.view.frame.size.height - header.frame.size.height)/CELL_HEIGHT);
-        int len = 4;
-        len = (min_cells > len ? min_cells : len);
-        for (int i = 0; i < len; i++) {
-            ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
-                                                             i*CELL_HEIGHT, 
-                                                             self.view.frame.size.width, 
-                                                             CELL_HEIGHT)];
-            [row setMainLabelText:[NSString stringWithFormat:@"American History From 1776 - 1912: %d", i]];
-            [row setDelegate:self];
-            [scrollView addSubview:row];
-        }
-        
-        NSLog(@"len : %d", len);
-        scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
-        
-        [self.view addSubview:scrollView];
-        [self.view addSubview:header];
-    }
+        [self.navigationItem setRightBarButtonItem:add];    }
     return self;
 }
 
@@ -80,9 +36,10 @@
     NSLog(@"Touched ClickRow: %@", clickRow);
 }
 
-- (void)addClass
+- (void)addCourseModal
 {
     AddClassViewController *addClassModal = [[AddClassViewController alloc] initWithNibName:nil bundle:nil];
+    [addClassModal setDelegate:self];
     [addClassModal setModalPresentationStyle:UIModalPresentationFormSheet];
     [addClassModal setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentModalViewController:addClassModal animated:YES];
@@ -97,21 +54,88 @@
 }
 
 #pragma mark - View lifecycle
-
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
 }
-*/
+ */
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:managedObjectContext];
+    [request setEntity:entity];
+     
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        NSLog(@"fetchResults error");
+    }
+    else {
+        NSLog(@"fetchResults Success");
+    }
+    
+    self.nextCourseId = 0;
+    int len = [mutableFetchResults count];
+    for (int i = 0; i < len; i++) {
+        if ((NSUInteger)((Course *)[mutableFetchResults objectAtIndex:i]).id > self.nextCourseId) {
+            self.nextCourseId = (NSUInteger)((Course *)[mutableFetchResults objectAtIndex:i]).id;
+        }
+        NSLog(@"%@", ((Course *)[mutableFetchResults objectAtIndex:i]).name);
+    }
+    self.nextCourseId++;
+    
+    self.view.backgroundColor = [UIColor colorWithRed:(float)0xEE/0XFF 
+                                                green:(float)0xEE/0XFF 
+                                                 blue:(float)0xEE/0XFF 
+                                                alpha:1];
+    
+    header = [[Header alloc] initWithFrame:CGRectMake(0, 
+                                                      0, 
+                                                      self.view.frame.size.width, 
+                                                      80)];
+    
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
+                                                                header.frame.size.height, 
+                                                                self.view.frame.size.width, 
+                                                                self.view.frame.size.height - header.frame.size.height)];
+    
+    int min_cells = ceil((self.view.frame.size.height - header.frame.size.height)/CELL_HEIGHT);
+    NSLog(@"[mutableFetchResults count] = %d", [mutableFetchResults count]);
+    //len = (min_cells > len ? min_cells : len);
+    for (int i = 0; i < len; i++) {
+        ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
+                                                                   i*CELL_HEIGHT, 
+                                                                   self.view.frame.size.width, 
+                                                                   CELL_HEIGHT)];
+        [row setMainLabelText:((Course *)[mutableFetchResults objectAtIndex:i]).name];
+        [row setDelegate:self];
+        [scrollView addSubview:row];
+    }
+    
+    NSLog(@"len : %d", len);
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
+    
+    [self.view addSubview:scrollView];
+    [self.view addSubview:header];
 }
-*/
+
+- (void)addCourse:(NSString *)courseName
+{
+    Course *course = (Course *)[NSEntityDescription 
+                              insertNewObjectForEntityForName:@"Course" 
+                              inManagedObjectContext:managedObjectContext];
+    [course setId:[NSNumber numberWithInt:self.nextCourseId]];
+    [course setName:courseName];
+    
+    NSError *error = nil;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"An error occurred while attempting to save data.");
+    }
+}
 
 - (void)viewDidUnload
 {

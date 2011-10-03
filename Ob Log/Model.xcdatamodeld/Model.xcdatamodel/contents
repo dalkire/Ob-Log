@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="870" systemVersion="11B26" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Class" syncable="YES">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="870" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Course" representedClassName="Course" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Entry" representedClassName="Item" syncable="YES">
-        <attribute name="class_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="course_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="student_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -34,7 +34,7 @@
         <element name="Note" positionX="-56" positionY="216" width="128" height="105"/>
         <element name="Option" positionX="178" positionY="162" width="128" height="90"/>
         <element name="OptionHeader" positionX="-20" positionY="36" width="128" height="75"/>
-        <element name="Class" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Student" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Course" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

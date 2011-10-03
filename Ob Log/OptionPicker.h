@@ -48,6 +48,5 @@
 @protocol OptionPickerDelegate <NSObject>
 
 - (void)didSelectOptionPicker:(OptionPicker *)picker;
-- (void)didDeselectOptionPicker:(OptionPicker *)picker;
 
 @end

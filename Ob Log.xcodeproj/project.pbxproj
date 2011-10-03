@@ -18,6 +18,7 @@
 		892C96B0142B67E000994EAB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 892C96AF142B67E000994EAB /* main.m */; };
 		892C96B4142B67E000994EAB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 892C96B3142B67E000994EAB /* AppDelegate.m */; };
 		89417F891430BDBA002EABBA /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 89417F881430BDBA002EABBA /* Theme.m */; };
+		895A66AE1439F68400AB14BC /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A66AD1439F68400AB14BC /* Course.m */; };
 		895B5D99142EB99A007D7B9C /* EditModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B5D98142EB99A007D7B9C /* EditModalViewController.m */; };
 		897728DA1430212D00B6D985 /* NameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 897728D91430212D00B6D985 /* NameCell.m */; };
 		89840DA4143630E4001C5E0C /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 89840DA3143630E4001C5E0C /* Item.m */; };
@@ -34,7 +35,7 @@
 		89C4B53E142BB05000D035BA /* OptionsScrollWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B53D142BB05000D035BA /* OptionsScrollWrapper.m */; };
 		89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4EF143158A70035CE24 /* SelectionTable.m */; };
 		89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */; };
-		89C7C4F714317FE60035CE24 /* Container.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4F614317FE50035CE24 /* Container.m */; };
+		89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */; };
 		89DF847214389C0B00D5F444 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF847114389C0B00D5F444 /* NavigationController.m */; };
 		89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF84751438ADB400D5F444 /* DailyEditViewController.m */; };
 		89DF84791438F02400D5F444 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF84781438F02400D5F444 /* HomeViewController.m */; };
@@ -63,6 +64,8 @@
 		892C96B3142B67E000994EAB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		89417F871430BDBA002EABBA /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		89417F881430BDBA002EABBA /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
+		895A66AC1439F68400AB14BC /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
+		895A66AD1439F68400AB14BC /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		895B5D97142EB99A007D7B9C /* EditModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditModalViewController.h; sourceTree = "<group>"; };
 		895B5D98142EB99A007D7B9C /* EditModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditModalViewController.m; sourceTree = "<group>"; };
 		897728D81430212D00B6D985 /* NameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameCell.h; sourceTree = "<group>"; };
@@ -92,8 +95,8 @@
 		89C7C4EF143158A70035CE24 /* SelectionTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionTable.m; sourceTree = "<group>"; };
 		89C7C4F214316ADB0035CE24 /* SelectionTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionTableRow.h; sourceTree = "<group>"; };
 		89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionTableRow.m; sourceTree = "<group>"; };
-		89C7C4F514317FE50035CE24 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Container.h; sourceTree = "<group>"; };
-		89C7C4F614317FE50035CE24 /* Container.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Container.m; sourceTree = "<group>"; };
+		89C9F564143A205F00ED2E4A /* OptionsPopoverTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsPopoverTableViewController.h; sourceTree = "<group>"; };
+		89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsPopoverTableViewController.m; sourceTree = "<group>"; };
 		89DF847014389C0B00D5F444 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		89DF847114389C0B00D5F444 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		89DF84741438ADB400D5F444 /* DailyEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyEditViewController.h; sourceTree = "<group>"; };
@@ -161,8 +164,6 @@
 				89C7C4EF143158A70035CE24 /* SelectionTable.m */,
 				89C7C4F214316ADB0035CE24 /* SelectionTableRow.h */,
 				89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */,
-				89C7C4F514317FE50035CE24 /* Container.h */,
-				89C7C4F614317FE50035CE24 /* Container.m */,
 			);
 			name = Row;
 			sourceTree = "<group>";
@@ -213,6 +214,8 @@
 				891AB1D8142F926400D0171B /* Model.xcdatamodeld */,
 				89840DA2143630E4001C5E0C /* Item.h */,
 				89840DA3143630E4001C5E0C /* Item.m */,
+				895A66AC1439F68400AB14BC /* Course.h */,
+				895A66AD1439F68400AB14BC /* Course.m */,
 				89DF848314390D0D00D5F444 /* ClickRow.h */,
 				89DF848414390D0F00D5F444 /* ClickRow.m */,
 			);
@@ -247,6 +250,8 @@
 				895B5D98142EB99A007D7B9C /* EditModalViewController.m */,
 				89DF848614393EBF00D5F444 /* AddClassViewController.h */,
 				89DF848714393EBF00D5F444 /* AddClassViewController.m */,
+				89C9F564143A205F00ED2E4A /* OptionsPopoverTableViewController.h */,
+				89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -333,7 +338,6 @@
 				89417F891430BDBA002EABBA /* Theme.m in Sources */,
 				89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */,
 				89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */,
-				89C7C4F714317FE60035CE24 /* Container.m in Sources */,
 				89840DA4143630E4001C5E0C /* Item.m in Sources */,
 				89DF847214389C0B00D5F444 /* NavigationController.m in Sources */,
 				89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */,
@@ -342,6 +346,8 @@
 				89DF847F143904AD00D5F444 /* ClassesViewController.m in Sources */,
 				89DF848514390D1A00D5F444 /* ClickRow.m in Sources */,
 				89DF848814393EBF00D5F444 /* AddClassViewController.m in Sources */,
+				895A66AE1439F68400AB14BC /* Course.m in Sources */,
+				89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

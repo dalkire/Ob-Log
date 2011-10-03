@@ -97,6 +97,7 @@
     NSLog(@"SELECT PICKER");
     active = YES;
     self.backgroundColor = [Theme getThemeColor];
+    self.headerLabel.textColor = [UIColor whiteColor];
 }
 
 - (void)deselectPicker
@@ -107,6 +108,7 @@
                                            green:(float)0xDD/0xFF 
                                             blue:(float)0xDD/0xFF 
                                            alpha:1];
+    self.headerLabel.textColor = [UIColor blackColor];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -116,14 +118,8 @@
     NSLog(@"touch ENDED OP, self.active=%@", self.active ? @"YES" : @"NO");
     
     if (delegate && [delegate respondsToSelector:@selector(didSelectOptionPicker:)]) {
-        if (self.active) {
-            [self selectPicker];
-            [delegate didSelectOptionPicker:self];
-        }
-        else {
-            [self deselectPicker];
-            [delegate didDeselectOptionPicker:self];
-        }
+        [self selectPicker];
+        [delegate didSelectOptionPicker:self];
     }
 }
 
