@@ -181,6 +181,7 @@
     
     NSLog(@"didSelectOptionPicker: %@", picker.headerLabel.text);
     OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [optionsPopTVC setOptionsArray:picker.options];
     self.optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsPopTVC];
     CGPoint localOrigin = [self.view convertPoint:CGPointMake(0, 0) fromView:picker];
     NSLog(@"localOrigin=(%f,%f)", localOrigin.x, localOrigin.y);
@@ -196,6 +197,7 @@
 {
     NSLog(@"%@", indexPath);
     [self.optionsPopoverController dismissPopoverAnimated:YES];
+    activePicker.headerLabel.text = [activePicker.options objectAtIndex:[indexPath indexAtPosition:1]];
 }
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date

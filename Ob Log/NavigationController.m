@@ -20,6 +20,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.navigationBar.tintColor = [Theme getThemeColor];
         self.view.backgroundColor = [UIColor colorWithRed:(float)0xEE/0xFF 
                                                     green:(float)0xEE/0xFF 
                                                      blue:(float)0xEE/0xFF 

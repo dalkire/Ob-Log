@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Header.h"
 #import "Course.h"
+#import "ColorPicker.h"
 
 @interface AddClassViewController : UIViewController
 {

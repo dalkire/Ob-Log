@@ -22,12 +22,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        UIBarButtonItem *add =[[UIBarButtonItem alloc] 
+        UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
+                               initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
+                               target:self 
+                               action:@selector(addCourseModal)];
+        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] 
                                 initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
                                 target:self 
-                                action:@selector(addCourseModal)];
-        [add setStyle:UIBarButtonItemStyleBordered];
-        [self.navigationItem setRightBarButtonItem:add];    }
+                               action:@selector(addCourseModal)];
+        [self.navigationItem setRightBarButtonItem:addBtn];    
+    }
     return self;
 }
 

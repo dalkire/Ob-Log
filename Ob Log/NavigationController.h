@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Theme.h"
 #import "HomeViewController.h"
 #import "ClassesViewController.h"
 #import "DailyEditViewController.h"
