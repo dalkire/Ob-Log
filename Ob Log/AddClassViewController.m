@@ -25,17 +25,6 @@
     return self;
 }
 
-- (void)touchedCancel
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)touchedSubmit
-{
-    [delegate addCourse:self.textField.text];
-    [self dismissModalViewControllerAnimated:YES];
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -61,7 +50,7 @@
                                                       0, 
                                                       540, 
                                                       80)];
-    [header setMaintitleLabelText:@"Add A Class"];
+    [header setMaintitleLabelText:@"Add Course"];
     
     textField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
                                                               header.frame.size.height + 30, 
@@ -69,7 +58,7 @@
                                                               40)];
     [textField setBorderStyle:UITextBorderStyleRoundedRect];
     [textField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
-    [textField setPlaceholder:@"Class Name"];
+    [textField setPlaceholder:@"Course Title"];
     
     colorPicker = [[ColorPicker alloc] init];
     [colorPicker setDelegate:self];
@@ -99,9 +88,34 @@
     [self.view addSubview:colorPicker];
 }
 
+- (void)touchedCancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)touchedSubmit
+{
+    NSLog(@":%@:", self.textField.text);
+    if (self.textField.text && ![self.textField.text isEqual:@""]) {
+        [delegate addCourseWithName:self.textField.text 
+                             andRed:colorPicker.rSlider.value 
+                              green:colorPicker.gSlider.value 
+                               blue:colorPicker.bSlider.value];
+        [self dismissModalViewControllerAnimated:YES];
+        return;
+    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" 
+                                                        message:@"Course title may not be empty" 
+                                                       delegate:self 
+                                              cancelButtonTitle:@"OK" 
+                                              otherButtonTitles:nil, nil];
+    [alertView show];
+}
+
 - (void)didSelectRed:(float)red green:(float)green blue:(float)blue
 {
     header.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:1];
+    header.maintitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
 }
 
 - (void)viewDidUnload

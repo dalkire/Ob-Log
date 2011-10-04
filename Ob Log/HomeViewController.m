@@ -23,7 +23,6 @@
                                                                self.view.frame.size.width, 
                                                                80)];
         [self.header setMaintitleLabelText:@"Home"];
-        //[self.header setSubtitleLabelText:@""];
         [self.view addSubview:self.header];
     }
     return self;

@@ -12,7 +12,10 @@
 
 @interface Course : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSNumber *id;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSNumber *colorR;
+@property (nonatomic, retain) NSNumber *colorG;
+@property (nonatomic, retain) NSNumber *colorB;
 
 @end

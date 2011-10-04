@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="870" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Course" representedClassName="Course" syncable="YES">
+        <attribute name="colorB" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="colorG" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="colorR" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -8,21 +11,21 @@
         <attribute name="course_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="note_text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="student_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="Note" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="itemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <entity name="Option" syncable="YES">
-        <attribute name="headerId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="optionTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="option_header_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="option_text" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OptionEntry" syncable="YES">
+        <attribute name="entry_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="option_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="OptionHeader" syncable="YES">
-        <attribute name="headerTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="header_text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Student" syncable="YES">
@@ -30,11 +33,11 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Entry" positionX="45" positionY="-81" width="128" height="105"/>
-        <element name="Note" positionX="-56" positionY="216" width="128" height="105"/>
+        <element name="Course" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Entry" positionX="45" positionY="-81" width="128" height="120"/>
         <element name="Option" positionX="178" positionY="162" width="128" height="90"/>
         <element name="OptionHeader" positionX="-20" positionY="36" width="128" height="75"/>
         <element name="Student" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="Course" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="OptionEntry" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

@@ -17,11 +17,13 @@
 
 @synthesize header;
 @synthesize scrollView;
+@synthesize coursesArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.coursesArray = [[NSMutableArray alloc] initWithCapacity:0];
         UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
                                initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                target:self 
@@ -89,6 +91,7 @@
             self.nextCourseId = (NSUInteger)((Course *)[mutableFetchResults objectAtIndex:i]).id;
         }
         NSLog(@"%@", ((Course *)[mutableFetchResults objectAtIndex:i]).name);
+        [self.coursesArray addObject:(Course *)[mutableFetchResults objectAtIndex:i]];
     }
     self.nextCourseId++;
     
@@ -101,14 +104,18 @@
                                                       0, 
                                                       self.view.frame.size.width, 
                                                       80)];
+    [header setMaintitleLabelText:@"Courses"];
+    header.maintitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                header.frame.size.height, 
+                                                                self.header.frame.size.height, 
                                                                 self.view.frame.size.width, 
-                                                                self.view.frame.size.height - header.frame.size.height)];
+                                                                self.view.frame.size.height - 
+                                                                self.header.frame.size.height - 40)];
+    scrollView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    NSLog(@"header.frame.size.height = %f", header.frame.size.height);
     
     int min_cells = ceil((self.view.frame.size.height - header.frame.size.height)/CELL_HEIGHT);
-    NSLog(@"[mutableFetchResults count] = %d", [mutableFetchResults count]);
     //len = (min_cells > len ? min_cells : len);
     for (int i = 0; i < len; i++) {
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
@@ -118,27 +125,41 @@
         [row setMainLabelText:((Course *)[mutableFetchResults objectAtIndex:i]).name];
         [row setDelegate:self];
         [scrollView addSubview:row];
+        NSLog(@"RGB: %@, %@, %@",   ((Course *)[mutableFetchResults objectAtIndex:i]).colorR,
+                                    ((Course *)[mutableFetchResults objectAtIndex:i]).colorG,
+                                    ((Course *)[mutableFetchResults objectAtIndex:i]).colorB);
     }
     
-    NSLog(@"len : %d", len);
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
     
     [self.view addSubview:scrollView];
     [self.view addSubview:header];
 }
 
-- (void)addCourse:(NSString *)courseName
+- (void)addCourseWithName:(NSString *)courseName andRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue
 {
     Course *course = (Course *)[NSEntityDescription 
                               insertNewObjectForEntityForName:@"Course" 
                               inManagedObjectContext:managedObjectContext];
     [course setId:[NSNumber numberWithInt:self.nextCourseId]];
     [course setName:courseName];
+    [course setColorR:[NSNumber numberWithUnsignedInteger:red]];
+    [course setColorG:[NSNumber numberWithUnsignedInteger:green]];
+    [course setColorB:[NSNumber numberWithUnsignedInteger:blue]];
     
     NSError *error = nil;
     if (![managedObjectContext save:&error]) {
         NSLog(@"An error occurred while attempting to save data.");
     }
+    ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
+                                                               [self.coursesArray count]*CELL_HEIGHT, 
+                                                               self.view.frame.size.width, 
+                                                               CELL_HEIGHT)];
+    [row setMainLabelText:courseName];
+    [row setDelegate:self];
+    [scrollView addSubview:row];
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [self.coursesArray count]*CELL_HEIGHT);
+    [self.coursesArray addObject:course];
 }
 
 - (void)viewDidUnload

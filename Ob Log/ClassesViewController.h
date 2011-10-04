@@ -20,6 +20,7 @@
     
     Header *header;
     UIScrollView *scrollView;
+    NSMutableArray *coursesArray;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -27,6 +28,7 @@
 
 @property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) UIScrollView *scrollView;
+@property (nonatomic, retain) NSMutableArray *coursesArray;
 
 - (void)addCourseModal;
 

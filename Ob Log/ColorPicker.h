@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Theme.h"
 #import "ColorSlider.h"
 
 @interface ColorPicker : UIView <ColorSliderDelegate>

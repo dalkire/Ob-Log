@@ -82,6 +82,7 @@
     }*/
     
     dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
+    dateHeader.dateTitle.textColor = dateHeader.sectionSubtitle.textColor = [Theme getTextColorForColor:dateHeader.backgroundColor];
     dateHeaderDropShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                                     dateHeader.frame.origin.y + dateHeader.frame.size.height, 
                                                                     self.view.frame.size.width, 
@@ -137,11 +138,14 @@
      nil];
 	
     int len = [array count];
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                dateHeader.frame.size.height, 
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,  
+                                                                self.dateHeader.frame.size.height, 
                                                                 self.view.frame.size.width, 
-                                                                self.view.frame.size.height - dateHeader.frame.size.height)];
+                                                                self.view.frame.size.height - 
+                                                                self.dateHeader.frame.size.height - 40)];
+    NSLog(@"-- %f", self.navigationController.navigationBar.frame.size.height);
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, CELL_HEIGHT*len);
+    scrollView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
     for (int i = 0; i < len; i++) {
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
@@ -161,10 +165,6 @@
         [scrollView addSubview:row];
     }
     
-    scrollView.backgroundColor = [UIColor colorWithRed:(float)0x99/0xFF 
-                                                 green:(float)0x99/0xFF 
-                                                  blue:(float)0x99/0xFF 
-                                                 alpha:1];
     [self.view addSubview:scrollView];
     
     [self.view insertSubview:dateHeader atIndex:[[self.view subviews] count]];

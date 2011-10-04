@@ -45,9 +45,11 @@
         [self.gSlider setMaximumValue:255];
         [self.bSlider setMaximumValue:255];
         
-        [self.rSlider setValue:115];
-        [self.gSlider setValue:182];
-        [self.bSlider setValue:107];
+        const float *themeColors = CGColorGetComponents([Theme getThemeColor].CGColor);
+        
+        [self.rSlider setValue:themeColors[0]*255];
+        [self.gSlider setValue:themeColors[1]*255];
+        [self.bSlider setValue:themeColors[2]*255];
         
         self.rSlider.colorLabel.text = @"Red";
         self.gSlider.colorLabel.text = @"Green";

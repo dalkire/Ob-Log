@@ -11,7 +11,10 @@
 
 @implementation Course
 
-@dynamic name;
 @dynamic id;
+@dynamic name;
+@dynamic colorR;
+@dynamic colorG;
+@dynamic colorB;
 
 @end
