@@ -7,23 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ColorSlider.h"
 
-@interface ColorPicker : UIView
+@interface ColorPicker : UIView <ColorSliderDelegate>
 {
-    UIView *colorPanel;
+    id delegate;
     
-    NSNumber *rValue;
-    NSNumber *gValue;
-    NSNumber *bValue;
-    
-    UISlider *rSlider;
-    UISlider *gSlider;
-    UISlider *bSlider;
+    ColorSlider *rSlider;
+    ColorSlider *gSlider;
+    ColorSlider *bSlider;
 }
 
-@property (nonatomic, retain) UIView *colorPanel;
-@property (nonatomic, retain) UISlider *rSlider;
-@property (nonatomic, retain) UISlider *gSlider;
-@property (nonatomic, retain) UISlider *bSlider;
+@property (nonatomic, retain) id delegate;
+
+@property (nonatomic, retain) ColorSlider *rSlider;
+@property (nonatomic, retain) ColorSlider *gSlider;
+@property (nonatomic, retain) ColorSlider *bSlider;
+
+@end
+
+@protocol ColorPickerDelegate <NSObject>
+
+- (void)didSelectRed:(float)red green:(float)green blue:(float)blue;
 
 @end

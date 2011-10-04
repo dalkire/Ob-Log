@@ -44,6 +44,7 @@
 		89DF847F143904AD00D5F444 /* ClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF847E143904AD00D5F444 /* ClassesViewController.m */; };
 		89DF848514390D1A00D5F444 /* ClickRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848414390D0F00D5F444 /* ClickRow.m */; };
 		89DF848814393EBF00D5F444 /* AddClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848714393EBF00D5F444 /* AddClassViewController.m */; };
+		89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E320AD143B42C600A6D54E /* ColorSlider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +115,8 @@
 		89DF848414390D0F00D5F444 /* ClickRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickRow.m; sourceTree = "<group>"; };
 		89DF848614393EBF00D5F444 /* AddClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddClassViewController.h; sourceTree = "<group>"; };
 		89DF848714393EBF00D5F444 /* AddClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddClassViewController.m; sourceTree = "<group>"; };
+		89E320AC143B42C600A6D54E /* ColorSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSlider.h; sourceTree = "<group>"; };
+		89E320AD143B42C600A6D54E /* ColorSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSlider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +226,8 @@
 				89DF848414390D0F00D5F444 /* ClickRow.m */,
 				89C9F56B143A4B6F00ED2E4A /* ColorPicker.h */,
 				89C9F56C143A4B6F00ED2E4A /* ColorPicker.m */,
+				89E320AC143B42C600A6D54E /* ColorSlider.h */,
+				89E320AD143B42C600A6D54E /* ColorSlider.m */,
 			);
 			path = "Ob Log";
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				895A66AE1439F68400AB14BC /* Course.m in Sources */,
 				89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */,
 				89C9F56D143A4B6F00ED2E4A /* ColorPicker.m in Sources */,
+				89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@
 @synthesize delegate;
 @synthesize header;
 @synthesize textField;
+@synthesize colorPicker;
 @synthesize cancelBtn;
 @synthesize submitBtn;
 
@@ -70,9 +71,13 @@
     [textField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
     [textField setPlaceholder:@"Class Name"];
     
+    colorPicker = [[ColorPicker alloc] init];
+    [colorPicker setDelegate:self];
+    colorPicker.center = CGPointMake(270, 250);
+    
     cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    cancelBtn.frame = CGRectMake(30, 
-                                 textField.frame.origin.y + textField.frame.size.height + 10, 
+    cancelBtn.frame = CGRectMake(colorPicker.frame.origin.x, 
+                                 colorPicker.frame.origin.y + colorPicker.frame.size.height + 10, 
                                  100, 
                                  40);
     [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
@@ -80,7 +85,7 @@
     
     submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     submitBtn.frame = CGRectMake(cancelBtn.frame.origin.x + cancelBtn.frame.size.width + 20, 
-                                 textField.frame.origin.y + textField.frame.size.height + 10, 
+                                 colorPicker.frame.origin.y + colorPicker.frame.size.height + 10, 
                                  100, 
                                  40);
     [submitBtn setTitle:@"Submit" forState:UIControlStateNormal];
@@ -91,9 +96,12 @@
     [self.view addSubview:cancelBtn];
     [self.view addSubview:submitBtn];
     [self.view addSubview:header];
-    
-    ColorPicker *colorPicker = [[ColorPicker alloc] initWithFrame:CGRectMake(100, 300, 400, 300)];
     [self.view addSubview:colorPicker];
+}
+
+- (void)didSelectRed:(float)red green:(float)green blue:(float)blue
+{
+    header.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:1];
 }
 
 - (void)viewDidUnload

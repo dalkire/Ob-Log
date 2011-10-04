@@ -11,11 +11,12 @@
 #import "Course.h"
 #import "ColorPicker.h"
 
-@interface AddClassViewController : UIViewController
+@interface AddClassViewController : UIViewController <ColorPickerDelegate>
 {
     id delegate;
     Header *header;
     UITextField *textField;
+    ColorPicker *colorPicker;
     UIButton *cancelBtn;
     UIButton *submitBtn;
 }
@@ -23,6 +24,7 @@
 @property (nonatomic, retain) id delegate;
 @property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) UITextField *textField;
+@property (nonatomic, retain) ColorPicker *colorPicker;
 @property (nonatomic, retain) UIButton *cancelBtn;
 @property (nonatomic, retain) UIButton *submitBtn;
 
