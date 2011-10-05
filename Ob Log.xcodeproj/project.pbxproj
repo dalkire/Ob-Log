@@ -25,6 +25,8 @@
 		8970EA55143CC24200C5AC69 /* AddStudentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA54143CC24200C5AC69 /* AddStudentViewController.m */; };
 		8970EA5E143CCAED00C5AC69 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA5D143CCAED00C5AC69 /* Student.m */; };
 		8970EA60143CD40900C5AC69 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8970EA5F143CD40800C5AC69 /* icon.png */; };
+		8970EA66143CE7C800C5AC69 /* CoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA65143CE7C800C5AC69 /* CoursesViewController.m */; };
+		8970EA69143CEEB200C5AC69 /* Toolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA68143CEEB100C5AC69 /* Toolbar.m */; };
 		897728DA1430212D00B6D985 /* NameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 897728D91430212D00B6D985 /* NameCell.m */; };
 		897B847B143BC6F50013D2CA /* ColorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 897B847A143BC6F50013D2CA /* ColorTag.m */; };
 		89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */; };
@@ -84,6 +86,10 @@
 		8970EA5C143CCAED00C5AC69 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
 		8970EA5D143CCAED00C5AC69 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 		8970EA5F143CD40800C5AC69 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		8970EA64143CE7C800C5AC69 /* CoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursesViewController.h; sourceTree = "<group>"; };
+		8970EA65143CE7C800C5AC69 /* CoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursesViewController.m; sourceTree = "<group>"; };
+		8970EA67143CEEB100C5AC69 /* Toolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toolbar.h; sourceTree = "<group>"; };
+		8970EA68143CEEB100C5AC69 /* Toolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toolbar.m; sourceTree = "<group>"; };
 		897728D81430212D00B6D985 /* NameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameCell.h; sourceTree = "<group>"; };
 		897728D91430212D00B6D985 /* NameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameCell.m; sourceTree = "<group>"; };
 		897B8479143BC6F50013D2CA /* ColorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTag.h; sourceTree = "<group>"; };
@@ -220,6 +226,8 @@
 		892C96A9142B67E000994EAB /* Ob Log */ = {
 			isa = PBXGroup;
 			children = (
+				8970EA67143CEEB100C5AC69 /* Toolbar.h */,
+				8970EA68143CEEB100C5AC69 /* Toolbar.m */,
 				89DF847A1438F66800D5F444 /* Header.h */,
 				89DF847B1438F66800D5F444 /* Header.m */,
 				892C96B2142B67E000994EAB /* AppDelegate.h */,
@@ -279,6 +287,8 @@
 				89DF847114389C0B00D5F444 /* NavigationController.m */,
 				89DF84771438F02400D5F444 /* HomeViewController.h */,
 				89DF84781438F02400D5F444 /* HomeViewController.m */,
+				8970EA64143CE7C800C5AC69 /* CoursesViewController.h */,
+				8970EA65143CE7C800C5AC69 /* CoursesViewController.m */,
 				89DF847D143904AD00D5F444 /* ClassesViewController.h */,
 				89DF847E143904AD00D5F444 /* ClassesViewController.m */,
 				89DF84741438ADB400D5F444 /* DailyEditViewController.h */,
@@ -396,6 +406,8 @@
 				8970EA52143CC10700C5AC69 /* ClassViewController.m in Sources */,
 				8970EA55143CC24200C5AC69 /* AddStudentViewController.m in Sources */,
 				8970EA5E143CCAED00C5AC69 /* Student.m in Sources */,
+				8970EA66143CE7C800C5AC69 /* CoursesViewController.m in Sources */,
+				8970EA69143CEEB200C5AC69 /* Toolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

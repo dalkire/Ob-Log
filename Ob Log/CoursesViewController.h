@@ -1,5 +1,5 @@
 //
-//  ClassViewController.h
+//  CoursesViewController.h
 //  Ob Log
 //
 //  Created by David Alkire on 10/5/11.
@@ -9,29 +9,29 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "Course.h"
-#import "AddStudentViewController.h"
+#import "AddClassViewController.h"
 #import "Header.h"
 #import "ClickRow.h"
 #import "ColorTag.h"
+#import "Toolbar.h"
 
-@interface ClassViewController : UIViewController <ClickRowDelegate, AddStudentDelegate>
+@interface CoursesViewController : UIViewController <ClickRowDelegate, AddCourseDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
-    NSUInteger nextStudentId;
+    NSUInteger nextCourseId;
     
     Header *header;
     UIScrollView *scrollView;
-    NSMutableArray *studentsArray;
+    NSMutableArray *coursesArray;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property NSUInteger nextStudentId;
+@property NSUInteger nextCourseId;
 
 @property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) NSMutableArray *studentsArray;
+@property (nonatomic, retain) NSMutableArray *coursesArray;
 
-- (id)initWithCourse:(Course *)course;
-- (void)addStudentModal;
+- (void)addCourseModal;
 
-@end 
+@end

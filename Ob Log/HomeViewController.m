@@ -25,16 +25,33 @@
         self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
         [super viewDidLoad];
         [self.header setMaintitleLabelText:@"Home"];
-        [self.view addSubview:self.header];
-        for (int i = 0; i < 15; i++) {
-            Row *coursesRow = [[Row alloc] initWithFrame:CGRectMake(0, 
-                                                                    self.header.frame.size.height + i*CELL_HEIGHT, 
+        
+        ClickRow *coursesRow = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
+                                                                    self.header.frame.size.height + 0, 
                                                                     self.view.frame.size.width, 
                                                                     CELL_HEIGHT)];
-            [self.view addSubview:coursesRow];
-        }
+        [coursesRow setMainLabelText:@"Courses"];
+        [self finishRow:coursesRow];
+        
+        [self.view addSubview:self.header];
     }
     return self;
+}
+
+- (void)finishRow:(ClickRow *)row
+{
+    row.marginLine.hidden = NO;
+    row.mainLabel.frame = CGRectMake(row.mainLabel.frame.origin.x + 300, 
+                                            row.mainLabel.frame.origin.y, 
+                                            row.mainLabel.frame.size.width - 300, 
+                                            row.mainLabel.frame.size.height);
+    [self.view addSubview:row];
+    [row setDelegate:self];
+}
+
+- (void)didTouchClickRow:(ClickRow *)clickRow
+{
+    NSLog(@"Did touch CLICK ROW");
 }
 
 - (void)didReceiveMemoryWarning

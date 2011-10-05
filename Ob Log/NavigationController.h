@@ -10,7 +10,7 @@
 #import "Theme.h"
 #import "HomeViewController.h"
 #import "ClassViewController.h"
-#import "ClassesViewController.h"
+#import "CoursesViewController.h"
 #import "DailyEditViewController.h"
 
 @interface NavigationController : UINavigationController
@@ -19,7 +19,7 @@
     
     HomeViewController *homeViewController;
     ClassViewController *classViewController;
-    ClassesViewController *classesViewController;
+    CoursesViewController *coursesViewController;
     DailyEditViewController *viewController;
 }
 
@@ -27,7 +27,7 @@
 
 @property (nonatomic, retain) HomeViewController *homeViewController;
 @property (nonatomic, retain) ClassViewController *classViewController;
-@property (nonatomic, retain) ClassesViewController *classesViewController;
+@property (nonatomic, retain) CoursesViewController *coursesViewController;
 @property (nonatomic, retain) DailyEditViewController *dailyEditViewController;
 
 - (void)loadInitialViewControllers;

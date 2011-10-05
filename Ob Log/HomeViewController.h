@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Theme.h"
 #import "Header.h"
-#import "Row.h"
+#import "ClickRow.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController <ClickRowDelegate>
 {
     Header *header;
 }
 
 @property (nonatomic, retain) Header *header;
+
+- (void)finishRow:(ClickRow *)row;
 
 @end

@@ -17,9 +17,9 @@
 @synthesize scrollView;
 @synthesize studentsArray;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCourse:(Course *)course
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
         self.studentsArray = [[NSMutableArray alloc] initWithCapacity:0];
         UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 

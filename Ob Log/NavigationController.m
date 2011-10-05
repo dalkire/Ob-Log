@@ -14,7 +14,7 @@
 
 @synthesize homeViewController;
 @synthesize classViewController;
-@synthesize classesViewController;
+@synthesize coursesViewController;
 @synthesize dailyEditViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,15 +26,25 @@
                                                     green:(float)0xEE/0xFF 
                                                      blue:(float)0xEE/0xFF 
                                                     alpha:1];
+        self.toolbarHidden = NO;
+        //self.navigationBarHidden = YES;
     }
     return self;
 }
 
 - (void)loadInitialViewControllers
 {
-    self.homeViewController = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
+    self.coursesViewController = [[CoursesViewController alloc] initWithNibName:nil bundle:nil];
+    if (self.managedObjectContext) {
+        self.coursesViewController.managedObjectContext = self.managedObjectContext;
+        [self.coursesViewController loadView];
+    }
+    else {
+        NSLog(@"managedObjectContext is NIL");
+    }
     
-    self.dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
+    [self pushViewController:self.coursesViewController animated:YES];
+    /*self.dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
     if (self.managedObjectContext) {
         self.dailyEditViewController.managedObjectContext = self.managedObjectContext;
         [self.dailyEditViewController loadView];
@@ -43,7 +53,7 @@
         NSLog(@"managedObjectContext is NIL");
     }
     [self pushViewController:self.homeViewController animated:NO];
-    [self pushViewController:self.dailyEditViewController animated:NO];
+    [self pushViewController:self.dailyEditViewController animated:NO];*/
 }
 
 - (void)didTouchDoneFromDailyEditViewController
@@ -59,9 +69,7 @@
     
     [self pushViewController:self.classesViewController animated:YES];*/
     
-    self.classViewController = [[ClassViewController alloc] 
-                                  initWithNibName:nil
-                                  bundle:nil];
+    self.classViewController = [[ClassViewController alloc] initWithCourse:nil];
     if (self.managedObjectContext)
         self.classViewController.managedObjectContext = self.managedObjectContext;
     else

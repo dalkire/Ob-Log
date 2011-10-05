@@ -46,19 +46,4 @@
     return self;
 }
 
-/*- (void)drawRect:(CGRect)rect
-{
-    CGContextRef context2 = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context2, 3.0);
-    CGContextSetStrokeColorWithColor(context2, [UIColor colorWithRed:(float)0xFF/0xFF 
-                                                              green:(float)0xA0/0xFF 
-                                                               blue:(float)0xC8/0xFF 
-                                                              alpha:1.0f].CGColor);
-    CGContextMoveToPoint(context2, 300, 0);
-    CGContextAddLineToPoint(context2, 300, self.frame.size.height);
-    CGContextStrokePath(context2);
-    
-    [super drawRect:rect];
-}*/
-
 @end
