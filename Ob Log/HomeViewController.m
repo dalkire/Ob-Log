@@ -22,8 +22,15 @@
                                                                0, 
                                                                self.view.frame.size.width, 
                                                                80)];
+        self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+        [super viewDidLoad];
         [self.header setMaintitleLabelText:@"Home"];
         [self.view addSubview:self.header];
+        Row *coursesRow = [[Row alloc] initWithFrame:CGRectMake(0, 
+                                                                self.header.frame.size.height, 
+                                                                self.view.frame.size.width, 
+                                                                CELL_HEIGHT)];
+        [self.view addSubview:coursesRow];
     }
     return self;
 }
@@ -45,13 +52,11 @@
 }
 */
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    
 }
-*/
 
 - (void)viewDidUnload
 {

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Theme.h"
 #import "Header.h"
+#import "Row.h"
 
 @interface HomeViewController : UIViewController
 {

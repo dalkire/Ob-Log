@@ -18,7 +18,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor colorWithRed:(float)0xBB/0xFF 
+                                               green:(float)0xBB/0xFF 
+                                                blue:(float)0xBB/0xFF 
+                                               alpha:1];
         
         leftShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                               0, 

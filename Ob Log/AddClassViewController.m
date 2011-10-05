@@ -98,9 +98,9 @@
     NSLog(@":%@:", self.textField.text);
     if (self.textField.text && ![self.textField.text isEqual:@""]) {
         [delegate addCourseWithName:self.textField.text 
-                             andRed:colorPicker.rSlider.value 
-                              green:colorPicker.gSlider.value 
-                               blue:colorPicker.bSlider.value];
+                             andRed:(float)colorPicker.rSlider.value/255
+                              green:(float)colorPicker.gSlider.value/255 
+                               blue:(float)colorPicker.bSlider.value/255];
         [self dismissModalViewControllerAnimated:YES];
         return;
     }

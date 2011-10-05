@@ -12,6 +12,7 @@
 #import "AddClassViewController.h"
 #import "Header.h"
 #import "ClickRow.h"
+#import "ColorTag.h"
 
 @interface ClassesViewController : UIViewController <ClickRowDelegate, AddCourseDelegate>
 {

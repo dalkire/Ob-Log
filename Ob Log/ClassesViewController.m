@@ -37,20 +37,6 @@
     return self;
 }
 
-- (void)didTouchClickRow:(ClickRow *)clickRow
-{
-    NSLog(@"Touched ClickRow: %@", clickRow);
-}
-
-- (void)addCourseModal
-{
-    AddClassViewController *addClassModal = [[AddClassViewController alloc] initWithNibName:nil bundle:nil];
-    [addClassModal setDelegate:self];
-    [addClassModal setModalPresentationStyle:UIModalPresentationFormSheet];
-    [addClassModal setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    [self presentModalViewController:addClassModal animated:YES];
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -113,16 +99,29 @@
                                                                 self.view.frame.size.height - 
                                                                 self.header.frame.size.height - 40)];
     scrollView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
-    NSLog(@"header.frame.size.height = %f", header.frame.size.height);
     
-    int min_cells = ceil((self.view.frame.size.height - header.frame.size.height)/CELL_HEIGHT);
-    //len = (min_cells > len ? min_cells : len);
     for (int i = 0; i < len; i++) {
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
                                                                    i*CELL_HEIGHT, 
                                                                    self.view.frame.size.width, 
                                                                    CELL_HEIGHT)];
         [row setMainLabelText:((Course *)[mutableFetchResults objectAtIndex:i]).name];
+        row.mainLabel.frame = CGRectMake(row.mainLabel.frame.origin.x + 60, 
+                                         row.mainLabel.frame.origin.y, 
+                                         row.mainLabel.frame.size.width - 60, 
+                                         row.mainLabel.frame.size.height);
+        float red   = [(NSNumber *)((Course *)[mutableFetchResults objectAtIndex:i]).colorR floatValue]/255;
+        float green = [(NSNumber *)((Course *)[mutableFetchResults objectAtIndex:i]).colorG floatValue]/255;
+        float blue  = [(NSNumber *)((Course *)[mutableFetchResults objectAtIndex:i]).colorB floatValue]/255;
+        ColorTag *colorTag = [[ColorTag alloc] initWithColor:[UIColor colorWithRed:red 
+                                                                             green:green 
+                                                                              blue:blue 
+                                                                             alpha:1]];
+        colorTag.frame = CGRectMake(20, 
+                                    (row.frame.size.height - colorTag.frame.size.height)/2, 
+                                    colorTag.frame.size.width, 
+                                    colorTag.frame.size.height);
+        [row addSubview:colorTag];
         [row setDelegate:self];
         [scrollView addSubview:row];
         NSLog(@"RGB: %@, %@, %@",   ((Course *)[mutableFetchResults objectAtIndex:i]).colorR,
@@ -136,16 +135,30 @@
     [self.view addSubview:header];
 }
 
-- (void)addCourseWithName:(NSString *)courseName andRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue
+- (void)didTouchClickRow:(ClickRow *)clickRow
+{
+    NSLog(@"Touched ClickRow: %@", clickRow);
+}
+
+- (void)addCourseModal
+{
+    AddClassViewController *addClassModal = [[AddClassViewController alloc] initWithNibName:nil bundle:nil];
+    [addClassModal setDelegate:self];
+    [addClassModal setModalPresentationStyle:UIModalPresentationFormSheet];
+    [addClassModal setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentModalViewController:addClassModal animated:YES];
+}
+
+- (void)addCourseWithName:(NSString *)courseName andRed:(float)red green:(float)green blue:(float)blue
 {
     Course *course = (Course *)[NSEntityDescription 
                               insertNewObjectForEntityForName:@"Course" 
                               inManagedObjectContext:managedObjectContext];
     [course setId:[NSNumber numberWithInt:self.nextCourseId]];
     [course setName:courseName];
-    [course setColorR:[NSNumber numberWithUnsignedInteger:red]];
-    [course setColorG:[NSNumber numberWithUnsignedInteger:green]];
-    [course setColorB:[NSNumber numberWithUnsignedInteger:blue]];
+    [course setColorR:[NSNumber numberWithInt:red*255]];
+    [course setColorG:[NSNumber numberWithInt:green*255]];
+    [course setColorB:[NSNumber numberWithInt:blue*255]];
     
     NSError *error = nil;
     if (![managedObjectContext save:&error]) {
@@ -156,6 +169,19 @@
                                                                self.view.frame.size.width, 
                                                                CELL_HEIGHT)];
     [row setMainLabelText:courseName];
+    row.mainLabel.frame = CGRectMake(row.mainLabel.frame.origin.x + 60, 
+                                     row.mainLabel.frame.origin.y, 
+                                     row.mainLabel.frame.size.width - 60, 
+                                     row.mainLabel.frame.size.height);
+    ColorTag *colorTag = [[ColorTag alloc] initWithColor:[UIColor colorWithRed:red 
+                                                                         green:green 
+                                                                          blue:blue 
+                                                                         alpha:1]];
+    colorTag.frame = CGRectMake(20, 
+                                (row.frame.size.height - colorTag.frame.size.height)/2, 
+                                colorTag.frame.size.width, 
+                                colorTag.frame.size.height);
+    [row addSubview:colorTag];
     [row setDelegate:self];
     [scrollView addSubview:row];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [self.coursesArray count]*CELL_HEIGHT);

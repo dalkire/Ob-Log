@@ -68,7 +68,7 @@
 - (void)loadView
 {
     [super loadView];
-    
+    self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
     
     /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -145,7 +145,7 @@
                                                                 self.dateHeader.frame.size.height - 40)];
     NSLog(@"-- %f", self.navigationController.navigationBar.frame.size.height);
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, CELL_HEIGHT*len);
-    scrollView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    scrollView.backgroundColor = [UIColor clearColor];
     
     for (int i = 0; i < len; i++) {
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 

@@ -21,6 +21,7 @@
 		895A66AE1439F68400AB14BC /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A66AD1439F68400AB14BC /* Course.m */; };
 		895B5D99142EB99A007D7B9C /* EditModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B5D98142EB99A007D7B9C /* EditModalViewController.m */; };
 		897728DA1430212D00B6D985 /* NameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 897728D91430212D00B6D985 /* NameCell.m */; };
+		897B847B143BC6F50013D2CA /* ColorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 897B847A143BC6F50013D2CA /* ColorTag.m */; };
 		89840DA4143630E4001C5E0C /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 89840DA3143630E4001C5E0C /* Item.m */; };
 		89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */; };
 		89C4B51F142B6C1000D035BA /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B510142B6C1000D035BA /* ActionButton.m */; };
@@ -72,6 +73,8 @@
 		895B5D98142EB99A007D7B9C /* EditModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditModalViewController.m; sourceTree = "<group>"; };
 		897728D81430212D00B6D985 /* NameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameCell.h; sourceTree = "<group>"; };
 		897728D91430212D00B6D985 /* NameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameCell.m; sourceTree = "<group>"; };
+		897B8479143BC6F50013D2CA /* ColorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTag.h; sourceTree = "<group>"; };
+		897B847A143BC6F50013D2CA /* ColorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTag.m; sourceTree = "<group>"; };
 		89840DA2143630E4001C5E0C /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		89840DA3143630E4001C5E0C /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		89C15DEA142C86CF001C125C /* PickerOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerOptionsViewController.h; sourceTree = "<group>"; };
@@ -228,6 +231,8 @@
 				89C9F56C143A4B6F00ED2E4A /* ColorPicker.m */,
 				89E320AC143B42C600A6D54E /* ColorSlider.h */,
 				89E320AD143B42C600A6D54E /* ColorSlider.m */,
+				897B8479143BC6F50013D2CA /* ColorTag.h */,
+				897B847A143BC6F50013D2CA /* ColorTag.m */,
 			);
 			path = "Ob Log";
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 				89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */,
 				89C9F56D143A4B6F00ED2E4A /* ColorPicker.m in Sources */,
 				89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */,
+				897B847B143BC6F50013D2CA /* ColorTag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
