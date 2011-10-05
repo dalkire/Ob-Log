@@ -13,6 +13,7 @@
 @synthesize managedObjectContext;
 
 @synthesize homeViewController;
+@synthesize classViewController;
 @synthesize classesViewController;
 @synthesize dailyEditViewController;
 
@@ -25,19 +26,29 @@
                                                     green:(float)0xEE/0xFF 
                                                      blue:(float)0xEE/0xFF 
                                                     alpha:1];
-        self.homeViewController = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
-        
-        self.dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
-        
-        [self pushViewController:self.homeViewController animated:NO];
-        [self pushViewController:self.dailyEditViewController animated:NO];
     }
     return self;
 }
 
+- (void)loadInitialViewControllers
+{
+    self.homeViewController = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
+    
+    self.dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
+    if (self.managedObjectContext) {
+        self.dailyEditViewController.managedObjectContext = self.managedObjectContext;
+        [self.dailyEditViewController loadView];
+    }
+    else {
+        NSLog(@"managedObjectContext is NIL");
+    }
+    [self pushViewController:self.homeViewController animated:NO];
+    [self pushViewController:self.dailyEditViewController animated:NO];
+}
+
 - (void)didTouchDoneFromDailyEditViewController
 {
-    self.classesViewController = [[ClassesViewController alloc] 
+    /*self.classesViewController = [[ClassesViewController alloc] 
                                   initWithNibName:nil
                                   bundle:nil];
     if (self.managedObjectContext)
@@ -46,7 +57,18 @@
         NSLog(@"managedObjectContext is NIL");
     
     
-    [self pushViewController:self.classesViewController animated:YES];
+    [self pushViewController:self.classesViewController animated:YES];*/
+    
+    self.classViewController = [[ClassViewController alloc] 
+                                  initWithNibName:nil
+                                  bundle:nil];
+    if (self.managedObjectContext)
+        self.classViewController.managedObjectContext = self.managedObjectContext;
+    else
+        NSLog(@"managedObjectContext is NIL");
+    
+    
+    [self pushViewController:self.classViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

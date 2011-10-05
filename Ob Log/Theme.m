@@ -69,14 +69,14 @@
     const float *colorComponents = CGColorGetComponents(color.CGColor);
     float colorAverage = (colorComponents[0]*255 + colorComponents[1]*255 + colorComponents[2]*255)/3;
     if (colorAverage > 150) {
-        return [UIColor colorWithRed:(float)0x00/0xFF 
-                               green:(float)0x00/0xFF 
-                                blue:(float)0x00/0xFF 
+        return [UIColor colorWithRed:(float)0x33/0xFF 
+                               green:(float)0x33/0xFF 
+                                blue:(float)0x33/0xFF 
                                alpha:1];
     }
-    return [UIColor colorWithRed:(float)0xFF/0xFF 
-                           green:(float)0xFF/0xFF 
-                            blue:(float)0xFF/0xFF 
+    return [UIColor colorWithRed:(float)0xEE/0xFF 
+                           green:(float)0xEE/0xFF 
+                            blue:(float)0xEE/0xFF 
                            alpha:1];
 }
 

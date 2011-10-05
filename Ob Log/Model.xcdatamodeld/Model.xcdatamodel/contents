@@ -7,7 +7,7 @@
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Entry" representedClassName="Item" syncable="YES">
+    <entity name="Entry" representedClassName="Entry" syncable="YES">
         <attribute name="course_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -28,16 +28,17 @@
         <attribute name="header_text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="Student" syncable="YES">
+    <entity name="Student" representedClassName="Student" syncable="YES">
+        <attribute name="first_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="last_name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Course" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="Entry" positionX="45" positionY="-81" width="128" height="120"/>
         <element name="Option" positionX="178" positionY="162" width="128" height="90"/>
-        <element name="OptionHeader" positionX="-20" positionY="36" width="128" height="75"/>
-        <element name="Student" positionX="160" positionY="192" width="128" height="75"/>
         <element name="OptionEntry" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="OptionHeader" positionX="-20" positionY="36" width="128" height="75"/>
+        <element name="Entry" positionX="45" positionY="-81" width="128" height="120"/>
+        <element name="Student" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

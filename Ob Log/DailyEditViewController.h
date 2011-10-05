@@ -15,10 +15,11 @@
 #import "EditModalViewController.h"
 #import "OptionPicker.h"
 #import "OptionsPopoverTableViewController.h"
+#import "Entry.h"
 
 @interface DailyEditViewController : UIViewController <OptionPickerDelegate, OptionsPopoverTVCDelegate>
 {
-    NSMutableArray *items;
+    NSMutableArray *entryArray;
     NSManagedObjectContext *managedObjectContext;
     
     UIPopoverController *optionsPopoverController;
@@ -31,7 +32,7 @@
     OptionPicker *activePicker;
 }
 
-@property (nonatomic, retain) NSMutableArray *items;
+@property (nonatomic, retain) NSMutableArray *entryArray;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 @property (nonatomic, retain) UIPopoverController *optionsPopoverController;
@@ -43,6 +44,7 @@
 @property (nonatomic, retain) EditModalViewController *editModal;
 @property (nonatomic, retain) OptionPicker *activePicker;
 
+- (void)queryEntries;
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;
 - (void)showOptionsForPicker:(OptionPicker *)picker;
 

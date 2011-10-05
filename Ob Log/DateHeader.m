@@ -7,7 +7,6 @@
 //
 
 #import "DateHeader.h"
-#import "Item.h"
 
 @implementation DateHeader
 

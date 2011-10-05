@@ -39,6 +39,7 @@
         NSLog(@"NO MANAGED OBJECT CONTEXT AVAILABLE IN AppDelegate");
     }
     self.navigationController.managedObjectContext = context;
+    [self.navigationController loadInitialViewControllers];
     
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];

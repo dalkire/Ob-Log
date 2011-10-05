@@ -1,19 +1,19 @@
 //
-//  AddClassViewController.m
+//  AddStudentViewController.m
 //  Ob Log
 //
-//  Created by David Alkire on 10/2/11.
+//  Created by David Alkire on 10/5/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
-#import "AddClassViewController.h"
+#import "AddStudentViewController.h"
 
-@implementation AddClassViewController
+@implementation AddStudentViewController
 
 @synthesize delegate;
 @synthesize header;
-@synthesize textField;
-@synthesize colorPicker;
+@synthesize firstNameTextField;
+@synthesize lastNameTextField;
 @synthesize cancelBtn;
 @synthesize submitBtn;
 
@@ -36,11 +36,11 @@
 #pragma mark - View lifecycle
 
 /*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
+ // Implement loadView to create a view hierarchy programmatically, without using a nib.
+ - (void)loadView
+ {
+ }
+ */
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -50,23 +50,29 @@
                                                       0, 
                                                       540, 
                                                       80)];
-    [header setMaintitleLabelText:@"Add Course"];
+    [header setMaintitleLabelText:@"Add Student"];
     
-    textField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
-                                                              header.frame.size.height + 30, 
-                                                              480, 
-                                                              40)];
-    [textField setBorderStyle:UITextBorderStyleRoundedRect];
-    [textField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
-    [textField setPlaceholder:@"Course title"];
+    firstNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
+                                                                       header.frame.size.height + 30, 
+                                                                       480, 
+                                                                       40)];
+    lastNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
+                                                                      firstNameTextField.frame.origin.y + 
+                                                                      firstNameTextField.frame.size.height + 10, 
+                                                                      480, 
+                                                                      40)];
+    [firstNameTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [firstNameTextField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
+    [firstNameTextField setPlaceholder:@"First name"];
     
-    colorPicker = [[ColorPicker alloc] init];
-    [colorPicker setDelegate:self];
-    colorPicker.center = CGPointMake(270, 250);
+    [lastNameTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [lastNameTextField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
+    [lastNameTextField setPlaceholder:@"Last name"];
     
     cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    cancelBtn.frame = CGRectMake(colorPicker.frame.origin.x, 
-                                 colorPicker.frame.origin.y + colorPicker.frame.size.height + 10, 
+    cancelBtn.frame = CGRectMake(lastNameTextField.frame.origin.x, 
+                                 lastNameTextField.frame.origin.y + 
+                                 lastNameTextField.frame.size.height + 30, 
                                  100, 
                                  40);
     [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
@@ -74,18 +80,18 @@
     
     submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     submitBtn.frame = CGRectMake(cancelBtn.frame.origin.x + cancelBtn.frame.size.width + 20, 
-                                 colorPicker.frame.origin.y + colorPicker.frame.size.height + 10, 
+                                 cancelBtn.frame.origin.y, 
                                  100, 
                                  40);
     [submitBtn setTitle:@"Submit" forState:UIControlStateNormal];
     [submitBtn addTarget:self action:@selector(touchedSubmit) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.view addSubview:textField];
+    [self.view addSubview:firstNameTextField];
+    [self.view addSubview:lastNameTextField];
     [self.view addSubview:cancelBtn];
     [self.view addSubview:submitBtn];
     [self.view addSubview:header];
-    [self.view addSubview:colorPicker];
 }
 
 - (void)touchedCancel
@@ -95,26 +101,18 @@
 
 - (void)touchedSubmit
 {
-    if (self.textField.text && ![self.textField.text isEqual:@""]) {
-        [delegate addCourseWithName:self.textField.text 
-                             andRed:(float)colorPicker.rSlider.value/255
-                              green:(float)colorPicker.gSlider.value/255 
-                               blue:(float)colorPicker.bSlider.value/255];
+    if (self.firstNameTextField.text && ![self.firstNameTextField.text isEqual:@""] && 
+        self.lastNameTextField.text && ![self.lastNameTextField.text isEqual:@""]) {
+        [delegate addStudentWithFirstName:self.firstNameTextField.text lastName:self.lastNameTextField.text];
         [self dismissModalViewControllerAnimated:YES];
         return;
     }
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" 
-                                                        message:@"Course title may not be empty" 
+                                                        message:@"First and last names may not be empty" 
                                                        delegate:self 
                                               cancelButtonTitle:@"OK" 
                                               otherButtonTitles:nil, nil];
     [alertView show];
-}
-
-- (void)didSelectRed:(float)red green:(float)green blue:(float)blue
-{
-    header.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:1];
-    header.maintitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
 }
 
 - (void)viewDidUnload

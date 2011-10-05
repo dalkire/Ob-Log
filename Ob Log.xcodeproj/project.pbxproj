@@ -20,9 +20,13 @@
 		89417F891430BDBA002EABBA /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 89417F881430BDBA002EABBA /* Theme.m */; };
 		895A66AE1439F68400AB14BC /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A66AD1439F68400AB14BC /* Course.m */; };
 		895B5D99142EB99A007D7B9C /* EditModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B5D98142EB99A007D7B9C /* EditModalViewController.m */; };
+		8970EA4E143CA87500C5AC69 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA4D143CA87500C5AC69 /* Entry.m */; };
+		8970EA52143CC10700C5AC69 /* ClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA51143CC10700C5AC69 /* ClassViewController.m */; };
+		8970EA55143CC24200C5AC69 /* AddStudentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA54143CC24200C5AC69 /* AddStudentViewController.m */; };
+		8970EA5E143CCAED00C5AC69 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA5D143CCAED00C5AC69 /* Student.m */; };
+		8970EA60143CD40900C5AC69 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8970EA5F143CD40800C5AC69 /* icon.png */; };
 		897728DA1430212D00B6D985 /* NameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 897728D91430212D00B6D985 /* NameCell.m */; };
 		897B847B143BC6F50013D2CA /* ColorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 897B847A143BC6F50013D2CA /* ColorTag.m */; };
-		89840DA4143630E4001C5E0C /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 89840DA3143630E4001C5E0C /* Item.m */; };
 		89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */; };
 		89C4B51F142B6C1000D035BA /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B510142B6C1000D035BA /* ActionButton.m */; };
 		89C4B520142B6C1000D035BA /* ActionsSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B512142B6C1000D035BA /* ActionsSlider.m */; };
@@ -71,12 +75,19 @@
 		895A66AD1439F68400AB14BC /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		895B5D97142EB99A007D7B9C /* EditModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditModalViewController.h; sourceTree = "<group>"; };
 		895B5D98142EB99A007D7B9C /* EditModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditModalViewController.m; sourceTree = "<group>"; };
+		8970EA4C143CA87500C5AC69 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
+		8970EA4D143CA87500C5AC69 /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entry.m; sourceTree = "<group>"; };
+		8970EA50143CC10700C5AC69 /* ClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassViewController.h; sourceTree = "<group>"; };
+		8970EA51143CC10700C5AC69 /* ClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassViewController.m; sourceTree = "<group>"; };
+		8970EA53143CC24200C5AC69 /* AddStudentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddStudentViewController.h; sourceTree = "<group>"; };
+		8970EA54143CC24200C5AC69 /* AddStudentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddStudentViewController.m; sourceTree = "<group>"; };
+		8970EA5C143CCAED00C5AC69 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		8970EA5D143CCAED00C5AC69 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		8970EA5F143CD40800C5AC69 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		897728D81430212D00B6D985 /* NameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameCell.h; sourceTree = "<group>"; };
 		897728D91430212D00B6D985 /* NameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameCell.m; sourceTree = "<group>"; };
 		897B8479143BC6F50013D2CA /* ColorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTag.h; sourceTree = "<group>"; };
 		897B847A143BC6F50013D2CA /* ColorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTag.m; sourceTree = "<group>"; };
-		89840DA2143630E4001C5E0C /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
-		89840DA3143630E4001C5E0C /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		89C15DEA142C86CF001C125C /* PickerOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerOptionsViewController.h; sourceTree = "<group>"; };
 		89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerOptionsViewController.m; sourceTree = "<group>"; };
 		89C4B50F142B6C1000D035BA /* ActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionButton.h; sourceTree = "<group>"; };
@@ -220,11 +231,7 @@
 				89C4B51D142B6C1000D035BA /* slideInBtn.png */,
 				89C4B51E142B6C1000D035BA /* slideOutBtn.png */,
 				892C96AA142B67E000994EAB /* Supporting Files */,
-				891AB1D8142F926400D0171B /* Model.xcdatamodeld */,
-				89840DA2143630E4001C5E0C /* Item.h */,
-				89840DA3143630E4001C5E0C /* Item.m */,
-				895A66AC1439F68400AB14BC /* Course.h */,
-				895A66AD1439F68400AB14BC /* Course.m */,
+				8970EA4F143CA88D00C5AC69 /* Core Data */,
 				89DF848314390D0D00D5F444 /* ClickRow.h */,
 				89DF848414390D0F00D5F444 /* ClickRow.m */,
 				89C9F56B143A4B6F00ED2E4A /* ColorPicker.h */,
@@ -240,6 +247,7 @@
 		892C96AA142B67E000994EAB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8970EA5F143CD40800C5AC69 /* icon.png */,
 				89417F871430BDBA002EABBA /* Theme.h */,
 				89417F881430BDBA002EABBA /* Theme.m */,
 				892C96AB142B67E000994EAB /* Ob Log-Info.plist */,
@@ -248,6 +256,20 @@
 				892C96B1142B67E000994EAB /* Ob Log-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8970EA4F143CA88D00C5AC69 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				891AB1D8142F926400D0171B /* Model.xcdatamodeld */,
+				8970EA5C143CCAED00C5AC69 /* Student.h */,
+				8970EA5D143CCAED00C5AC69 /* Student.m */,
+				8970EA4C143CA87500C5AC69 /* Entry.h */,
+				8970EA4D143CA87500C5AC69 /* Entry.m */,
+				895A66AC1439F68400AB14BC /* Course.h */,
+				895A66AD1439F68400AB14BC /* Course.m */,
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 		89DF84731438A09D00D5F444 /* View Controllers */ = {
@@ -267,6 +289,10 @@
 				89DF848714393EBF00D5F444 /* AddClassViewController.m */,
 				89C9F564143A205F00ED2E4A /* OptionsPopoverTableViewController.h */,
 				89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */,
+				8970EA50143CC10700C5AC69 /* ClassViewController.h */,
+				8970EA51143CC10700C5AC69 /* ClassViewController.m */,
+				8970EA53143CC24200C5AC69 /* AddStudentViewController.h */,
+				8970EA54143CC24200C5AC69 /* AddStudentViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -325,6 +351,7 @@
 				892C96AE142B67E000994EAB /* InfoPlist.strings in Resources */,
 				89C4B527142B6C1000D035BA /* slideInBtn.png in Resources */,
 				89C4B528142B6C1000D035BA /* slideOutBtn.png in Resources */,
+				8970EA60143CD40900C5AC69 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +380,6 @@
 				89417F891430BDBA002EABBA /* Theme.m in Sources */,
 				89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */,
 				89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */,
-				89840DA4143630E4001C5E0C /* Item.m in Sources */,
 				89DF847214389C0B00D5F444 /* NavigationController.m in Sources */,
 				89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */,
 				89DF84791438F02400D5F444 /* HomeViewController.m in Sources */,
@@ -366,6 +392,10 @@
 				89C9F56D143A4B6F00ED2E4A /* ColorPicker.m in Sources */,
 				89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */,
 				897B847B143BC6F50013D2CA /* ColorTag.m in Sources */,
+				8970EA4E143CA87500C5AC69 /* Entry.m in Sources */,
+				8970EA52143CC10700C5AC69 /* ClassViewController.m in Sources */,
+				8970EA55143CC24200C5AC69 /* AddStudentViewController.m in Sources */,
+				8970EA5E143CCAED00C5AC69 /* Student.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

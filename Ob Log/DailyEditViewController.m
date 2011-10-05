@@ -15,11 +15,10 @@
 #import "AppDelegate.h"
 #import "NavigationController.h"
 #import "DailyEditViewController.h"
-#import "Item.h"
 
 @implementation DailyEditViewController
 
-@synthesize items;
+@synthesize entryArray;
 @synthesize managedObjectContext;
 
 @synthesize optionsPopoverController;
@@ -35,6 +34,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.entryArray = [[NSMutableArray alloc] initWithCapacity:0];
         UIBarButtonItem *done =[[UIBarButtonItem alloc] 
                                       initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                       target:self 
@@ -42,8 +42,6 @@
         [done setStyle:UIBarButtonItemStyleBordered];
         [self.navigationItem setRightBarButtonItem:done];
         [self.navigationItem setTitle:@"Class Title"];
-        
-        [self loadView];
     }
     return self;
 }
@@ -68,18 +66,9 @@
 - (void)loadView
 {
     [super loadView];
+    [self queryEntries];
+    
     self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
-    
-    
-    /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
-    [request setEntity:entity];
-    
-    NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResults == nil) {
-        NSLog(@"fetchResults error");
-    }*/
     
     dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
     dateHeader.dateTitle.textColor = dateHeader.sectionSubtitle.textColor = [Theme getTextColorForColor:dateHeader.backgroundColor];
@@ -169,6 +158,26 @@
     
     [self.view insertSubview:dateHeader atIndex:[[self.view subviews] count]];
     [self.view addSubview:dateHeaderDropShadow];
+}
+
+- (void)queryEntries
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    if (managedObjectContext == nil) {
+        NSLog(@"NO CONTEXT");
+    }
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Entry" inManagedObjectContext:managedObjectContext];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        NSLog(@"fetchResults error");
+    }
+    else {
+        NSLog(@"fetchResults Success");
+        self.entryArray = mutableFetchResults;
+    }
 }
 
 - (void)didSelectOptionPicker:(OptionPicker *)picker
