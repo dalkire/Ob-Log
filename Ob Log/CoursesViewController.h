@@ -14,6 +14,8 @@
 #import "ClickRow.h"
 #import "ColorTag.h"
 #import "Toolbar.h"
+#import "DailyEditViewController.h"
+#import "AddStudentViewController.h"
 
 @interface CoursesViewController : UIViewController <ClickRowDelegate, AddCourseDelegate>
 {
@@ -21,6 +23,8 @@
     NSUInteger nextCourseId;
     
     UIToolbar *toolbar;
+    UISegmentedControl *segmentedControl;
+    NSUInteger activeSegment;
     Header *header;
     UIScrollView *scrollView;
     NSMutableArray *coursesArray;
@@ -30,10 +34,13 @@
 @property NSUInteger nextCourseId;
 
 @property (nonatomic, retain) UIToolbar *toolbar;
+@property (nonatomic, retain) UISegmentedControl *segmentedControl;
+@property NSUInteger activeSegment;
 @property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) NSMutableArray *coursesArray;
 
+- (void)didTouchSegmentedControl;
 - (void)addCourseModal;
 
 @end

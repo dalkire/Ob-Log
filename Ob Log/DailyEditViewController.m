@@ -70,7 +70,7 @@
     
     self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
-    dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
+    dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 90)];
     dateHeader.dateTitle.textColor = dateHeader.sectionSubtitle.textColor = [Theme getTextColorForColor:dateHeader.backgroundColor];
     dateHeaderDropShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                                     dateHeader.frame.origin.y + dateHeader.frame.size.height, 
@@ -81,8 +81,7 @@
     [dateHeader setDelegate:self];
     
     CAGradientLayer *headerDrop = [CAGradientLayer layer];
-    headerDrop.frame = CGRectMake(
-                                  0, 
+    headerDrop.frame = CGRectMake(0, 
                                   0, 
                                   dateHeaderDropShadow.frame.size.width, 
                                   dateHeaderDropShadow.frame.size.height);
@@ -128,7 +127,7 @@
 	
     int len = [array count];
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,  
-                                                                self.dateHeader.frame.size.height, 
+                                                                self.dateHeader.frame.origin.y + self.dateHeader.frame.size.height, 
                                                                 self.view.frame.size.width, 
                                                                 self.view.frame.size.height - 
                                                                 self.dateHeader.frame.size.height - 40)];
@@ -162,7 +161,7 @@
 
 - (void)queryEntries
 {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
     if (managedObjectContext == nil) {
         NSLog(@"NO CONTEXT");
     }
@@ -177,7 +176,7 @@
     else {
         NSLog(@"fetchResults Success");
         self.entryArray = mutableFetchResults;
-    }
+    }*/
 }
 
 - (void)didSelectOptionPicker:(OptionPicker *)picker

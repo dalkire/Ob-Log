@@ -6,6 +6,10 @@
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
+#define SEGMENT_LIST    0
+#define SEGMENT_TODAY   1
+#define SEGMENT_HISTORY 2
+
 #import "CoursesViewController.h"
 
 @implementation CoursesViewController
@@ -14,44 +18,90 @@
 @synthesize nextCourseId;
 
 @synthesize toolbar;
+@synthesize segmentedControl;
+@synthesize activeSegment;
 @synthesize header;
 @synthesize scrollView;
 @synthesize coursesArray;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.coursesArray = [[NSMutableArray alloc] initWithCapacity:0];
-        
+        self.view.backgroundColor = [UIColor orangeColor];
         toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
                                                               0, 
                                                               self.view.frame.size.width, 
                                                               50)];
-        [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+        [toolbar setBarStyle:UIBarStyleDefault];
         toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
         
-        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] 
-                                                initWithItems:[NSArray arrayWithObjects:@"List", @"History", nil]];
+        segmentedControl = [[UISegmentedControl alloc] 
+                            initWithItems:[NSArray arrayWithObjects:@"List", @"Today", @"History", nil]];
         segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
         segmentedControl.tintColor = [Theme getThemeColor];
+        [segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
+        [self setActiveSegment:SEGMENT_LIST];
+        [segmentedControl addTarget:self
+                             action:@selector(didTouchSegmentedControl)
+                   forControlEvents:UIControlEventValueChanged];
         
         UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
         
         UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
                                    initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                    target:self 
-                                   action:@selector(addCourseModal)];
-        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleBordered target:self action:nil];
-        UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:@"Courses" style:UIBarButtonItemStylePlain target:self action:nil];
+                                   action:@selector(flipMe)];
+        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
+                                                                  style:UIBarButtonItemStyleBordered 
+                                                                 target:self 
+                                                                 action:@selector(addCourseModal)];
+        UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:@"Courses" 
+                                                                     style:UIBarButtonItemStylePlain 
+                                                                    target:self 
+                                                                    action:nil];
         UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        [toolbar setItems:[NSArray arrayWithObjects:flex, titleBtn, flex, segmentedButtons, editBtn, addBtn, nil]];
+        [toolbar setItems:[NSArray arrayWithObjects:flex, flex, flex, titleBtn, flex, segmentedButtons, editBtn, addBtn, nil]];
+        [self.view addSubview:self.toolbar];
         
-        //[toolbar addButtons:[NSArray arrayWithObjects:editBtn, addBtn, nil]];
-        //[toolbar addSubview:editBtn];
-        [self.navigationItem setRightBarButtonItem:addBtn];
+        self.coursesArray = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
+}
+
+- (void)didTouchSegmentedControl
+{
+    NSLog(@"touched seg control");
+    switch ([self.segmentedControl selectedSegmentIndex]) {
+        case SEGMENT_LIST:
+            if (SEGMENT_LIST != activeSegment) {
+                NSLog(@"touched segment list");
+                [self setActiveSegment:SEGMENT_LIST];
+                [segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
+            }
+            break;
+        case SEGMENT_TODAY:
+            if (SEGMENT_TODAY != activeSegment) {
+                NSLog(@"touched segment today");
+                [self setActiveSegment:SEGMENT_TODAY];
+                [segmentedControl setSelectedSegmentIndex:SEGMENT_TODAY];
+            }
+        case SEGMENT_HISTORY:
+            if (SEGMENT_HISTORY != activeSegment) {
+                NSLog(@"touched segment history");
+                [self setActiveSegment:SEGMENT_HISTORY];
+                [segmentedControl setSelectedSegmentIndex:SEGMENT_HISTORY];
+            }
+            
+        default:
+            break;
+    }
+}
+
+- (void)didTouchEdit
+{
+    NSLog(@"DID TOUCH EDIT");
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,10 +142,7 @@
     }*/
     self.nextCourseId++;
     
-    self.view.backgroundColor = [UIColor colorWithRed:(float)0xEE/0XFF 
-                                                green:(float)0xEE/0XFF 
-                                                 blue:(float)0xEE/0XFF 
-                                                alpha:1];
+    [self.view setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
     
     header = [[Header alloc] initWithFrame:CGRectMake(0, 
                                                       70, 
@@ -109,7 +156,7 @@
                                                                 self.view.frame.size.width, 
                                                                 self.view.frame.size.height - 
                                                                 self.toolbar.frame.size.height)];
-    scrollView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    scrollView.backgroundColor = [UIColor clearColor];
     
     /*for (int i = 0; i < len; i++) {
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
@@ -142,7 +189,7 @@
     
     //scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
     
-    [self.view addSubview:scrollView];
+//    [self.view addSubview:scrollView];
     //[self.view addSubview:header];
     [self.view addSubview:toolbar];
 }

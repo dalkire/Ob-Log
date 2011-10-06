@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class NavigationController;
+@class RootViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (strong, nonatomic) RootViewController *myRootViewController;
 @property (strong, nonatomic) NavigationController *navigationController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;

@@ -10,6 +10,7 @@
 
 #import "NavigationController.h"
 #import "DailyEditViewController.h"
+#import "RootViewController.h"
 
 @implementation AppDelegate
 
@@ -18,11 +19,13 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
 @synthesize window = _window;
+@synthesize myRootViewController = _myRootViewController;
 @synthesize navigationController = _navigationController;
 
 - (void)dealloc
 {
     [_window release];
+    [_myRootViewController release];
     [_navigationController release];
     [super dealloc];
 }
@@ -32,6 +35,7 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.navigationController = [[NavigationController alloc] initWithNibName:nil bundle:nil];
+    self.myRootViewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
     
     NSManagedObjectContext *context = [self managedObjectContext];
     if (!context) {
@@ -41,7 +45,7 @@
     self.navigationController.managedObjectContext = context;
     [self.navigationController loadInitialViewControllers];
     
-    self.window.rootViewController = self.navigationController;
+    self.window.rootViewController = self.myRootViewController;
     [self.window makeKeyAndVisible];
     return YES;
 }

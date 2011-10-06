@@ -22,7 +22,7 @@
         self.backgroundColor = [Theme getThemeColor];
         
         CAGradientLayer *gradient = [CAGradientLayer layer];
-        [gradient setFrame:frame];
+        [gradient setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [gradient setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0xCC/0xFF 
                                                                           green:(float)0xCC/0xFF 
                                                                            blue:(float)0xCC/0xFF 
