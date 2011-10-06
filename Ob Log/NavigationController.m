@@ -27,7 +27,7 @@
                                                      blue:(float)0xEE/0xFF 
                                                     alpha:1];
         self.toolbarHidden = YES;
-        //self.navigationBarHidden = YES;
+        self.navigationBarHidden = YES;
     }
     return self;
 }

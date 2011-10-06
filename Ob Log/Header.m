@@ -21,7 +21,10 @@
         self.backgroundColor = [Theme getThemeColor];
         
         CAGradientLayer *gradient = [CAGradientLayer layer];
-        [gradient setFrame:frame];
+        gradient.frame = CGRectMake(0, 
+                                    0, 
+                                    self.frame.size.width, 
+                                    self.frame.size.height);
         [gradient setColors:[NSArray arrayWithObjects:(id)[UIColor colorWithRed:(float)0xCC/0xFF 
                                                                           green:(float)0xCC/0xFF 
                                                                            blue:(float)0xCC/0xFF 
@@ -36,7 +39,7 @@
         [[self layer] addSublayer:gradient];
         
         dropShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
-                                                              self.frame.origin.y + self.frame.size.height, 
+                                                              self.frame.size.height, 
                                                               self.frame.size.width, 
                                                               8)];
         

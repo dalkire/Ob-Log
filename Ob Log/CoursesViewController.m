@@ -13,6 +13,7 @@
 @synthesize managedObjectContext;
 @synthesize nextCourseId;
 
+@synthesize toolbar;
 @synthesize header;
 @synthesize scrollView;
 @synthesize coursesArray;
@@ -23,23 +24,28 @@
     if (self) {
         self.coursesArray = [[NSMutableArray alloc] initWithCapacity:0];
         
-        Toolbar *toolbar = [[Toolbar alloc] initWithFrame:CGRectMake(0, 
-                                                                     0, 
-                                                                     100, 
-                                                                     40)];
-        //toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
+        toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
+                                                              0, 
+                                                              self.view.frame.size.width, 
+                                                              50)];
+        [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+        toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
+        
+        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] 
+                                                initWithItems:[NSArray arrayWithObjects:@"List", @"History", nil]];
+        segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+        segmentedControl.tintColor = [Theme getThemeColor];
+        
+        UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
         
         UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
                                    initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                    target:self 
                                    action:@selector(addCourseModal)];
-        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] 
-                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
-                                  target:self 
-                                  action:@selector(addCourseModal)];
-        [self setToolbarItems:[NSArray arrayWithObjects:editBtn, addBtn, nil]];
-        [self.navigationController setToolbarHidden:NO animated:YES];
-        self.navigationController.toolbar.hidden = NO;
+        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleBordered target:self action:nil];
+        UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:@"Courses" style:UIBarButtonItemStylePlain target:self action:nil];
+        UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        [toolbar setItems:[NSArray arrayWithObjects:flex, titleBtn, flex, segmentedButtons, editBtn, addBtn, nil]];
         
         //[toolbar addButtons:[NSArray arrayWithObjects:editBtn, addBtn, nil]];
         //[toolbar addSubview:editBtn];
@@ -62,7 +68,7 @@
 - (void)loadView
 {
     [super loadView];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:managedObjectContext];
     [request setEntity:entity];
     
@@ -73,17 +79,17 @@
     }
     else {
         NSLog(@"fetchResults Success..");
-    }
+    }*/
     
     self.nextCourseId = 0;
-    int len = [mutableFetchResults count];
+    /*int len = [mutableFetchResults count];
     for (int i = 0; i < len; i++) {
         if ((NSUInteger)((Course *)[mutableFetchResults objectAtIndex:i]).id > self.nextCourseId) {
             self.nextCourseId = (NSUInteger)((Course *)[mutableFetchResults objectAtIndex:i]).id;
         }
         NSLog(@"%@", ((Course *)[mutableFetchResults objectAtIndex:i]).name);
         [self.coursesArray addObject:(Course *)[mutableFetchResults objectAtIndex:i]];
-    }
+    }*/
     self.nextCourseId++;
     
     self.view.backgroundColor = [UIColor colorWithRed:(float)0xEE/0XFF 
@@ -92,20 +98,20 @@
                                                 alpha:1];
     
     header = [[Header alloc] initWithFrame:CGRectMake(0, 
-                                                      0, 
+                                                      70, 
                                                       self.view.frame.size.width, 
                                                       80)];
     [header setMaintitleLabelText:@"Courses"];
     header.maintitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                self.header.frame.size.height, 
+                                                                self.toolbar.frame.size.height, 
                                                                 self.view.frame.size.width, 
                                                                 self.view.frame.size.height - 
-                                                                self.header.frame.size.height - 40)];
+                                                                self.toolbar.frame.size.height)];
     scrollView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
-    for (int i = 0; i < len; i++) {
+    /*for (int i = 0; i < len; i++) {
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
                                                                    i*CELL_HEIGHT, 
                                                                    self.view.frame.size.width, 
@@ -132,12 +138,13 @@
         NSLog(@"RGB: %@, %@, %@",   ((Course *)[mutableFetchResults objectAtIndex:i]).colorR,
               ((Course *)[mutableFetchResults objectAtIndex:i]).colorG,
               ((Course *)[mutableFetchResults objectAtIndex:i]).colorB);
-    }
+    }*/
     
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
+    //scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
     
     [self.view addSubview:scrollView];
-    [self.view addSubview:header];
+    //[self.view addSubview:header];
+    [self.view addSubview:toolbar];
 }
  
 /*
