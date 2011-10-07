@@ -45,11 +45,8 @@
 		89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */; };
 		89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */; };
 		89C9F56D143A4B6F00ED2E4A /* ColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9F56C143A4B6F00ED2E4A /* ColorPicker.m */; };
-		89DF847214389C0B00D5F444 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF847114389C0B00D5F444 /* NavigationController.m */; };
 		89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF84751438ADB400D5F444 /* DailyEditViewController.m */; };
-		89DF84791438F02400D5F444 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF84781438F02400D5F444 /* HomeViewController.m */; };
 		89DF847C1438F66900D5F444 /* Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF847B1438F66800D5F444 /* Header.m */; };
-		89DF847F143904AD00D5F444 /* ClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF847E143904AD00D5F444 /* ClassesViewController.m */; };
 		89DF848514390D1A00D5F444 /* ClickRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848414390D0F00D5F444 /* ClickRow.m */; };
 		89DF848814393EBF00D5F444 /* AddClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848714393EBF00D5F444 /* AddClassViewController.m */; };
 		89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E320AD143B42C600A6D54E /* ColorSlider.m */; };
@@ -124,16 +121,10 @@
 		89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsPopoverTableViewController.m; sourceTree = "<group>"; };
 		89C9F56B143A4B6F00ED2E4A /* ColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPicker.h; sourceTree = "<group>"; };
 		89C9F56C143A4B6F00ED2E4A /* ColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPicker.m; sourceTree = "<group>"; };
-		89DF847014389C0B00D5F444 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
-		89DF847114389C0B00D5F444 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		89DF84741438ADB400D5F444 /* DailyEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyEditViewController.h; sourceTree = "<group>"; };
 		89DF84751438ADB400D5F444 /* DailyEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyEditViewController.m; sourceTree = "<group>"; };
-		89DF84771438F02400D5F444 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		89DF84781438F02400D5F444 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		89DF847A1438F66800D5F444 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		89DF847B1438F66800D5F444 /* Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Header.m; sourceTree = "<group>"; };
-		89DF847D143904AD00D5F444 /* ClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassesViewController.h; sourceTree = "<group>"; };
-		89DF847E143904AD00D5F444 /* ClassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassesViewController.m; sourceTree = "<group>"; };
 		89DF848314390D0D00D5F444 /* ClickRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickRow.h; sourceTree = "<group>"; };
 		89DF848414390D0F00D5F444 /* ClickRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickRow.m; sourceTree = "<group>"; };
 		89DF848614393EBF00D5F444 /* AddClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddClassViewController.h; sourceTree = "<group>"; };
@@ -288,14 +279,8 @@
 			children = (
 				8964C37F143E2773008630E5 /* RootViewController.h */,
 				8964C380143E2773008630E5 /* RootViewController.m */,
-				89DF847014389C0B00D5F444 /* NavigationController.h */,
-				89DF847114389C0B00D5F444 /* NavigationController.m */,
-				89DF84771438F02400D5F444 /* HomeViewController.h */,
-				89DF84781438F02400D5F444 /* HomeViewController.m */,
 				8970EA64143CE7C800C5AC69 /* CoursesViewController.h */,
 				8970EA65143CE7C800C5AC69 /* CoursesViewController.m */,
-				89DF847D143904AD00D5F444 /* ClassesViewController.h */,
-				89DF847E143904AD00D5F444 /* ClassesViewController.m */,
 				89DF84741438ADB400D5F444 /* DailyEditViewController.h */,
 				89DF84751438ADB400D5F444 /* DailyEditViewController.m */,
 				895B5D97142EB99A007D7B9C /* EditModalViewController.h */,
@@ -395,11 +380,8 @@
 				89417F891430BDBA002EABBA /* Theme.m in Sources */,
 				89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */,
 				89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */,
-				89DF847214389C0B00D5F444 /* NavigationController.m in Sources */,
 				89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */,
-				89DF84791438F02400D5F444 /* HomeViewController.m in Sources */,
 				89DF847C1438F66900D5F444 /* Header.m in Sources */,
-				89DF847F143904AD00D5F444 /* ClassesViewController.m in Sources */,
 				89DF848514390D1A00D5F444 /* ClickRow.m in Sources */,
 				89DF848814393EBF00D5F444 /* AddClassViewController.m in Sources */,
 				895A66AE1439F68400AB14BC /* Course.m in Sources */,

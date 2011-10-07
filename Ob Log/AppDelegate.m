@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 
-#import "NavigationController.h"
 #import "DailyEditViewController.h"
 #import "RootViewController.h"
 
@@ -20,13 +19,11 @@
 
 @synthesize window = _window;
 @synthesize myRootViewController = _myRootViewController;
-@synthesize navigationController = _navigationController;
 
 - (void)dealloc
 {
     [_window release];
     [_myRootViewController release];
-    [_navigationController release];
     [super dealloc];
 }
 
@@ -34,7 +31,6 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.navigationController = [[NavigationController alloc] initWithNibName:nil bundle:nil];
     self.myRootViewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
     
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -42,18 +38,10 @@
         // Handle the error.
         NSLog(@"NO MANAGED OBJECT CONTEXT AVAILABLE IN AppDelegate");
     }
-    self.navigationController.managedObjectContext = context;
-    [self.navigationController loadInitialViewControllers];
     
     self.window.rootViewController = self.myRootViewController;
     [self.window makeKeyAndVisible];
     return YES;
-}
-
-- (void)switchViewControllers
-{
-    self.window.rootViewController = self.navigationController;
-    [self.window makeKeyAndVisible];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

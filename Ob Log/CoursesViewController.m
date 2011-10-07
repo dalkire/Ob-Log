@@ -62,7 +62,9 @@
                                                                     target:self 
                                                                     action:nil];
         UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        [toolbar setItems:[NSArray arrayWithObjects:flex, flex, flex, titleBtn, flex, segmentedButtons, editBtn, addBtn, nil]];
+        UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        fixed.width = 78;
+        [toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
         [self.view addSubview:self.toolbar];
         
         self.coursesArray = [[NSMutableArray alloc] initWithCapacity:0];

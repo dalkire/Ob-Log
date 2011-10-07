@@ -12,8 +12,6 @@
 #define NOTE_CELL  776585
 #define CELL_HEIGHT 70
 
-#import "AppDelegate.h"
-#import "NavigationController.h"
 #import "DailyEditViewController.h"
 
 @implementation DailyEditViewController
@@ -35,20 +33,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.entryArray = [[NSMutableArray alloc] initWithCapacity:0];
-        UIBarButtonItem *done =[[UIBarButtonItem alloc] 
-                                      initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                      target:self 
-                                      action:@selector(didTouchDone)];
-        [done setStyle:UIBarButtonItemStyleBordered];
-        [self.navigationItem setRightBarButtonItem:done];
-        [self.navigationItem setTitle:@"Class Title"];
     }
     return self;
-}
-
-- (void)didTouchDone
-{
-    [(NavigationController *)self.navigationController didTouchDoneFromDailyEditViewController];
 }
 
 - (void)didReceiveMemoryWarning
