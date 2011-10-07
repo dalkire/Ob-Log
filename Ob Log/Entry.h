@@ -2,7 +2,7 @@
 //  Entry.h
 //  Ob Log
 //
-//  Created by David Alkire on 10/5/11.
+//  Created by David Alkire on 10/7/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
@@ -12,10 +12,9 @@
 
 @interface Entry : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * id;
-@property (nonatomic, retain) NSNumber * studentId;
-@property (nonatomic, retain) NSString * noteText;
-@property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSNumber * courseId;
+@property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSString * noteText;
+@property (nonatomic, retain) NSNumber * studentId;
 
 @end

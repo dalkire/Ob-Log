@@ -108,7 +108,7 @@
                                initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                target:self 
                                action:@selector(didTouchEdit)];
-    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
+    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add Course" 
                                                               style:UIBarButtonItemStyleBordered 
                                                              target:self 
                                                              action:@selector(addCourseModal)];
@@ -139,7 +139,8 @@
 }
 
 - (void)initCourses
-{NSFetchRequest *request = [[NSFetchRequest alloc] init];
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:managedObjectContext];
     [request setEntity:entity];
     
@@ -152,18 +153,9 @@
         NSLog(@"fetchResults Success..");
     }
     
-    self.nextCourseId = 0;
     int len = [mutableFetchResults count];
     for (int i = 0; i < len; i++) {
-        if ((NSUInteger)((Course *)[mutableFetchResults objectAtIndex:i]).id > self.nextCourseId) {
-            self.nextCourseId = (NSUInteger)((Course *)[mutableFetchResults objectAtIndex:i]).id;
-        }
-        
         [self.coursesArray addObject:(Course *)[mutableFetchResults objectAtIndex:i]];
-    }
-    self.nextCourseId++;
-    
-    for (int i = 0; i < len; i++) {
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
                                                                    i*CELL_HEIGHT, 
                                                                    self.view.frame.size.width, 
@@ -222,7 +214,6 @@
     Course *course = (Course *)[NSEntityDescription 
                                 insertNewObjectForEntityForName:@"Course" 
                                 inManagedObjectContext:managedObjectContext];
-    [course setId:[NSNumber numberWithInt:self.nextCourseId]];
     [course setCourseTitle:courseTitle];
     [course setColorR:[NSNumber numberWithInt:red*255]];
     [course setColorG:[NSNumber numberWithInt:green*255]];
@@ -250,6 +241,7 @@
                                 colorTag.frame.size.width, 
                                 colorTag.frame.size.height);
     [row addSubview:colorTag];
+    [row setCourse:course];
     [row setDelegate:self];
     [scrollView addSubview:row];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [self.coursesArray count]*CELL_HEIGHT);

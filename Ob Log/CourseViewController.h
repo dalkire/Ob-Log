@@ -17,7 +17,6 @@
 @interface CourseViewController : UIViewController <ClickRowDelegate, AddStudentDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
-    NSUInteger nextStudentId;
     
     UIToolbar *toolbar;
     Header *header;
@@ -28,7 +27,6 @@
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property NSUInteger nextStudentId;
 
 @property (nonatomic, retain) UIToolbar *toolbar;
 @property (nonatomic, retain) UISegmentedControl *segmentedControl;

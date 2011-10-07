@@ -2,17 +2,18 @@
 //  Student.m
 //  Ob Log
 //
-//  Created by David Alkire on 10/5/11.
+//  Created by David Alkire on 10/7/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
 #import "Student.h"
+#import "Course.h"
 
 
 @implementation Student
 
-@dynamic lastName;
-@dynamic id;
 @dynamic firstName;
+@dynamic lastName;
+@dynamic courses;
 
 @end

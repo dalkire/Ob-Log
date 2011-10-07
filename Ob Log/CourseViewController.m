@@ -14,7 +14,6 @@
 @implementation CourseViewController
 
 @synthesize managedObjectContext;
-@synthesize nextStudentId;
 
 @synthesize toolbar;
 @synthesize segmentedControl;
@@ -88,7 +87,7 @@
                                initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                target:self 
                                action:@selector(didTouchEdit)];
-    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
+    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add Student" 
                                                               style:UIBarButtonItemStyleBordered 
                                                              target:self 
                                                              action:@selector(addStudentModal)];  
@@ -130,8 +129,8 @@
     self.scrollView.backgroundColor = [UIColor clearColor];
     
     [view addSubview:self.toolbar];
-    [view addSubview:self.header];
     [view addSubview:self.scrollView];
+    [view addSubview:self.header];
     [self setView:view];
     [view release];
 }
@@ -151,7 +150,9 @@
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:managedObjectContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ IN courses", self.course];
     [request setEntity:entity];
+    [request setPredicate:predicate];
     
     NSError *error = nil;
     NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
@@ -162,17 +163,7 @@
         NSLog(@"fetchResults Success HERE..`");
     }
     
-    self.nextStudentId = 0;
     int len = [mutableFetchResults count];
-    for (int i = 0; i < len; i++) {
-        if ((NSUInteger)((Student *)[mutableFetchResults objectAtIndex:i]).id > self.nextStudentId) {
-            self.nextStudentId = (NSUInteger)((Student *)[mutableFetchResults objectAtIndex:i]).id;
-        }
-        //NSLog(@"%@", ((Course *)[mutableFetchResults objectAtIndex:i]).course_title);
-        [self.studentsArray addObject:(Student *)[mutableFetchResults objectAtIndex:i]];
-    }
-    self.nextStudentId++;
-    
     for (int i = 0; i < len; i++) {
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
                                                                    i*CELL_HEIGHT, 
@@ -181,10 +172,14 @@
         [row setMainLabelText:[NSString stringWithFormat:@"%@ %@", 
                                ((Student *)[mutableFetchResults objectAtIndex:i]).firstName,
                                ((Student *)[mutableFetchResults objectAtIndex:i]).lastName]];
+        [row setClickColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                           green:[self.course.colorG floatValue]/255 
+                                            blue:[self.course.colorB floatValue]/255 
+                                           alpha:1]];
         [row setDelegate:self];
         [scrollView addSubview:row];
+        [self.studentsArray addObject:(Student *)[mutableFetchResults objectAtIndex:i]];
     }
-    
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
 }
 
@@ -217,9 +212,11 @@
     Student *student = (Student *)[NSEntityDescription 
                                    insertNewObjectForEntityForName:@"Student" 
                                    inManagedObjectContext:managedObjectContext];
-    [student setId:[NSNumber numberWithInt:self.nextStudentId]];
     [student setFirstName:first];
     [student setLastName:last];
+    [student addCoursesObject:self.course];
+    
+    
     
     NSError *error = nil;
     if (![managedObjectContext save:&error]) {
@@ -230,6 +227,10 @@
                                                                self.view.frame.size.width, 
                                                                CELL_HEIGHT)];
     [row setMainLabelText:[NSString stringWithFormat:@"%@ %@", first, last]];
+    [row setClickColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                       green:[self.course.colorG floatValue]/255 
+                                        blue:[self.course.colorB floatValue]/255 
+                                       alpha:1]];
     [row setDelegate:self];
     [scrollView addSubview:row];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [self.studentsArray count]*CELL_HEIGHT);

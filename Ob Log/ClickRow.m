@@ -14,6 +14,7 @@
 @synthesize cell;
 @synthesize mainLabel;
 @synthesize course;
+@synthesize clickColor;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -60,20 +61,26 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    cell.backgroundColor = [Theme getThemeColor];
+    if (self.clickColor == nil) {
+        self.clickColor = [Theme getThemeColor];
+    }
+    self.cell.backgroundColor = self.clickColor;
+    self.mainLabel.textColor = [Theme getTextColorForColor:self.clickColor];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    cell.backgroundColor = [UIColor clearColor];
-    if (delegate && [delegate respondsToSelector:@selector(didTouchClickRow:)]) {
-        [delegate didTouchClickRow:self];
+    self.cell.backgroundColor = [UIColor clearColor];
+    self.mainLabel.textColor = [UIColor blackColor];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didTouchClickRow:)]) {
+        [self.delegate didTouchClickRow:self];
     }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    cell.backgroundColor = [UIColor clearColor];
+    self.cell.backgroundColor = [UIColor clearColor];
+    self.mainLabel.textColor = [UIColor blackColor];
 }
 
 /*

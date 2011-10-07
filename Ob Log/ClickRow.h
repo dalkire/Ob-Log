@@ -17,12 +17,14 @@
     UIView *cell;
     UILabel *mainLabel;
     Course *course;
+    UIColor *clickColor;
 }
 
 @property (nonatomic, retain) id delegate;
 @property (nonatomic, retain) UIView *cell;
 @property (nonatomic, retain) UILabel *mainLabel;
 @property (nonatomic, retain) Course *course;
+@property (nonatomic, retain) UIColor *clickColor;
 
 - (void)setMainLabelText:(NSString *)text;
 
