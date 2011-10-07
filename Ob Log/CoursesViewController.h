@@ -52,5 +52,6 @@
 
 - (void)didTouchCoursesList;
 - (void)didTouchCoursesHistory;
+- (void)didtouchCourse:(Course *)course;
 
 @end

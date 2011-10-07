@@ -13,12 +13,13 @@
 @synthesize managedObjectContext;
 @synthesize coursesViewController;
 @synthesize dailyEditViewController;
+@synthesize courseViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.view.backgroundColor = [UIColor yellowColor];
+        self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
         self.coursesViewController = [[CoursesViewController alloc] initWithNibName:nil bundle:nil];
         //[self.coursesViewController loadView];
         self.coursesViewController.view.frame = CGRectMake(0, 
@@ -76,9 +77,47 @@
 
 #pragma mark - delegation
 
+- (void)didtouchCourse:(Course *)course
+{
+    if (self.courseViewController == nil)
+    {
+        NSLog(@"+before init");
+        self.courseViewController = [[CourseViewController alloc]
+                                        initWithCourse:course];
+        NSLog(@"+after init");
+        [self.courseViewController setManagedObjectContext:self.managedObjectContext];
+        [self.courseViewController initStudents];
+        NSLog(@"+after managed object context");
+        self.courseViewController.view.frame = CGRectMake(0, 
+                                                          0, 
+                                                          self.courseViewController.view.frame.size.width, 
+                                                          self.courseViewController.view.frame.size.height);
+    }
+    
+    [UIView beginAnimations:@"View Flip" context:nil];
+    [UIView setAnimationDuration:1.25];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    
+    UIViewController *coming = nil;
+    UIViewController *going = nil;
+    UIViewAnimationTransition transition;
+    coming = courseViewController;
+    going = coursesViewController;
+    transition = UIViewAnimationTransitionCurlUp;
+    
+    [UIView setAnimationTransition: transition forView:self.view cache:YES];
+    [coming viewWillAppear:YES];
+    [going viewWillDisappear:YES];
+    [going.view removeFromSuperview];
+    [self.view insertSubview: coming.view atIndex:0];
+    [going viewDidDisappear:YES];
+    [coming viewDidAppear:YES];
+    
+    [UIView commitAnimations];
+}
+
 - (void)didTouchCoursesList
 {
-    
 }
 
 - (void)didTouchCoursesHistory
@@ -87,6 +126,7 @@
     {
         self.dailyEditViewController = [[DailyEditViewController alloc]
                                         initWithNibName:nil bundle:nil];
+        [self.dailyEditViewController setManagedObjectContext:self.managedObjectContext];
     }
     
     [UIView beginAnimations:@"View Flip" context:nil];

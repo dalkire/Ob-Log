@@ -1,17 +1,17 @@
 //
-//  ClassViewController.m
+//  CourseViewController.m
 //  Ob Log
 //
-//  Created by David Alkire on 10/5/11.
+//  Created by David Alkire on 10/6/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
 #define SEGMENT_LIST    0
 #define SEGMENT_HISTORY 1
 
-#import "ClassViewController.h"
+#import "CourseViewController.h"
 
-@implementation ClassViewController
+@implementation CourseViewController
 
 @synthesize managedObjectContext;
 @synthesize nextStudentId;
@@ -21,11 +21,13 @@
 @synthesize header;
 @synthesize scrollView;
 @synthesize studentsArray;
+@synthesize activeSegment;
 
 - (id)initWithCourse:(Course *)course
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
+        self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
         self.studentsArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
                                                                    0, 
@@ -53,7 +55,7 @@
         UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
                                                                   style:UIBarButtonItemStyleBordered 
                                                                  target:self 
-                                                                 action:@selector(addCourseModal)];
+                                                                 action:@selector(addStudentModal)];
         UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:@"Courses" 
                                                                      style:UIBarButtonItemStylePlain 
                                                                     target:self 
@@ -63,7 +65,7 @@
         fixed.width = 23;
         [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
         [self.view addSubview:self.toolbar];
-
+        NSLog(@"+in init with course");
     }
     return self;
 }
@@ -87,9 +89,32 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    NSLog(@"+viewdid load");
     [super viewDidLoad];
+    
+    header = [[Header alloc] initWithFrame:CGRectMake(0, 
+                                                      50, 
+                                                      self.view.frame.size.width, 
+                                                      80)];
+    [header setMaintitleLabelText:@"Students in Class XYZ"];
+    header.maintitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
+    
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
+                                                                self.header.frame.origin.y + self.header.frame.size.height, 
+                                                                self.view.frame.size.width, 
+                                                                self.view.frame.size.height - 
+                                                                self.header.frame.size.height - 40)];
+    scrollView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    
+    
+    [self.view addSubview:scrollView];
+    [self.view addSubview:header];
+}
+
+- (void)initStudents
+{
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:managedObjectContext];
     [request setEntity:entity];
     
     NSError *error = nil;
@@ -98,7 +123,7 @@
         NSLog(@"fetchResults error");
     }
     else {
-        NSLog(@"fetchResults Success HERE");
+        NSLog(@"fetchResults Success HERE..`");
     }
     
     self.nextStudentId = 0;
@@ -111,25 +136,6 @@
         [self.studentsArray addObject:(Student *)[mutableFetchResults objectAtIndex:i]];
     }
     self.nextStudentId++;
-    
-    self.view.backgroundColor = [UIColor colorWithRed:(float)0xEE/0XFF 
-                                                green:(float)0xEE/0XFF 
-                                                 blue:(float)0xEE/0XFF 
-                                                alpha:1];
-    
-    header = [[Header alloc] initWithFrame:CGRectMake(0, 
-                                                      0, 
-                                                      self.view.frame.size.width, 
-                                                      80)];
-    [header setMaintitleLabelText:@"Students in Class XYZ"];
-    header.maintitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
-    
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                self.header.frame.size.height, 
-                                                                self.view.frame.size.width, 
-                                                                self.view.frame.size.height - 
-                                                                self.header.frame.size.height - 40)];
-    scrollView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
     for (int i = 0; i < len; i++) {
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
@@ -144,14 +150,12 @@
     }
     
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
-    
-    [self.view addSubview:scrollView];
-    [self.view addSubview:header];
 }
 
 - (void)didTouchClickRow:(ClickRow *)clickRow
 {
     NSLog(@"Touched ClickRow: %@", clickRow);
+    
 }
 
 - (void)addStudentModal
@@ -166,8 +170,8 @@
 - (void)addStudentWithFirstName:(NSString *)firstName lastName:(NSString *)lastName
 {
     Student *student = (Student *)[NSEntityDescription 
-                                insertNewObjectForEntityForName:@"Student" 
-                                inManagedObjectContext:managedObjectContext];
+                                   insertNewObjectForEntityForName:@"Student" 
+                                   inManagedObjectContext:managedObjectContext];
     [student setId:[NSNumber numberWithInt:self.nextStudentId]];
     [student setFirst_name:firstName];
     [student setLast_name:lastName];

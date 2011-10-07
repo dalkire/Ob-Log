@@ -187,6 +187,7 @@
 - (void)didTouchClickRow:(ClickRow *)clickRow
 {
     NSLog(@"Touched ClickRow: %@", clickRow);
+    [self.delegate didtouchCourse:nil];
 }
 
 - (void)addCourseModal

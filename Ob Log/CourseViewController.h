@@ -1,8 +1,8 @@
 //
-//  ClassViewController.h
+//  CourseViewController.h
 //  Ob Log
 //
-//  Created by David Alkire on 10/5/11.
+//  Created by David Alkire on 10/6/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
@@ -14,7 +14,7 @@
 #import "ClickRow.h"
 #import "ColorTag.h"
 
-@interface ClassViewController : UIViewController <ClickRowDelegate, AddStudentDelegate>
+@interface CourseViewController : UIViewController <ClickRowDelegate, AddStudentDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
     NSUInteger nextStudentId;
@@ -23,6 +23,7 @@
     Header *header;
     UIScrollView *scrollView;
     NSMutableArray *studentsArray;
+    NSUInteger activeSegment;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -33,8 +34,10 @@
 @property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) NSMutableArray *studentsArray;
+@property NSUInteger activeSegment;
 
 - (id)initWithCourse:(Course *)course;
+- (void)initStudents;
 - (void)addStudentModal;
 
 @end 
