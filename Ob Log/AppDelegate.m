@@ -18,12 +18,16 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
 @synthesize window = _window;
+
 @synthesize myRootViewController = _myRootViewController;
+@synthesize coursesViewController = _coursesViewController;
+@synthesize dailyEditViewController = _dailyEditViewController;
 
 - (void)dealloc
 {
     [_window release];
     [_myRootViewController release];
+    [_coursesViewController release];
     [super dealloc];
 }
 
@@ -32,12 +36,15 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.myRootViewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
+    self.coursesViewController = [[CoursesViewController alloc] initWithNibName:nil bundle:nil];
     
     NSManagedObjectContext *context = [self managedObjectContext];
     if (!context) {
         // Handle the error.
         NSLog(@"NO MANAGED OBJECT CONTEXT AVAILABLE IN AppDelegate");
     }
+    [self.myRootViewController setManagedObjectContext:context];
+    [self.myRootViewController initContext];
     
     self.window.rootViewController = self.myRootViewController;
     [self.window makeKeyAndVisible];

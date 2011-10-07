@@ -10,6 +10,7 @@
 
 @implementation RootViewController
 
+@synthesize managedObjectContext;
 @synthesize coursesViewController;
 @synthesize dailyEditViewController;
 
@@ -17,52 +18,23 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.view.backgroundColor = [UIColor yellowColor];
         self.coursesViewController = [[CoursesViewController alloc] initWithNibName:nil bundle:nil];
-        [self.coursesViewController loadView];
-        
+        //[self.coursesViewController loadView];
+        self.coursesViewController.view.frame = CGRectMake(0, 
+                                                           0, 
+                                                           self.coursesViewController.view.frame.size.width, 
+                                                           self.coursesViewController.view.frame.size.height);
         [self.view addSubview:self.coursesViewController.view];
     }
     return self;
 }
 
-- (void)flipMe
+- (void)initContext
 {
-    if (self.dailyEditViewController == nil)
-    {
-        self.dailyEditViewController = [[DailyEditViewController alloc]
-                                        initWithNibName:nil bundle:nil];
-    }
-    
-    [UIView beginAnimations:@"View Flip" context:nil];
-    [UIView setAnimationDuration:1.25];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    
-    UIViewController *coming = nil;
-    UIViewController *going = nil;
-    UIViewAnimationTransition transition;
-    
-    if (self.coursesViewController.view.superview == nil) 
-    {   
-        coming = coursesViewController;
-        going = dailyEditViewController;
-        transition = UIViewAnimationTransitionCurlUp;
-    }
-    else
-    {
-        coming = dailyEditViewController;
-        going = coursesViewController;
-        transition = UIViewAnimationTransitionCurlDown;
-    }
-    
-    [UIView setAnimationTransition: transition forView:self.view cache:YES];
-    [coming viewWillAppear:YES];
-    [going viewWillDisappear:YES];
-    [going.view removeFromSuperview];
-    [self.view insertSubview: coming.view atIndex:0];
-    [going viewDidDisappear:YES];
-    [coming viewDidAppear:YES];
-    
-    [UIView commitAnimations];
+    [self.coursesViewController setManagedObjectContext:self.managedObjectContext];
+    [self.coursesViewController initCourses];
+    [self.coursesViewController setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,6 +72,43 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+#pragma mark - delegation
+
+- (void)didTouchCoursesList
+{
+    
+}
+
+- (void)didTouchCoursesHistory
+{
+    if (self.dailyEditViewController == nil)
+    {
+        self.dailyEditViewController = [[DailyEditViewController alloc]
+                                        initWithNibName:nil bundle:nil];
+    }
+    
+    [UIView beginAnimations:@"View Flip" context:nil];
+    [UIView setAnimationDuration:1.25];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    
+    UIViewController *coming = nil;
+    UIViewController *going = nil;
+    UIViewAnimationTransition transition;
+    coming = dailyEditViewController;
+    going = coursesViewController;
+    transition = UIViewAnimationTransitionCurlUp;
+    
+    [UIView setAnimationTransition: transition forView:self.view cache:YES];
+    [coming viewWillAppear:YES];
+    [going viewWillDisappear:YES];
+    [going.view removeFromSuperview];
+    [self.view insertSubview: coming.view atIndex:0];
+    [going viewDidDisappear:YES];
+    [coming viewDidAppear:YES];
+    
+    [UIView commitAnimations];
 }
 
 @end

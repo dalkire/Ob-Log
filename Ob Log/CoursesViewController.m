@@ -7,8 +7,7 @@
 //
 
 #define SEGMENT_LIST    0
-#define SEGMENT_TODAY   1
-#define SEGMENT_HISTORY 2
+#define SEGMENT_HISTORY 1
 
 #import "CoursesViewController.h"
 
@@ -17,6 +16,7 @@
 @synthesize managedObjectContext;
 @synthesize nextCourseId;
 
+@synthesize delegate;
 @synthesize toolbar;
 @synthesize segmentedControl;
 @synthesize activeSegment;
@@ -29,16 +29,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.view.backgroundColor = [UIColor orangeColor];
-        toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
+        self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+        self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
                                                               0, 
                                                               self.view.frame.size.width, 
                                                               50)];
-        [toolbar setBarStyle:UIBarStyleDefault];
-        toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
+        [self.toolbar setBarStyle:UIBarStyleDefault];
+        self.toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
         
         segmentedControl = [[UISegmentedControl alloc] 
-                            initWithItems:[NSArray arrayWithObjects:@"List", @"Today", @"History", nil]];
+                            initWithItems:[NSArray arrayWithObjects:@"List", @"History", nil]];
         segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
         segmentedControl.tintColor = [Theme getThemeColor];
         [segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
@@ -52,7 +52,7 @@
         UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
                                    initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                    target:self 
-                                   action:@selector(flipMe)];
+                                   action:@selector(didTouchEdit)];
         UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
                                                                   style:UIBarButtonItemStyleBordered 
                                                                  target:self 
@@ -63,10 +63,11 @@
                                                                     action:nil];
         UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        fixed.width = 78;
-        [toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
+        fixed.width = 23;
+        [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
         [self.view addSubview:self.toolbar];
         
+        NSLog(@"> %f", toolbar.frame.size.height);
         self.coursesArray = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
@@ -77,25 +78,14 @@
     NSLog(@"touched seg control");
     switch ([self.segmentedControl selectedSegmentIndex]) {
         case SEGMENT_LIST:
-            if (SEGMENT_LIST != activeSegment) {
-                NSLog(@"touched segment list");
-                [self setActiveSegment:SEGMENT_LIST];
-                [segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
-            }
+            NSLog(@"touched segment list");
+            [self setActiveSegment:SEGMENT_LIST];
             break;
-        case SEGMENT_TODAY:
-            if (SEGMENT_TODAY != activeSegment) {
-                NSLog(@"touched segment today");
-                [self setActiveSegment:SEGMENT_TODAY];
-                [segmentedControl setSelectedSegmentIndex:SEGMENT_TODAY];
-            }
         case SEGMENT_HISTORY:
-            if (SEGMENT_HISTORY != activeSegment) {
-                NSLog(@"touched segment history");
-                [self setActiveSegment:SEGMENT_HISTORY];
-                [segmentedControl setSelectedSegmentIndex:SEGMENT_HISTORY];
-            }
-            
+            NSLog(@"touched segment history");
+            [self setActiveSegment:SEGMENT_HISTORY];
+            [delegate didTouchCoursesHistory];
+            break;
         default:
             break;
     }
@@ -120,7 +110,19 @@
 - (void)loadView
 {
     [super loadView];
-    /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
+                                                                50, 
+                                                                self.view.frame.size.width, 
+                                                                954)];
+    NSLog(@">> %f", self.toolbar.frame.size.height);
+    scrollView.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:scrollView];
+    NSLog(@">>> %f", self.toolbar.frame.size.height);
+}
+
+- (void)initCourses
+{NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:managedObjectContext];
     [request setEntity:entity];
     
@@ -131,36 +133,20 @@
     }
     else {
         NSLog(@"fetchResults Success..");
-    }*/
+    }
     
     self.nextCourseId = 0;
-    /*int len = [mutableFetchResults count];
+    int len = [mutableFetchResults count];
     for (int i = 0; i < len; i++) {
         if ((NSUInteger)((Course *)[mutableFetchResults objectAtIndex:i]).id > self.nextCourseId) {
             self.nextCourseId = (NSUInteger)((Course *)[mutableFetchResults objectAtIndex:i]).id;
         }
-        NSLog(@"%@", ((Course *)[mutableFetchResults objectAtIndex:i]).name);
+        
         [self.coursesArray addObject:(Course *)[mutableFetchResults objectAtIndex:i]];
-    }*/
+    }
     self.nextCourseId++;
     
-    [self.view setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
-    
-    header = [[Header alloc] initWithFrame:CGRectMake(0, 
-                                                      70, 
-                                                      self.view.frame.size.width, 
-                                                      80)];
-    [header setMaintitleLabelText:@"Courses"];
-    header.maintitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
-    
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                self.toolbar.frame.size.height, 
-                                                                self.view.frame.size.width, 
-                                                                self.view.frame.size.height - 
-                                                                self.toolbar.frame.size.height)];
-    scrollView.backgroundColor = [UIColor clearColor];
-    
-    /*for (int i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++) {
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
                                                                    i*CELL_HEIGHT, 
                                                                    self.view.frame.size.width, 
@@ -184,16 +170,10 @@
         [row addSubview:colorTag];
         [row setDelegate:self];
         [scrollView addSubview:row];
-        NSLog(@"RGB: %@, %@, %@",   ((Course *)[mutableFetchResults objectAtIndex:i]).colorR,
-              ((Course *)[mutableFetchResults objectAtIndex:i]).colorG,
-              ((Course *)[mutableFetchResults objectAtIndex:i]).colorB);
-    }*/
+    }
     
-    //scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
-    
-//    [self.view addSubview:scrollView];
-    //[self.view addSubview:header];
-    [self.view addSubview:toolbar];
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
+    NSLog(@"len*CELL_HEIGHT : %d", len*CELL_HEIGHT);
 }
  
 /*

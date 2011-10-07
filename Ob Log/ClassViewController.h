@@ -19,6 +19,7 @@
     NSManagedObjectContext *managedObjectContext;
     NSUInteger nextStudentId;
     
+    UIToolbar *toolbar;
     Header *header;
     UIScrollView *scrollView;
     NSMutableArray *studentsArray;
@@ -27,6 +28,8 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property NSUInteger nextStudentId;
 
+@property (nonatomic, retain) UIToolbar *toolbar;
+@property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) NSMutableArray *studentsArray;

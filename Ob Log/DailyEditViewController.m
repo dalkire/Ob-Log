@@ -11,6 +11,8 @@
 #define SHORT_CELL_WIDTH 300
 #define NOTE_CELL  776585
 #define CELL_HEIGHT 70
+#define SEGMENT_LIST    0
+#define SEGMENT_HISTORY 1
 
 #import "DailyEditViewController.h"
 
@@ -21,6 +23,8 @@
 
 @synthesize optionsPopoverController;
 
+@synthesize toolbar;
+@synthesize segmentedControl;
 @synthesize bg;
 @synthesize scrollView;
 @synthesize dateHeader;
@@ -33,6 +37,43 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.entryArray = [[NSMutableArray alloc] initWithCapacity:0];
+        self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
+                                                                   0, 
+                                                                   self.view.frame.size.width, 
+                                                                   50)];
+        [self.toolbar setBarStyle:UIBarStyleDefault];
+        self.toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
+        
+        segmentedControl = [[UISegmentedControl alloc] 
+                            initWithItems:[NSArray arrayWithObjects:@"List", @"History", nil]];
+        segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+        segmentedControl.tintColor = [Theme getThemeColor];
+        [segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
+        [self setActiveSegment:SEGMENT_LIST];
+        [segmentedControl addTarget:self
+                             action:@selector(didTouchSegmentedControl)
+                   forControlEvents:UIControlEventValueChanged];
+        
+        UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
+        
+        UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
+                                   target:self 
+                                   action:@selector(didTouchEdit)];
+        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
+                                                                  style:UIBarButtonItemStyleBordered 
+                                                                 target:self 
+                                                                 action:@selector(addCourseModal)];
+        UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:@"Courses" 
+                                                                     style:UIBarButtonItemStylePlain 
+                                                                    target:self 
+                                                                    action:nil];
+        UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        fixed.width = 23;
+        [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
+        [self.view addSubview:self.toolbar];
+
     }
     return self;
 }

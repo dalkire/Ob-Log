@@ -22,6 +22,7 @@
     NSManagedObjectContext *managedObjectContext;
     NSUInteger nextCourseId;
     
+    id delegate;
     UIToolbar *toolbar;
     UISegmentedControl *segmentedControl;
     NSUInteger activeSegment;
@@ -33,6 +34,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property NSUInteger nextCourseId;
 
+@property (nonatomic, retain) id delegate;
 @property (nonatomic, retain) UIToolbar *toolbar;
 @property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property NSUInteger activeSegment;
@@ -40,7 +42,15 @@
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) NSMutableArray *coursesArray;
 
+- (void)initCourses;
 - (void)didTouchSegmentedControl;
 - (void)addCourseModal;
+
+@end
+
+@protocol CoursesViewControllerDelegate <NSObject>
+
+- (void)didTouchCoursesList;
+- (void)didTouchCoursesHistory;
 
 @end

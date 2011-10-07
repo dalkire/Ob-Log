@@ -23,7 +23,8 @@
     NSManagedObjectContext *managedObjectContext;
     
     UIPopoverController *optionsPopoverController;
-    
+    UIToolbar *toolbar;
+    UISegmentedControl *segmentedControl;
     UIImageView *bg;
     UIScrollView *scrollView;
     DateHeader *dateHeader;
@@ -37,6 +38,8 @@
 
 @property (nonatomic, retain) UIPopoverController *optionsPopoverController;
 
+@property (nonatomic, retain) UIToolbar *toolbar;
+@property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property (nonatomic, retain) UIImageView *bg;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) DateHeader *dateHeader;

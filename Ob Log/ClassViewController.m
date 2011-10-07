@@ -6,6 +6,9 @@
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
+#define SEGMENT_LIST    0
+#define SEGMENT_HISTORY 1
+
 #import "ClassViewController.h"
 
 @implementation ClassViewController
@@ -13,6 +16,8 @@
 @synthesize managedObjectContext;
 @synthesize nextStudentId;
 
+@synthesize toolbar;
+@synthesize segmentedControl;
 @synthesize header;
 @synthesize scrollView;
 @synthesize studentsArray;
@@ -22,15 +27,43 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         self.studentsArray = [[NSMutableArray alloc] initWithCapacity:0];
+        self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
+                                                                   0, 
+                                                                   self.view.frame.size.width, 
+                                                                   50)];
+        [self.toolbar setBarStyle:UIBarStyleDefault];
+        self.toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
+        
+        segmentedControl = [[UISegmentedControl alloc] 
+                            initWithItems:[NSArray arrayWithObjects:@"Students", @"Today", @"History", nil]];
+        segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+        segmentedControl.tintColor = [Theme getThemeColor];
+        [segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
+        [self setActiveSegment:SEGMENT_LIST];
+        [segmentedControl addTarget:self
+                             action:@selector(didTouchSegmentedControl)
+                   forControlEvents:UIControlEventValueChanged];
+        
+        UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
+        
         UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
                                    initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                    target:self 
-                                   action:@selector(addCourseModal)];
-        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] 
-                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
-                                  target:self 
-                                  action:@selector(addStudentModal)];
-        [self.navigationItem setRightBarButtonItem:addBtn];    
+                                   action:@selector(didTouchEdit)];
+        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
+                                                                  style:UIBarButtonItemStyleBordered 
+                                                                 target:self 
+                                                                 action:@selector(addCourseModal)];
+        UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:@"Courses" 
+                                                                     style:UIBarButtonItemStylePlain 
+                                                                    target:self 
+                                                                    action:nil];
+        UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        fixed.width = 23;
+        [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
+        [self.view addSubview:self.toolbar];
+
     }
     return self;
 }
