@@ -16,8 +16,10 @@
 #import "Toolbar.h"
 #import "DailyEditViewController.h"
 #import "AddStudentViewController.h"
+#import "EditNavController.h"
+#import "EditCoursesViewController.h"
 
-@interface CoursesViewController : UIViewController <ClickRowDelegate, AddCourseDelegate>
+@interface CoursesViewController : UIViewController <ClickRowDelegate, AddCourseDelegate, UINavigationControllerDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
     NSUInteger nextCourseId;

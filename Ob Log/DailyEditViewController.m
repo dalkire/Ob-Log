@@ -218,8 +218,6 @@
     OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStylePlain];
     [optionsPopTVC setOptionsArray:picker.options];
     self.optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsPopTVC];
-    CGPoint localOrigin = [self.view convertPoint:CGPointMake(0, 0) fromView:picker];
-    NSLog(@"localOrigin=(%f,%f)", localOrigin.x, localOrigin.y);
     [self.optionsPopoverController setPopoverContentSize:CGSizeMake(200, 300) 
                                                 animated:YES];
     [self.optionsPopoverController presentPopoverFromRect:[picker bounds] 

@@ -55,6 +55,17 @@
 - (void)didTouchEdit
 {
     NSLog(@"DID TOUCH EDIT");
+    EditCoursesViewController *editCoursesViewController = [[EditCoursesViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editCoursesViewController];
+    [editCoursesViewController setCoursesArray:self.coursesArray];
+    [editCoursesViewController.tableView reloadData];
+    UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
+    
+    [editPop presentPopoverFromRect:[self.view bounds] 
+                             inView:self.view
+           permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [editNavController setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
