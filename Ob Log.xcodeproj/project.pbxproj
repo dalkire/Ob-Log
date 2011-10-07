@@ -48,7 +48,7 @@
 		89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF84751438ADB400D5F444 /* DailyEditViewController.m */; };
 		89DF847C1438F66900D5F444 /* Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF847B1438F66800D5F444 /* Header.m */; };
 		89DF848514390D1A00D5F444 /* ClickRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848414390D0F00D5F444 /* ClickRow.m */; };
-		89DF848814393EBF00D5F444 /* AddClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848714393EBF00D5F444 /* AddClassViewController.m */; };
+		89DF848814393EBF00D5F444 /* AddCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848714393EBF00D5F444 /* AddCourseViewController.m */; };
 		89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E320AD143B42C600A6D54E /* ColorSlider.m */; };
 /* End PBXBuildFile section */
 
@@ -127,8 +127,8 @@
 		89DF847B1438F66800D5F444 /* Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Header.m; sourceTree = "<group>"; };
 		89DF848314390D0D00D5F444 /* ClickRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickRow.h; sourceTree = "<group>"; };
 		89DF848414390D0F00D5F444 /* ClickRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickRow.m; sourceTree = "<group>"; };
-		89DF848614393EBF00D5F444 /* AddClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddClassViewController.h; sourceTree = "<group>"; };
-		89DF848714393EBF00D5F444 /* AddClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddClassViewController.m; sourceTree = "<group>"; };
+		89DF848614393EBF00D5F444 /* AddCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AddCourseViewController.h; sourceTree = "<group>"; };
+		89DF848714393EBF00D5F444 /* AddCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCourseViewController.m; sourceTree = "<group>"; };
 		89E320AC143B42C600A6D54E /* ColorSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSlider.h; sourceTree = "<group>"; };
 		89E320AD143B42C600A6D54E /* ColorSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSlider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -285,8 +285,8 @@
 				89DF84751438ADB400D5F444 /* DailyEditViewController.m */,
 				895B5D97142EB99A007D7B9C /* EditModalViewController.h */,
 				895B5D98142EB99A007D7B9C /* EditModalViewController.m */,
-				89DF848614393EBF00D5F444 /* AddClassViewController.h */,
-				89DF848714393EBF00D5F444 /* AddClassViewController.m */,
+				89DF848614393EBF00D5F444 /* AddCourseViewController.h */,
+				89DF848714393EBF00D5F444 /* AddCourseViewController.m */,
 				89C9F564143A205F00ED2E4A /* OptionsPopoverTableViewController.h */,
 				89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */,
 				895FE63E143EA21E00D6D8A6 /* CourseViewController.h */,
@@ -383,7 +383,7 @@
 				89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */,
 				89DF847C1438F66900D5F444 /* Header.m in Sources */,
 				89DF848514390D1A00D5F444 /* ClickRow.m in Sources */,
-				89DF848814393EBF00D5F444 /* AddClassViewController.m in Sources */,
+				89DF848814393EBF00D5F444 /* AddCourseViewController.m in Sources */,
 				895A66AE1439F68400AB14BC /* Course.m in Sources */,
 				89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */,
 				89C9F56D143A4B6F00ED2E4A /* ColorPicker.m in Sources */,

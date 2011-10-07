@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "Course.h"
-#import "AddClassViewController.h"
+#import "AddCourseViewController.h"
 #import "Header.h"
 #import "ClickRow.h"
 #import "ColorTag.h"

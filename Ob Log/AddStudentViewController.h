@@ -34,6 +34,6 @@
 
 @protocol AddStudentDelegate <NSObject>
 
-- (void)addStudentWithFirstName:(NSString *)firstName lastName:(NSString *)lastName;
+- (void)addStudentWithFirstName:(NSString *)first lastName:(NSString *)last;
 
 @end

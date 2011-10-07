@@ -11,8 +11,8 @@
 
 @implementation Student
 
-@dynamic last_name;
+@dynamic lastName;
 @dynamic id;
-@dynamic first_name;
+@dynamic firstName;
 
 @end

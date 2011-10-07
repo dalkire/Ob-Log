@@ -29,45 +29,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
-        self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
-                                                              0, 
-                                                              self.view.frame.size.width, 
-                                                              50)];
-        [self.toolbar setBarStyle:UIBarStyleDefault];
-        self.toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
-        
-        segmentedControl = [[UISegmentedControl alloc] 
-                            initWithItems:[NSArray arrayWithObjects:@"List", @"History", nil]];
-        segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-        segmentedControl.tintColor = [Theme getThemeColor];
-        [segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
-        [self setActiveSegment:SEGMENT_LIST];
-        [segmentedControl addTarget:self
-                             action:@selector(didTouchSegmentedControl)
-                   forControlEvents:UIControlEventValueChanged];
-        
-        UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
-        
-        UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
-                                   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
-                                   target:self 
-                                   action:@selector(didTouchEdit)];
-        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
-                                                                  style:UIBarButtonItemStyleBordered 
-                                                                 target:self 
-                                                                 action:@selector(addCourseModal)];
-        UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:@"Courses" 
-                                                                     style:UIBarButtonItemStylePlain 
-                                                                    target:self 
-                                                                    action:nil];
-        UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        fixed.width = 23;
-        [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
-        [self.view addSubview:self.toolbar];
-        
-        NSLog(@"> %f", toolbar.frame.size.height);
         self.coursesArray = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
@@ -109,16 +70,72 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    [super loadView];
+    float width = 0;
+    float height = 0;
+    switch ([[UIDevice currentDevice] orientation]) {
+        case UIDeviceOrientationPortrait:
+        case UIDeviceOrientationPortraitUpsideDown:
+            width = [UIScreen mainScreen].bounds.size.width;
+            height = [UIScreen mainScreen].bounds.size.height;
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+        case UIDeviceOrientationLandscapeRight:
+            width = [UIScreen mainScreen].bounds.size.height;
+            height = [UIScreen mainScreen].bounds.size.width;
+            break;
+            
+        default:
+            width = [UIScreen mainScreen].bounds.size.width;
+            height = [UIScreen mainScreen].bounds.size.height;
+            break;
+    }
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    
+    segmentedControl = [[UISegmentedControl alloc] 
+                        initWithItems:[NSArray arrayWithObjects:@"List", @"History", nil]];
+    segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    segmentedControl.tintColor = [Theme getThemeColor];
+    [segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
+    [self setActiveSegment:SEGMENT_LIST];
+    [segmentedControl addTarget:self
+                         action:@selector(didTouchSegmentedControl)
+               forControlEvents:UIControlEventValueChanged];
+    
+    UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
+    
+    UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
+                               initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
+                               target:self 
+                               action:@selector(didTouchEdit)];
+    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
+                                                              style:UIBarButtonItemStyleBordered 
+                                                             target:self 
+                                                             action:@selector(addCourseModal)];
+    UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:@"Courses" 
+                                                                 style:UIBarButtonItemStylePlain 
+                                                                target:self 
+                                                                action:nil];
+    UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    fixed.width = 23;
+    self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
+                                                               0, 
+                                                               view.frame.size.width, 
+                                                               50)];
+    [self.toolbar setBarStyle:UIBarStyleDefault];
+    self.toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
+    [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                50, 
-                                                                self.view.frame.size.width, 
-                                                                954)];
-    NSLog(@">> %f", self.toolbar.frame.size.height);
+                                                                self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
+                                                                view.frame.size.width, 
+                                                                view.frame.size.height - (self.toolbar.frame.origin.y + self.toolbar.frame.size.height))];
     scrollView.backgroundColor = [UIColor clearColor];
     
-    [self.view addSubview:scrollView];
-    NSLog(@">>> %f", self.toolbar.frame.size.height);
+    [view addSubview:self.toolbar];
+    [view addSubview:scrollView];
+    [self setView:view];
+    [view release];
 }
 
 - (void)initCourses
@@ -151,7 +168,7 @@
                                                                    i*CELL_HEIGHT, 
                                                                    self.view.frame.size.width, 
                                                                    CELL_HEIGHT)];
-        [row setMainLabelText:((Course *)[mutableFetchResults objectAtIndex:i]).course_title];
+        [row setMainLabelText:((Course *)[mutableFetchResults objectAtIndex:i]).courseTitle];
         row.mainLabel.frame = CGRectMake(row.mainLabel.frame.origin.x + 60, 
                                          row.mainLabel.frame.origin.y, 
                                          row.mainLabel.frame.size.width - 60, 
@@ -187,13 +204,13 @@
  
 - (void)didTouchClickRow:(ClickRow *)clickRow
 {
-    NSLog(@"Touched ClickRow.course.course_title: %@", clickRow.course.course_title);
+    NSLog(@"Touched ClickRow.course.course_title: %@", clickRow.course.courseTitle);
     [self.delegate didtouchCourse:clickRow.course];
 }
 
 - (void)addCourseModal
 {
-    AddClassViewController *addClassModal = [[AddClassViewController alloc] initWithNibName:nil bundle:nil];
+    AddCourseViewController *addClassModal = [[AddCourseViewController alloc] initWithNibName:nil bundle:nil];
     [addClassModal setDelegate:self];
     [addClassModal setModalPresentationStyle:UIModalPresentationFormSheet];
     [addClassModal setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
@@ -206,7 +223,7 @@
                                 insertNewObjectForEntityForName:@"Course" 
                                 inManagedObjectContext:managedObjectContext];
     [course setId:[NSNumber numberWithInt:self.nextCourseId]];
-    [course setCourse_title:courseTitle];
+    [course setCourseTitle:courseTitle];
     [course setColorR:[NSNumber numberWithInt:red*255]];
     [course setColorG:[NSNumber numberWithInt:green*255]];
     [course setColorB:[NSNumber numberWithInt:blue*255]];

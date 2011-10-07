@@ -35,64 +35,66 @@
 
 #pragma mark - View lifecycle
 
-/*
- // Implement loadView to create a view hierarchy programmatically, without using a nib.
- - (void)loadView
- {
- }
- */
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView
+{
+    NSLog(@"ADD student loadview");
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 540, 500)];
+    self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
+                                                      0, 
+                                                      540, 
+                                                      80)];
+    [self.header setMaintitleLabelText:@"Add Student"];
+ 
+    self.firstNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
+                                                                            self.header.frame.size.height + 30, 
+                                                                            480, 
+                                                                            40)];
+    self.lastNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
+                                                                           self.firstNameTextField.frame.origin.y + 
+                                                                           self.firstNameTextField.frame.size.height + 10, 
+                                                                           480, 
+                                                                           40)];
+    [self.firstNameTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.firstNameTextField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
+    [self.firstNameTextField setPlaceholder:@"First name"];
+ 
+    [self.lastNameTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.lastNameTextField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
+    [self.lastNameTextField setPlaceholder:@"Last name"];
+ 
+    self.cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.cancelBtn.frame = CGRectMake(self.lastNameTextField.frame.origin.x, 
+                                      self.lastNameTextField.frame.origin.y + 
+                                      self.lastNameTextField.frame.size.height + 30, 
+                                      100, 
+                                      40);
+    [self.cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
+    [self.cancelBtn addTarget:self action:@selector(touchedCancel) forControlEvents:UIControlEventTouchUpInside];
+ 
+    self.submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.submitBtn.frame = CGRectMake(self.cancelBtn.frame.origin.x + self.cancelBtn.frame.size.width + 20, 
+                                      self.cancelBtn.frame.origin.y, 
+                                      100, 
+                                      40);
+    [self.submitBtn setTitle:@"Submit" forState:UIControlStateNormal];
+    [self.submitBtn addTarget:self action:@selector(touchedSubmit) forControlEvents:UIControlEventTouchUpInside];
+ 
+ 
+    [view addSubview:self.firstNameTextField];
+    [view addSubview:self.lastNameTextField];
+    [view addSubview:self.cancelBtn];
+    [view addSubview:self.submitBtn];
+    [view addSubview:self.header];
+    [self setView:view];
+}
 
+/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    header = [[Header alloc] initWithFrame:CGRectMake(0, 
-                                                      0, 
-                                                      540, 
-                                                      80)];
-    [header setMaintitleLabelText:@"Add Student"];
-    
-    firstNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
-                                                                       header.frame.size.height + 30, 
-                                                                       480, 
-                                                                       40)];
-    lastNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
-                                                                      firstNameTextField.frame.origin.y + 
-                                                                      firstNameTextField.frame.size.height + 10, 
-                                                                      480, 
-                                                                      40)];
-    [firstNameTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [firstNameTextField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
-    [firstNameTextField setPlaceholder:@"First name"];
-    
-    [lastNameTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [lastNameTextField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
-    [lastNameTextField setPlaceholder:@"Last name"];
-    
-    cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    cancelBtn.frame = CGRectMake(lastNameTextField.frame.origin.x, 
-                                 lastNameTextField.frame.origin.y + 
-                                 lastNameTextField.frame.size.height + 30, 
-                                 100, 
-                                 40);
-    [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
-    [cancelBtn addTarget:self action:@selector(touchedCancel) forControlEvents:UIControlEventTouchUpInside];
-    
-    submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    submitBtn.frame = CGRectMake(cancelBtn.frame.origin.x + cancelBtn.frame.size.width + 20, 
-                                 cancelBtn.frame.origin.y, 
-                                 100, 
-                                 40);
-    [submitBtn setTitle:@"Submit" forState:UIControlStateNormal];
-    [submitBtn addTarget:self action:@selector(touchedSubmit) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    [self.view addSubview:firstNameTextField];
-    [self.view addSubview:lastNameTextField];
-    [self.view addSubview:cancelBtn];
-    [self.view addSubview:submitBtn];
-    [self.view addSubview:header];
-}
+}*/
 
 - (void)touchedCancel
 {

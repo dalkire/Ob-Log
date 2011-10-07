@@ -24,57 +24,12 @@
 @synthesize activeSegment;
 @synthesize course;
 
-- (id)initWithCourse:(Course *)course
+- (id)initWithCourse:(Course *)crse
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        [self setCourse:course];
-        self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+        [self setCourse:crse];
         self.studentsArray = [[NSMutableArray alloc] initWithCapacity:0];
-        self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
-                                                                   0, 
-                                                                   self.view.frame.size.width, 
-                                                                   50)];
-        [self.toolbar setBarStyle:UIBarStyleDefault];
-        self.toolbar.tintColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                 green:[self.course.colorG floatValue]/255 
-                                                  blue:[self.course.colorB floatValue]/255 
-                                                 alpha:1];
-        
-        segmentedControl = [[UISegmentedControl alloc] 
-                            initWithItems:[NSArray arrayWithObjects:@"Students", @"Today", @"History", nil]];
-        segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-        segmentedControl.tintColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                     green:[self.course.colorG floatValue]/255 
-                                                      blue:[self.course.colorB floatValue]/255 
-                                                     alpha:1];
-        [segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
-        [self setActiveSegment:SEGMENT_LIST];
-        [segmentedControl addTarget:self
-                             action:@selector(didTouchSegmentedControl)
-                   forControlEvents:UIControlEventValueChanged];
-        
-        UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
-        
-        UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
-                                   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
-                                   target:self 
-                                   action:@selector(didTouchEdit)];
-        UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
-                                                                  style:UIBarButtonItemStyleBordered 
-                                                                 target:self 
-                                                                 action:@selector(addStudentModal)];
-        UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:self.course.course_title 
-                                                                     style:UIBarButtonItemStylePlain 
-                                                                    target:self 
-                                                                    action:nil];
-        UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        fixed.width = 23;
-        [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
-        [self.view addSubview:self.toolbar];
-        NSLog(@"+in init with course");
-        
     }
     return self;
 }
@@ -88,44 +43,104 @@
 }
 
 #pragma mark - View lifecycle
-/*
- // Implement loadView to create a view hierarchy programmatically, without using a nib.
- - (void)loadView
- {
- }
- */
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView
 {
-    NSLog(@"+viewdid load");
-    [super viewDidLoad];
+    float width = 0;
+    float height = 0;
+    switch ([[UIDevice currentDevice] orientation]) {
+        case UIDeviceOrientationPortrait:
+        case UIDeviceOrientationPortraitUpsideDown:
+            width = [UIScreen mainScreen].bounds.size.width;
+            height = [UIScreen mainScreen].bounds.size.height;
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+        case UIDeviceOrientationLandscapeRight:
+            width = [UIScreen mainScreen].bounds.size.height;
+            height = [UIScreen mainScreen].bounds.size.width;
+            break;
+            
+        default:
+            width = [UIScreen mainScreen].bounds.size.width;
+            height = [UIScreen mainScreen].bounds.size.height;
+            break;
+    }
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
-    header = [[Header alloc] initWithFrame:CGRectMake(0, 
-                                                      50, 
-                                                      self.view.frame.size.width, 
-                                                      80)];
-    [header setMaintitleLabelText:self.course.course_title];
-    header.backgroundColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
+    self.segmentedControl = [[UISegmentedControl alloc] 
+                        initWithItems:[NSArray arrayWithObjects:@"Students", @"Today", @"History", nil]];
+    self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    self.segmentedControl.tintColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                                      green:[self.course.colorG floatValue]/255 
+                                                       blue:[self.course.colorB floatValue]/255 
+                                                      alpha:1];
+    [self.segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
+    [self setActiveSegment:SEGMENT_LIST];
+    [self.segmentedControl addTarget:self
+                              action:@selector(didTouchSegmentedControl)
+                    forControlEvents:UIControlEventValueChanged];
+    
+    UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:self.segmentedControl];
+    
+    UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
+                               initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
+                               target:self 
+                               action:@selector(didTouchEdit)];
+    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
+                                                              style:UIBarButtonItemStyleBordered 
+                                                             target:self 
+                                                             action:@selector(addStudentModal)];  
+    UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
+                                                               0, 
+                                                               view.frame.size.width, 
+                                                               50)];
+    [self.toolbar setBarStyle:UIBarStyleDefault];
+    self.toolbar.tintColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                              green:[self.course.colorG floatValue]/255 
                                               blue:[self.course.colorB floatValue]/255 
                                              alpha:1];
-    header.maintitleLabel.textColor = [Theme getTextColorForColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                                                  green:[self.course.colorG floatValue]/255 
-                                                                                   blue:[self.course.colorB floatValue]/255 
-                                                                                  alpha:1]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, editBtn, addBtn, nil]];
     
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                0,//self.header.frame.origin.y + self.header.frame.size.height, 
-                                                                self.view.frame.size.width, 
-                                                                self.view.frame.size.height - 
-                                                                self.header.frame.size.height - 40)];
-    scrollView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
+                                                      self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
+                                                      view.frame.size.width, 
+                                                      80)];
+    self.header.backgroundColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                                  green:[self.course.colorG floatValue]/255 
+                                                   blue:[self.course.colorB floatValue]/255 
+                                                  alpha:1];
+    [self.header setMaintitleLabelText:self.course.courseTitle];
+    self.header.backgroundColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                                  green:[self.course.colorG floatValue]/255 
+                                                   blue:[self.course.colorB floatValue]/255 
+                                                  alpha:1];
+    self.header.maintitleLabel.textColor = [Theme getTextColorForColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                                                                       green:[self.course.colorG floatValue]/255 
+                                                                                        blue:[self.course.colorB floatValue]/255 
+                                                                                       alpha:1]];
     
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
+                                                                     self.header.frame.origin.y + self.header.frame.size.height, 
+                                                                     view.frame.size.width, 
+                                                                     view.frame.size.height - (self.header.frame.origin.y + self.header.frame.size.height))];
+    self.scrollView.backgroundColor = [UIColor clearColor];
     
-    [self.view addSubview:scrollView];
-    //[self.view addSubview:header];
+    [view addSubview:self.toolbar];
+    [view addSubview:self.header];
+    [view addSubview:self.scrollView];
+    [self setView:view];
+    [view release];
 }
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+/*- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}*/
 
 - (void)loadStudentsForCourse:(Course *)course
 {
@@ -164,8 +179,8 @@
                                                                    self.view.frame.size.width, 
                                                                    CELL_HEIGHT)];
         [row setMainLabelText:[NSString stringWithFormat:@"%@ %@", 
-                               ((Student *)[mutableFetchResults objectAtIndex:i]).first_name,
-                               ((Student *)[mutableFetchResults objectAtIndex:i]).last_name]];
+                               ((Student *)[mutableFetchResults objectAtIndex:i]).firstName,
+                               ((Student *)[mutableFetchResults objectAtIndex:i]).lastName]];
         [row setDelegate:self];
         [scrollView addSubview:row];
     }
@@ -182,20 +197,29 @@
 - (void)addStudentModal
 {
     AddStudentViewController *addStudentModal = [[AddStudentViewController alloc] initWithNibName:nil bundle:nil];
+    [addStudentModal loadView];
     [addStudentModal setDelegate:self];
+    addStudentModal.header.backgroundColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                                             green:[self.course.colorG floatValue]/255 
+                                                              blue:[self.course.colorB floatValue]/255 
+                                                             alpha:1];
+    addStudentModal.header.maintitleLabel.textColor = [Theme getTextColorForColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                                                                                  green:[self.course.colorG floatValue]/255 
+                                                                                                   blue:[self.course.colorB floatValue]/255 
+                                                                                                  alpha:1]];
     [addStudentModal setModalPresentationStyle:UIModalPresentationFormSheet];
     [addStudentModal setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentModalViewController:addStudentModal animated:YES];
 }
 
-- (void)addStudentWithFirstName:(NSString *)firstName lastName:(NSString *)lastName
+- (void)addStudentWithFirstName:(NSString *)first lastName:(NSString *)last
 {
     Student *student = (Student *)[NSEntityDescription 
                                    insertNewObjectForEntityForName:@"Student" 
                                    inManagedObjectContext:managedObjectContext];
     [student setId:[NSNumber numberWithInt:self.nextStudentId]];
-    [student setFirst_name:firstName];
-    [student setLast_name:lastName];
+    [student setFirstName:first];
+    [student setLastName:last];
     
     NSError *error = nil;
     if (![managedObjectContext save:&error]) {
@@ -205,7 +229,7 @@
                                                                [self.studentsArray count]*CELL_HEIGHT, 
                                                                self.view.frame.size.width, 
                                                                CELL_HEIGHT)];
-    [row setMainLabelText:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
+    [row setMainLabelText:[NSString stringWithFormat:@"%@ %@", first, last]];
     [row setDelegate:self];
     [scrollView addSubview:row];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [self.studentsArray count]*CELL_HEIGHT);

@@ -12,9 +12,9 @@
 @implementation Entry
 
 @dynamic id;
-@dynamic student_id;
-@dynamic note_text;
+@dynamic studentId;
+@dynamic noteText;
 @dynamic date;
-@dynamic course_id;
+@dynamic courseId;
 
 @end

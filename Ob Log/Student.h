@@ -12,8 +12,8 @@
 
 @interface Student : NSManagedObject
 
-@property (nonatomic, retain) NSString * last_name;
+@property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSNumber * id;
-@property (nonatomic, retain) NSString * first_name;
+@property (nonatomic, retain) NSString * firstName;
 
 @end

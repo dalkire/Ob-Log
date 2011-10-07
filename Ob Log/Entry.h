@@ -13,9 +13,9 @@
 @interface Entry : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * id;
-@property (nonatomic, retain) NSNumber * student_id;
-@property (nonatomic, retain) NSString * note_text;
+@property (nonatomic, retain) NSNumber * studentId;
+@property (nonatomic, retain) NSString * noteText;
 @property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) NSNumber * course_id;
+@property (nonatomic, retain) NSNumber * courseId;
 
 @end
