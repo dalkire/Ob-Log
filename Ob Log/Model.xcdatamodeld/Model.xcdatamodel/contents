@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="870" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="870" systemVersion="11B26" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Course" representedClassName="Course" syncable="YES">
         <attribute name="colorB" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
         <attribute name="colorG" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
         <attribute name="colorR" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="course_title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Entry" representedClassName="Entry" syncable="YES">
         <attribute name="course_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -34,11 +34,11 @@
         <attribute name="last_name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Course" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Course" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Entry" positionX="45" positionY="-81" width="128" height="120"/>
         <element name="Option" positionX="178" positionY="162" width="128" height="90"/>
         <element name="OptionEntry" positionX="160" positionY="192" width="128" height="90"/>
         <element name="OptionHeader" positionX="-20" positionY="36" width="128" height="75"/>
-        <element name="Entry" positionX="45" positionY="-81" width="128" height="120"/>
         <element name="Student" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

@@ -24,6 +24,7 @@
     UIScrollView *scrollView;
     NSMutableArray *studentsArray;
     NSUInteger activeSegment;
+    Course *course;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -35,8 +36,10 @@
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) NSMutableArray *studentsArray;
 @property NSUInteger activeSegment;
+@property (nonatomic, retain) Course *course;
 
 - (id)initWithCourse:(Course *)course;
+- (void)loadStudentsForCourse:(Course *)course;
 - (void)initStudents;
 - (void)addStudentModal;
 

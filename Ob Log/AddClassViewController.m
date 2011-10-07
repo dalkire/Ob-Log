@@ -96,7 +96,7 @@
 - (void)touchedSubmit
 {
     if (self.textField.text && ![self.textField.text isEqual:@""]) {
-        [delegate addCourseWithName:self.textField.text 
+        [delegate addCourseWithTitle:self.textField.text 
                              andRed:(float)colorPicker.rSlider.value/255
                               green:(float)colorPicker.gSlider.value/255 
                                blue:(float)colorPicker.bSlider.value/255];

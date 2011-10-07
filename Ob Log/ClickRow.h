@@ -9,17 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "Row.h"
 #import "Theme.h"
+#import "Course.h"
 
 @interface ClickRow : Row
 {
     id delegate;
     UIView *cell;
     UILabel *mainLabel;
+    Course *course;
 }
 
 @property (nonatomic, retain) id delegate;
 @property (nonatomic, retain) UIView *cell;
 @property (nonatomic, retain) UILabel *mainLabel;
+@property (nonatomic, retain) Course *course;
 
 - (void)setMainLabelText:(NSString *)text;
 

@@ -13,6 +13,7 @@
 @synthesize delegate;
 @synthesize cell;
 @synthesize mainLabel;
+@synthesize course;
 
 - (id)initWithFrame:(CGRect)frame
 {

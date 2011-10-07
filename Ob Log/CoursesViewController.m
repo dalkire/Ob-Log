@@ -151,7 +151,7 @@
                                                                    i*CELL_HEIGHT, 
                                                                    self.view.frame.size.width, 
                                                                    CELL_HEIGHT)];
-        [row setMainLabelText:((Course *)[mutableFetchResults objectAtIndex:i]).name];
+        [row setMainLabelText:((Course *)[mutableFetchResults objectAtIndex:i]).course_title];
         row.mainLabel.frame = CGRectMake(row.mainLabel.frame.origin.x + 60, 
                                          row.mainLabel.frame.origin.y, 
                                          row.mainLabel.frame.size.width - 60, 
@@ -169,6 +169,7 @@
                                     colorTag.frame.size.height);
         [row addSubview:colorTag];
         [row setDelegate:self];
+        [row setCourse:(Course *)[mutableFetchResults objectAtIndex:i]];
         [scrollView addSubview:row];
     }
     
@@ -186,8 +187,8 @@
  
 - (void)didTouchClickRow:(ClickRow *)clickRow
 {
-    NSLog(@"Touched ClickRow: %@", clickRow);
-    [self.delegate didtouchCourse:nil];
+    NSLog(@"Touched ClickRow.course.course_title: %@", clickRow.course.course_title);
+    [self.delegate didtouchCourse:clickRow.course];
 }
 
 - (void)addCourseModal
@@ -199,13 +200,13 @@
     [self presentModalViewController:addClassModal animated:YES];
 }
 
-- (void)addCourseWithName:(NSString *)courseName andRed:(float)red green:(float)green blue:(float)blue
+- (void)addCourseWithTitle:(NSString *)courseTitle andRed:(float)red green:(float)green blue:(float)blue
 {
     Course *course = (Course *)[NSEntityDescription 
                                 insertNewObjectForEntityForName:@"Course" 
                                 inManagedObjectContext:managedObjectContext];
     [course setId:[NSNumber numberWithInt:self.nextCourseId]];
-    [course setName:courseName];
+    [course setCourse_title:courseTitle];
     [course setColorR:[NSNumber numberWithInt:red*255]];
     [course setColorG:[NSNumber numberWithInt:green*255]];
     [course setColorB:[NSNumber numberWithInt:blue*255]];
@@ -218,7 +219,7 @@
                                                                [self.coursesArray count]*CELL_HEIGHT, 
                                                                self.view.frame.size.width, 
                                                                CELL_HEIGHT)];
-    [row setMainLabelText:courseName];
+    [row setMainLabelText:courseTitle];
     row.mainLabel.frame = CGRectMake(row.mainLabel.frame.origin.x + 60, 
                                      row.mainLabel.frame.origin.y, 
                                      row.mainLabel.frame.size.width - 60, 

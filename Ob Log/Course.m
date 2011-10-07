@@ -12,7 +12,7 @@
 @implementation Course
 
 @dynamic id;
-@dynamic name;
+@dynamic course_title;
 @dynamic colorR;
 @dynamic colorG;
 @dynamic colorB;

@@ -35,6 +35,6 @@
 
 @protocol AddCourseDelegate <NSObject>
 
-- (void)addCourseWithName:(NSString *)courseName andRed:(float)red green:(float)green blue:(float)blue;
+- (void)addCourseWithTitle:(NSString *)courseTitle andRed:(float)red green:(float)green blue:(float)blue;
 
 @end
