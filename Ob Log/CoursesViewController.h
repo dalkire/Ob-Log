@@ -54,6 +54,7 @@
 
 - (void)didTouchCoursesList;
 - (void)didTouchCoursesHistory;
+- (void)loadDailyEditViewForCourse:(Course *)course andDate:(NSDate *)date;
 - (void)didtouchCourse:(Course *)course;
 
 @end

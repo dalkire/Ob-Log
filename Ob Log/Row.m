@@ -31,6 +31,7 @@
                                                    green:(float)0x9D/0xFF 
                                                     blue:(float)0xE8/0xFF 
                                                    alpha:1];
+        [blueLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [self addSubview:blueLine];
         
         marginLine = [[UIView alloc] initWithFrame:CGRectMake(300, 

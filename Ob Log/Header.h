@@ -15,6 +15,7 @@
 {
     UILabel *maintitleLabel;
     UILabel *subtitleLabel;
+    UIView *gradientOverlay;
     UIView *dropShadow;
 }
 

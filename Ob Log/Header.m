@@ -44,6 +44,7 @@
                                                               8)];
         
         dropShadow.backgroundColor = [UIColor clearColor];
+        [dropShadow setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         
         CAGradientLayer *headerDrop = [CAGradientLayer layer];
         headerDrop.frame = CGRectMake(0, 
@@ -61,6 +62,7 @@
                                                             nil]];
         headerDrop.startPoint = CGPointMake(0, 0);
         headerDrop.endPoint = CGPointMake(0, 1);
+        [headerDrop setNeedsDisplayOnBoundsChange:YES];
         [[dropShadow layer] addSublayer:headerDrop];
         
         maintitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)];

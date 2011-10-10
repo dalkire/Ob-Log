@@ -6,11 +6,17 @@
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
+#define VIEW_CONTROLLER_COURSES     0
+#define VIEW_CONTROLLER_COURSE      1
+#define VIEW_CONTROLLER_DAILYEDIT   2
+
 #import "RootViewController.h"
 
 @implementation RootViewController
 
 @synthesize managedObjectContext;
+
+@synthesize currentViewController;
 @synthesize coursesViewController;
 @synthesize dailyEditViewController;
 @synthesize courseViewController;
@@ -27,6 +33,7 @@
                                                            self.coursesViewController.view.frame.size.width, 
                                                            self.coursesViewController.view.frame.size.height);
         [self.view addSubview:self.coursesViewController.view];
+        [self setCurrentViewController:VIEW_CONTROLLER_COURSES];
     }
     return self;
 }
@@ -79,30 +86,39 @@
 
 - (void)didtouchCourse:(Course *)course
 {
+    self.courseViewController = nil;
     if (self.courseViewController == nil)
     {
-        NSLog(@"+before init");
         self.courseViewController = [[CourseViewController alloc]
                                         initWithCourse:course];
-        NSLog(@"+after init");
         [self.courseViewController setManagedObjectContext:self.managedObjectContext];
         [self.courseViewController initStudents];
-        NSLog(@"+after managed object context");
         self.courseViewController.view.frame = CGRectMake(0, 
                                                           0, 
                                                           self.courseViewController.view.frame.size.width, 
                                                           self.courseViewController.view.frame.size.height);
+        [self.courseViewController setDelegate:self];
     }
     
     [UIView beginAnimations:@"View Flip" context:nil];
-    [UIView setAnimationDuration:1.25];
+    [UIView setAnimationDuration:.5];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     
     UIViewController *coming = nil;
     UIViewController *going = nil;
     UIViewAnimationTransition transition;
-    coming = courseViewController;
-    going = coursesViewController;
+    coming = self.courseViewController;
+    switch (self.currentViewController) {
+        case VIEW_CONTROLLER_COURSES:
+            going = self.coursesViewController;
+            break;
+        case VIEW_CONTROLLER_DAILYEDIT:
+            going = self.dailyEditViewController;
+            break;
+            
+        default:
+            break;
+    }
     transition = UIViewAnimationTransitionCurlUp;
     
     [UIView setAnimationTransition: transition forView:self.view cache:YES];
@@ -114,6 +130,7 @@
     [coming viewDidAppear:YES];
     
     [UIView commitAnimations];
+    [self setCurrentViewController:VIEW_CONTROLLER_COURSE];
 }
 
 - (void)didTouchCoursesList
@@ -122,22 +139,29 @@
 
 - (void)didTouchCoursesHistory
 {
-    if (self.dailyEditViewController == nil)
-    {
-        self.dailyEditViewController = [[DailyEditViewController alloc]
-                                        initWithNibName:nil bundle:nil];
-        [self.dailyEditViewController setManagedObjectContext:self.managedObjectContext];
-    }
+    self.dailyEditViewController = nil;
+    self.dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
+    [self.dailyEditViewController setManagedObjectContext:self.managedObjectContext];
     
     [UIView beginAnimations:@"View Flip" context:nil];
-    [UIView setAnimationDuration:1.25];
+    [UIView setAnimationDuration:.5];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     
     UIViewController *coming = nil;
     UIViewController *going = nil;
     UIViewAnimationTransition transition;
     coming = dailyEditViewController;
-    going = coursesViewController;
+    switch (self.currentViewController) {
+        case VIEW_CONTROLLER_COURSES:
+            going = self.coursesViewController;
+            break;
+        case VIEW_CONTROLLER_DAILYEDIT:
+            going = self.dailyEditViewController;
+            break;
+            
+        default:
+            break;
+    }
     transition = UIViewAnimationTransitionCurlUp;
     
     [UIView setAnimationTransition: transition forView:self.view cache:YES];
@@ -149,6 +173,98 @@
     [coming viewDidAppear:YES];
     
     [UIView commitAnimations];
+    [self setCurrentViewController:VIEW_CONTROLLER_DAILYEDIT];
+}
+
+- (void)loadCoursesViewController
+{
+    if (self.coursesViewController == nil)
+    {
+        self.coursesViewController = [[CoursesViewController alloc] initWithNibName:nil bundle:nil];
+        [self.coursesViewController setManagedObjectContext:self.managedObjectContext];
+        [self.coursesViewController setDelegate:self];
+        self.coursesViewController.view.frame = CGRectMake(0, 
+                                                          0, 
+                                                          self.coursesViewController.view.frame.size.width, 
+                                                          self.coursesViewController.view.frame.size.height);
+    }
+    
+    [UIView beginAnimations:@"View Flip" context:nil];
+    [UIView setAnimationDuration:.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    
+    UIViewController *coming = nil;
+    UIViewController *going = nil;
+    UIViewAnimationTransition transition;
+    coming = coursesViewController;
+    switch (self.currentViewController) {
+        case VIEW_CONTROLLER_COURSE:
+            going = self.courseViewController;
+            break;
+        case VIEW_CONTROLLER_DAILYEDIT:
+            going = self.dailyEditViewController;
+            break;
+            
+        default:
+            break;
+    }
+    transition = UIViewAnimationTransitionCurlDown;
+    
+    [UIView setAnimationTransition: transition forView:self.view cache:YES];
+    [coming viewWillAppear:YES];
+    [going viewWillDisappear:YES];
+    [going.view removeFromSuperview];
+    [self.view insertSubview: coming.view atIndex:0];
+    [going viewDidDisappear:YES];
+    [coming viewDidAppear:YES];
+    
+    [UIView commitAnimations];
+    [self setCurrentViewController:VIEW_CONTROLLER_COURSES];
+}
+
+- (void)loadDailyEditViewForCourse:(Course *)course andDate:(NSDate *)date
+{
+    self.dailyEditViewController = nil;
+    self.dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
+    [self.dailyEditViewController setManagedObjectContext:self.managedObjectContext];
+    [self.dailyEditViewController loadStudentsForCourse:course andDate:nil];
+    [self.dailyEditViewController setDelegate:self];
+    self.dailyEditViewController.view.frame = CGRectMake(0, 
+                                                         0, 
+                                                         self.dailyEditViewController.view.frame.size.width, 
+                                                         self.dailyEditViewController.view.frame.size.height);
+    
+    [UIView beginAnimations:@"View Flip" context:nil];
+    [UIView setAnimationDuration:.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    
+    UIViewController *coming = nil;
+    UIViewController *going = nil;
+    UIViewAnimationTransition transition;
+    coming = self.dailyEditViewController;
+    switch (self.currentViewController) {
+        case VIEW_CONTROLLER_COURSE:
+            going = self.courseViewController;
+            break;
+        case VIEW_CONTROLLER_COURSES:
+            going = self.coursesViewController;
+            break;
+            
+        default:
+            break;
+    }
+    transition = UIViewAnimationTransitionCurlUp;
+    
+    [UIView setAnimationTransition: transition forView:self.view cache:YES];
+    [coming viewWillAppear:YES];
+    [going viewWillDisappear:YES];
+    [going.view removeFromSuperview];
+    [self.view insertSubview: coming.view atIndex:0];
+    [going viewDidDisappear:YES];
+    [coming viewDidAppear:YES];
+    
+    [UIView commitAnimations];
+    [self setCurrentViewController:VIEW_CONTROLLER_DAILYEDIT];
 }
 
 @end

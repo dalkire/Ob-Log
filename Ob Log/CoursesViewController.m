@@ -60,6 +60,7 @@
     EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editCoursesViewController];
     [editCoursesViewController setCoursesArray:self.coursesArray];
     [editCoursesViewController.tableView reloadData];
+    //[editCoursesViewController.tableView setEditing:YES];
     UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
     
     [editPop presentPopoverFromRect:[self.view bounds] 
@@ -123,28 +124,35 @@
                                                               style:UIBarButtonItemStyleBordered 
                                                              target:self 
                                                              action:@selector(addCourseModal)];
-    UIBarButtonItem *titleBtn = [[UIBarButtonItem alloc] initWithTitle:@"Courses" 
-                                                                 style:UIBarButtonItemStylePlain 
-                                                                target:self 
-                                                                action:nil];
     UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    fixed.width = 23;
     self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 
                                                                0, 
                                                                view.frame.size.width, 
                                                                50)];
     [self.toolbar setBarStyle:UIBarStyleDefault];
     self.toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
-    [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, titleBtn, fixed, flex, editBtn, addBtn, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, editBtn, addBtn, nil]];
+    
+    self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
+                                                           self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
+                                                           view.frame.size.width, 
+                                                           80)];
+    self.header.backgroundColor = [Theme getThemeColor];
+    [self.header setMaintitleLabelText:@"Courses"];
+    [self.header setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    self.header.maintitleLabel.textColor = [Theme getTextColorForColor:[Theme getThemeColor]];
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
-                                                                self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
+                                                                self.header.frame.origin.y + self.header.frame.size.height, 
                                                                 view.frame.size.width, 
                                                                 view.frame.size.height - (self.toolbar.frame.origin.y + self.toolbar.frame.size.height))];
     scrollView.backgroundColor = [UIColor clearColor];
     
     [view addSubview:self.toolbar];
-    [view addSubview:scrollView];
+    [view addSubview:self.scrollView];
+    [view addSubview:self.header];
+    [self.toolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [self.scrollView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self setView:view];
     [view release];
 }
@@ -190,6 +198,7 @@
         [row addSubview:colorTag];
         [row setDelegate:self];
         [row setCourse:(Course *)[mutableFetchResults objectAtIndex:i]];
+        [row setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [scrollView addSubview:row];
     }
     
@@ -208,7 +217,8 @@
 - (void)didTouchClickRow:(ClickRow *)clickRow
 {
     NSLog(@"Touched ClickRow.course.course_title: %@", clickRow.course.courseTitle);
-    [self.delegate didtouchCourse:clickRow.course];
+    //[self.delegate didtouchCourse:clickRow.course];
+    [self.delegate loadDailyEditViewForCourse:clickRow.course andDate:[NSDate date]];
 }
 
 - (void)addCourseModal
@@ -254,6 +264,7 @@
     [row addSubview:colorTag];
     [row setCourse:course];
     [row setDelegate:self];
+    [row setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [scrollView addSubview:row];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [self.coursesArray count]*CELL_HEIGHT);
     [self.coursesArray addObject:course];
@@ -270,6 +281,14 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    int len = [[self.scrollView subviews] count];
+    for (int i = 0; i < len; i++) {
+        [[[self.scrollView subviews] objectAtIndex:i] setNeedsDisplay:YES];
+    }
 }
 
 @end

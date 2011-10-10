@@ -40,23 +40,25 @@
         dateTitle.backgroundColor = [UIColor clearColor];
         dateTitle.textColor = [UIColor whiteColor];
         dateTitle.font = [UIFont fontWithName:@"Helvetica-Bold" size:36];
-        dateTitle.text = @"Wednesday, 21 September 2011";
-        [dateTitle sizeToFit];
-        dateTitle.frame = CGRectMake((frame.size.width - dateTitle.frame.size.width)/2, 
-                                     (frame.size.height - dateTitle.frame.size.height)/2 - 8, 
-                                     dateTitle.frame.size.width, 
-                                     dateTitle.frame.size.height);
+        dateTitle.text = @"";
+        dateTitle.textAlignment = UITextAlignmentCenter;
+        //[dateTitle sizeToFit];
+        dateTitle.frame = CGRectMake(20, 
+                                     16, 
+                                     frame.size.width - 40, 
+                                     40);
         
         sectionSubtitle = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)];
         sectionSubtitle.backgroundColor = [UIColor clearColor];
         sectionSubtitle.textColor = [UIColor whiteColor];
+        sectionSubtitle.textAlignment = UITextAlignmentCenter;
         sectionSubtitle.font = [UIFont fontWithName:@"Helvetica" size:18];
-        sectionSubtitle.text = @"American History: 1800-1940";
-        [sectionSubtitle sizeToFit];
-        sectionSubtitle.frame = CGRectMake((frame.size.width - sectionSubtitle.frame.size.width)/2, 
+        sectionSubtitle.text = @"";
+        //[sectionSubtitle sizeToFit];
+        sectionSubtitle.frame = CGRectMake(20, 
                                            dateTitle.frame.origin.y + dateTitle.frame.size.height, 
-                                           sectionSubtitle.frame.size.width, 
-                                           sectionSubtitle.frame.size.height);
+                                           frame.size.width - 20, 
+                                           20);
         [self addSubview:dateTitle];
         [self addSubview:sectionSubtitle];
     }

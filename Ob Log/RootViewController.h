@@ -11,15 +11,19 @@
 #import "DailyEditViewController.h"
 #import "CourseViewController.h"
 
-@interface RootViewController : UIViewController <CoursesViewControllerDelegate>
+@interface RootViewController : UIViewController <CoursesViewControllerDelegate, CourseViewControllerDelegate, DailyEditViewControllerDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
+    
+    NSUInteger currentViewController;
     CoursesViewController *coursesViewController;
     DailyEditViewController *dailyEditViewController;
     CourseViewController *courseViewController;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+@property NSUInteger currentViewController;
 @property (nonatomic, retain) CoursesViewController *coursesViewController;
 @property (nonatomic, retain) DailyEditViewController *dailyEditViewController;
 @property (nonatomic, retain) CourseViewController *courseViewController;

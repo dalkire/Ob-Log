@@ -18,6 +18,8 @@
 {
     NSManagedObjectContext *managedObjectContext;
     
+    id delegate;
+    
     UIToolbar *toolbar;
     Header *header;
     UIScrollView *scrollView;
@@ -28,6 +30,8 @@
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
+@property (nonatomic, retain) id delegate;
+
 @property (nonatomic, retain) UIToolbar *toolbar;
 @property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property (nonatomic, retain) Header *header;
@@ -37,8 +41,16 @@
 @property (nonatomic, retain) Course *course;
 
 - (id)initWithCourse:(Course *)course;
-- (void)loadStudentsForCourse:(Course *)course;
+- (void)didTouchSegmentedControl;
+- (void)didTouchCoursesBtn;
 - (void)initStudents;
 - (void)addStudentModal;
 
 @end 
+
+@protocol CourseViewControllerDelegate <NSObject>
+
+- (void)loadCoursesViewController;
+- (void)loadDailyEditViewForCourse:(Course *)course andDate:(NSDate *)date;
+
+@end

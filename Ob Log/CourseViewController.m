@@ -6,14 +6,17 @@
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
-#define SEGMENT_LIST    0
-#define SEGMENT_HISTORY 1
+#define SEGMENT_STUDENTS    0
+#define SEGMENT_TODAY       1
+#define SEGMENT_HISTORY     2
 
 #import "CourseViewController.h"
 
 @implementation CourseViewController
 
 @synthesize managedObjectContext;
+
+@synthesize delegate;
 
 @synthesize toolbar;
 @synthesize segmentedControl;
@@ -68,6 +71,11 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
     view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
+    UIBarButtonItem *coursesBtn =[[UIBarButtonItem alloc] initWithTitle:@"Courses"
+                                                                  style:UIBarButtonItemStyleBordered
+                                                                 target:self 
+                                                                 action:@selector(didTouchCoursesBtn)];
+    
     self.segmentedControl = [[UISegmentedControl alloc] 
                         initWithItems:[NSArray arrayWithObjects:@"Students", @"Today", @"History", nil]];
     self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -75,8 +83,8 @@
                                                       green:[self.course.colorG floatValue]/255 
                                                        blue:[self.course.colorB floatValue]/255 
                                                       alpha:1];
-    [self.segmentedControl setSelectedSegmentIndex:SEGMENT_LIST];
-    [self setActiveSegment:SEGMENT_LIST];
+    [self.segmentedControl setSelectedSegmentIndex:SEGMENT_STUDENTS];
+    [self setActiveSegment:SEGMENT_STUDENTS];
     [self.segmentedControl addTarget:self
                               action:@selector(didTouchSegmentedControl)
                     forControlEvents:UIControlEventValueChanged];
@@ -102,16 +110,12 @@
                                              green:[self.course.colorG floatValue]/255 
                                               blue:[self.course.colorB floatValue]/255 
                                              alpha:1];
-    [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, editBtn, addBtn, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, segmentedButtons, flex, editBtn, addBtn, nil]];
     
     self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
                                                       self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
                                                       view.frame.size.width, 
                                                       80)];
-    self.header.backgroundColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                  green:[self.course.colorG floatValue]/255 
-                                                   blue:[self.course.colorB floatValue]/255 
-                                                  alpha:1];
     [self.header setMaintitleLabelText:self.course.courseTitle];
     self.header.backgroundColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                   green:[self.course.colorG floatValue]/255 
@@ -141,9 +145,25 @@
     [super viewDidLoad];
 }*/
 
-- (void)loadStudentsForCourse:(Course *)course
+- (void)didTouchSegmentedControl
 {
-    
+    switch ([self.segmentedControl selectedSegmentIndex]) {
+        case SEGMENT_STUDENTS:
+            NSLog(@"touched segment list");
+            [self setActiveSegment:SEGMENT_STUDENTS];
+            break;
+        case SEGMENT_TODAY:
+            NSLog(@"touched segment today");
+            [self setActiveSegment:SEGMENT_TODAY];
+            [delegate loadDailyEditViewForCourse:self.course andDate:[NSDate date]];
+            break;
+        case SEGMENT_HISTORY:
+            NSLog(@"touched segment history");
+            [self setActiveSegment:SEGMENT_HISTORY];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)initStudents
@@ -187,6 +207,13 @@
 {
     NSLog(@"Touched ClickRow: %@", clickRow);
     
+}
+
+- (void)didTouchCoursesBtn
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(loadCoursesViewController)]) {
+        [self.delegate loadCoursesViewController];
+    }
 }
 
 - (void)addStudentModal

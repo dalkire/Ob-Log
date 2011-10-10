@@ -15,10 +15,13 @@
 #import "EditModalViewController.h"
 #import "OptionPicker.h"
 #import "OptionsPopoverTableViewController.h"
+#import "Course.h"
 #import "Entry.h"
 
 @interface DailyEditViewController : UIViewController <OptionPickerDelegate, OptionsPopoverTVCDelegate>
 {
+    id delegate;
+    
     NSMutableArray *entryArray;
     NSManagedObjectContext *managedObjectContext;
     
@@ -31,7 +34,11 @@
     UIView *dateHeaderDropShadow;
     EditModalViewController *editModal;
     OptionPicker *activePicker;
+    
+    Course *course;
 }
+
+@property (nonatomic, retain) id delegate;
 
 @property (nonatomic, retain) NSMutableArray *entryArray;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -47,8 +54,16 @@
 @property (nonatomic, retain) EditModalViewController *editModal;
 @property (nonatomic, retain) OptionPicker *activePicker;
 
-- (void)queryEntries;
+@property (nonatomic, retain) Course *course;
+
+- (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)date;
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;
 - (void)showOptionsForPicker:(OptionPicker *)picker;
+
+@end
+
+@protocol DailyEditViewControllerDelegate <NSObject>
+
+- (void)loadCoursesViewController;
 
 @end
