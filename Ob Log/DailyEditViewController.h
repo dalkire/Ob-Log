@@ -16,12 +16,14 @@
 #import "OptionPicker.h"
 #import "OptionsPopoverTableViewController.h"
 #import "Course.h"
+#import "Student.h"
 #import "Entry.h"
 
 @interface DailyEditViewController : UIViewController <OptionPickerDelegate, OptionsPopoverTVCDelegate>
 {
     id delegate;
     
+    NSMutableArray *studentsMutableArray;
     NSMutableArray *entryArray;
     NSManagedObjectContext *managedObjectContext;
     
@@ -40,6 +42,7 @@
 
 @property (nonatomic, retain) id delegate;
 
+@property (nonatomic, retain) NSMutableArray *studentsMutableArray;
 @property (nonatomic, retain) NSMutableArray *entryArray;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 

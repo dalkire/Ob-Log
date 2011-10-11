@@ -61,16 +61,16 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (self.clickColor == nil) {
-        self.clickColor = [Theme getThemeColor];
-    }
-    self.cell.backgroundColor = self.clickColor;
-    self.mainLabel.textColor = [Theme getTextColorForColor:self.clickColor];
+    self.cell.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
+                                                green:(float)0xDD/0xFF 
+                                                 blue:(float)0xDD/0xFF 
+                                                alpha:1];
+    self.mainLabel.textColor = [UIColor blackColor];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    self.cell.backgroundColor = [UIColor clearColor];
+    self.cell.backgroundColor = [UIColor whiteColor];
     self.mainLabel.textColor = [UIColor blackColor];
     if (self.delegate && [self.delegate respondsToSelector:@selector(didTouchClickRow:)]) {
         [self.delegate didTouchClickRow:self];

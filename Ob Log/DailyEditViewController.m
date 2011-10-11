@@ -22,6 +22,7 @@
 
 @synthesize delegate;
 
+@synthesize studentsMutableArray;
 @synthesize entryArray;
 @synthesize managedObjectContext;
 
@@ -42,6 +43,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.studentsMutableArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.entryArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.course = nil;
     }
@@ -181,14 +183,24 @@
 
 - (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)date
 {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:managedObjectContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY IN students"];
-    [request setEntity:entity];
-    [request setPredicate:predicate];
-    
     NSLog(@"load students for course: %@", crse);
     [self setCourse:crse];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:managedObjectContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ IN courses", self.course];
+    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc]
+                                         initWithKey:@"lastName" ascending:YES];
+    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc]
+                                         initWithKey:@"firstName" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor1, sortDescriptor2, nil]];
+    [sortDescriptor1 release];
+    [sortDescriptor2 release];
+    [request setEntity:entity];
+    [entity release];
+    [request setPredicate:predicate];
+    [predicate release];
+    
     [self.toolbar setTintColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                green:[self.course.colorG floatValue]/255 
                                                 blue:[self.course.colorB floatValue]/255 
@@ -207,13 +219,13 @@
     [request setEntity:entity];*/
     
     NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResults == nil) {
+    NSMutableArray *studentPointers = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (studentPointers == nil) {
         NSLog(@"fetchResults error");
     }
     else {
-        NSLog(@"fetchResults Success %@", mutableFetchResults);
-        self.entryArray = mutableFetchResults;
+        NSLog(@"fetchResults Success");
+        self.studentsMutableArray = studentPointers;
     }
     
     
@@ -244,7 +256,7 @@
                       @"Gary Dell'Abate",
                       nil];
 	
-    int len = [array count];
+    int len = [self.studentsMutableArray count];
     for (int i = 0; i < len; i++) {
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
                                                                            i*CELL_HEIGHT, 
@@ -252,7 +264,9 @@
                                                                            CELL_HEIGHT)];
         [row setTag:i];
         [row setDelegate:self];
-        [row createNameCellWithName:[array objectAtIndex:i]];
+        [row createNameCellWithName:[NSString stringWithFormat:@"%@ %@", 
+                                     ((Student *)[studentsMutableArray objectAtIndex:i]).firstName, 
+                                     ((Student *)[studentsMutableArray objectAtIndex:i]).lastName]];
         
         int length = [row.optionPickers count];
         for (int j = 0; j < length; j++) {
@@ -262,7 +276,6 @@
         [row setNeedsDisplay];
         [self.scrollView addSubview:row];
         [self.scrollView setContentSize:CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height + CELL_HEIGHT)];
-        NSLog(@"^ %f", self.scrollView.contentSize.height);
     }
 }
 
