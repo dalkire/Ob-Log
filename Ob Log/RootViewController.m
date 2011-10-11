@@ -107,6 +107,7 @@
     UIViewController *coming = nil;
     UIViewController *going = nil;
     UIViewAnimationTransition transition;
+    transition = UIViewAnimationTransitionCurlUp;
     coming = self.courseViewController;
     switch (self.currentViewController) {
         case VIEW_CONTROLLER_COURSES:
@@ -114,12 +115,12 @@
             break;
         case VIEW_CONTROLLER_DAILYEDIT:
             going = self.dailyEditViewController;
+            transition = UIViewAnimationTransitionCurlDown;
             break;
             
         default:
             break;
     }
-    transition = UIViewAnimationTransitionCurlUp;
     
     [UIView setAnimationTransition: transition forView:self.view cache:YES];
     [coming viewWillAppear:YES];
@@ -226,13 +227,13 @@
 {
     self.dailyEditViewController = nil;
     self.dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
-    [self.dailyEditViewController setManagedObjectContext:self.managedObjectContext];
-    [self.dailyEditViewController loadStudentsForCourse:course andDate:nil];
-    [self.dailyEditViewController setDelegate:self];
     self.dailyEditViewController.view.frame = CGRectMake(0, 
                                                          0, 
                                                          self.dailyEditViewController.view.frame.size.width, 
                                                          self.dailyEditViewController.view.frame.size.height);
+    [self.dailyEditViewController setManagedObjectContext:self.managedObjectContext];
+    [self.dailyEditViewController loadStudentsForCourse:course andDate:date];
+    [self.dailyEditViewController setDelegate:self];
     
     [UIView beginAnimations:@"View Flip" context:nil];
     [UIView setAnimationDuration:.5];

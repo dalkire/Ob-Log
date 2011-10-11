@@ -23,7 +23,4 @@
 @property (nonatomic, retain) UILabel *subtitleLabel;
 @property (nonatomic, retain) UIView *dropShadow;
 
-- (void)setMaintitleLabelText:(NSString *)title;
-- (void)setSubtitleLabelText:(NSString *)title;
-
 @end

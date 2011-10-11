@@ -116,7 +116,7 @@
                                                       self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
                                                       view.frame.size.width, 
                                                       80)];
-    [self.header setMaintitleLabelText:self.course.courseTitle];
+    [self.header.maintitleLabel setText:self.course.courseTitle];
     self.header.backgroundColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                   green:[self.course.colorG floatValue]/255 
                                                    blue:[self.course.colorB floatValue]/255 
@@ -171,6 +171,13 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:managedObjectContext];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ IN courses", self.course];
+    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc]
+                                         initWithKey:@"lastName" ascending:YES];
+    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc]
+                                         initWithKey:@"firstName" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor1, sortDescriptor2, nil]];
+    [sortDescriptor1 release];
+    [sortDescriptor2 release];
     [request setEntity:entity];
     [request setPredicate:predicate];
     

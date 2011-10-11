@@ -35,7 +35,7 @@
         mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, frame.size.width - 60, frame.size.height - 20)];
         mainLabel.backgroundColor = [UIColor clearColor];
         mainLabel.textColor = [UIColor blackColor];
-        mainLabel.font = [UIFont fontWithName:@"Helvetica" size:36];
+        mainLabel.font = [UIFont fontWithName:@"Helvetica" size:28];
         mainLabel.text = @"";
         [mainLabel sizeToFit];
         mainLabel.frame = CGRectMake(30, 
@@ -70,7 +70,7 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    self.cell.backgroundColor = [UIColor whiteColor];
+    self.cell.backgroundColor = [UIColor clearColor];
     self.mainLabel.textColor = [UIColor blackColor];
     if (self.delegate && [self.delegate respondsToSelector:@selector(didTouchClickRow:)]) {
         [self.delegate didTouchClickRow:self];

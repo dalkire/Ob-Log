@@ -32,7 +32,7 @@
 @synthesize segmentedControl;
 @synthesize bg;
 @synthesize scrollView;
-@synthesize dateHeader;
+@synthesize header;
 @synthesize dateHeaderDropShadow;
 @synthesize editModal;
 @synthesize activePicker;
@@ -129,23 +129,22 @@
     fixed.width = 23;
     [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, segmentedButtons, flex, editBtn, addBtn, nil]];
     
-    self.dateHeader = [[DateHeader alloc] initWithFrame:CGRectMake(0, 
-                                                                   self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
-                                                                   view.frame.size.width, 
-                                                                   90)];
-    [self.dateHeader setBackgroundColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                        green:[self.course.colorG floatValue]/255 
-                                                         blue:[self.course.colorB floatValue]/255 
-                                                        alpha:1]];
-    self.dateHeader.dateTitle.textColor = self.dateHeader.sectionSubtitle.textColor = [Theme getTextColorForColor:dateHeader.backgroundColor];
-    [self.dateHeader.dateTitle setText:[NSString stringWithFormat:@"%@", [NSDate date]]];
-    [self.dateHeader.sectionSubtitle setText:course.courseTitle];
+    self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
+                                                           self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
+                                                           view.frame.size.width, 
+                                                           90)];
+    [self.header setBackgroundColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                                    green:[self.course.colorG floatValue]/255 
+                                                     blue:[self.course.colorB floatValue]/255 
+                                                    alpha:1]];
+    self.header.maintitleLabel.textColor = self.header.subtitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
+    //[self.header.maintitleLabel setText:@""];
+    //[self.header.subtitleLabel setText:course.courseTitle];
     self.dateHeaderDropShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
-                                                                    dateHeader.frame.origin.y + dateHeader.frame.size.height, 
+                                                                    header.frame.origin.y + header.frame.size.height, 
                                                                     view.frame.size.width, 
                                                                     8)];
     [self.dateHeaderDropShadow setBackgroundColor:[UIColor clearColor]];
-    [self.dateHeader setDelegate:self];
     
     CAGradientLayer *headerDrop = [CAGradientLayer layer];
     headerDrop.frame = CGRectMake(0, 
@@ -166,17 +165,17 @@
     [[self.dateHeaderDropShadow layer] addSublayer:headerDrop];
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,  
-                                                                self.dateHeader.frame.origin.y + self.dateHeader.frame.size.height, 
+                                                                self.header.frame.origin.y + self.header.frame.size.height, 
                                                                 view.frame.size.width, 
                                                                 view.frame.size.height - 
-                                                                self.dateHeader.frame.size.height - self.toolbar.frame.size.height)];
+                                                                self.header.frame.size.height - self.toolbar.frame.size.height)];
     scrollView.contentSize = CGSizeMake(view.frame.size.width, 0);
     scrollView.backgroundColor = [UIColor clearColor];
     
     [view addSubview:self.toolbar];
     [view addSubview:self.scrollView];
-    [view addSubview:self.dateHeader];
-    [view addSubview:self.dateHeaderDropShadow];
+    [view addSubview:self.header];
+    //[view addSubview:self.dateHeaderDropShadow];
     [self setView:view];
     [view release];
 }
@@ -186,48 +185,19 @@
     NSLog(@"load students for course: %@", crse);
     [self setCourse:crse];
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:managedObjectContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ IN courses", self.course];
-    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc]
-                                         initWithKey:@"lastName" ascending:YES];
-    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc]
-                                         initWithKey:@"firstName" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor1, sortDescriptor2, nil]];
-    [sortDescriptor1 release];
-    [sortDescriptor2 release];
-    [request setEntity:entity];
-    [entity release];
-    [request setPredicate:predicate];
-    [predicate release];
     
     [self.toolbar setTintColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                green:[self.course.colorG floatValue]/255 
                                                 blue:[self.course.colorB floatValue]/255 
                                                alpha:1]];
-    [self.dateHeader setBackgroundColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                        green:[self.course.colorG floatValue]/255 
-                                                         blue:[self.course.colorB floatValue]/255 
-                                                        alpha:1]];
-    [self.dateHeader.sectionSubtitle setText:self.course.courseTitle];
-    
-    /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    if (managedObjectContext == nil) {
-        NSLog(@"NO CONTEXT");
-    }
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Entry" inManagedObjectContext:managedObjectContext];
-    [request setEntity:entity];*/
-    
-    NSError *error = nil;
-    NSMutableArray *studentPointers = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (studentPointers == nil) {
-        NSLog(@"fetchResults error");
-    }
-    else {
-        NSLog(@"fetchResults Success");
-        self.studentsMutableArray = studentPointers;
-    }
-    
+    [self.header setBackgroundColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                                    green:[self.course.colorG floatValue]/255 
+                                                     blue:[self.course.colorB floatValue]/255 
+                                                    alpha:1]];
+    [self.header.maintitleLabel setText:[NSDateFormatter localizedStringFromDate:date 
+                                                                       dateStyle:NSDateFormatterLongStyle 
+                                                                       timeStyle:NSDateFormatterNoStyle]];
+    [self.header.subtitleLabel setText:self.course.courseTitle];
     
     NSArray *array = [[NSArray alloc] initWithObjects:
                       @"Melissa Alkire",
@@ -256,6 +226,7 @@
                       @"Gary Dell'Abate",
                       nil];
 	
+    [self setStudentsMutableArray:[self fetchStudentsForCourse:crse]];
     int len = [self.studentsMutableArray count];
     for (int i = 0; i < len; i++) {
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
@@ -277,6 +248,33 @@
         [self.scrollView addSubview:row];
         [self.scrollView setContentSize:CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height + CELL_HEIGHT)];
     }
+}
+
+- (NSMutableArray *)fetchStudentsForCourse:(Course *)course
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:managedObjectContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ IN courses", self.course];
+    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc]
+                                         initWithKey:@"lastName" ascending:YES];
+    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc]
+                                         initWithKey:@"firstName" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor1, sortDescriptor2, nil]];
+    //[sortDescriptor1 release];
+    //[sortDescriptor2 release];
+    [request setEntity:entity];
+    //[entity release];
+    [request setPredicate:predicate];
+    //[predicate release];
+    
+    NSError *error = nil;
+    NSMutableArray *studentPointers = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (studentPointers == nil) {
+        NSLog(@"fetchResults error");
+        return [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    
+    return studentPointers;
 }
 
 - (void)didTouchCoursesBtn

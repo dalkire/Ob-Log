@@ -11,7 +11,7 @@
 #import "DailyEditRow.h"
 #import "NameCell.h"
 #import "NoteCell.h"
-#import "DateHeader.h"
+#import "Header.h"
 #import "EditModalViewController.h"
 #import "OptionPicker.h"
 #import "OptionsPopoverTableViewController.h"
@@ -32,7 +32,7 @@
     UISegmentedControl *segmentedControl;
     UIImageView *bg;
     UIScrollView *scrollView;
-    DateHeader *dateHeader;
+    Header *header;
     UIView *dateHeaderDropShadow;
     EditModalViewController *editModal;
     OptionPicker *activePicker;
@@ -52,13 +52,14 @@
 @property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property (nonatomic, retain) UIImageView *bg;
 @property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) DateHeader *dateHeader;
+@property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) UIView *dateHeaderDropShadow;
 @property (nonatomic, retain) EditModalViewController *editModal;
 @property (nonatomic, retain) OptionPicker *activePicker;
 
 @property (nonatomic, retain) Course *course;
 
+- (NSMutableArray *)fetchStudentsForCourse:(Course *)course;
 - (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)date;
 - (void)didTouchCoursesBtn;
 - (void)didTouchSegmentedControl;

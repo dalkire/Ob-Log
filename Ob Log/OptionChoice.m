@@ -1,21 +1,19 @@
 //
-//  Entry.m
+//  OptionChoice.m
 //  Ob Log
 //
 //  Created by David Alkire on 10/11/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
+#import "OptionChoice.h"
 #import "Entry.h"
-#import "Student.h"
 
 
-@implementation Entry
+@implementation OptionChoice
 
-@dynamic courseId;
-@dynamic date;
-@dynamic noteText;
-@dynamic student;
-@dynamic options;
+@dynamic choiceText;
+@dynamic optionHeader;
+@dynamic entries;
 
 @end

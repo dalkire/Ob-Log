@@ -65,45 +65,29 @@
         [headerDrop setNeedsDisplayOnBoundsChange:YES];
         [[dropShadow layer] addSublayer:headerDrop];
         
-        maintitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)];
-        maintitleLabel.backgroundColor = [UIColor clearColor];
-        maintitleLabel.textColor = [UIColor whiteColor];
-        maintitleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:36];
+        self.maintitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 
+                                                                   20, 
+                                                                   frame.size.width - 40, 
+                                                                   40)];
+        [self.maintitleLabel setBackgroundColor:[UIColor clearColor]];
+        [self.maintitleLabel setTextColor:[UIColor whiteColor]];
+        [self.maintitleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:36]];
+        [self.maintitleLabel setTextAlignment:UITextAlignmentCenter];
         
-        subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 400, 40)];
-        subtitleLabel.backgroundColor = [UIColor clearColor];
-        subtitleLabel.textColor = [UIColor whiteColor];
-        subtitleLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
         
-        [self addSubview:maintitleLabel];
-        [self addSubview:subtitleLabel];
-        [self addSubview:dropShadow];
+        self.subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 
+                                                                  maintitleLabel.frame.origin.y + maintitleLabel.frame.size.height, 
+                                                                  frame.size.width - 40, 20)];
+        [self.subtitleLabel setBackgroundColor:[UIColor clearColor]];
+        [self.subtitleLabel setTextColor:[UIColor whiteColor]];
+        [self.subtitleLabel setFont:[UIFont fontWithName:@"Helvetica" size:18]];
+        [self.subtitleLabel setTextAlignment:UITextAlignmentCenter];
+        
+        [self addSubview:self.maintitleLabel];
+        [self addSubview:self.subtitleLabel];
+        [self addSubview:self.dropShadow];
     }
     return self;
-}
-
-- (void)setMaintitleLabelText:(NSString *)title
-{
-    maintitleLabel.text = title;
-    [maintitleLabel sizeToFit];
-    maintitleLabel.frame = CGRectMake((self.frame.size.width - maintitleLabel.frame.size.width)/2, 
-                                 (self.frame.size.height - maintitleLabel.frame.size.height)/2, 
-                                 maintitleLabel.frame.size.width, 
-                                 maintitleLabel.frame.size.height);
-}
-
-- (void)setSubtitleLabelText:(NSString *)title
-{
-    maintitleLabel.frame = CGRectMake(maintitleLabel.frame.origin.x, 
-                                      maintitleLabel.frame.origin.y - 8, 
-                                      maintitleLabel.frame.size.width, 
-                                      maintitleLabel.frame.size.height);
-    subtitleLabel.text = title;
-    [subtitleLabel sizeToFit];
-    subtitleLabel.frame = CGRectMake((self.frame.size.width - subtitleLabel.frame.size.width)/2, 
-                                maintitleLabel.frame.origin.y + maintitleLabel.frame.size.height - 6, 
-                                subtitleLabel.frame.size.width, 
-                                subtitleLabel.frame.size.height);
 }
 
 /*

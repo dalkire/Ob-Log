@@ -50,7 +50,7 @@
                                                       0, 
                                                       540, 
                                                       80)];
-    [header setMaintitleLabelText:@"Add Course"];
+    [header.maintitleLabel setText:@"Add Course"];
     
     textField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
                                                               header.frame.size.height + 30, 

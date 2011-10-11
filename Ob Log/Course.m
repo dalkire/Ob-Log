@@ -2,7 +2,7 @@
 //  Course.m
 //  Ob Log
 //
-//  Created by David Alkire on 10/7/11.
+//  Created by David Alkire on 10/11/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 

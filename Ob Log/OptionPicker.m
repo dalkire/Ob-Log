@@ -113,6 +113,10 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {  
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
     NSLog(@"self.active=%@", self.active ? @"YES" : @"NO");
     self.active = !self.active;
     NSLog(@"touch ENDED OP, self.active=%@", self.active ? @"YES" : @"NO");
