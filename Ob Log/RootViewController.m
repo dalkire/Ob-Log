@@ -84,7 +84,7 @@
 
 #pragma mark - delegation
 
-- (void)didtouchCourse:(Course *)course
+- (void)loadCourseViewControllerForCourse:(Course *)course
 {
     self.courseViewController = nil;
     if (self.courseViewController == nil)

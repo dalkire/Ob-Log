@@ -57,6 +57,8 @@
 @property (nonatomic, retain) Course *course;
 
 - (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)date;
+- (void)didTouchCoursesBtn;
+- (void)didTouchSegmentedControl;
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;
 - (void)showOptionsForPicker:(OptionPicker *)picker;
 
@@ -65,5 +67,6 @@
 @protocol DailyEditViewControllerDelegate <NSObject>
 
 - (void)loadCoursesViewController;
+- (void)loadCourseViewControllerForCourse:(Course *)crse;
 
 @end

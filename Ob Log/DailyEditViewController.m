@@ -12,9 +12,9 @@
 #define NOTE_CELL           776585
 #define CELL_HEIGHT         70
 
-#define SEGMENT_STUDENT     0
+#define SEGMENT_STUDENTS    0
 #define SEGMENT_TODAY       1
-#define SEGMENT_HISTORY     1
+#define SEGMENT_HISTORY     2
 
 #import "DailyEditViewController.h"
 
@@ -181,6 +181,12 @@
 
 - (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)date
 {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:managedObjectContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY IN students"];
+    [request setEntity:entity];
+    [request setPredicate:predicate];
+    
     NSLog(@"load students for course: %@", crse);
     [self setCourse:crse];
     [self.toolbar setTintColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
@@ -193,12 +199,12 @@
                                                         alpha:1]];
     [self.dateHeader.sectionSubtitle setText:self.course.courseTitle];
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
     if (managedObjectContext == nil) {
         NSLog(@"NO CONTEXT");
     }
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Entry" inManagedObjectContext:managedObjectContext];
-    [request setEntity:entity];
+    [request setEntity:entity];*/
     
     NSError *error = nil;
     NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
@@ -206,7 +212,7 @@
         NSLog(@"fetchResults error");
     }
     else {
-        NSLog(@"fetchResults Success");
+        NSLog(@"fetchResults Success %@", mutableFetchResults);
         self.entryArray = mutableFetchResults;
     }
     
@@ -263,6 +269,24 @@
 - (void)didTouchCoursesBtn
 {
     [self.delegate loadCoursesViewController];
+}
+
+- (void)didTouchSegmentedControl
+{
+    switch ([self.segmentedControl selectedSegmentIndex]) {
+        case SEGMENT_STUDENTS:
+            NSLog(@"touched segment list");
+            [delegate loadCourseViewControllerForCourse:self.course];
+            break;
+        case SEGMENT_TODAY:
+            NSLog(@"touched segment today");
+            break;
+        case SEGMENT_HISTORY:
+            NSLog(@"touched segment history");
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didSelectOptionPicker:(OptionPicker *)picker
