@@ -15,28 +15,33 @@
 
 @synthesize delegate;
 
+@synthesize dailyEditRow;
+
 @synthesize optionPickerPopover;
 @synthesize options;
 @synthesize popoverHeader;
 @synthesize headerLabel;
 @synthesize rowId;
-@synthesize rowPos;
 @synthesize expanded;
 @synthesize gradient;
 @synthesize active;
+@synthesize highlightColor;
 
 - (id)initWithFrame:(CGRect)frame andHeader:(NSMutableString *)header andOptions:(NSMutableArray *)localOptions
 {
     if (self) {
         self = [super initWithFrame:frame];
         
-        delegate = nil;
-        active = NO;
+        self.delegate = nil;
+        self.dailyEditRow = nil;
+        self.active = NO;
         
         self.backgroundColor = [UIColor colorWithRed:(float)0xDD/0xFF 
                                                green:(float)0xDD/0xFF 
                                                 blue:(float)0xDD/0xFF 
                                                alpha:1];
+        
+        self.highlightColor = [Theme getThemeColor];
         
         gradient = [CAGradientLayer layer];
         [gradient setFrame:frame];
@@ -96,8 +101,8 @@
 {
     NSLog(@"SELECT PICKER");
     active = YES;
-    self.backgroundColor = [Theme getThemeColor];
-    self.headerLabel.textColor = [UIColor whiteColor];
+    self.backgroundColor = self.highlightColor;
+    self.headerLabel.textColor = [Theme getTextColorForColor:self.highlightColor];
 }
 
 - (void)deselectPicker

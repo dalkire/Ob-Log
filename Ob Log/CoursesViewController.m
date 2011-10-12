@@ -280,10 +280,20 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+/*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-	return YES;
+    NSLog(@"SHOULD AUTOROTATE");
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+            return YES;
+            break;
+            
+        default:
+            return NO;
+            break;
+    }
+    
+	return NO;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -292,6 +302,6 @@
     for (int i = 0; i < len; i++) {
         [[[self.scrollView subviews] objectAtIndex:i] setNeedsDisplay:YES];
     }
-}
+}*/
 
 @end

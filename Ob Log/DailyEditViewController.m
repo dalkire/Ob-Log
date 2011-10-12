@@ -23,7 +23,7 @@
 @synthesize delegate;
 
 @synthesize studentsMutableArray;
-@synthesize entryArray;
+@synthesize entriesArray;
 @synthesize managedObjectContext;
 
 @synthesize optionsPopoverController;
@@ -33,7 +33,6 @@
 @synthesize bg;
 @synthesize scrollView;
 @synthesize header;
-@synthesize dateHeaderDropShadow;
 @synthesize editModal;
 @synthesize activePicker;
 
@@ -44,7 +43,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.studentsMutableArray = [[NSMutableArray alloc] initWithCapacity:0];
-        self.entryArray = [[NSMutableArray alloc] initWithCapacity:0];
+        self.entriesArray = [[NSMutableArray alloc] initWithCapacity:0];
         self.course = nil;
     }
     return self;
@@ -120,14 +119,10 @@
                                initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                                     target:self 
                                                     action:@selector(didTouchEditBtn)];
-    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add" 
-                                                              style:UIBarButtonItemStyleBordered 
-                                                             target:self 
-                                                             action:@selector(addCourseModal)];
     UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     fixed.width = 23;
-    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, segmentedButtons, flex, editBtn, addBtn, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, segmentedButtons, flex, editBtn, nil]];
     
     self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
                                                            self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
@@ -138,31 +133,6 @@
                                                      blue:[self.course.colorB floatValue]/255 
                                                     alpha:1]];
     self.header.maintitleLabel.textColor = self.header.subtitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
-    //[self.header.maintitleLabel setText:@""];
-    //[self.header.subtitleLabel setText:course.courseTitle];
-    self.dateHeaderDropShadow = [[UIView alloc] initWithFrame:CGRectMake(0, 
-                                                                    header.frame.origin.y + header.frame.size.height, 
-                                                                    view.frame.size.width, 
-                                                                    8)];
-    [self.dateHeaderDropShadow setBackgroundColor:[UIColor clearColor]];
-    
-    CAGradientLayer *headerDrop = [CAGradientLayer layer];
-    headerDrop.frame = CGRectMake(0, 
-                                  0, 
-                                  dateHeaderDropShadow.frame.size.width, 
-                                  dateHeaderDropShadow.frame.size.height);
-    [headerDrop setColors:[NSArray arrayWithObjects: (id)[UIColor colorWithRed:(float)0x33/0xFF 
-                                                                         green:(float)0x33/0xFF 
-                                                                          blue:(float)0x33/0xFF 
-                                                                         alpha:0.4f].CGColor, 
-                           (id)[UIColor colorWithRed:(float)0x33/0xFF 
-                                               green:(float)0x33/0xFF 
-                                                blue:(float)0x33/0xFF 
-                                               alpha:0.0f].CGColor, 
-                           nil]];
-    headerDrop.startPoint = CGPointMake(0, 0);
-    headerDrop.endPoint = CGPointMake(0, 1);
-    [[self.dateHeaderDropShadow layer] addSublayer:headerDrop];
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,  
                                                                 self.header.frame.origin.y + self.header.frame.size.height, 
@@ -175,7 +145,6 @@
     [view addSubview:self.toolbar];
     [view addSubview:self.scrollView];
     [view addSubview:self.header];
-    //[view addSubview:self.dateHeaderDropShadow];
     [self setView:view];
     [view release];
 }
@@ -229,19 +198,26 @@
     [self setStudentsMutableArray:[self fetchStudentsForCourse:crse]];
     int len = [self.studentsMutableArray count];
     for (int i = 0; i < len; i++) {
+        NSLog(@"## %@", ((Student *)[studentsMutableArray objectAtIndex:i]).entries);
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
                                                                            i*CELL_HEIGHT, 
                                                                            self.view.frame.size.width, 
                                                                            CELL_HEIGHT)];
         [row setTag:i];
         [row setDelegate:self];
-        [row createNameCellWithName:[NSString stringWithFormat:@"%@ %@", 
-                                     ((Student *)[studentsMutableArray objectAtIndex:i]).firstName, 
-                                     ((Student *)[studentsMutableArray objectAtIndex:i]).lastName]];
+        [row createNameCellWithName:[NSString stringWithFormat:@"%@, %@", 
+                                     ((Student *)[studentsMutableArray objectAtIndex:i]).lastName, 
+                                     ((Student *)[studentsMutableArray objectAtIndex:i]).firstName]];
         
         int length = [row.optionPickers count];
         for (int j = 0; j < length; j++) {
             [(OptionPicker *)[row.optionPickers objectAtIndex:j] setDelegate:self];
+            [(OptionPicker *)[row.optionPickers objectAtIndex:j] setDailyEditRow:row];
+            [(OptionPicker *)[row.optionPickers objectAtIndex:j] 
+             setHighlightColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+                                               green:[self.course.colorG floatValue]/255 
+                                                blue:[self.course.colorB floatValue]/255 
+                                               alpha:1]];
         }
         
         [row setNeedsDisplay];
@@ -308,7 +284,7 @@
     }
     self.activePicker = picker;
     
-    NSLog(@"didSelectOptionPicker: %@", picker.headerLabel.text);
+    NSLog(@"didSelectOptionPickerin row: %@", picker.dailyEditRow);
     OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStylePlain];
     [optionsPopTVC setOptionsArray:picker.options];
     self.optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsPopTVC];
@@ -378,10 +354,19 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+/*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-	return YES;
-}
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+            return YES;
+            break;
+            
+        default:
+            return NO;
+            break;
+    }
+    
+	return NO;
+}*/
 
 @end

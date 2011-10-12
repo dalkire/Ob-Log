@@ -9,35 +9,38 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "PickerOptionsViewController.h"
-#import "SelectionTableRow.h"
 #import "Theme.h"
 
 @interface OptionPicker : UIView <UIPopoverControllerDelegate>
 {
     id delegate;
     
+    id dailyEditRow;
+    
     UIPopoverController *optionPickerPopover;
     NSMutableArray *options;
     NSString *popoverHeader;
     UILabel *headerLabel;
-    NSUInteger rowID;
-    NSUInteger rowPos;
+    NSUInteger rowId;
     BOOL expanded;
     CAGradientLayer *gradient;
     BOOL active;
+    UIColor *highlightColor;
 }
 
 @property (nonatomic, retain) id delegate;
+
+@property (nonatomic, retain) id dailyEditRow;
 
 @property (nonatomic, retain) UIPopoverController *optionPickerPopover;
 @property (nonatomic, retain) NSMutableArray *options;
 @property (nonatomic, retain) NSString *popoverHeader;
 @property (nonatomic, retain) UILabel *headerLabel;
 @property NSUInteger rowId;
-@property NSUInteger rowPos;
 @property BOOL expanded;
 @property (nonatomic, retain) CAGradientLayer *gradient;
 @property BOOL active;
+@property (nonatomic, retain) UIColor *highlightColor;
 
 - (id)initWithFrame:(CGRect)frame andHeader:(NSMutableString *)header andOptions:(NSMutableArray *)localOptions;
 - (void)selectPicker;

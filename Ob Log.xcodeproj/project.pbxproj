@@ -46,7 +46,6 @@
 		89DCB10F1444B6E100F847C4 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB10E1444B6E100F847C4 /* Entry.m */; };
 		89DCB1121444B6E200F847C4 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB1111444B6E200F847C4 /* Student.m */; };
 		89DCB1151444B6E200F847C4 /* OptionChoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB1141444B6E200F847C4 /* OptionChoice.m */; };
-		89DCB1181444B6E200F847C4 /* OptionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB1171444B6E200F847C4 /* OptionHeader.m */; };
 		89DCB11B1444B6E200F847C4 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB11A1444B6E200F847C4 /* Course.m */; };
 		89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF84751438ADB400D5F444 /* DailyEditViewController.m */; };
 		89DF847C1438F66900D5F444 /* Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF847B1438F66800D5F444 /* Header.m */; };
@@ -126,8 +125,6 @@
 		89DCB1111444B6E200F847C4 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 		89DCB1131444B6E200F847C4 /* OptionChoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionChoice.h; sourceTree = "<group>"; };
 		89DCB1141444B6E200F847C4 /* OptionChoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionChoice.m; sourceTree = "<group>"; };
-		89DCB1161444B6E200F847C4 /* OptionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionHeader.h; sourceTree = "<group>"; };
-		89DCB1171444B6E200F847C4 /* OptionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionHeader.m; sourceTree = "<group>"; };
 		89DCB1191444B6E200F847C4 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		89DCB11A1444B6E200F847C4 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		89DF84741438ADB400D5F444 /* DailyEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyEditViewController.h; sourceTree = "<group>"; };
@@ -272,8 +269,6 @@
 			children = (
 				89DCB1191444B6E200F847C4 /* Course.h */,
 				89DCB11A1444B6E200F847C4 /* Course.m */,
-				89DCB1161444B6E200F847C4 /* OptionHeader.h */,
-				89DCB1171444B6E200F847C4 /* OptionHeader.m */,
 				89DCB1131444B6E200F847C4 /* OptionChoice.h */,
 				89DCB1141444B6E200F847C4 /* OptionChoice.m */,
 				89DCB1101444B6E200F847C4 /* Student.h */,
@@ -412,7 +407,6 @@
 				89DCB10F1444B6E100F847C4 /* Entry.m in Sources */,
 				89DCB1121444B6E200F847C4 /* Student.m in Sources */,
 				89DCB1151444B6E200F847C4 /* OptionChoice.m in Sources */,
-				89DCB1181444B6E200F847C4 /* OptionHeader.m in Sources */,
 				89DCB11B1444B6E200F847C4 /* Course.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

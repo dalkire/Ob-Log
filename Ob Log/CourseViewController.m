@@ -116,7 +116,7 @@
                                                       self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
                                                       view.frame.size.width, 
                                                       80)];
-    [self.header.maintitleLabel setText:self.course.courseTitle];
+    [self.header.maintitleLabel setText:[NSString stringWithFormat:@"%@", self.course.courseTitle]];
     self.header.backgroundColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                   green:[self.course.colorG floatValue]/255 
                                                    blue:[self.course.colorB floatValue]/255 
@@ -129,7 +129,9 @@
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
                                                                      self.header.frame.origin.y + self.header.frame.size.height, 
                                                                      view.frame.size.width, 
-                                                                     view.frame.size.height - (self.header.frame.origin.y + self.header.frame.size.height))];
+                                                                     view.frame.size.height -
+                                                                     self.header.frame.size.height -
+                                                                     self.toolbar.frame.size.height)];
     self.scrollView.backgroundColor = [UIColor clearColor];
     
     [view addSubview:self.toolbar];
@@ -196,9 +198,9 @@
                                                                    i*CELL_HEIGHT, 
                                                                    self.view.frame.size.width, 
                                                                    CELL_HEIGHT)];
-        [row setMainLabelText:[NSString stringWithFormat:@"%@ %@", 
-                               ((Student *)[mutableFetchResults objectAtIndex:i]).firstName,
-                               ((Student *)[mutableFetchResults objectAtIndex:i]).lastName]];
+        [row setMainLabelText:[NSString stringWithFormat:@"%@, %@", 
+                               ((Student *)[mutableFetchResults objectAtIndex:i]).lastName,
+                               ((Student *)[mutableFetchResults objectAtIndex:i]).firstName]];
         [row setClickColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                            green:[self.course.colorG floatValue]/255 
                                             blue:[self.course.colorB floatValue]/255 
@@ -260,7 +262,7 @@
                                                                [self.studentsArray count]*CELL_HEIGHT, 
                                                                self.view.frame.size.width, 
                                                                CELL_HEIGHT)];
-    [row setMainLabelText:[NSString stringWithFormat:@"%@ %@", first, last]];
+    [row setMainLabelText:[NSString stringWithFormat:@"%@, %@", last, first]];
     [row setClickColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                        green:[self.course.colorG floatValue]/255 
                                         blue:[self.course.colorB floatValue]/255 
@@ -278,10 +280,19 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+/*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-	return YES;
-}
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+            return YES;
+            break;
+            
+        default:
+            return NO;
+            break;
+    }
+    
+	return NO;
+}*/
 
 @end

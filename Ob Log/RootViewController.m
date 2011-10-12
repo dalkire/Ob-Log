@@ -78,8 +78,17 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-	return YES;
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+            return YES;
+            break;
+            
+        default:
+            return NO;
+            break;
+    }
+    
+	return NO;
 }
 
 #pragma mark - delegation

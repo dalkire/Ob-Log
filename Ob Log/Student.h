@@ -10,12 +10,14 @@
 #import <CoreData/CoreData.h>
 
 @class Course;
+@class Entry;
 
 @interface Student : NSManagedObject
 
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSSet *courses;
+@property (nonatomic, retain) NSSet *entries;
 @end
 
 @interface Student (CoreDataGeneratedAccessors)
@@ -24,4 +26,9 @@
 - (void)removeCoursesObject:(Course *)value;
 - (void)addCourses:(NSSet *)values;
 - (void)removeCourses:(NSSet *)values;
+- (void)addEntriesObject:(Entry *)value;
+- (void)removeEntriesObject:(Entry *)value;
+- (void)addEntries:(NSSet *)values;
+- (void)removeEntries:(NSSet *)values;
+
 @end

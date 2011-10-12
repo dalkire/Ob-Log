@@ -15,5 +15,6 @@
 @dynamic firstName;
 @dynamic lastName;
 @dynamic courses;
+@dynamic entries;
 
 @end

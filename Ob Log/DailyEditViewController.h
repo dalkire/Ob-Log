@@ -24,7 +24,7 @@
     id delegate;
     
     NSMutableArray *studentsMutableArray;
-    NSMutableArray *entryArray;
+    NSMutableArray *entriesArray;
     NSManagedObjectContext *managedObjectContext;
     
     UIPopoverController *optionsPopoverController;
@@ -33,7 +33,6 @@
     UIImageView *bg;
     UIScrollView *scrollView;
     Header *header;
-    UIView *dateHeaderDropShadow;
     EditModalViewController *editModal;
     OptionPicker *activePicker;
     
@@ -43,7 +42,7 @@
 @property (nonatomic, retain) id delegate;
 
 @property (nonatomic, retain) NSMutableArray *studentsMutableArray;
-@property (nonatomic, retain) NSMutableArray *entryArray;
+@property (nonatomic, retain) NSMutableArray *entriesArray;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 @property (nonatomic, retain) UIPopoverController *optionsPopoverController;
@@ -53,7 +52,6 @@
 @property (nonatomic, retain) UIImageView *bg;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) Header *header;
-@property (nonatomic, retain) UIView *dateHeaderDropShadow;
 @property (nonatomic, retain) EditModalViewController *editModal;
 @property (nonatomic, retain) OptionPicker *activePicker;
 
