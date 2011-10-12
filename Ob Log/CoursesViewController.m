@@ -144,7 +144,10 @@
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
                                                                 self.header.frame.origin.y + self.header.frame.size.height, 
                                                                 view.frame.size.width, 
-                                                                view.frame.size.height - (self.toolbar.frame.origin.y + self.toolbar.frame.size.height))];
+                                                                view.frame.size.height - 
+                                                                self.toolbar.frame.size.height -
+                                                                self.header.frame.size.height -
+                                                                [UIApplication sharedApplication].statusBarFrame.size.height)];
     scrollView.backgroundColor = [UIColor clearColor];
     
     [view addSubview:self.toolbar];

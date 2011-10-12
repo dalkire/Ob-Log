@@ -130,8 +130,9 @@
                                                                      self.header.frame.origin.y + self.header.frame.size.height, 
                                                                      view.frame.size.width, 
                                                                      view.frame.size.height -
+                                                                     self.toolbar.frame.size.height -
                                                                      self.header.frame.size.height -
-                                                                     self.toolbar.frame.size.height)];
+                                                                     [UIApplication sharedApplication].statusBarFrame.size.height)];
     self.scrollView.backgroundColor = [UIColor clearColor];
     
     [view addSubview:self.toolbar];
@@ -269,8 +270,8 @@
                                        alpha:1]];
     [row setDelegate:self];
     [scrollView addSubview:row];
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [self.studentsArray count]*CELL_HEIGHT);
     [self.studentsArray addObject:student];
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [self.studentsArray count]*CELL_HEIGHT);
 }
 
 - (void)viewDidUnload

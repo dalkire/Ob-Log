@@ -138,7 +138,9 @@
                                                                 self.header.frame.origin.y + self.header.frame.size.height, 
                                                                 view.frame.size.width, 
                                                                 view.frame.size.height - 
-                                                                self.header.frame.size.height - self.toolbar.frame.size.height)];
+                                                                self.toolbar.frame.size.height -
+                                                                self.header.frame.size.height -
+                                                                [UIApplication sharedApplication].statusBarFrame.size.height)];
     scrollView.contentSize = CGSizeMake(view.frame.size.width, 0);
     scrollView.backgroundColor = [UIColor clearColor];
     
