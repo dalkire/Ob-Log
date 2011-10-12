@@ -79,10 +79,10 @@
     self.segmentedControl = [[UISegmentedControl alloc] 
                         initWithItems:[NSArray arrayWithObjects:@"Students", @"Today", @"History", nil]];
     self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    self.segmentedControl.tintColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
+    self.segmentedControl.tintColor = [Theme getThemeColor];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                       green:[self.course.colorG floatValue]/255 
                                                        blue:[self.course.colorB floatValue]/255 
-                                                      alpha:1];
+                                                      alpha:1];*/
     [self.segmentedControl setSelectedSegmentIndex:SEGMENT_STUDENTS];
     [self setActiveSegment:SEGMENT_STUDENTS];
     [self.segmentedControl addTarget:self
@@ -106,10 +106,10 @@
                                                                view.frame.size.width, 
                                                                50)];
     [self.toolbar setBarStyle:UIBarStyleDefault];
-    self.toolbar.tintColor = [UIColor colorWithRed:[self.course.colorR floatValue]/255 
+    self.toolbar.tintColor = [Theme getThemeColor];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                              green:[self.course.colorG floatValue]/255 
                                               blue:[self.course.colorB floatValue]/255 
-                                             alpha:1];
+                                             alpha:1];*/
     [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, segmentedButtons, flex, editBtn, addBtn, nil]];
     
     self.header = [[Header alloc] initWithFrame:CGRectMake(0, 

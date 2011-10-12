@@ -92,10 +92,10 @@
                                                                view.frame.size.width, 
                                                                50)];
     [self.toolbar setBarStyle:UIBarStyleDefault];
-    [self.toolbar setTintColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+    [self.toolbar setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                green:[self.course.colorG floatValue]/255 
                                                 blue:[self.course.colorB floatValue]/255 
-                                               alpha:1]];
+                                               alpha:1]];*/
     
     UIBarButtonItem *coursesBtn =[[UIBarButtonItem alloc] initWithTitle:@"Courses"
                                                                   style:UIBarButtonItemStyleBordered
@@ -104,10 +104,10 @@
     self.segmentedControl = [[UISegmentedControl alloc] 
                         initWithItems:[NSArray arrayWithObjects:@"Students", @"Today", @"History", nil]];
     self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    [self.segmentedControl setTintColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+    [self.segmentedControl setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                         green:[self.course.colorG floatValue]/255 
                                                          blue:[self.course.colorB floatValue]/255 
-                                                        alpha:1]];
+                                                        alpha:1]];*/
     [self.segmentedControl setSelectedSegmentIndex:SEGMENT_TODAY];
     [self.segmentedControl addTarget:self
                               action:@selector(didTouchSegmentedControl)
@@ -155,10 +155,10 @@
     [self setCourse:crse];
     
     
-    [self.toolbar setTintColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
+    [self.toolbar setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                green:[self.course.colorG floatValue]/255 
                                                 blue:[self.course.colorB floatValue]/255 
-                                               alpha:1]];
+                                               alpha:1]];*/
     [self.header setBackgroundColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                     green:[self.course.colorG floatValue]/255 
                                                      blue:[self.course.colorB floatValue]/255 
