@@ -28,6 +28,7 @@
     id delegate;
     NSUInteger containerTag;
     
+    NSDate *date;
     Course *course;
     Student *student;
     Entry *entry;
@@ -54,6 +55,7 @@
 @property (nonatomic, assign) id delegate;
 @property NSUInteger containerTag;
 
+@property (nonatomic, retain) NSDate *date;
 @property (nonatomic, retain) Course *course;
 @property (nonatomic, retain) Student *student;
 @property (nonatomic, retain) Entry *entry;
@@ -75,7 +77,7 @@
 @property (nonatomic, retain) NSIndexPath *currentIndexPath;
 @property NSInteger previousIndex;
 
-- (id)initWithFrame:(CGRect)frame andStudent:(Student *)tStudent inCourse:(Course *)tCourse forDate:(NSDate *)tDate;
+- (id)initWithFrame:(CGRect)frame andStudent:(Student *)iStudent inCourse:(Course *)iCourse forDate:(NSDate *)iDate;
 - (void)assignOptionsArray:(NSMutableArray *)options;
 
 @end

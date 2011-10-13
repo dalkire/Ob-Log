@@ -171,7 +171,6 @@
 
 - (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)date
 {
-    NSLog(@"load students for course: %@", crse);
     [self setCourse:crse];
     
     
@@ -191,7 +190,7 @@
     [self setStudentsMutableArray:[self fetchStudentsForCourse:crse]];
     int len = [self.studentsMutableArray count];
     for (int i = 0; i < len; i++) {
-        //NSLog(@"## %@", ((Student *)[studentsMutableArray objectAtIndex:i]).entries);
+        NSLog(@"## student");
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
                                                                            i*CELL_HEIGHT, 
                                                                            self.view.frame.size.width, 
@@ -216,6 +215,7 @@
         [row setNeedsDisplay];
         [self.scrollView addSubview:row];
         [self.scrollView setContentSize:CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height + CELL_HEIGHT)];
+        NSLog(@"row in devc: %@", row);
     }
 }
 

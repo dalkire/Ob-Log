@@ -34,16 +34,15 @@
         
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 2, frame.size.width - 52, frame.size.height - 5)];
         _scrollView.backgroundColor = [UIColor clearColor];
-        _scrollView.contentSize = CGSizeMake(frame.size.width - 52, textView.frame.size.height - 5);
-        [scrollView addSubview:textView];
-        [self addSubview:scrollView];
+        _scrollView.contentSize = CGSizeMake(frame.size.width - 52, _textView.frame.size.height - 5);
         _actionsSlider = [[ActionsSlider alloc] initWithFrame:CGRectMake(-6, 
                                                                         0, 
                                                                         self.frame.size.width, 
                                                                         self.frame.size.height - 1)];
         
-        [self addSubview:scrollView];
-        [self addSubview:actionsSlider];
+        [_scrollView addSubview:_textView];
+        [self addSubview:_scrollView];
+        [self addSubview:_actionsSlider];
         _sliderIsExtended = YES;
     }
     return self;

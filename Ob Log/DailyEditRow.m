@@ -13,18 +13,20 @@
 @synthesize delegate;
 @synthesize containerTag;
 
-@synthesize course;
-@synthesize student;
-@synthesize entry;
-@synthesize optionChoices;
+@synthesize date = _date;
+@synthesize course = _course;
+@synthesize student = _student;
+@synthesize entry = _entry;
+@synthesize optionChoices = _optionChoices;
 
-@synthesize nameCell;
-@synthesize noteCell;
-@synthesize actionsSlider;
-@synthesize actionButton;
-@synthesize optionsScrollWrapper;
-@synthesize optionsScroll;
-@synthesize optionPickers;
+@synthesize nameCell = _nameCell;
+@synthesize noteCell = _noteCell;
+@synthesize actionsSlider = _actionSlider;
+@synthesize actionButton = _actionButton;
+@synthesize optionsScrollWrapper = _optionsScrollWrapper;
+@synthesize optionsScroll = _optionsScroll;
+@synthesize optionPickers = _optionPicker;
+@synthesize arr = _arr;
 
 @synthesize rowId;
 @synthesize rowPos;
@@ -33,22 +35,19 @@
 @synthesize currentIndexPath;
 @synthesize previousIndex;
 
-- (id)initWithFrame:(CGRect)frame andStudent:(Student *)tStudent inCourse:(Course *)tCourse forDate:(NSDate *)tDate
+- (id)initWithFrame:(CGRect)frame andStudent:(Student *)iStudent inCourse:(Course *)iCourse forDate:(NSDate *)iDate
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.course = nil;
-        self.student = nil;
-        self.entry = nil;
-        self.optionChoices = nil;
-        
-        self.nameCell = nil;
-        self.noteCell = nil;
-        [self createNoteCellWithObject:[[NSObject alloc] init]];
-        self.actionsSlider = self.noteCell.actionsSlider;
-        self.optionsScrollWrapper = self.noteCell.actionsSlider.optionsScrollWrapper;
-        self.optionsScroll = self.noteCell.actionsSlider.optionsScrollWrapper.optionsScroll;
-        self.optionPickers = self.noteCell.actionsSlider.optionsScrollWrapper.optionsScroll.optionPickers;
+        _student  = iStudent;
+        _course   = iCourse;
+        _date     = iDate;
+        _nameCell = [[NameCell alloc] initWithFrame:CGRectMake(0, 0, 299, frame.size.height - 2) 
+                                            andName:[NSString stringWithFormat:@"%@, %@", _student.lastName, _student.firstName]];
+        _noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(302, 0, frame.size.width - 308, frame.size.height)];
+        NSLog(@"NOTE CELL width: %f", _noteCell.frame.size.width);
+        [self addSubview:_nameCell];
+        [self addSubview:_noteCell];
     }
     
     return self;
