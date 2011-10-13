@@ -211,6 +211,9 @@
         [self.studentsArray addObject:(Student *)[mutableFetchResults objectAtIndex:i]];
     }
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
+    
+    [request release];
+    [mutableFetchResults release];
 }
 
 - (void)didTouchClickRow:(ClickRow *)clickRow

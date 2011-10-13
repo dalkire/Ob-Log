@@ -39,7 +39,7 @@
     Course *course;
 }
 
-@property (nonatomic, retain) id delegate;
+@property (nonatomic, assign) id delegate;
 
 @property (nonatomic, retain) NSMutableArray *studentsMutableArray;
 @property (nonatomic, retain) NSMutableArray *entriesArray;

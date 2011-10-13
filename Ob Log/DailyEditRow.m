@@ -13,66 +13,59 @@
 @synthesize delegate;
 @synthesize containerTag;
 
-@synthesize nameCell;
-@synthesize noteCell;
-@synthesize actionsSlider;
-@synthesize actionButton;
-@synthesize optionsScrollWrapper;
-@synthesize optionsScroll;
-@synthesize optionPickers;
+@synthesize date = _date;
+@synthesize course = _course;
+@synthesize student = _student;
+@synthesize entry = _entry;
+@synthesize optionChoices = _optionChoices;
+
+@synthesize nameCell = _nameCell;
+@synthesize noteCell = _noteCell;
+@synthesize actionsSlider = _actionSlider;
+@synthesize actionButton = _actionButton;
+@synthesize optionsScrollWrapper = _optionsScrollWrapper;
+@synthesize optionsScroll = _optionsScroll;
+@synthesize optionPickers = _optionPicker;
+@synthesize arr = _arr;
 
 @synthesize rowId;
 @synthesize rowPos;
-@synthesize arr;
 @synthesize popoverHeader;
 @synthesize previousIndexPath;
 @synthesize currentIndexPath;
 @synthesize previousIndex;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame andStudent:(Student *)tStudent inCourse:(Course *)tCourse forDate:(NSDate *)tDate
 {
     self = [super initWithFrame:frame];
     if (self) {
-        nameCell = nil;
-        noteCell = nil;
-        [self createNoteCellWithObject:[[NSObject alloc] init]];
-        actionsSlider = noteCell.actionsSlider;
-        optionsScrollWrapper = noteCell.actionsSlider.optionsScrollWrapper;
-        optionsScroll = noteCell.actionsSlider.optionsScrollWrapper.optionsScroll;
-        optionPickers = noteCell.actionsSlider.optionsScrollWrapper.optionsScroll.optionPickers;
+        _student  = tStudent;
+        _course   = tCourse;
+        _date     = tDate;
+        _nameCell = [[NameCell alloc] initWithFrame:CGRectMake(0, 0, 299, frame.size.height - 2) 
+                                            andName:[NSString stringWithFormat:@"%@, %@", _student.lastName, _student.firstName]];
+        _noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(302, 0, frame.size.width - 308, frame.size.height)];
+        
+        [self addSubview:_nameCell];
+        [self addSubview:_noteCell];
     }
+    
     return self;
-}
-
-- (NameCell *)createNameCellWithName:(NSString *)name
-{
-    nameCell = nil;
-    nameCell = [[NameCell alloc] initWithFrame:CGRectMake(0, 
-                                                          0, 
-                                                          299, 
-                                                          self.frame.size.height - 2) 
-                                       andName:name];
-    [self addSubview:nameCell];
-    
-    return nameCell;
-}
-
-- (NoteCell *)createNoteCellWithObject:(NSObject *)object
-{
-    noteCell = nil;
-    noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(302, 
-                                                          0, 
-                                                          self.frame.size.width - 308, 
-                                                          self.frame.size.height)];
-    
-    [self addSubview:noteCell];
-    
-    return noteCell;
 }
 
 - (void)assignOptionsArray:(NSMutableArray *)options
 {
-    arr = options;
+    _arr = options;
+}
+
+- (void)dealloc
+{
+    [_student release];
+    [_course release];
+    [_date release];
+    [_nameCell release];
+    [_noteCell release];
+    [super dealloc];
 }
 
 @end
