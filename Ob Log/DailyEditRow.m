@@ -13,6 +13,11 @@
 @synthesize delegate;
 @synthesize containerTag;
 
+@synthesize course;
+@synthesize student;
+@synthesize entry;
+@synthesize optionChoices;
+
 @synthesize nameCell;
 @synthesize noteCell;
 @synthesize actionsSlider;
@@ -33,13 +38,18 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        nameCell = nil;
-        noteCell = nil;
+        self.course = nil;
+        self.student = nil;
+        self.entry = nil;
+        self.optionChoices = nil;
+        
+        self.nameCell = nil;
+        self.noteCell = nil;
         [self createNoteCellWithObject:[[NSObject alloc] init]];
-        actionsSlider = noteCell.actionsSlider;
-        optionsScrollWrapper = noteCell.actionsSlider.optionsScrollWrapper;
-        optionsScroll = noteCell.actionsSlider.optionsScrollWrapper.optionsScroll;
-        optionPickers = noteCell.actionsSlider.optionsScrollWrapper.optionsScroll.optionPickers;
+        self.actionsSlider = self.noteCell.actionsSlider;
+        self.optionsScrollWrapper = self.noteCell.actionsSlider.optionsScrollWrapper;
+        self.optionsScroll = self.noteCell.actionsSlider.optionsScrollWrapper.optionsScroll;
+        self.optionPickers = self.noteCell.actionsSlider.optionsScrollWrapper.optionsScroll.optionPickers;
     }
     return self;
 }

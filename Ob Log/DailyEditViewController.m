@@ -169,38 +169,11 @@
                                                                        dateStyle:NSDateFormatterLongStyle 
                                                                        timeStyle:NSDateFormatterNoStyle]];
     [self.header.subtitleLabel setText:self.course.courseTitle];
-    
-    NSArray *array = [[NSArray alloc] initWithObjects:
-                      @"Melissa Alkire",
-                      @"David Alkire",
-                      @"Bryan Catarra",
-                      @"Jessie Lloyd",
-                      @"Metta World Peace",
-                      @"J.R. Martinez",
-                      @"Tom Bergeron",
-                      @"Howard Stern",
-                      @"Robin Quivers",
-                      @"Gary Dell'Abate",
-                      @"Fred Norris",
-                      @"George Takei",
-                      @"Richard Christy & Sal Governale",
-                      @"Sal Governale",
-                      @"Oprah Winfrey",
-                      @"Steve Jobs",
-                      @"Steve Wozniak",
-                      @"Jessie Lloyd",
-                      @"Metta World Peace",
-                      @"J.R. Martinez",
-                      @"Tom Bergeron",
-                      @"Howard Stern",
-                      @"Robin Quivers",
-                      @"Gary Dell'Abate",
-                      nil];
 	
     [self setStudentsMutableArray:[self fetchStudentsForCourse:crse]];
     int len = [self.studentsMutableArray count];
     for (int i = 0; i < len; i++) {
-        NSLog(@"## %@", ((Student *)[studentsMutableArray objectAtIndex:i]).entries);
+        //NSLog(@"## %@", ((Student *)[studentsMutableArray objectAtIndex:i]).entries);
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
                                                                            i*CELL_HEIGHT, 
                                                                            self.view.frame.size.width, 

@@ -7,6 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+
+#import "Course.h"
+#import "Student.h"
+#import "Entry.h"
+#import "OptionChoice.h"
+
 #import "Row.h"
 #import "NameCell.h"
 #import "NoteCell.h"
@@ -21,6 +27,11 @@
 {
     id delegate;
     NSUInteger containerTag;
+    
+    Course *course;
+    Student *student;
+    Entry *entry;
+    NSSet *optionChoices;
     
     NameCell *nameCell;
     NoteCell *noteCell;
@@ -42,6 +53,11 @@
 
 @property (nonatomic, retain) id delegate;
 @property NSUInteger containerTag;
+
+@property (nonatomic, retain) Course *course;
+@property (nonatomic, retain) Student *student;
+@property (nonatomic, retain) Entry *entry;
+@property (nonatomic, retain) NSSet *optionChoices;
 
 @property (nonatomic, retain) NameCell *nameCell;
 @property (nonatomic, retain) NoteCell *noteCell;
