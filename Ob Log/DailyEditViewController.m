@@ -42,8 +42,14 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.studentsMutableArray = [[NSMutableArray alloc] initWithCapacity:0];
-        self.entriesArray = [[NSMutableArray alloc] initWithCapacity:0];
+        NSMutableArray *sma = [[NSMutableArray alloc] initWithCapacity:0];
+        self.studentsMutableArray = sma;
+        [sma release];
+        
+        NSMutableArray *ea = [[NSMutableArray alloc] initWithCapacity:0];
+        self.entriesArray = ea;
+        [ea release];
+        
         self.course = nil;
     }
     return self;
@@ -101,8 +107,12 @@
                                                                   style:UIBarButtonItemStyleBordered
                                                                  target:self 
                                                                  action:@selector(didTouchCoursesBtn)];
-    self.segmentedControl = [[UISegmentedControl alloc] 
-                        initWithItems:[NSArray arrayWithObjects:@"Students", @"Today", @"History", nil]];
+    
+    UISegmentedControl *sc = [[UISegmentedControl alloc] 
+                              initWithItems:[NSArray arrayWithObjects:@"Students", @"Today", @"History", nil]];
+    self.segmentedControl = sc;
+    [sc release];
+    
     self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
     [self.segmentedControl setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                         green:[self.course.colorG floatValue]/255 
@@ -120,29 +130,37 @@
                                                     target:self 
                                                     action:@selector(didTouchEditBtn)];
     UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem	*fixed = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    fixed.width = 23;
     [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, segmentedButtons, flex, editBtn, nil]];
+    [coursesBtn release];
+    [segmentedButtons release];
+    [flex release];
+    [editBtn release];
     
     self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
                                                            self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
                                                            view.frame.size.width, 
                                                            90)];
-    [self.header setBackgroundColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                    green:[self.course.colorG floatValue]/255 
-                                                     blue:[self.course.colorB floatValue]/255 
-                                                    alpha:1]];
+    UIColor *bgc = [[UIColor alloc] initWithRed:[self.course.colorR floatValue]/255 
+                                          green:[self.course.colorG floatValue]/255 
+                                           blue:[self.course.colorB floatValue]/255 
+                                          alpha:1];
+    [self.header setBackgroundColor:bgc];
+    [bgc release];
+    
     self.header.maintitleLabel.textColor = self.header.subtitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
     
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,  
-                                                                self.header.frame.origin.y + self.header.frame.size.height, 
-                                                                view.frame.size.width, 
-                                                                view.frame.size.height - 
-                                                                self.toolbar.frame.size.height -
-                                                                self.header.frame.size.height -
-                                                                [UIApplication sharedApplication].statusBarFrame.size.height)];
-    scrollView.contentSize = CGSizeMake(view.frame.size.width, 0);
-    scrollView.backgroundColor = [UIColor clearColor];
+    UIScrollView *sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0,  
+                                                                      self.header.frame.origin.y + self.header.frame.size.height, 
+                                                                      view.frame.size.width, 
+                                                                      view.frame.size.height - 
+                                                                      self.toolbar.frame.size.height -
+                                                                      self.header.frame.size.height -
+                                                                      [UIApplication sharedApplication].statusBarFrame.size.height)];
+    self.scrollView = sv;
+    [sv release];
+    
+    self.scrollView.contentSize = CGSizeMake(view.frame.size.width, 0);
+    self.scrollView.backgroundColor = [UIColor clearColor];
     
     [view addSubview:self.toolbar];
     [view addSubview:self.scrollView];
@@ -177,12 +195,12 @@
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
                                                                            i*CELL_HEIGHT, 
                                                                            self.view.frame.size.width, 
-                                                                           CELL_HEIGHT)];
+                                                                           CELL_HEIGHT)
+                                                     andStudent:(Student *)[studentsMutableArray objectAtIndex:i] 
+                                                       inCourse:crse 
+                                                        forDate:date];
         [row setTag:i];
         [row setDelegate:self];
-        [row createNameCellWithName:[NSString stringWithFormat:@"%@, %@", 
-                                     ((Student *)[studentsMutableArray objectAtIndex:i]).lastName, 
-                                     ((Student *)[studentsMutableArray objectAtIndex:i]).firstName]];
         
         int length = [row.optionPickers count];
         for (int j = 0; j < length; j++) {

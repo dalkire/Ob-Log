@@ -40,10 +40,10 @@
     OptionsScrollWrapper *optionsScrollWrapper;
     OptionsScroll *optionsScroll;
     NSMutableArray *optionPickers;
+    NSMutableArray *arr;
     
     NSUInteger rowId;
     NSUInteger rowPos;
-    NSMutableArray *arr;
     NSString *popoverHeader;
     NSIndexPath *previousIndexPath;
     NSIndexPath *currentIndexPath;
@@ -51,7 +51,7 @@
 }
 
 
-@property (nonatomic, retain) id delegate;
+@property (nonatomic, assign) id delegate;
 @property NSUInteger containerTag;
 
 @property (nonatomic, retain) Course *course;
@@ -66,16 +66,16 @@
 @property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
 @property (nonatomic, retain) OptionsScroll *optionsScroll;
 @property (nonatomic, retain) NSMutableArray *optionPickers;
+@property (nonatomic, retain) NSMutableArray *arr;
+
 @property NSUInteger rowId;
 @property NSUInteger rowPos;
-@property (nonatomic, retain) NSMutableArray *arr;
 @property (nonatomic, retain) NSString *popoverHeader;
 @property (nonatomic, retain) NSIndexPath *previousIndexPath;
 @property (nonatomic, retain) NSIndexPath *currentIndexPath;
 @property NSInteger previousIndex;
 
-- (NameCell *)createNameCellWithName:(NSString *)name;
-- (NoteCell *)createNoteCellWithObject:(NSObject *)object;
+- (id)initWithFrame:(CGRect)frame andStudent:(Student *)tStudent inCourse:(Course *)tCourse forDate:(NSDate *)tDate;
 - (void)assignOptionsArray:(NSMutableArray *)options;
 
 @end

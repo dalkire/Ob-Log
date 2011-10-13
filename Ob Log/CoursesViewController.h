@@ -36,7 +36,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property NSUInteger nextCourseId;
 
-@property (nonatomic, retain) id delegate;
+@property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) UIToolbar *toolbar;
 @property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property NSUInteger activeSegment;

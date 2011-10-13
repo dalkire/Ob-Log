@@ -10,9 +10,11 @@
 
 @interface NameCell : UIView
 {
+    id dailyEditRow;
     UILabel *nameLabel;
 }
 
+@property (nonatomic, assign) __weak id dailyEditRow;
 @property (nonatomic, retain) UILabel *nameLabel;
 
 - (id)initWithFrame:(CGRect)frame andName:(NSString *)name;

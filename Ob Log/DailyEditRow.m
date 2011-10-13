@@ -28,13 +28,12 @@
 
 @synthesize rowId;
 @synthesize rowPos;
-@synthesize arr;
 @synthesize popoverHeader;
 @synthesize previousIndexPath;
 @synthesize currentIndexPath;
 @synthesize previousIndex;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame andStudent:(Student *)tStudent inCourse:(Course *)tCourse forDate:(NSDate *)tDate
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -51,38 +50,23 @@
         self.optionsScroll = self.noteCell.actionsSlider.optionsScrollWrapper.optionsScroll;
         self.optionPickers = self.noteCell.actionsSlider.optionsScrollWrapper.optionsScroll.optionPickers;
     }
+    
     return self;
-}
-
-- (NameCell *)createNameCellWithName:(NSString *)name
-{
-    nameCell = nil;
-    nameCell = [[NameCell alloc] initWithFrame:CGRectMake(0, 
-                                                          0, 
-                                                          299, 
-                                                          self.frame.size.height - 2) 
-                                       andName:name];
-    [self addSubview:nameCell];
-    
-    return nameCell;
-}
-
-- (NoteCell *)createNoteCellWithObject:(NSObject *)object
-{
-    noteCell = nil;
-    noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(302, 
-                                                          0, 
-                                                          self.frame.size.width - 308, 
-                                                          self.frame.size.height)];
-    
-    [self addSubview:noteCell];
-    
-    return noteCell;
 }
 
 - (void)assignOptionsArray:(NSMutableArray *)options
 {
-    arr = options;
+    _arr = options;
+}
+
+- (void)dealloc
+{
+    [_student release];
+    [_course release];
+    [_date release];
+    [_nameCell release];
+    [_noteCell release];
+    [super dealloc];
 }
 
 @end

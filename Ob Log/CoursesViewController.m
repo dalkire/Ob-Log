@@ -67,6 +67,9 @@
                              inView:self.view
            permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     [editNavController setDelegate:self];
+    
+    [editCoursesViewController release];
+    [editPop release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -157,6 +160,11 @@
     [self.scrollView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self setView:view];
+    
+    [segmentedButtons release];
+    [addBtn release];
+    [editBtn release];
+    [flex release];
     [view release];
 }
 
@@ -206,10 +214,17 @@
         [row setCourse:(Course *)[mutableFetchResults objectAtIndex:i]];
         [row setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [scrollView addSubview:row];
+        
+        [colorTag release];
     }
     
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
     NSLog(@"len*CELL_HEIGHT : %d", len*CELL_HEIGHT);
+    
+    [mutableFetchResults release];
+    [sortDescriptor release];
+    [sortDescriptors release];
+    [request release];
 }
  
 /*
@@ -274,13 +289,21 @@
     [scrollView addSubview:row];
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [self.coursesArray count]*CELL_HEIGHT);
     [self.coursesArray addObject:course];
+    
+    [colorTag release];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    
+    self.managedObjectContext = nil;
+    self.delegate = nil;
+    self.toolbar = nil;
+    self.segmentedControl = nil;
+    self.header = nil;
+    self.scrollView = nil;
+    self.coursesArray = nil;
 }
 
 /*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

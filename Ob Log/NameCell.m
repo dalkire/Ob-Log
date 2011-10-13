@@ -30,6 +30,16 @@
     return self;
 }
 
+- (id)dailyEditRow
+{
+    return self.dailyEditRow;
+}
+
+- (void)setDailyEditRow:(id)der
+{
+    self.dailyEditRow = der;
+}
+
 /*- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"Name CELL touches ENDED");

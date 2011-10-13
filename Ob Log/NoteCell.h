@@ -15,6 +15,8 @@
 
 @interface NoteCell : UIView
 {
+    id dailyEditRow;
+    
     ActionsSlider *actionsSlider;
     ActionButton *actionButton;
     OptionsScrollWrapper *optionsScrollWrapper;
@@ -27,6 +29,8 @@
     NSUInteger rowPos;
 }
 
+@property (nonatomic, assign) __weak id dailyEditRow;
+
 @property (nonatomic, retain) ActionsSlider *actionsSlider;
 @property (nonatomic, retain) ActionButton *actionButton;
 @property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
@@ -37,7 +41,5 @@
 @property (nonatomic, retain) UITextView *textView;
 @property NSUInteger rowId;
 @property NSUInteger rowPos;
-
-- (ActionsSlider *)createActionsSlider;
 
 @end
