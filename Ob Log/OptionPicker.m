@@ -70,8 +70,7 @@
         [headerLabel setBackgroundColor:[UIColor clearColor]];
         [headerLabel setText:header];
         [headerLabel sizeToFit];
-        /**/
-        //NSLog(@"pickerFRAME 1: %f", self.frame.size.width);
+        
         [self setFrame:CGRectMake(self.frame.origin.x, 
                                   self.frame.origin.y, 
                                   headerLabel.frame.size.width + 40, 
@@ -95,6 +94,12 @@
     }
     
     return self;
+}
+
+- (void)propagateDailyEditRow:(__weak id)der
+{
+    [self setDailyEditRow:der];
+    NSLog(@"set DER in OP: %@ %@", [der student].firstName, [der student].lastName);
 }
 
 - (void)selectPicker

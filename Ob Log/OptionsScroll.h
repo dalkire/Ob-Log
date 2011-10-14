@@ -11,13 +11,18 @@
 
 @interface OptionsScroll : UIScrollView
 {
+    __weak id dailyEditRow;
+    
     NSMutableArray *optionPickers;
     NSUInteger currX;
 }
 
+@property (nonatomic, assign) __weak id dailyEditRow;
+
 @property (nonatomic, retain) NSMutableArray *optionPickers;
 @property NSUInteger currX;
 
+- (void)propagateDailyEditRow:(__weak id)der;
 - (NSMutableArray *)createOptionPickersFromArray:(NSMutableArray *)pickersData;
 - (OptionPicker *)createOptionPickerWithHeader:(NSMutableString *)header andOptions:(NSMutableArray *)options;
 

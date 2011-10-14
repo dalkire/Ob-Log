@@ -52,7 +52,7 @@
 }
 
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, retain) id delegate;
 @property NSUInteger containerTag;
 
 @property (nonatomic, retain) NSDate *date;

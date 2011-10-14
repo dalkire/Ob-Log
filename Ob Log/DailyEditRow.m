@@ -45,7 +45,8 @@
         _nameCell = [[NameCell alloc] initWithFrame:CGRectMake(0, 0, 299, frame.size.height - 2) 
                                             andName:[NSString stringWithFormat:@"%@, %@", _student.lastName, _student.firstName]];
         _noteCell = [[NoteCell alloc] initWithFrame:CGRectMake(302, 0, frame.size.width - 308, frame.size.height)];
-        NSLog(@"NOTE CELL width: %f", _noteCell.frame.size.width);
+        [_noteCell propagateDailyEditRow:self];
+        
         [self addSubview:_nameCell];
         [self addSubview:_noteCell];
     }

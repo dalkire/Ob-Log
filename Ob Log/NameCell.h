@@ -14,7 +14,7 @@
     UILabel *nameLabel;
 }
 
-@property (nonatomic, assign) __weak id dailyEditRow;
+@property (nonatomic, retain) id dailyEditRow;
 @property (nonatomic, retain) UILabel *nameLabel;
 
 - (id)initWithFrame:(CGRect)frame andName:(NSString *)name;

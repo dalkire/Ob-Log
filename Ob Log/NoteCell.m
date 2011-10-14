@@ -10,6 +10,8 @@
 
 @implementation NoteCell
 
+@synthesize dailyEditRow;
+
 @synthesize actionsSlider = _actionsSlider;
 @synthesize actionButton;
 @synthesize optionsScrollWrapper;
@@ -48,14 +50,10 @@
     return self;
 }
 
-- (id)dailyEditRow
+- (void)propagateDailyEditRow:(__weak id)der
 {
-    return self.dailyEditRow;
-}
-
-- (void)setDailyEditRow:(id)der
-{
-    self.dailyEditRow = der;
+    [self setDailyEditRow:der];
+    [_actionsSlider propagateDailyEditRow:der];
 }
 
 /*- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

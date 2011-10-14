@@ -15,7 +15,7 @@
 {
     id delegate;
     
-    id dailyEditRow;
+    __weak id dailyEditRow;
     
     UIPopoverController *optionPickerPopover;
     NSMutableArray *options;
@@ -30,7 +30,7 @@
 
 @property (nonatomic, retain) id delegate;
 
-@property (nonatomic, retain) id dailyEditRow;
+@property (nonatomic, assign) __weak id dailyEditRow;
 
 @property (nonatomic, retain) UIPopoverController *optionPickerPopover;
 @property (nonatomic, retain) NSMutableArray *options;
@@ -42,6 +42,7 @@
 @property BOOL active;
 @property (nonatomic, retain) UIColor *highlightColor;
 
+- (void)propagateDailyEditRow:(__weak id)der;
 - (id)initWithFrame:(CGRect)frame andHeader:(NSMutableString *)header andOptions:(NSMutableArray *)localOptions;
 - (void)selectPicker;
 - (void)deselectPicker;

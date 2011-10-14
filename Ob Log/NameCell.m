@@ -10,6 +10,7 @@
 
 @implementation NameCell
 
+@synthesize dailyEditRow;
 @synthesize nameLabel;
 
 - (id)initWithFrame:(CGRect)frame andName:(NSString *)name
@@ -28,16 +29,6 @@
         [self addSubview:nameLabel];
     }
     return self;
-}
-
-- (id)dailyEditRow
-{
-    return self.dailyEditRow;
-}
-
-- (void)setDailyEditRow:(id)der
-{
-    self.dailyEditRow = der;
 }
 
 /*- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

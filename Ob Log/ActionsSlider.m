@@ -8,10 +8,14 @@
 
 #import "ActionsSlider.h"
 
+#import "DailyEditRow.h"
+
 @implementation ActionsSlider
 
-@synthesize actionButton;
-@synthesize optionsScrollWrapper;
+@synthesize dailyEditRow;
+
+@synthesize actionButton = _actionButton;
+@synthesize optionsScrollWrapper = _optionsScrollWrapper;
 @synthesize optionsScroll;
 @synthesize optionPickers;
 
@@ -30,30 +34,23 @@
                                              alpha:1];
         [self addSubview:bg];
         
-        actionButton = [self createActionButton];
-        [self addSubview:actionButton];
+        _actionButton = [[ActionButton alloc] initWithFrame:CGRectMake(10, 0, 50, frame.size.height)];
+        [_actionButton createButtonOfType:@"toggle"];
+        [self addSubview:_actionButton];
         
-        optionsScrollWrapper = [self createOptionsScrollWrapper];
-        [self addSubview:optionsScrollWrapper];
+        _optionsScrollWrapper = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(60, 
+                                                                                      0, 
+                                                                                      frame.size.width - 60, 
+                                                                                      frame.size.height)];
+        [self addSubview:_optionsScrollWrapper];
     }
     return self;
 }
 
-- (ActionButton *)createActionButton
+- (void)propagateDailyEditRow:(__weak id)der
 {
-    ActionButton *ab = [[ActionButton alloc] initWithFrame:CGRectMake(10, 0, 50, self.frame.size.height)];
-    [ab createButtonOfType:@"toggle"];
-    
-    return ab;
-}
-
-- (OptionsScrollWrapper *)createOptionsScrollWrapper
-{
-    OptionsScrollWrapper *osw = [[OptionsScrollWrapper alloc] initWithFrame:CGRectMake(60, 
-                                                                                       0, 
-                                                                                       self.frame.size.width - 60, 
-                                                                                       self.frame.size.height)];
-    return osw;
+    [self setDailyEditRow:der];
+    [_optionsScrollWrapper propagateDailyEditRow:der];
 }
 
 - (void)drawRect:(CGRect)rect

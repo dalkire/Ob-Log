@@ -12,15 +12,19 @@
 
 @interface OptionsScrollWrapper : UIView
 {
+    __weak id dailyEditRow;
+    
     OptionsScroll *optionsScroll;
     UIView *leftShadow;
     UIView *rightShadow;
 }
 
+@property (nonatomic, assign) __weak id dailyEditRow;
+
 @property (nonatomic, retain) OptionsScroll *optionsScroll;
 @property (nonatomic, retain) UIView *leftShadow;
 @property (nonatomic, retain) UIView *rightShadow;
 
-- (OptionsScroll *)createOptionsScroll;
+- (void)propagateDailyEditRow:(__weak id)der;
 
 @end

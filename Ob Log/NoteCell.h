@@ -15,7 +15,7 @@
 
 @interface NoteCell : UIView
 {
-    id dailyEditRow;
+    __weak id dailyEditRow;
     
     ActionsSlider *actionsSlider;
     ActionButton *actionButton;
@@ -41,5 +41,7 @@
 @property (nonatomic, retain) UITextView *textView;
 @property NSUInteger rowId;
 @property NSUInteger rowPos;
+
+- (void)propagateDailyEditRow:(__weak id)der;
 
 @end

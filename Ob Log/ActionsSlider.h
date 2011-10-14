@@ -13,6 +13,8 @@
 
 @interface ActionsSlider : UIView
 {
+    id dailyEditRow;
+    
     ActionButton *actionButton;
     OptionsScrollWrapper *optionsScrollWrapper;
     OptionsScroll *optionsScroll;
@@ -22,6 +24,8 @@
     NSUInteger rowPos;
 }
 
+@property (nonatomic, assign) id dailyEditRow;
+
 @property (nonatomic, retain) ActionButton *actionButton;
 @property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
 @property (nonatomic, retain) OptionsScroll *optionsScroll;
@@ -30,7 +34,6 @@
 @property NSUInteger rowId;
 @property NSUInteger rowPos;
 
-- (ActionButton *)createActionButton;
-- (OptionsScrollWrapper *)createOptionsScrollWrapper;
+- (void)propagateDailyEditRow:(__weak id)der;
 
 @end

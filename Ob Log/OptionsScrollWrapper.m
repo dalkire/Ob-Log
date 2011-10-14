@@ -10,7 +10,9 @@
 
 @implementation OptionsScrollWrapper
 
-@synthesize optionsScroll;
+@synthesize dailyEditRow;
+
+@synthesize optionsScroll = _optionsScroll;
 @synthesize leftShadow;
 @synthesize rightShadow;
 
@@ -73,8 +75,8 @@
         [[rightShadow layer] addSublayer:gradientR];
         rightShadow.backgroundColor = [UIColor clearColor];
         
-        optionsScroll = [self createOptionsScroll];
-        [self addSubview:optionsScroll];
+        _optionsScroll = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        [self addSubview:_optionsScroll];
         
         [self addSubview:leftShadow];
         [self addSubview:rightShadow];
@@ -82,12 +84,10 @@
     return self;
 }
 
-- (OptionsScroll *)createOptionsScroll
+- (void)propagateDailyEditRow:(__weak id)der
 {
-    self.optionsScroll = nil;
-    OptionsScroll *os = [[OptionsScroll alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    
-    return os;
+    [self setDailyEditRow:der];
+    [_optionsScroll propagateDailyEditRow:der];
 }
 
 /*

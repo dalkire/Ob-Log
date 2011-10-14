@@ -8,8 +8,11 @@
 
 #import "OptionsScroll.h"
 #import "OptionsScrollWrapper.h"
+#import "DailyEditRow.h"
 
 @implementation OptionsScroll
+
+@synthesize dailyEditRow;
 
 @synthesize optionPickers;
 @synthesize currX;
@@ -40,10 +43,18 @@
     return localOptionPickers;
 }
 
+- (void)propagateDailyEditRow:(__weak id)der
+{
+    [self setDailyEditRow:der];
+    NSLog(@"DER in OS: %@ %@", [der student].firstName, [der student].lastName);
+}
+
 - (OptionPicker *)createOptionPickerWithHeader:(NSMutableString *)header andOptions:(NSMutableArray *)options
 {
     OptionPicker *picker = [[OptionPicker alloc] initWithFrame:CGRectMake(currX, 0, 100, CELL_HEIGHT) 
                                                      andHeader:header andOptions:options];
+    [picker propagateDailyEditRow:dailyEditRow];
+    
     currX = picker.frame.origin.x + picker.frame.size.width + 1;
     [self addSubview:picker];
     
