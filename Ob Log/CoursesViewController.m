@@ -68,8 +68,8 @@
            permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     [editNavController setDelegate:self];
     
-    [editCoursesViewController release];
-    [editPop release];
+    //[editCoursesViewController release];
+    //[editPop release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,11 +119,15 @@
     
     UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
     
+    UIBarButtonItem *settingsBtn =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-settings.png"] 
+                                                                   style:UIBarButtonItemStyleBordered 
+                                                                  target:self 
+                                                                  action:@selector(didTouchSettings)];
     UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
                                initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                target:self 
                                action:@selector(didTouchEdit)];
-    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add Course" 
+    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-add.png"] 
                                                               style:UIBarButtonItemStyleBordered 
                                                              target:self 
                                                              action:@selector(addCourseModal)];
@@ -134,7 +138,7 @@
                                                                50)];
     [self.toolbar setBarStyle:UIBarStyleDefault];
     self.toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
-    [self.toolbar setItems:[NSArray arrayWithObjects:segmentedButtons, flex, editBtn, addBtn, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:settingsBtn, segmentedButtons, flex, editBtn, addBtn, nil]];
     
     self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
                                                            self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
@@ -235,6 +239,11 @@
 }
 */
  
+- (void)didTouchSettings
+{
+    NSLog(@"did touch settings");
+}
+
 - (void)didTouchClickRow:(ClickRow *)clickRow
 {
     NSLog(@"Touched ClickRow.course.course_title: %@", clickRow.course.courseTitle);

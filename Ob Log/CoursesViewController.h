@@ -45,6 +45,7 @@
 @property (nonatomic, retain) NSMutableArray *coursesArray;
 
 - (void)initCourses;
+- (void)didTouchSettings;
 - (void)didTouchSegmentedControl;
 - (void)addCourseModal;
 

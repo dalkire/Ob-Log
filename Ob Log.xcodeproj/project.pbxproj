@@ -52,6 +52,8 @@
 		89DF848514390D1A00D5F444 /* ClickRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848414390D0F00D5F444 /* ClickRow.m */; };
 		89DF848814393EBF00D5F444 /* AddCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848714393EBF00D5F444 /* AddCourseViewController.m */; };
 		89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E320AD143B42C600A6D54E /* ColorSlider.m */; };
+		89E44CDC1448AB280052A24B /* icon-settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 89E44CDB1448AB280052A24B /* icon-settings.png */; };
+		89E44CDE1448BE6A0052A24B /* icon-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 89E44CDD1448BE6A0052A24B /* icon-add.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +139,8 @@
 		89DF848714393EBF00D5F444 /* AddCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCourseViewController.m; sourceTree = "<group>"; };
 		89E320AC143B42C600A6D54E /* ColorSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSlider.h; sourceTree = "<group>"; };
 		89E320AD143B42C600A6D54E /* ColorSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSlider.m; sourceTree = "<group>"; };
+		89E44CDB1448AB280052A24B /* icon-settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-settings.png"; sourceTree = "<group>"; };
+		89E44CDD1448BE6A0052A24B /* icon-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +257,8 @@
 		892C96AA142B67E000994EAB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				89E44CDD1448BE6A0052A24B /* icon-add.png */,
+				89E44CDB1448AB280052A24B /* icon-settings.png */,
 				8970EA5F143CD40800C5AC69 /* icon.png */,
 				89417F871430BDBA002EABBA /* Theme.h */,
 				89417F881430BDBA002EABBA /* Theme.m */,
@@ -362,6 +368,8 @@
 				89C4B527142B6C1000D035BA /* slideInBtn.png in Resources */,
 				89C4B528142B6C1000D035BA /* slideOutBtn.png in Resources */,
 				8970EA60143CD40900C5AC69 /* icon.png in Resources */,
+				89E44CDC1448AB280052A24B /* icon-settings.png in Resources */,
+				89E44CDE1448BE6A0052A24B /* icon-add.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
