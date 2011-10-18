@@ -18,8 +18,11 @@
 #import "AddStudentViewController.h"
 #import "EditNavController.h"
 #import "EditCoursesViewController.h"
+#import "SettingsTableViewController.h"
+#import "SettingsNavigationController.h"
+#import "OptionPickersTableViewController.h"
 
-@interface CoursesViewController : UIViewController <ClickRowDelegate, AddCourseDelegate, UINavigationControllerDelegate>
+@interface CoursesViewController : UIViewController <ClickRowDelegate, AddCourseDelegate, UINavigationControllerDelegate, SettingsTableViewControllerDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
     NSUInteger nextCourseId;
@@ -31,6 +34,9 @@
     Header *header;
     UIScrollView *scrollView;
     NSMutableArray *coursesArray;
+    
+    UIPopoverController *settingsPopoverController;
+    SettingsNavigationController *settingsNavController;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -43,6 +49,9 @@
 @property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) NSMutableArray *coursesArray;
+
+@property (nonatomic, retain) UIPopoverController *settingsPopoverController;
+@property (nonatomic, retain) SettingsNavigationController *settingsNavController;
 
 - (void)initCourses;
 - (void)didTouchSettings;

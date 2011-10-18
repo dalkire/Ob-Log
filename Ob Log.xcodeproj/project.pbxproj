@@ -26,6 +26,9 @@
 		8970EA66143CE7C800C5AC69 /* CoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA65143CE7C800C5AC69 /* CoursesViewController.m */; };
 		8970EA69143CEEB200C5AC69 /* Toolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA68143CEEB100C5AC69 /* Toolbar.m */; };
 		897728DA1430212D00B6D985 /* NameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 897728D91430212D00B6D985 /* NameCell.m */; };
+		897AF166144DF319005D71E9 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF165144DF319005D71E9 /* SettingsTableViewController.m */; };
+		897AF16B144E09FA005D71E9 /* SettingsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF16A144E09FA005D71E9 /* SettingsNavigationController.m */; };
+		897AF16E144E0BCC005D71E9 /* OptionPickersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF16D144E0BCC005D71E9 /* OptionPickersTableViewController.m */; };
 		897B847B143BC6F50013D2CA /* ColorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 897B847A143BC6F50013D2CA /* ColorTag.m */; };
 		898B2276143F844400D883DF /* EditNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898B2275143F844300D883DF /* EditNavController.m */; };
 		898B2279143F846E00D883DF /* EditCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898B2278143F846E00D883DF /* EditCoursesViewController.m */; };
@@ -90,6 +93,12 @@
 		8970EA68143CEEB100C5AC69 /* Toolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toolbar.m; sourceTree = "<group>"; };
 		897728D81430212D00B6D985 /* NameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameCell.h; sourceTree = "<group>"; };
 		897728D91430212D00B6D985 /* NameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameCell.m; sourceTree = "<group>"; };
+		897AF164144DF319005D71E9 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		897AF165144DF319005D71E9 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		897AF169144E09FA005D71E9 /* SettingsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsNavigationController.h; sourceTree = "<group>"; };
+		897AF16A144E09FA005D71E9 /* SettingsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNavigationController.m; sourceTree = "<group>"; };
+		897AF16C144E0BCC005D71E9 /* OptionPickersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionPickersTableViewController.h; sourceTree = "<group>"; };
+		897AF16D144E0BCC005D71E9 /* OptionPickersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionPickersTableViewController.m; sourceTree = "<group>"; };
 		897B8479143BC6F50013D2CA /* ColorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTag.h; sourceTree = "<group>"; };
 		897B847A143BC6F50013D2CA /* ColorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTag.m; sourceTree = "<group>"; };
 		898B2274143F844300D883DF /* EditNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNavController.h; sourceTree = "<group>"; };
@@ -286,6 +295,19 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
+		897AF168144E09A4005D71E9 /* Settings Popover */ = {
+			isa = PBXGroup;
+			children = (
+				897AF164144DF319005D71E9 /* SettingsTableViewController.h */,
+				897AF165144DF319005D71E9 /* SettingsTableViewController.m */,
+				897AF169144E09FA005D71E9 /* SettingsNavigationController.h */,
+				897AF16A144E09FA005D71E9 /* SettingsNavigationController.m */,
+				897AF16C144E0BCC005D71E9 /* OptionPickersTableViewController.h */,
+				897AF16D144E0BCC005D71E9 /* OptionPickersTableViewController.m */,
+			);
+			name = "Settings Popover";
+			sourceTree = "<group>";
+		};
 		89DF84731438A09D00D5F444 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +331,7 @@
 				898B2275143F844300D883DF /* EditNavController.m */,
 				898B2277143F846E00D883DF /* EditCoursesViewController.h */,
 				898B2278143F846E00D883DF /* EditCoursesViewController.m */,
+				897AF168144E09A4005D71E9 /* Settings Popover */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -416,6 +439,9 @@
 				89DCB1121444B6E200F847C4 /* Student.m in Sources */,
 				89DCB1151444B6E200F847C4 /* OptionChoice.m in Sources */,
 				89DCB11B1444B6E200F847C4 /* Course.m in Sources */,
+				897AF166144DF319005D71E9 /* SettingsTableViewController.m in Sources */,
+				897AF16B144E09FA005D71E9 /* SettingsNavigationController.m in Sources */,
+				897AF16E144E0BCC005D71E9 /* OptionPickersTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

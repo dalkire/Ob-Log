@@ -24,6 +24,9 @@
 @synthesize scrollView;
 @synthesize coursesArray;
 
+@synthesize settingsPopoverController;
+@synthesize settingsNavController;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -241,7 +244,22 @@
  
 - (void)didTouchSettings
 {
-    NSLog(@"did touch settings");
+    SettingsTableViewController *settingsPopTVC = [[SettingsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [settingsPopTVC setTitle:@"Settings"];
+    self.settingsNavController = [[SettingsNavigationController alloc] initWithRootViewController:settingsPopTVC];
+    self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:settingsNavController];
+    [self.settingsPopoverController presentPopoverFromRect:CGRectMake(10, 50, 0, 0) 
+                                                   inView:self.toolbar
+                                 permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [settingsPopTVC setDelegate:self];
+}
+
+- (void)selectedOptionPickersRow
+{
+    NSLog(@"SELECTED OPTION PICKERS ROW");
+    OptionPickersTableViewController *optionPickersTVC = [[OptionPickersTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [optionPickersTVC setTitle:@"Option Pickers"];
+    [self.settingsNavController pushViewController:optionPickersTVC animated:YES];
 }
 
 - (void)didTouchClickRow:(ClickRow *)clickRow
