@@ -12,10 +12,12 @@
 {
     __weak id delegate;
     NSArray *settingsArray;
+    NSMutableArray *optionsArray;
 }
 
 @property (nonatomic, assign) __weak id delegate;
 @property (nonatomic, retain) NSArray *settingsArray;
+@property (nonatomic, retain) NSMutableArray *optionsArray;
 
 @end
 

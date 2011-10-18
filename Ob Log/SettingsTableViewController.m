@@ -11,13 +11,16 @@
 @implementation SettingsTableViewController
 
 @synthesize settingsArray = _settingsArray;
+@synthesize optionsArray = _optionsArray;
 @synthesize delegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        _settingsArray = [[NSArray alloc] initWithObjects:@"Option Pickers", @"Row 2", @"Row 3", nil];
+        NSArray *basicsArray = [[NSArray alloc] initWithObjects:@"About", nil];
+        _optionsArray = [[NSMutableArray alloc] initWithObjects:@"Option Pickers", @"Row 2", @"Row 3", nil];
+        _settingsArray = [[NSArray alloc] initWithObjects:basicsArray, _optionsArray, nil];
         [self.tableView setDataSource:self];
         [self.tableView setDelegate:self];
     }
@@ -82,12 +85,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [_settingsArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_settingsArray count];
+    return [[_settingsArray objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,7 +102,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    [cell.textLabel setText:[_settingsArray objectAtIndex:indexPath.row]];
+    [cell.textLabel setText:[(NSMutableArray *)[_settingsArray objectAtIndex:[indexPath indexAtPosition:0]] objectAtIndex:[indexPath indexAtPosition:1]]];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }

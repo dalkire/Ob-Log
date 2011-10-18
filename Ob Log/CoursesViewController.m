@@ -244,7 +244,7 @@
  
 - (void)didTouchSettings
 {
-    SettingsTableViewController *settingsPopTVC = [[SettingsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    SettingsTableViewController *settingsPopTVC = [[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [settingsPopTVC setTitle:@"Settings"];
     self.settingsNavController = [[SettingsNavigationController alloc] initWithRootViewController:settingsPopTVC];
     self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:settingsNavController];
@@ -257,7 +257,7 @@
 - (void)selectedOptionPickersRow
 {
     NSLog(@"SELECTED OPTION PICKERS ROW");
-    OptionPickersTableViewController *optionPickersTVC = [[OptionPickersTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    OptionPickersTableViewController *optionPickersTVC = [[OptionPickersTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [optionPickersTVC setTitle:@"Option Pickers"];
     [self.settingsNavController pushViewController:optionPickersTVC animated:YES];
 }
