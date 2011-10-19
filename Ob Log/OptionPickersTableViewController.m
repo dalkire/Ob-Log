@@ -10,17 +10,52 @@
 
 @implementation OptionPickersTableViewController
 
+@synthesize managedObjectContext = _managedObjectContext;
 @synthesize optionsArray = _optionsArray;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        _optionsArray = [[NSMutableArray alloc] initWithObjects:@"Header 1", @"header 2", @"header 3", @"header 4", @"header 5", nil];
-        [self.tableView setDataSource:self];
-        [self.tableView setDelegate:self];
+        _optionsArray = [[NSMutableArray alloc] initWithCapacity:0];
+        UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                 target:self 
+                                                                 action:@selector(didTouchEditButton)];
+        [self.navigationItem setRightBarButtonItem:editBtn];
     }
     return self;
+}
+
+- (void)loadOptionPickers
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"OptionHeader" inManagedObjectContext:_managedObjectContext];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"headerText" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setEntity:entity];
+    [request setSortDescriptors:sortDescriptors];
+    
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        NSLog(@"fetchResults error");
+    }
+    else {
+        NSLog(@"fetchResults Success..");
+        [self setOptionsArray:[NSMutableArray arrayWithObjects:@"hello1", @"hello2", nil]];//mutableFetchResults];
+        [self.tableView reloadData];
+    }
+    [self setOptionsArray:[NSMutableArray arrayWithObjects:@"hello1", @"hello2", nil]];//mutableFetchResults];
+    if (self.editing) {
+        [_optionsArray addObject:@"Add Option Picker"];
+    }
+}
+
+- (void)didTouchEditButton
+{
+    NSLog(@"DID touch edit btn");
+    [self.tableView setEditing:YES animated:YES];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,20 +134,30 @@
     }
     
     [cell.textLabel setText:[_optionsArray objectAtIndex:indexPath.row]];
+    [cell.textLabel setUserInteractionEnabled:YES];
     
     return cell;
 }
 
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row < [_optionsArray count] - 1) {
+        return UITableViewCellEditingStyleDelete;
+    }
+    else if (indexPath.row == [_optionsArray count] - 1) {
+        return UITableViewCellEditingStyleInsert;
+    }
+    
+    return UITableViewCellEditingStyleNone;
+}
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -124,14 +169,11 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
-/*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
-*/
 
 /*
 // Override to support conditional rearranging of the table view.

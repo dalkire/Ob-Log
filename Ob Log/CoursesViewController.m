@@ -13,7 +13,7 @@
 
 @implementation CoursesViewController
 
-@synthesize managedObjectContext;
+@synthesize managedObjectContext = _managedObjectContext;
 @synthesize nextCourseId;
 
 @synthesize delegate;
@@ -178,14 +178,14 @@
 - (void)initCourses
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:_managedObjectContext];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"courseTitle" ascending:YES];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [request setEntity:entity];
     [request setSortDescriptors:sortDescriptors];
     
     NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    NSMutableArray *mutableFetchResults = [[_managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
     if (mutableFetchResults == nil) {
         NSLog(@"fetchResults error");
     }
@@ -250,7 +250,9 @@
     self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:settingsNavController];
     [self.settingsPopoverController presentPopoverFromRect:CGRectMake(10, 50, 0, 0) 
                                                    inView:self.toolbar
-                                 permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+                                  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [self.settingsPopoverController setPopoverContentSize:CGSizeMake(320, 480) 
+                                                animated:NO];
     [settingsPopTVC setDelegate:self];
 }
 
@@ -259,13 +261,16 @@
     NSLog(@"SELECTED OPTION PICKERS ROW");
     OptionPickersTableViewController *optionPickersTVC = [[OptionPickersTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [optionPickersTVC setTitle:@"Option Pickers"];
+    [optionPickersTVC setManagedObjectContext:_managedObjectContext];
+    [optionPickersTVC loadOptionPickers];
     [self.settingsNavController pushViewController:optionPickersTVC animated:YES];
+    [self.settingsPopoverController setPopoverContentSize:CGSizeMake(320, 480) 
+                                                 animated:NO];
 }
 
 - (void)didTouchClickRow:(ClickRow *)clickRow
 {
     NSLog(@"Touched ClickRow.course.course_title: %@", clickRow.course.courseTitle);
-    //[self.delegate didtouchCourse:clickRow.course];
     [self.delegate loadDailyEditViewForCourse:clickRow.course andDate:[NSDate date]];
 }
 
@@ -282,14 +287,14 @@
 {
     Course *course = (Course *)[NSEntityDescription 
                                 insertNewObjectForEntityForName:@"Course" 
-                                inManagedObjectContext:managedObjectContext];
+                                inManagedObjectContext:_managedObjectContext];
     [course setCourseTitle:courseTitle];
     [course setColorR:[NSNumber numberWithInt:red*255]];
     [course setColorG:[NSNumber numberWithInt:green*255]];
     [course setColorB:[NSNumber numberWithInt:blue*255]];
     
     NSError *error = nil;
-    if (![managedObjectContext save:&error]) {
+    if (![_managedObjectContext save:&error]) {
         NSLog(@"An error occurred while attempting to save data.");
     }
     ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
@@ -324,7 +329,7 @@
 {
     [super viewDidUnload];
     
-    self.managedObjectContext = nil;
+    _managedObjectContext = nil;
     self.delegate = nil;
     self.toolbar = nil;
     self.segmentedControl = nil;

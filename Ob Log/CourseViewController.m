@@ -14,7 +14,7 @@
 
 @implementation CourseViewController
 
-@synthesize managedObjectContext;
+@synthesize managedObjectContext = _managedObjectContext;
 
 @synthesize delegate;
 
@@ -172,7 +172,7 @@
 - (void)initStudents
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:_managedObjectContext];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ IN courses", self.course];
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc]
                                          initWithKey:@"lastName" ascending:YES];
@@ -185,7 +185,7 @@
     [request setPredicate:predicate];
     
     NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    NSMutableArray *mutableFetchResults = [[_managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
     if (mutableFetchResults == nil) {
         NSLog(@"fetchResults error");
     }
@@ -251,7 +251,7 @@
 {
     Student *student = (Student *)[NSEntityDescription 
                                    insertNewObjectForEntityForName:@"Student" 
-                                   inManagedObjectContext:managedObjectContext];
+                                   inManagedObjectContext:_managedObjectContext];
     [student setFirstName:first];
     [student setLastName:last];
     [student addCoursesObject:self.course];
@@ -259,7 +259,7 @@
     
     
     NSError *error = nil;
-    if (![managedObjectContext save:&error]) {
+    if (![_managedObjectContext save:&error]) {
         NSLog(@"An error occurred while attempting to save data.");
     }
     ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 

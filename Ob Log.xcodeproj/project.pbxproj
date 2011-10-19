@@ -26,6 +26,7 @@
 		8970EA66143CE7C800C5AC69 /* CoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA65143CE7C800C5AC69 /* CoursesViewController.m */; };
 		8970EA69143CEEB200C5AC69 /* Toolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA68143CEEB100C5AC69 /* Toolbar.m */; };
 		897728DA1430212D00B6D985 /* NameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 897728D91430212D00B6D985 /* NameCell.m */; };
+		89786491144F0B2200B76EB9 /* OptionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 89786490144F0B2200B76EB9 /* OptionHeader.m */; };
 		897AF166144DF319005D71E9 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF165144DF319005D71E9 /* SettingsTableViewController.m */; };
 		897AF16B144E09FA005D71E9 /* SettingsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF16A144E09FA005D71E9 /* SettingsNavigationController.m */; };
 		897AF16E144E0BCC005D71E9 /* OptionPickersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF16D144E0BCC005D71E9 /* OptionPickersTableViewController.m */; };
@@ -93,6 +94,8 @@
 		8970EA68143CEEB100C5AC69 /* Toolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toolbar.m; sourceTree = "<group>"; };
 		897728D81430212D00B6D985 /* NameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameCell.h; sourceTree = "<group>"; };
 		897728D91430212D00B6D985 /* NameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameCell.m; sourceTree = "<group>"; };
+		8978648F144F0B2200B76EB9 /* OptionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionHeader.h; sourceTree = "<group>"; };
+		89786490144F0B2200B76EB9 /* OptionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionHeader.m; sourceTree = "<group>"; };
 		897AF164144DF319005D71E9 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		897AF165144DF319005D71E9 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		897AF169144E09FA005D71E9 /* SettingsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsNavigationController.h; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 				89DCB10D1444B6E100F847C4 /* Entry.h */,
 				89DCB10E1444B6E100F847C4 /* Entry.m */,
 				891AB1D8142F926400D0171B /* Model.xcdatamodeld */,
+				8978648F144F0B2200B76EB9 /* OptionHeader.h */,
+				89786490144F0B2200B76EB9 /* OptionHeader.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -442,6 +447,7 @@
 				897AF166144DF319005D71E9 /* SettingsTableViewController.m in Sources */,
 				897AF16B144E09FA005D71E9 /* SettingsNavigationController.m in Sources */,
 				897AF16E144E0BCC005D71E9 /* OptionPickersTableViewController.m in Sources */,
+				89786491144F0B2200B76EB9 /* OptionHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

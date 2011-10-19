@@ -18,7 +18,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        NSArray *basicsArray = [[NSArray alloc] initWithObjects:@"About", nil];
+        NSArray *basicsArray = [[NSArray alloc] initWithObjects:@"About", @"Help", nil];
         _optionsArray = [[NSMutableArray alloc] initWithObjects:@"Option Pickers", @"Row 2", @"Row 3", nil];
         _settingsArray = [[NSArray alloc] initWithObjects:basicsArray, _optionsArray, nil];
         [self.tableView setDataSource:self];
@@ -151,7 +151,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if ([indexPath indexAtPosition:0] == 1 && [indexPath indexAtPosition:1] == 0) {
         [self.delegate selectedOptionPickersRow];
     }
 }
