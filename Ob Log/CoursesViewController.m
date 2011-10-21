@@ -251,8 +251,7 @@
     [self.settingsPopoverController presentPopoverFromRect:CGRectMake(10, 50, 0, 0) 
                                                    inView:self.toolbar
                                   permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    [self.settingsPopoverController setPopoverContentSize:CGSizeMake(320, 480) 
-                                                animated:NO];
+    [self.settingsPopoverController setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
     [settingsPopTVC setDelegate:self];
 }
 
@@ -260,12 +259,9 @@
 {
     NSLog(@"SELECTED OPTION PICKERS ROW");
     OptionPickersTableViewController *optionPickersTVC = [[OptionPickersTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    [optionPickersTVC setTitle:@"Option Pickers"];
     [optionPickersTVC setManagedObjectContext:_managedObjectContext];
     [optionPickersTVC loadOptionPickers];
     [self.settingsNavController pushViewController:optionPickersTVC animated:YES];
-    [self.settingsPopoverController setPopoverContentSize:CGSizeMake(320, 480) 
-                                                 animated:NO];
 }
 
 - (void)didTouchClickRow:(ClickRow *)clickRow

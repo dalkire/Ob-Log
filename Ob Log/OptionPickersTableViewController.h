@@ -14,12 +14,15 @@
 {
     NSManagedObjectContext *managedObjectContext;
     NSMutableArray *optionsArray;
+    BOOL myEditing;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSMutableArray *optionsArray;
+@property BOOL myEditing;
 
 - (void)loadOptionPickers;
 - (void)didTouchEditButton;
+- (void)didTouchDoneButton;
 
 @end

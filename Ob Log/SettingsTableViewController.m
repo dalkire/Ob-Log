@@ -19,7 +19,7 @@
     self = [super initWithStyle:style];
     if (self) {
         NSArray *basicsArray = [[NSArray alloc] initWithObjects:@"About", @"Help", nil];
-        _optionsArray = [[NSMutableArray alloc] initWithObjects:@"Option Pickers", @"Row 2", @"Row 3", nil];
+        _optionsArray = [[NSMutableArray alloc] initWithObjects:@"Option Sets", @"Row 2", @"Row 3", nil];
         _settingsArray = [[NSArray alloc] initWithObjects:basicsArray, _optionsArray, nil];
         [self.tableView setDataSource:self];
         [self.tableView setDelegate:self];
@@ -58,6 +58,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    NSLog(@"VIEW WILL APPEAR");
+    [self setContentSizeForViewInPopover:CGSizeMake(320, 440)];
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -34,7 +34,15 @@
 - (void)loadView
 {
 }
-*/
+ */
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"VIEW WILL APPEAR");
+    [self setContentSizeForViewInPopover:CGSizeMake(320, 440)];
+}
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

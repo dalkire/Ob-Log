@@ -12,6 +12,7 @@
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize optionsArray = _optionsArray;
+@synthesize myEditing = _myEditing;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -22,6 +23,7 @@
                                                                  target:self 
                                                                  action:@selector(didTouchEditButton)];
         [self.navigationItem setRightBarButtonItem:editBtn];
+        [self setTitle:@"Option Sets"];
     }
     return self;
 }
@@ -54,8 +56,31 @@
 - (void)didTouchEditButton
 {
     NSLog(@"DID touch edit btn");
-    [self.tableView setEditing:YES animated:YES];
+    //[self.tableView setEditing:YES animated:YES];
+    
+    [_optionsArray addObject:@"zzzAdd_Option_Pickerzzz"];
     [self.tableView reloadData];
+    UIBarButtonItem *doneBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                            target:self 
+                                                                            action:@selector(didTouchDoneButton)];
+    [self.navigationItem setRightBarButtonItem:doneBtn];
+    [doneBtn release];
+}
+
+- (void)didTouchDoneButton
+{
+    int len = [_optionsArray count];
+    for (int i = 0; i < len; i++) {
+        if ([[_optionsArray objectAtIndex:i] isEqualToString:@"zzzAdd_Option_Pickerzzz"]) {
+            [_optionsArray removeObjectAtIndex:i];
+        }
+    }
+    [self.tableView reloadData];
+    UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                            target:self 
+                                                                            action:@selector(didTouchEditButton)];
+    [self.navigationItem setRightBarButtonItem:editBtn];
+    [editBtn release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,6 +114,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    NSLog(@"VIEW WILL APPEAR");
+    [self setContentSizeForViewInPopover:CGSizeMake(320, 440)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -134,7 +162,23 @@
     }
     
     [cell.textLabel setText:[_optionsArray objectAtIndex:indexPath.row]];
-    [cell.textLabel setUserInteractionEnabled:YES];
+    
+    if ([[_optionsArray objectAtIndex:indexPath.row] isEqualToString:@"zzzAdd_Option_Pickerzzz"]) {
+        UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(8, 
+                                                                        11, 
+                                                                        282, 
+                                                                        24)];
+        [tf setBackgroundColor:[UIColor colorWithRed:(float)0xF7/0xFF 
+                                               green:(float)0xF7/0xFF 
+                                                blue:(float)0xF7/0xFF 
+                                               alpha:1]];
+        [tf setFont:[UIFont boldSystemFontOfSize:17]];
+        [tf setPlaceholder:@"Add Option Set"];
+        [cell.contentView addSubview:tf];
+    }
+    else {
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    }
     
     return cell;
 }
@@ -142,7 +186,10 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
+    NSLog(@"[_optionsArray count] = %d", [_optionsArray count]);
+    if (indexPath.row == [_optionsArray count] - 1) {
+        return NO;
+    }
     return YES;
 }
 
@@ -150,9 +197,6 @@
 {
     if (indexPath.row < [_optionsArray count] - 1) {
         return UITableViewCellEditingStyleDelete;
-    }
-    else if (indexPath.row == [_optionsArray count] - 1) {
-        return UITableViewCellEditingStyleInsert;
     }
     
     return UITableViewCellEditingStyleNone;
@@ -163,16 +207,22 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [_optionsArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
+    NSLog(@"COMMIT EDITING");
 }
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+}
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView reloadData];
 }
 
 /*
