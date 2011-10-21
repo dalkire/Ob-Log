@@ -187,7 +187,7 @@
                                                                        timeStyle:NSDateFormatterNoStyle]];
     [self.header.subtitleLabel setText:self.course.courseTitle];
 	
-    [self setStudentsMutableArray:[self fetchStudentsForCourse:crse]];
+    [self setStudentsMutableArray:[CoreDataHelperFunctions fetchStudentsForCourse:self.course]];
     int len = [self.studentsMutableArray count];
     for (int i = 0; i < len; i++) {
         NSLog(@"## student");
@@ -217,33 +217,6 @@
         [self.scrollView setContentSize:CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height + CELL_HEIGHT)];
         NSLog(@"row in devc: %@", row);
     }
-}
-
-- (NSMutableArray *)fetchStudentsForCourse:(Course *)course
-{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:managedObjectContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ IN courses", self.course];
-    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc]
-                                         initWithKey:@"lastName" ascending:YES];
-    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc]
-                                         initWithKey:@"firstName" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor1, sortDescriptor2, nil]];
-    //[sortDescriptor1 release];
-    //[sortDescriptor2 release];
-    [request setEntity:entity];
-    //[entity release];
-    [request setPredicate:predicate];
-    //[predicate release];
-    
-    NSError *error = nil;
-    NSMutableArray *studentPointers = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (studentPointers == nil) {
-        NSLog(@"fetchResults error");
-        return [[NSMutableArray alloc] initWithCapacity:0];
-    }
-    
-    return studentPointers;
 }
 
 - (void)didTouchCoursesBtn

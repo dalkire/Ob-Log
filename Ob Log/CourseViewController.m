@@ -171,49 +171,25 @@
 
 - (void)initStudents
 {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:_managedObjectContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ IN courses", self.course];
-    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc]
-                                         initWithKey:@"lastName" ascending:YES];
-    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc]
-                                         initWithKey:@"firstName" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor1, sortDescriptor2, nil]];
-    [sortDescriptor1 release];
-    [sortDescriptor2 release];
-    [request setEntity:entity];
-    [request setPredicate:predicate];
-    
-    NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[_managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResults == nil) {
-        NSLog(@"fetchResults error");
-    }
-    else {
-        NSLog(@"fetchResults Success HERE..`");
-    }
-    
-    int len = [mutableFetchResults count];
+    NSMutableArray *fetchResults = [CoreDataHelperFunctions fetchStudentsForCourse:self.course];
+    int len = [fetchResults count];
     for (int i = 0; i < len; i++) {
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
                                                                    i*CELL_HEIGHT, 
                                                                    self.view.frame.size.width, 
                                                                    CELL_HEIGHT)];
         [row setMainLabelText:[NSString stringWithFormat:@"%@, %@", 
-                               ((Student *)[mutableFetchResults objectAtIndex:i]).lastName,
-                               ((Student *)[mutableFetchResults objectAtIndex:i]).firstName]];
+                               ((Student *)[fetchResults objectAtIndex:i]).lastName,
+                               ((Student *)[fetchResults objectAtIndex:i]).firstName]];
         [row setClickColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                            green:[self.course.colorG floatValue]/255 
                                             blue:[self.course.colorB floatValue]/255 
                                            alpha:1]];
         [row setDelegate:self];
         [scrollView addSubview:row];
-        [self.studentsArray addObject:(Student *)[mutableFetchResults objectAtIndex:i]];
+        [self.studentsArray addObject:(Student *)[fetchResults objectAtIndex:i]];
     }
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
-    
-    [request release];
-    [mutableFetchResults release];
 }
 
 - (void)didTouchClickRow:(ClickRow *)clickRow

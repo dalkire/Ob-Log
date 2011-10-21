@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "CoreDataHelperFunctions.h"
 #import "DailyEditRow.h"
 #import "NameCell.h"
 #import "NoteCell.h"
@@ -15,9 +16,6 @@
 #import "EditModalViewController.h"
 #import "OptionPicker.h"
 #import "OptionsPopoverTableViewController.h"
-#import "Course.h"
-#import "Student.h"
-#import "Entry.h"
 
 @interface DailyEditViewController : UIViewController <OptionPickerDelegate, OptionsPopoverTVCDelegate>
 {

@@ -177,7 +177,7 @@
 
 - (void)initCourses
 {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:_managedObjectContext];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"courseTitle" ascending:YES];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
@@ -191,23 +191,26 @@
     }
     else {
         NSLog(@"fetchResults Success..");
-    }
+    }*/
     
-    int len = [mutableFetchResults count];
+    
+    NSMutableArray *fetchResults = [CoreDataHelperFunctions fetchCourses];
+    
+    int len = [fetchResults count];
     for (int i = 0; i < len; i++) {
-        [self.coursesArray addObject:(Course *)[mutableFetchResults objectAtIndex:i]];
+        [self.coursesArray addObject:(Course *)[fetchResults objectAtIndex:i]];
         ClickRow *row = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
                                                                    i*CELL_HEIGHT, 
                                                                    self.view.frame.size.width, 
                                                                    CELL_HEIGHT)];
-        [row setMainLabelText:((Course *)[mutableFetchResults objectAtIndex:i]).courseTitle];
+        [row setMainLabelText:((Course *)[fetchResults objectAtIndex:i]).courseTitle];
         row.mainLabel.frame = CGRectMake(row.mainLabel.frame.origin.x + 60, 
                                          row.mainLabel.frame.origin.y, 
                                          row.mainLabel.frame.size.width - 60, 
                                          row.mainLabel.frame.size.height);
-        float red   = [(NSNumber *)((Course *)[mutableFetchResults objectAtIndex:i]).colorR floatValue]/255;
-        float green = [(NSNumber *)((Course *)[mutableFetchResults objectAtIndex:i]).colorG floatValue]/255;
-        float blue  = [(NSNumber *)((Course *)[mutableFetchResults objectAtIndex:i]).colorB floatValue]/255;
+        float red   = [(NSNumber *)((Course *)[fetchResults objectAtIndex:i]).colorR floatValue]/255;
+        float green = [(NSNumber *)((Course *)[fetchResults objectAtIndex:i]).colorG floatValue]/255;
+        float blue  = [(NSNumber *)((Course *)[fetchResults objectAtIndex:i]).colorB floatValue]/255;
         ColorTag *colorTag = [[ColorTag alloc] initWithColor:[UIColor colorWithRed:red 
                                                                              green:green 
                                                                               blue:blue 
@@ -218,7 +221,7 @@
                                     colorTag.frame.size.height);
         [row addSubview:colorTag];
         [row setDelegate:self];
-        [row setCourse:(Course *)[mutableFetchResults objectAtIndex:i]];
+        [row setCourse:(Course *)[fetchResults objectAtIndex:i]];
         [row setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [scrollView addSubview:row];
         
@@ -227,11 +230,6 @@
     
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, len*CELL_HEIGHT);
     NSLog(@"len*CELL_HEIGHT : %d", len*CELL_HEIGHT);
-    
-    [mutableFetchResults release];
-    [sortDescriptor release];
-    [sortDescriptors release];
-    [request release];
 }
  
 /*

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "Course.h"
+#import "CoreDataHelperFunctions.h"
 #import "AddStudentViewController.h"
 #import "Header.h"
 #import "ClickRow.h"
