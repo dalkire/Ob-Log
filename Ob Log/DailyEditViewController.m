@@ -25,16 +25,12 @@
 @synthesize studentsMutableArray;
 @synthesize entriesArray;
 @synthesize managedObjectContext;
-
-@synthesize optionsPopoverController;
-
 @synthesize toolbar;
 @synthesize segmentedControl;
 @synthesize bg;
 @synthesize scrollView;
 @synthesize header;
 @synthesize editModal;
-@synthesize activePicker;
 
 @synthesize course;
 
@@ -89,7 +85,7 @@
             height = [UIScreen mainScreen].bounds.size.height;
             break;
     }
-    NSLog(@"SELF COURSE? %@", self.course == nil ? @"YES" : @"NO");
+    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
     view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
@@ -147,7 +143,7 @@
     [self.header setBackgroundColor:bgc];
     [bgc release];
     
-    self.header.maintitleLabel.textColor = self.header.subtitleLabel.textColor = [Theme getTextColorForColor:header.backgroundColor];
+    self.header.maintitleLabel.textColor = self.header.subtitleLabel.textColor = [Theme getTextColorForColor:self.header.backgroundColor];
     
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0,  
                                                                       self.header.frame.origin.y + self.header.frame.size.height, 
@@ -190,7 +186,7 @@
     [self setStudentsMutableArray:[CoreDataHelperFunctions fetchStudentsForCourse:self.course]];
     int len = [self.studentsMutableArray count];
     for (int i = 0; i < len; i++) {
-        NSLog(@"## student");
+        NSLog(@"## student %@", (Student *)[studentsMutableArray objectAtIndex:i]);
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
                                                                            i*CELL_HEIGHT, 
                                                                            self.view.frame.size.width, 
@@ -203,19 +199,18 @@
         
         int length = [row.optionPickers count];
         for (int j = 0; j < length; j++) {
-            [(OptionPicker *)[row.optionPickers objectAtIndex:j] setDelegate:self];
             [(OptionPicker *)[row.optionPickers objectAtIndex:j] setDailyEditRow:row];
             [(OptionPicker *)[row.optionPickers objectAtIndex:j] 
              setHighlightColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                green:[self.course.colorG floatValue]/255 
                                                 blue:[self.course.colorB floatValue]/255 
                                                alpha:1]];
+            NSLog(@"Setting devc as delegate for OP: %@", (OptionPicker *)[row.optionPickers objectAtIndex:j]);
         }
         
         [row setNeedsDisplay];
         [self.scrollView addSubview:row];
         [self.scrollView setContentSize:CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height + CELL_HEIGHT)];
-        NSLog(@"row in devc: %@", row);
     }
 }
 
@@ -240,33 +235,6 @@
         default:
             break;
     }
-}
-
-- (void)didSelectOptionPicker:(OptionPicker *)picker
-{
-    [picker selectPicker];
-    if (self.activePicker) {
-        [self.activePicker deselectPicker];
-    }
-    self.activePicker = picker;
-    
-    NSLog(@"didSelectOptionPickerin row: %@", picker.dailyEditRow);
-    OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    [optionsPopTVC setOptionsArray:picker.options];
-    self.optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsPopTVC];
-    [self.optionsPopoverController setPopoverContentSize:CGSizeMake(200, 300) 
-                                                animated:YES];
-    [self.optionsPopoverController presentPopoverFromRect:[picker bounds] 
-                                                   inView:picker
-                                 permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    [optionsPopTVC setDelegate:self];
-}
-
-- (void)didSelectOptionRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"%@", indexPath);
-    [self.optionsPopoverController dismissPopoverAnimated:YES];
-    activePicker.headerLabel.text = [activePicker.options objectAtIndex:[indexPath indexAtPosition:1]];
 }
 
 - (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date

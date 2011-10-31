@@ -19,6 +19,8 @@
 @synthesize entry = _entry;
 @synthesize optionChoices = _optionChoices;
 
+@synthesize optionsPopoverController = _optionsPopoverController;
+
 @synthesize nameCell = _nameCell;
 @synthesize noteCell = _noteCell;
 @synthesize actionsSlider = _actionSlider;
@@ -26,6 +28,7 @@
 @synthesize optionsScrollWrapper = _optionsScrollWrapper;
 @synthesize optionsScroll = _optionsScroll;
 @synthesize optionPickers = _optionPicker;
+@synthesize activePicker = _activePicker;
 @synthesize arr = _arr;
 
 @synthesize rowId;
@@ -57,6 +60,34 @@
 - (void)assignOptionsArray:(NSMutableArray *)options
 {
     _arr = options;
+}
+
+
+- (void)didSelectOptionPicker:(OptionPicker *)picker
+{
+    [picker selectPicker];
+    if (_activePicker) {
+        [_activePicker deselectPicker];
+    }
+    _activePicker = picker;
+    
+    NSLog(@"didSelectOptionPickerin row: %@", picker.dailyEditRow);
+    OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [optionsPopTVC setOptionsArray:picker.options];
+    _optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsPopTVC];
+    [_optionsPopoverController setPopoverContentSize:CGSizeMake(200, 300) 
+                                                animated:YES];
+    [_optionsPopoverController presentPopoverFromRect:[picker bounds] 
+                                                   inView:picker
+                                 permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [optionsPopTVC setDelegate:self];
+}
+
+- (void)didSelectOptionRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%@", indexPath);
+    [_optionsPopoverController dismissPopoverAnimated:YES];
+    _activePicker.headerLabel.text = [_activePicker.options objectAtIndex:[indexPath indexAtPosition:1]];
 }
 
 - (void)dealloc

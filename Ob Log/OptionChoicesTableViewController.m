@@ -51,6 +51,11 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (NSMutableArray *)loadOptionChoices
+{
+    return [NSMutableArray arrayWithCapacity:0];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

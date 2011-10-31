@@ -99,6 +99,7 @@
 - (void)propagateDailyEditRow:(__weak id)der
 {
     [self setDailyEditRow:der];
+    [self setDelegate:der];
     NSLog(@"set DER in OP: %@ %@", [der student].firstName, [der student].lastName);
 }
 

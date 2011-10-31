@@ -121,10 +121,8 @@
                                                   green:[self.course.colorG floatValue]/255 
                                                    blue:[self.course.colorB floatValue]/255 
                                                   alpha:1];
-    self.header.maintitleLabel.textColor = [Theme getTextColorForColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                                                       green:[self.course.colorG floatValue]/255 
-                                                                                        blue:[self.course.colorB floatValue]/255 
-                                                                                       alpha:1]];
+    
+    self.header.maintitleLabel.textColor = self.header.subtitleLabel.textColor = [Theme getTextColorForColor:self.header.backgroundColor];
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
                                                                      self.header.frame.origin.y + self.header.frame.size.height, 

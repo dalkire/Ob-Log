@@ -17,22 +17,19 @@
 #import "OptionPicker.h"
 #import "OptionsPopoverTableViewController.h"
 
-@interface DailyEditViewController : UIViewController <OptionPickerDelegate, OptionsPopoverTVCDelegate>
+@interface DailyEditViewController : UIViewController
 {
     id delegate;
     
     NSMutableArray *studentsMutableArray;
     NSMutableArray *entriesArray;
     NSManagedObjectContext *managedObjectContext;
-    
-    UIPopoverController *optionsPopoverController;
     UIToolbar *toolbar;
     UISegmentedControl *segmentedControl;
     UIImageView *bg;
     UIScrollView *scrollView;
     Header *header;
     EditModalViewController *editModal;
-    OptionPicker *activePicker;
     
     Course *course;
 }
@@ -42,20 +39,15 @@
 @property (nonatomic, retain) NSMutableArray *studentsMutableArray;
 @property (nonatomic, retain) NSMutableArray *entriesArray;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-
-@property (nonatomic, retain) UIPopoverController *optionsPopoverController;
-
 @property (nonatomic, retain) UIToolbar *toolbar;
 @property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property (nonatomic, retain) UIImageView *bg;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) EditModalViewController *editModal;
-@property (nonatomic, retain) OptionPicker *activePicker;
 
 @property (nonatomic, retain) Course *course;
 
-- (NSMutableArray *)fetchStudentsForCourse:(Course *)course;
 - (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)date;
 - (void)didTouchCoursesBtn;
 - (void)didTouchSegmentedControl;

@@ -22,8 +22,9 @@
 #import "OptionsScroll.h"
 #import "OptionPicker.h"
 #import "DailyEditViewController.h"
+#import "OptionsPopoverTableViewController.h"
 
-@interface DailyEditRow : Row
+@interface DailyEditRow : Row <OptionPickerDelegate, OptionsPopoverTVCDelegate>
 {
     id delegate;
     NSUInteger containerTag;
@@ -34,6 +35,8 @@
     Entry *entry;
     NSSet *optionChoices;
     
+    UIPopoverController *optionsPopoverController;
+    
     NameCell *nameCell;
     NoteCell *noteCell;
     ActionsSlider *actionsSlider;
@@ -41,6 +44,7 @@
     OptionsScrollWrapper *optionsScrollWrapper;
     OptionsScroll *optionsScroll;
     NSMutableArray *optionPickers;
+    OptionPicker *activePicker;
     NSMutableArray *arr;
     
     NSUInteger rowId;
@@ -61,6 +65,8 @@
 @property (nonatomic, retain) Entry *entry;
 @property (nonatomic, retain) NSSet *optionChoices;
 
+@property (nonatomic, retain) UIPopoverController *optionsPopoverController;
+
 @property (nonatomic, retain) NameCell *nameCell;
 @property (nonatomic, retain) NoteCell *noteCell;
 @property (nonatomic, retain) ActionsSlider *actionsSlider;
@@ -68,6 +74,7 @@
 @property (nonatomic, retain) OptionsScrollWrapper *optionsScrollWrapper;
 @property (nonatomic, retain) OptionsScroll *optionsScroll;
 @property (nonatomic, retain) NSMutableArray *optionPickers;
+@property (nonatomic, retain) OptionPicker *activePicker;
 @property (nonatomic, retain) NSMutableArray *arr;
 
 @property NSUInteger rowId;
