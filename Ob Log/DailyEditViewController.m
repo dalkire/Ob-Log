@@ -198,6 +198,7 @@
         [row setDelegate:self];
         
         int length = [row.optionPickers count];
+        NSLog(@"--== [row.optionPickers count]: %d", [row.optionPickers count]);
         for (int j = 0; j < length; j++) {
             [(OptionPicker *)[row.optionPickers objectAtIndex:j] setDailyEditRow:row];
             [(OptionPicker *)[row.optionPickers objectAtIndex:j] 
