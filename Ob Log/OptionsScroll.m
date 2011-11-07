@@ -39,6 +39,7 @@
         [header appendFormat:@".%d", i];
         [localOptionPickers addObject:[self createOptionPickerWithHeader:header andOptions:options]];
     }
+    NSLog(@"creating pickers");
     
     return localOptionPickers;
 }
@@ -50,6 +51,7 @@
     int len = [_optionPickers count];
     for (int i = 0; i < len; i++) {
         [(OptionPicker *)[_optionPickers objectAtIndex:i] propagateDailyEditRow:der];
+        [[(DailyEditRow *)der optionPickers] addObject:(OptionPicker *)[_optionPickers objectAtIndex:i]];
     }
 }
 

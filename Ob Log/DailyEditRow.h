@@ -53,6 +53,7 @@
     NSIndexPath *previousIndexPath;
     NSIndexPath *currentIndexPath;
     NSInteger previousIndex;
+    UIColor *highlightColor;
 }
 
 
@@ -83,6 +84,7 @@
 @property (nonatomic, retain) NSIndexPath *previousIndexPath;
 @property (nonatomic, retain) NSIndexPath *currentIndexPath;
 @property NSInteger previousIndex;
+@property (nonatomic, retain) UIColor *highlightColor;
 
 - (id)initWithFrame:(CGRect)frame andStudent:(Student *)iStudent inCourse:(Course *)iCourse forDate:(NSDate *)iDate;
 - (void)assignOptionsArray:(NSMutableArray *)options;

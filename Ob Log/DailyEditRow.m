@@ -27,7 +27,7 @@
 @synthesize actionButton = _actionButton;
 @synthesize optionsScrollWrapper = _optionsScrollWrapper;
 @synthesize optionsScroll = _optionsScroll;
-@synthesize optionPickers = _optionPicker;
+@synthesize optionPickers = _optionPickers;
 @synthesize activePicker = _activePicker;
 @synthesize arr = _arr;
 
@@ -37,6 +37,7 @@
 @synthesize previousIndexPath;
 @synthesize currentIndexPath;
 @synthesize previousIndex;
+@synthesize highlightColor = _highlightColor;
 
 - (id)initWithFrame:(CGRect)frame andStudent:(Student *)iStudent inCourse:(Course *)iCourse forDate:(NSDate *)iDate
 {

@@ -66,6 +66,7 @@
 
 + (UIColor *)getTextColorForColor:(UIColor *)color
 {
+    NSLog(@"UICOLOR: %@", color);
     const float *colorComponents = CGColorGetComponents(color.CGColor);
     float colorAverage = (colorComponents[0]*255 + colorComponents[1]*255 + colorComponents[2]*255)/3;
     if (colorAverage > 150) {

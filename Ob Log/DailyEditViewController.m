@@ -196,6 +196,7 @@
                                                         forDate:date];
         [row setTag:i];
         [row setDelegate:self];
+        [row setHighlightColor:self.header.backgroundColor];
         
         int length = [row.optionPickers count];
         NSLog(@"--== [row.optionPickers count]: %d", [row.optionPickers count]);

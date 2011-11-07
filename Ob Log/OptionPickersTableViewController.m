@@ -72,6 +72,7 @@
     int len = [_optionsArray count];
     for (int i = 0; i < len; i++) {
         if ([[_optionsArray objectAtIndex:i] isEqualToString:@"zzzAdd_Option_Pickerzzz"]) {
+            NSLog(@"OPTION?: %@", [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]].textLabel.text);
             [_optionsArray removeObjectAtIndex:i];
         }
     }
