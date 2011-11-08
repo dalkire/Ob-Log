@@ -10,19 +10,22 @@
 #import <CoreData/CoreData.h>
 #import "OptionHeader.h"
 
-@interface OptionPickersTableViewController : UITableViewController
+@interface OptionPickersTableViewController : UITableViewController <UITextFieldDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
     NSMutableArray *optionsArray;
     BOOL myEditing;
+    BOOL mayAddRow;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSMutableArray *optionsArray;
 @property BOOL myEditing;
+@property BOOL mayAddRow;
 
 - (void)loadOptionPickers;
 - (void)didTouchEditButton;
 - (void)didTouchDoneButton;
+- (void)saveOptionChoices;
 
 @end
