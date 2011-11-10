@@ -6,7 +6,9 @@
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
-#define EDIT_TEXTFIELD 223164
+#define TEXTFIELD_OLD   223164
+#define TEXTFIELD_TEMP  223165
+#define TEXTFIELD_NEW   223166
 
 #import "OptionPickersTableViewController.h"
 
@@ -14,6 +16,7 @@
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize optionsArray = _optionsArray;
+@synthesize optionsCoreDataArray = _optionsCoreDataArray;
 @synthesize myEditing = _myEditing;
 @synthesize mayAddRow = _mayAddRow;
 
@@ -22,6 +25,7 @@
     self = [super initWithStyle:style];
     if (self) {
         _optionsArray = [[NSMutableArray alloc] initWithCapacity:0];
+        _optionsCoreDataArray = [[NSMutableArray alloc] initWithCapacity:0];
         UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                  target:self 
                                                                  action:@selector(didTouchEditButton)];
@@ -49,9 +53,10 @@
     else {
         NSLog(@"fetchResults Success..");
         NSMutableArray *ops = [[NSMutableArray alloc] initWithCapacity:0];
-        int len = [mutableFetchResults count];
+        _optionsCoreDataArray = mutableFetchResults;
+        int len = [_optionsCoreDataArray count];
         for (int i = 0; i < len; i++) {
-           [ops addObject:[(OptionHeader *)[mutableFetchResults objectAtIndex:i] headerText]];
+           [ops addObject:[(OptionHeader *)[_optionsCoreDataArray objectAtIndex:i] headerText]];
         }
         [self setOptionsArray:ops];
         [ops release];
@@ -70,6 +75,11 @@
     [doneBtn release];
     NSArray *row = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:[_optionsArray count] inSection:0], nil];
     [_optionsArray addObject:@"zzzAdd_Option_Pickerzzz"];
+    OptionHeader *header = (OptionHeader *)[NSEntityDescription 
+                                            insertNewObjectForEntityForName:@"OptionHeader" 
+                                            inManagedObjectContext:_managedObjectContext];
+    [header setHeaderText:@""];
+    [_optionsCoreDataArray addObject:header];
     [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationNone];
     _myEditing = YES;
     [self.tableView reloadData];
@@ -79,15 +89,19 @@
 {
     int len = [self.tableView numberOfRowsInSection:0];
     for (int i = 0; i < len; i++) {
-        if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:EDIT_TEXTFIELD]) {
-            NSString *str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:EDIT_TEXTFIELD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:EDIT_TEXTFIELD]).text : @""];
-            if ([str isEqualToString:@""]) {
-                [_optionsArray removeObjectAtIndex:i];
-            }
-            else {
-                [_optionsArray replaceObjectAtIndex:i withObject:str];
-            }
+        NSString *str = @"";
+        if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]) {
+            str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text : @""];
         }
+        else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_TEMP]) {
+            str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_TEMP]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_TEMP]).text : @""];
+        }
+        else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]) {
+            str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]).text : @""];
+        }
+        
+        [_optionsArray replaceObjectAtIndex:i withObject:str];
+        [(OptionHeader *)[_optionsCoreDataArray objectAtIndex:i] setHeaderText:str];
     }
     UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                             target:self 
@@ -195,19 +209,26 @@
         if ([[_optionsArray objectAtIndex:indexPath.row] isEqualToString:@"zzzAdd_Option_Pickerzzz"]) {
             [tf setPlaceholder:@"Add Option Set"];
             [tf setText:@""];
+            [tf setTag:TEXTFIELD_NEW];
         }
         else {
             [tf setText:[_optionsArray objectAtIndex:indexPath.row]];
+            [tf setTag:TEXTFIELD_OLD];
         }
         [tf setDelegate:self];
-        [tf setTag:EDIT_TEXTFIELD];
         [cell.contentView addSubview:tf];
         [cell setAccessoryType:UITableViewCellAccessoryNone];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     else {
-        if ([cell viewWithTag:EDIT_TEXTFIELD]) {
-            [[cell viewWithTag:EDIT_TEXTFIELD] removeFromSuperview];
+        if ([cell viewWithTag:TEXTFIELD_OLD]) {
+            [[cell viewWithTag:TEXTFIELD_OLD] removeFromSuperview];
+        }
+        else if ([cell viewWithTag:TEXTFIELD_TEMP]) {
+            [[cell viewWithTag:TEXTFIELD_TEMP] removeFromSuperview];
+        }
+        else if ([cell viewWithTag:TEXTFIELD_NEW]) {
+            [[cell viewWithTag:TEXTFIELD_NEW] removeFromSuperview];
         }
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
@@ -217,14 +238,14 @@
 }
 
 // Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"[_optionsArray count] = %d", [_optionsArray count]);
     if (indexPath.row == [_optionsArray count] - 1) {
         return NO;
     }
     return YES;
-}
+}*/
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -241,6 +262,8 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [_optionsArray removeObjectAtIndex:indexPath.row];
+        [_managedObjectContext deleteObject:[_optionsCoreDataArray objectAtIndex:indexPath.row]];
+        [_optionsCoreDataArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -285,7 +308,19 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    _mayAddRow = YES;
+    int news = 0;
+    int len = [self.tableView numberOfRowsInSection:0];
+    for (int i = 0; i < len; i++) {
+        if ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]) {
+            news++;
+        }
+    }
+    if (textField.tag == TEXTFIELD_NEW && news < 1) {
+        _mayAddRow = YES;
+    }
+    else {
+        _mayAddRow = NO;
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -293,6 +328,11 @@
     if (_mayAddRow) {
         NSArray *row = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:[_optionsArray count] inSection:0], nil];
         [_optionsArray addObject:@"zzzAdd_Option_Pickerzzz"];
+        OptionHeader *header = (OptionHeader *)[NSEntityDescription 
+                                                insertNewObjectForEntityForName:@"OptionHeader" 
+                                                inManagedObjectContext:_managedObjectContext];
+        [header setHeaderText:@""];
+        [_optionsCoreDataArray addObject:header];
         [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationBottom];
         _mayAddRow = NO;
     }
@@ -301,13 +341,13 @@
     if ([str isEqualToString:@""]) {
         int len = [self.tableView numberOfRowsInSection:0];
         for (int i = 0; i < len; i++) {
-            if ([((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:EDIT_TEXTFIELD]).text isEqualToString:@""]) {
-                [_optionsArray removeObjectAtIndex:i];
-                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-                NSLog(@"------&&&&&******####$$$$!!!!");
-                _mayAddRow = YES;
+            if ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]) {
+                NSLog(@"%d: TEXTFIELD_NEW", i);
             }
         }
+    }
+    else {
+        textField.tag = TEXTFIELD_TEMP;
     }
     
     return TRUE;
@@ -323,10 +363,10 @@
 - (void)saveOptionChoices
 {
     
-    OptionHeader *header = (OptionHeader *)[NSEntityDescription 
+    /*OptionHeader *header = (OptionHeader *)[NSEntityDescription 
                                 insertNewObjectForEntityForName:@"OptionHeader" 
                                 inManagedObjectContext:_managedObjectContext];
-    [header setHeaderText:@"text"];
+    [header setHeaderText:@"text"];*/
     
     NSError *error = nil;
     if (![_managedObjectContext save:&error]) {

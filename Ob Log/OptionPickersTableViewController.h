@@ -14,12 +14,14 @@
 {
     NSManagedObjectContext *managedObjectContext;
     NSMutableArray *optionsArray;
+    NSMutableArray *optionsCoreDataArray;
     BOOL myEditing;
     BOOL mayAddRow;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSMutableArray *optionsArray;
+@property (nonatomic, retain) NSMutableArray *optionsCoreDataArray;
 @property BOOL myEditing;
 @property BOOL mayAddRow;
 
