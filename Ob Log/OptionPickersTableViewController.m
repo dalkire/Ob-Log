@@ -60,6 +60,7 @@
         [self setOptionsArray:ops];
         [ops release];
         [self.tableView reloadData];
+        NSLog(@"OpCD: %@", _optionsCoreDataArray);
     }
 }
 
@@ -105,10 +106,10 @@
             str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]).text : @""];
             if ([str isEqualToString:@""]) {
                 [_optionsArray removeObjectAtIndex:i];
+                [_managedObjectContext deleteObject:(OptionHeader *)[_optionsCoreDataArray objectAtIndex:i]];
                 [_optionsCoreDataArray removeObjectAtIndex:i];
             }
         }
-        
     }
     UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                             target:self 
@@ -118,6 +119,7 @@
     [self.tableView setEditing:NO];
     [self.tableView reloadData];
     [self saveOptionChoices];
+    NSLog(@"OpCD: %@", _optionsCoreDataArray);
 }
 
 - (void)didReceiveMemoryWarning
@@ -273,12 +275,20 @@
         [_optionsCoreDataArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
         [self saveOptionChoices];
+        NSLog(@"-OpCD: %@", _optionsCoreDataArray);
     }
 }
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    [_optionsArray exchangeObjectAtIndex:[fromIndexPath indexAtPosition:1] withObjectAtIndex:[toIndexPath indexAtPosition:1]];
+    [_optionsCoreDataArray exchangeObjectAtIndex:[fromIndexPath indexAtPosition:1] withObjectAtIndex:[toIndexPath indexAtPosition:1]];
+    
+    int len = [_optionsCoreDataArray count];
+    for (int i = 0; i < len; i++) {
+        [(OptionHeader *)[_optionsCoreDataArray objectAtIndex:i] setPosition:[NSNumber numberWithInt:i]];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -289,6 +299,7 @@
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
+    
     return YES;
 }
 
@@ -296,14 +307,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    NSLog(@"Selected %@", [(OptionHeader *)[_optionsCoreDataArray objectAtIndex:[indexPath indexAtPosition:1]] headerText]);
 }
 
 #pragma mark - UITextField delegate
@@ -366,6 +370,7 @@
 {
     NSLog(@"DID END EDITING");
     [self saveOptionChoices];
+    NSLog(@"~OpCD: %@", _optionsCoreDataArray);
 }
 
 #pragma mark - Save data
