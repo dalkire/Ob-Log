@@ -22,7 +22,6 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSMutableArray *optionsArray;
 @property (nonatomic, retain) NSMutableArray *optionsCoreDataArray;
-@property BOOL myEditing;
 @property BOOL mayAddRow;
 
 - (void)loadOptionPickers;

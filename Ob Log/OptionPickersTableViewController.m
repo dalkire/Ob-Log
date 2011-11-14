@@ -17,7 +17,6 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize optionsArray = _optionsArray;
 @synthesize optionsCoreDataArray = _optionsCoreDataArray;
-@synthesize myEditing = _myEditing;
 @synthesize mayAddRow = _mayAddRow;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -31,7 +30,7 @@
                                                                  action:@selector(didTouchEditButton)];
         [self.navigationItem setRightBarButtonItem:editBtn];
         [self setTitle:@"Option Sets"];
-        _myEditing = NO;
+        [self.tableView setEditing:NO];
     }
     return self;
 }
@@ -40,7 +39,7 @@
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"OptionHeader" inManagedObjectContext:_managedObjectContext];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"headerText" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:YES];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [request setEntity:entity];
     [request setSortDescriptors:sortDescriptors];
@@ -73,15 +72,17 @@
                                                                             action:@selector(didTouchDoneButton)];
     [self.navigationItem setRightBarButtonItem:doneBtn];
     [doneBtn release];
-    NSArray *row = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:[_optionsArray count] inSection:0], nil];
+    int pos = [_optionsArray count];
+    NSArray *row = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:pos inSection:0], nil];
     [_optionsArray addObject:@"zzzAdd_Option_Pickerzzz"];
     OptionHeader *header = (OptionHeader *)[NSEntityDescription 
                                             insertNewObjectForEntityForName:@"OptionHeader" 
                                             inManagedObjectContext:_managedObjectContext];
     [header setHeaderText:@""];
+    [header setPosition:[NSNumber numberWithInt:pos]];
     [_optionsCoreDataArray addObject:header];
     [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationNone];
-    _myEditing = YES;
+    [self.tableView setEditing:YES];
     [self.tableView reloadData];
 }
 
@@ -92,23 +93,29 @@
         NSString *str = @"";
         if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]) {
             str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text : @""];
+            [_optionsArray replaceObjectAtIndex:i withObject:str];
+            [(OptionHeader *)[_optionsCoreDataArray objectAtIndex:i] setHeaderText:str];
         }
         else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_TEMP]) {
             str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_TEMP]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_TEMP]).text : @""];
+            [_optionsArray replaceObjectAtIndex:i withObject:str];
+            [(OptionHeader *)[_optionsCoreDataArray objectAtIndex:i] setHeaderText:str];
         }
         else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]) {
             str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]).text : @""];
+            if ([str isEqualToString:@""]) {
+                [_optionsArray removeObjectAtIndex:i];
+                [_optionsCoreDataArray removeObjectAtIndex:i];
+            }
         }
         
-        [_optionsArray replaceObjectAtIndex:i withObject:str];
-        [(OptionHeader *)[_optionsCoreDataArray objectAtIndex:i] setHeaderText:str];
     }
     UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                             target:self 
                                                                             action:@selector(didTouchEditButton)];
     [self.navigationItem setRightBarButtonItem:editBtn];
     [editBtn release];
-    _myEditing = NO;
+    [self.tableView setEditing:NO];
     [self.tableView reloadData];
     [self saveOptionChoices];
 }
@@ -194,12 +201,12 @@
     
     [cell.textLabel setText:[_optionsArray objectAtIndex:indexPath.row]];
     
-    if (_myEditing) {
+    if (self.tableView.editing) {
         //[_optionsArray replaceObjectAtIndex:indexPath.row withObject:@""];
         //[cell.textLabel setText:@""];
         UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(10, 
                                                                         11, 
-                                                                        282, 
+                                                                        262, 
                                                                         24)];
         [tf setBackgroundColor:[UIColor colorWithRed:(float)0xF7/0xFF 
                                                green:(float)0xF7/0xFF 
@@ -232,28 +239,28 @@
         }
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+        [cell setShowsReorderControl:NO];
     }
     
     return cell;
 }
 
 // Override to support conditional editing of the table view.
-/*- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"[_optionsArray count] = %d", [_optionsArray count]);
-    if (indexPath.row == [_optionsArray count] - 1) {
-        return NO;
-    }
     return YES;
-}*/
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row < [_optionsArray count] - 1) {
-        return UITableViewCellEditingStyleDelete;
+    if (self.tableView.editing) {
+        return UITableViewCellEditingStyleNone;
     }
-    
-    return UITableViewCellEditingStyleNone;
+    return UITableViewCellEditingStyleDelete;
 }
 
 // Override to support editing the table view.
@@ -265,11 +272,8 @@
         [_managedObjectContext deleteObject:[_optionsCoreDataArray objectAtIndex:indexPath.row]];
         [_optionsCoreDataArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-    NSLog(@"COMMIT EDITING");
+        [self saveOptionChoices];
+    }
 }
 
 // Override to support rearranging the table view.
@@ -281,14 +285,12 @@
     //[tableView reloadData];
 }
 
-/*
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/
 
 #pragma mark - Table view delegate
 
@@ -315,7 +317,7 @@
             news++;
         }
     }
-    if (textField.tag == TEXTFIELD_NEW && news < 1) {
+    if (textField.tag == TEXTFIELD_NEW) {// && news < 1) {
         _mayAddRow = YES;
     }
     else {
@@ -326,12 +328,14 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (_mayAddRow) {
-        NSArray *row = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:[_optionsArray count] inSection:0], nil];
+        int pos = [_optionsArray count];
+        NSArray *row = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:pos inSection:0], nil];
         [_optionsArray addObject:@"zzzAdd_Option_Pickerzzz"];
         OptionHeader *header = (OptionHeader *)[NSEntityDescription 
                                                 insertNewObjectForEntityForName:@"OptionHeader" 
                                                 inManagedObjectContext:_managedObjectContext];
         [header setHeaderText:@""];
+        [header setPosition:[NSNumber numberWithInt:pos]];
         [_optionsCoreDataArray addObject:header];
         [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationBottom];
         _mayAddRow = NO;
@@ -339,15 +343,20 @@
     NSMutableString *str = [NSMutableString stringWithString:[textField text]];
     [str replaceCharactersInRange:range withString:string];
     if ([str isEqualToString:@""]) {
+        [textField setTag:TEXTFIELD_NEW];
         int len = [self.tableView numberOfRowsInSection:0];
         for (int i = 0; i < len; i++) {
-            if ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]) {
-                NSLog(@"%d: TEXTFIELD_NEW", i);
+            UITextField *tf = (UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW];
+            if (tf && ![tf isEqual:textField]) {
+                [_optionsArray removeObjectAtIndex:i];
+                [_optionsCoreDataArray removeObjectAtIndex:i];
+                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                _mayAddRow = YES;
             }
         }
     }
     else {
-        textField.tag = TEXTFIELD_TEMP;
+        [textField setTag:TEXTFIELD_TEMP];
     }
     
     return TRUE;
@@ -356,18 +365,13 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     NSLog(@"DID END EDITING");
+    [self saveOptionChoices];
 }
 
 #pragma mark - Save data
 
 - (void)saveOptionChoices
 {
-    
-    /*OptionHeader *header = (OptionHeader *)[NSEntityDescription 
-                                insertNewObjectForEntityForName:@"OptionHeader" 
-                                inManagedObjectContext:_managedObjectContext];
-    [header setHeaderText:@"text"];*/
-    
     NSError *error = nil;
     if (![_managedObjectContext save:&error]) {
         NSLog(@"An error occurred while attempting to save data.");

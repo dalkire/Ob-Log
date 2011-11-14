@@ -12,6 +12,7 @@
 
 @implementation OptionHeader
 
+@dynamic position;
 @dynamic headerText;
 @dynamic options;
 

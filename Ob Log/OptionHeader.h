@@ -13,7 +13,8 @@
 
 @interface OptionHeader : NSManagedObject
 
-@property (nonatomic, retain) NSString * headerText;
+@property (nonatomic, retain) NSNumber *position;
+@property (nonatomic, retain) NSString *headerText;
 @property (nonatomic, retain) NSSet *options;
 @end
 

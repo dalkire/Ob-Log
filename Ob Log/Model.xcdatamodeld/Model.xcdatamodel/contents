@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="870" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Course" representedClassName="Course" syncable="YES">
         <attribute name="colorB" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
         <attribute name="colorG" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
@@ -21,6 +21,7 @@
     </entity>
     <entity name="OptionHeader" representedClassName="OptionHeader" syncable="YES">
         <attribute name="headerText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="options" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OptionChoice" inverseName="optionHeader" inverseEntity="OptionChoice" syncable="YES"/>
     </entity>
     <entity name="Student" representedClassName="Student" syncable="YES">
@@ -33,7 +34,7 @@
         <element name="Course" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Entry" positionX="45" positionY="-81" width="128" height="120"/>
         <element name="OptionChoice" positionX="178" positionY="162" width="128" height="90"/>
-        <element name="OptionHeader" positionX="-20" positionY="36" width="128" height="75"/>
+        <element name="OptionHeader" positionX="-20" positionY="36" width="128" height="90"/>
         <element name="Student" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>
