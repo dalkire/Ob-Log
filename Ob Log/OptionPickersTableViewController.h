@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "OptionHeader.h"
+#import "OptionChoicesTableViewController.h"
 
 @interface OptionPickersTableViewController : UITableViewController <UITextFieldDelegate>
 {

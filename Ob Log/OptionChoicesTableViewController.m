@@ -18,7 +18,13 @@
     self = [super initWithStyle:style];
     if (self) {
         _optionHeader = oh;
-        [self loadOptionChoices];
+        _optionChoices = [[NSMutableArray alloc] initWithCapacity:0];
+        UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                target:self 
+                                                                                action:@selector(didTouchEditButton)];
+        [self.navigationItem setRightBarButtonItem:editBtn];
+        [self setTitle:[_optionHeader headerText]];
+        [self.tableView setEditing:NO];
     }
     return self;
 }
@@ -59,6 +65,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    NSLog(@"VIEW WILL APPEAR");
+    [self setContentSizeForViewInPopover:CGSizeMake(320, 440)];
+    [self loadOptionChoices];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -86,16 +96,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [_optionChoices count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

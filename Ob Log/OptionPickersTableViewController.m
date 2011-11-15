@@ -308,6 +308,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Selected %@", [(OptionHeader *)[_optionsCoreDataArray objectAtIndex:[indexPath indexAtPosition:1]] headerText]);
+    OptionChoicesTableViewController *choicesTVC = [[OptionChoicesTableViewController alloc] initWithStyle:UITableViewStyleGrouped andOptionHeader:(OptionHeader *)[_optionsCoreDataArray objectAtIndex:[indexPath indexAtPosition:1]]];
+    [self.navigationController pushViewController:choicesTVC animated:YES];
 }
 
 #pragma mark - UITextField delegate
