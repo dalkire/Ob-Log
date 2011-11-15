@@ -12,6 +12,7 @@
 
 @implementation OptionChoice
 
+@dynamic position;
 @dynamic choiceText;
 @dynamic optionHeader;
 @dynamic entries;

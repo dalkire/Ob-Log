@@ -16,6 +16,7 @@
     </entity>
     <entity name="OptionChoice" representedClassName="OptionChoice" syncable="YES">
         <attribute name="choiceText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="options" inverseEntity="Entry" syncable="YES"/>
         <relationship name="optionHeader" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="OptionHeader" inverseName="options" inverseEntity="OptionHeader" syncable="YES"/>
     </entity>
@@ -33,7 +34,7 @@
     <elements>
         <element name="Course" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Entry" positionX="45" positionY="-81" width="128" height="120"/>
-        <element name="OptionChoice" positionX="178" positionY="162" width="128" height="90"/>
+        <element name="OptionChoice" positionX="178" positionY="162" width="128" height="105"/>
         <element name="OptionHeader" positionX="-20" positionY="36" width="128" height="90"/>
         <element name="Student" positionX="160" positionY="192" width="128" height="90"/>
     </elements>

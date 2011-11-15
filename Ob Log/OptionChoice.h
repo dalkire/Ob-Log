@@ -13,6 +13,7 @@
 
 @interface OptionChoice : NSManagedObject
 
+@property (nonatomic, retain) NSNumber *position;
 @property (nonatomic, retain) NSString * choiceText;
 @property (nonatomic, retain) NSManagedObject *optionHeader;
 @property (nonatomic, retain) NSSet *entries;

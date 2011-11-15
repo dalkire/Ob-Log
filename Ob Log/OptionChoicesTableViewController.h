@@ -8,19 +8,26 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "CoreDataHelperFunctions.h"
 #import "OptionHeader.h"
 #import "OptionChoice.h"
 
-@interface OptionChoicesTableViewController : UITableViewController
+@interface OptionChoicesTableViewController : UITableViewController <UITextFieldDelegate>
 {
+    NSManagedObjectContext *managedObjectContext;
     OptionHeader *optionHeader;
-    NSMutableArray *optionChoices;
+    NSMutableArray *optionChoicesCoreDataArray;
+    NSMutableArray *optionChoicesArray;
+    BOOL mayAddRow;
 }
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) OptionHeader *optionHeader;
-@property (nonatomic, retain) NSMutableArray *optionChoices;
+@property (nonatomic, retain) NSMutableArray *optionChoicesCoreDataArray;
+@property (nonatomic, retain) NSMutableArray *optionChoicesArray;
+@property BOOL mayAddRow;
 
 - (id)initWithStyle:(UITableViewStyle)style andOptionHeader:(OptionHeader *)oh;
-- (NSMutableArray *)loadOptionChoices;
+- (void)saveOptionChoices;
 
 @end

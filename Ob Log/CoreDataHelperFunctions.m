@@ -11,6 +11,11 @@
 
 @implementation CoreDataHelperFunctions
 
++ (NSManagedObjectContext *)managedObjectContext
+{
+    return ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;
+}
+
 + (NSMutableArray *)fetchCourses
 {
     NSManagedObjectContext *moc = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;
@@ -68,25 +73,28 @@
     NSManagedObjectContext *moc = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"OptionHeader" inManagedObjectContext:moc];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"headerText" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self == %@", optionHeader];
     [request setEntity:entity];
-    [request setSortDescriptors:sortDescriptors];
+    [request setPredicate:predicate];
     
     NSError *error = nil;
     NSMutableArray *mutableFetchResults = [[moc executeFetchRequest:request error:&error] mutableCopy];
-    /*if (mutableFetchResults == nil) {
+    if (mutableFetchResults == nil) {
         NSLog(@"fetchResults error");
     }
     else {
-        NSLog(@"fetchResults Success..");
-        [self setOptionsArray:[NSMutableArray arrayWithObjects:@"hello1", @"hello2", nil]];//mutableFetchResults];
-        [self.tableView reloadData];
+        NSLog(@"fetchResults Success.. ");
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:YES];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        NSMutableArray *optionChoices = [NSMutableArray arrayWithArray:[[(OptionHeader *)[mutableFetchResults objectAtIndex:0] options] allObjects]];
+        
+        int len = [optionChoices count];
+        for (int i = 0; i < len; i++) {
+            NSLog(@"POSITION: %@", [(OptionChoice *)[optionChoices objectAtIndex:i] position]);
+        }
+        NSLog(@"}}| %@", optionChoices);
+        return optionChoices;
     }
-    [self setOptionsArray:[NSMutableArray arrayWithObjects:@"hello1", @"hello2", nil]];//mutableFetchResults];
-    if (self.editing) {
-        [_optionsArray addObject:@"Add Option Picker"];
-    }*/
     
     return [NSMutableArray arrayWithCapacity:0];
 }
