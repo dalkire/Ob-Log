@@ -87,12 +87,8 @@
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
         NSMutableArray *optionChoices = [NSMutableArray arrayWithArray:[[(OptionHeader *)[mutableFetchResults objectAtIndex:0] options] allObjects]];
+        [optionChoices sortUsingDescriptors:sortDescriptors];
         
-        int len = [optionChoices count];
-        for (int i = 0; i < len; i++) {
-            NSLog(@"POSITION: %@", [(OptionChoice *)[optionChoices objectAtIndex:i] position]);
-        }
-        NSLog(@"}}| %@", optionChoices);
         return optionChoices;
     }
     
