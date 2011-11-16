@@ -73,7 +73,7 @@
     _activePicker = picker;
     
     NSLog(@"didSelectOptionPickerin row: %@", picker.dailyEditRow);
-    OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [optionsPopTVC setOptionsArray:picker.options];
     _optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsPopTVC];
     [_optionsPopoverController setPopoverContentSize:CGSizeMake(200, 300) 

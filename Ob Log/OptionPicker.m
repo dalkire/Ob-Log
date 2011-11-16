@@ -57,11 +57,28 @@
                              nil]];
         gradient.startPoint = CGPointMake(0, 0);
         gradient.endPoint = CGPointMake(0, 1);
-        //[[self layer] addSublayer:gradient];
+        
+        self.options = [[NSMutableArray alloc] initWithCapacity:0];
+        _optionChoicesCoreDataArray = localOptions;
+        
+        int len = [_optionChoicesCoreDataArray count];
+        int width = frame.size.width;
+        for (int i = 0; i < len; i++) {
+            UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 
+                                                                           10, 
+                                                                           frame.size.width - 40, 
+                                                                           frame.size.height - 20)]; 
+            tempLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
+            [tempLabel setText:[[_optionChoicesCoreDataArray objectAtIndex:i] choiceText]];
+            [tempLabel sizeToFit];
+            width = (width > tempLabel.frame.size.width) ? width : tempLabel.frame.size.width;
+            [self.options addObject:[[_optionChoicesCoreDataArray objectAtIndex:i] choiceText]];
+            [tempLabel release];
+        }
         
         headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 
                                                                 10, 
-                                                                frame.size.width - 40, 
+                                                                width, 
                                                                 frame.size.height - 20)];
         headerLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
         headerLabel.textColor = [UIColor colorWithRed:(float)0x22/0xFF 
@@ -70,31 +87,19 @@
                                                 alpha:1];
         [headerLabel setBackgroundColor:[UIColor clearColor]];
         [headerLabel setText:[header headerText]];
-        [headerLabel sizeToFit];
+        [headerLabel setTextAlignment:UITextAlignmentCenter];
+        //[headerLabel sizeToFit];
         
         [self setFrame:CGRectMake(self.frame.origin.x, 
                                   self.frame.origin.y, 
-                                  headerLabel.frame.size.width + 40, 
+                                  width + 40, 
                                   self.frame.size.height)];
-        
-        [headerLabel setFrame:CGRectMake((self.frame.size.width - headerLabel.frame.size.width)/2, 
-                                         (self.frame.size.height - headerLabel.frame.size.height)/2, 
-                                         headerLabel.frame.size.width, 
-                                         headerLabel.frame.size.height)];
         
         gradient.frame = CGRectMake(self.frame.origin.x, 
                                     self.frame.origin.y, 
                                     self.frame.size.width, 
                                     self.frame.size.height);
         //NSLog(@"pickerFRAME 2: %f", self.frame.size.width);
-        
-        self.options = [[NSMutableArray alloc] initWithCapacity:0];
-        _optionChoicesCoreDataArray = localOptions;
-        
-        int len = [_optionChoicesCoreDataArray count];
-        for (int i = 0; i < len; i++) {
-            [self.options addObject:[[_optionChoicesCoreDataArray objectAtIndex:i] choiceText]];
-        }
         
         [self addSubview:headerLabel];
         self.expanded = NO;
