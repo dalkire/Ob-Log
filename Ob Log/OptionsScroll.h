@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CoreDataHelperFunctions.h"
+#import "OptionHeader.h"
+#import "OptionChoice.h"
 #import "OptionPicker.h"
 
 @interface OptionsScroll : UIScrollView
@@ -24,6 +27,6 @@
 
 - (void)propagateDailyEditRow:(__weak id)der;
 - (NSMutableArray *)createOptionPickersFromArray:(NSMutableArray *)pickersData;
-- (OptionPicker *)createOptionPickerWithHeader:(NSMutableString *)header andOptions:(NSMutableArray *)options;
+- (OptionPicker *)createOptionPickerForHeader:(OptionHeader *)header;
 
 @end

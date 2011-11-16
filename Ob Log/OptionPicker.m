@@ -19,6 +19,7 @@
 
 @synthesize optionPickerPopover;
 @synthesize options;
+@synthesize optionChoicesCoreDataArray = _optionChoicesCoreDataArray;
 @synthesize popoverHeader;
 @synthesize headerLabel;
 @synthesize rowId;
@@ -27,7 +28,7 @@
 @synthesize active;
 @synthesize highlightColor;
 
-- (id)initWithFrame:(CGRect)frame andHeader:(NSMutableString *)header andOptions:(NSMutableArray *)localOptions
+- (id)initWithFrame:(CGRect)frame andHeader:(OptionHeader *)header andOptions:(NSMutableArray *)localOptions
 {
     if (self) {
         self = [super initWithFrame:frame];
@@ -68,7 +69,7 @@
                                                  blue:(float)0x22/0xFF 
                                                 alpha:1];
         [headerLabel setBackgroundColor:[UIColor clearColor]];
-        [headerLabel setText:header];
+        [headerLabel setText:[header headerText]];
         [headerLabel sizeToFit];
         
         [self setFrame:CGRectMake(self.frame.origin.x, 
@@ -87,7 +88,13 @@
                                     self.frame.size.height);
         //NSLog(@"pickerFRAME 2: %f", self.frame.size.width);
         
-        self.options = localOptions;
+        self.options = [[NSMutableArray alloc] initWithCapacity:0];
+        _optionChoicesCoreDataArray = localOptions;
+        
+        int len = [_optionChoicesCoreDataArray count];
+        for (int i = 0; i < len; i++) {
+            [self.options addObject:[[_optionChoicesCoreDataArray objectAtIndex:i] choiceText]];
+        }
         
         [self addSubview:headerLabel];
         self.expanded = NO;

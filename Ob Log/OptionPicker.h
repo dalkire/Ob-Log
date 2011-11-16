@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "OptionHeader.h"
+#import "OptionChoice.h"
 #import "PickerOptionsViewController.h"
 #import "Theme.h"
 
@@ -19,6 +21,7 @@
     
     UIPopoverController *optionPickerPopover;
     NSMutableArray *options;
+    NSMutableArray *optionChoicesCoreDataArray;
     NSString *popoverHeader;
     UILabel *headerLabel;
     NSUInteger rowId;
@@ -34,6 +37,7 @@
 
 @property (nonatomic, retain) UIPopoverController *optionPickerPopover;
 @property (nonatomic, retain) NSMutableArray *options;
+@property (nonatomic, retain) NSMutableArray *optionChoicesCoreDataArray;
 @property (nonatomic, retain) NSString *popoverHeader;
 @property (nonatomic, retain) UILabel *headerLabel;
 @property NSUInteger rowId;
@@ -43,7 +47,7 @@
 @property (nonatomic, retain) UIColor *highlightColor;
 
 - (void)propagateDailyEditRow:(__weak id)der;
-- (id)initWithFrame:(CGRect)frame andHeader:(NSMutableString *)header andOptions:(NSMutableArray *)localOptions;
+- (id)initWithFrame:(CGRect)frame andHeader:(OptionHeader *)header andOptions:(NSMutableArray *)localOptions;
 - (void)selectPicker;
 - (void)deselectPicker;
 

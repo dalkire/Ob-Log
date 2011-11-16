@@ -68,6 +68,29 @@
     return [NSMutableArray arrayWithCapacity:0];
 }
 
++ (NSMutableArray *)fetchOptionHeaders
+{
+    NSManagedObjectContext *moc = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"OptionHeader" inManagedObjectContext:moc];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setEntity:entity];
+    [request setSortDescriptors:sortDescriptors];
+    
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[moc executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        NSLog(@"fetchResults error");
+    }
+    else {
+        NSLog(@"fetchResults Success..");
+        return mutableFetchResults;
+    }
+    
+    return [[NSMutableArray alloc] initWithCapacity:0];
+}
+
 + (NSMutableArray *)fetchOptionChoicesForOptionHeader:(OptionHeader *)optionHeader
 {
     NSManagedObjectContext *moc = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).managedObjectContext;

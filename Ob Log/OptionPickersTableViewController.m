@@ -24,7 +24,7 @@
     self = [super initWithStyle:style];
     if (self) {
         _optionsArray = [[NSMutableArray alloc] initWithCapacity:0];
-        _optionsCoreDataArray = [[NSMutableArray alloc] initWithCapacity:0];
+        _optionsCoreDataArray = [[NSMutableArray alloc] initWithArray:[CoreDataHelperFunctions fetchOptionHeaders]];
         UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                  target:self 
                                                                  action:@selector(didTouchEditButton)];
@@ -37,31 +37,15 @@
 
 - (void)loadOptionPickers
 {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"OptionHeader" inManagedObjectContext:_managedObjectContext];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [request setEntity:entity];
-    [request setSortDescriptors:sortDescriptors];
-    
-    NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[_managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResults == nil) {
-        NSLog(@"fetchResults error");
+    NSMutableArray *ops = [[NSMutableArray alloc] initWithCapacity:0];
+    int len = [_optionsCoreDataArray count];
+    for (int i = 0; i < len; i++) {
+        [ops addObject:[(OptionHeader *)[_optionsCoreDataArray objectAtIndex:i] headerText]];
     }
-    else {
-        NSLog(@"fetchResults Success..");
-        NSMutableArray *ops = [[NSMutableArray alloc] initWithCapacity:0];
-        _optionsCoreDataArray = mutableFetchResults;
-        int len = [_optionsCoreDataArray count];
-        for (int i = 0; i < len; i++) {
-           [ops addObject:[(OptionHeader *)[_optionsCoreDataArray objectAtIndex:i] headerText]];
-        }
-        [self setOptionsArray:ops];
-        [ops release];
-        [self.tableView reloadData];
-        NSLog(@"OpCD: %@", _optionsCoreDataArray);
-    }
+    [self setOptionsArray:ops];
+    [ops release];
+    [self.tableView reloadData];
+    NSLog(@"OpCD: %@", _optionsCoreDataArray);
 }
 
 - (void)didTouchEditButton

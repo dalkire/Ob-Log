@@ -17,6 +17,7 @@
 
 + (NSMutableArray *)fetchCourses;
 + (NSMutableArray *)fetchStudentsForCourse:(Course *)crs;
++ (NSMutableArray *)fetchOptionHeaders;
 + (NSMutableArray *)fetchOptionChoicesForOptionHeader:(OptionHeader *)optionHeader;
 + (NSManagedObjectContext *)managedObjectContext;
 

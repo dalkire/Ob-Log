@@ -31,13 +31,11 @@
 - (NSMutableArray *)createOptionPickersFromArray:(NSMutableArray *)pickersData
 {
     NSMutableArray *localOptionPickers = [[NSMutableArray alloc] initWithCapacity:0];
-    NSMutableString *header = [[NSMutableString alloc] initWithString:@"participation"];
-    NSMutableArray *options = [[NSMutableArray alloc] initWithObjects:@"1ne", @"2wo", @"3hree", @"4our", @"5ive", nil];
+    NSMutableArray *optionHeaders = [[NSMutableArray alloc] initWithArray:[CoreDataHelperFunctions fetchOptionHeaders]];
     
-    int len = 8;
+    int len = [optionHeaders count];
     for (int i = 0; i < len; i++) {
-        [header appendFormat:@".%d", i];
-        [localOptionPickers addObject:[self createOptionPickerWithHeader:header andOptions:options]];
+        [localOptionPickers addObject:[self createOptionPickerForHeader:[optionHeaders objectAtIndex:i]]];
     }
     NSLog(@"creating pickers");
     
@@ -55,10 +53,11 @@
     }
 }
 
-- (OptionPicker *)createOptionPickerWithHeader:(NSMutableString *)header andOptions:(NSMutableArray *)options
+- (OptionPicker *)createOptionPickerForHeader:(OptionHeader *)header
 {
+    NSMutableArray *optionChoices = [[NSMutableArray alloc] initWithArray:[CoreDataHelperFunctions fetchOptionChoicesForOptionHeader:header]];
     OptionPicker *picker = [[OptionPicker alloc] initWithFrame:CGRectMake(currX, 0, 100, CELL_HEIGHT) 
-                                                     andHeader:header andOptions:options];
+                                                     andHeader:header andOptions:optionChoices];
     
     currX = picker.frame.origin.x + picker.frame.size.width + 1;
     [self addSubview:picker];
