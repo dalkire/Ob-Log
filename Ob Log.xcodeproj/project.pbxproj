@@ -22,6 +22,7 @@
 		89417F891430BDBA002EABBA /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 89417F881430BDBA002EABBA /* Theme.m */; };
 		895B5D99142EB99A007D7B9C /* EditModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B5D98142EB99A007D7B9C /* EditModalViewController.m */; };
 		895FE640143EA21E00D6D8A6 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 895FE63F143EA21E00D6D8A6 /* CourseViewController.m */; };
+		896066DA14759C2B001C28CD /* EditStudentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896066D914759C2B001C28CD /* EditStudentsTableViewController.m */; };
 		8964C381143E2773008630E5 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8964C380143E2773008630E5 /* RootViewController.m */; };
 		8970EA55143CC24200C5AC69 /* AddStudentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA54143CC24200C5AC69 /* AddStudentViewController.m */; };
 		8970EA60143CD40900C5AC69 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8970EA5F143CD40800C5AC69 /* icon.png */; };
@@ -90,6 +91,8 @@
 		895B5D98142EB99A007D7B9C /* EditModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditModalViewController.m; sourceTree = "<group>"; };
 		895FE63E143EA21E00D6D8A6 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
 		895FE63F143EA21E00D6D8A6 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
+		896066D814759C2A001C28CD /* EditStudentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditStudentsTableViewController.h; sourceTree = "<group>"; };
+		896066D914759C2B001C28CD /* EditStudentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditStudentsTableViewController.m; sourceTree = "<group>"; };
 		8964C37F143E2773008630E5 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		8964C380143E2773008630E5 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		8970EA53143CC24200C5AC69 /* AddStudentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddStudentViewController.h; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 				895FE63F143EA21E00D6D8A6 /* CourseViewController.m */,
 				8970EA53143CC24200C5AC69 /* AddStudentViewController.h */,
 				8970EA54143CC24200C5AC69 /* AddStudentViewController.m */,
+				896066D814759C2A001C28CD /* EditStudentsTableViewController.h */,
+				896066D914759C2B001C28CD /* EditStudentsTableViewController.m */,
 				898B2274143F844300D883DF /* EditNavController.h */,
 				898B2275143F844300D883DF /* EditNavController.m */,
 				898B2277143F846E00D883DF /* EditCoursesViewController.h */,
@@ -466,6 +471,7 @@
 				8999441F14505C64000D244D /* EditableTableViewCell.m in Sources */,
 				892D5C3B1451BFAE00C2C144 /* OptionChoicesTableViewController.m in Sources */,
 				892D5C411451C28E00C2C144 /* CoreDataHelperFunctions.m in Sources */,
+				896066DA14759C2B001C28CD /* EditStudentsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

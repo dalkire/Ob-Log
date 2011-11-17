@@ -120,8 +120,8 @@
 {
     NSLog(@"SELECT PICKER");
     active = YES;
-    self.backgroundColor = self.highlightColor;
-    self.headerLabel.textColor = [Theme getTextColorForColor:self.highlightColor];
+    self.backgroundColor = [delegate highlightColor] ? [delegate highlightColor] : [self highlightColor];
+    self.headerLabel.textColor = [Theme getTextColorForColor:self.backgroundColor];
 }
 
 - (void)deselectPicker
@@ -132,7 +132,10 @@
                                            green:(float)0xDD/0xFF 
                                             blue:(float)0xDD/0xFF 
                                            alpha:1];
-    self.headerLabel.textColor = [UIColor blackColor];
+    self.headerLabel.textColor = [UIColor colorWithRed:(float)0x22/0xFF 
+                                                 green:(float)0x22/0xFF 
+                                                  blue:(float)0x22/0xFF 
+                                                 alpha:1];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

@@ -110,7 +110,7 @@
                                              green:[self.course.colorG floatValue]/255 
                                               blue:[self.course.colorB floatValue]/255 
                                              alpha:1];*/
-    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, segmentedButtons, flex, editBtn, addBtn, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, editBtn, flex, segmentedButtons, nil]];
     
     self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
                                                       self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
@@ -121,8 +121,9 @@
                                                   green:[self.course.colorG floatValue]/255 
                                                    blue:[self.course.colorB floatValue]/255 
                                                   alpha:1];
-    
-    self.header.maintitleLabel.textColor = self.header.subtitleLabel.textColor = [Theme getTextColorForColor:self.header.backgroundColor];
+    NSLog(@"header BG Color: %@, textColor: %@", self.header.backgroundColor, [Theme getTextColorForColor:self.header.backgroundColor]);
+    self.header.maintitleLabel.textColor = [Theme getTextColorForColor:self.header.backgroundColor];
+    self.header.subtitleLabel.textColor = [Theme getTextColorForColor:self.header.backgroundColor];
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
                                                                      self.header.frame.origin.y + self.header.frame.size.height, 
@@ -203,6 +204,25 @@
     }
 }
 
+- (void)didTouchEdit
+{
+    NSLog(@"TOUCHED EDIT");
+    EditStudentsTableViewController *editStudentsTableViewController = [[EditStudentsTableViewController alloc] 
+                                                                        initWithStyle:UITableViewStyleGrouped
+                                                                        andCourse:self.course];
+    
+    EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editStudentsTableViewController];
+    UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
+    
+    [editPop presentPopoverFromRect:CGRectMake(self.toolbar.frame.origin.x + self.toolbar.frame.size.width - 80, 
+                                               50, 
+                                               0, 
+                                               0)
+                             inView:self.toolbar
+           permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
+}
+
 - (void)addStudentModal
 {
     AddStudentViewController *addStudentModal = [[AddStudentViewController alloc] initWithNibName:nil bundle:nil];
@@ -212,10 +232,7 @@
                                                              green:[self.course.colorG floatValue]/255 
                                                               blue:[self.course.colorB floatValue]/255 
                                                              alpha:1];
-    addStudentModal.header.maintitleLabel.textColor = [Theme getTextColorForColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                                                                  green:[self.course.colorG floatValue]/255 
-                                                                                                   blue:[self.course.colorB floatValue]/255 
-                                                                                                  alpha:1]];
+    addStudentModal.header.maintitleLabel.textColor = [Theme getTextColorForColor:addStudentModal.header.backgroundColor];
     [addStudentModal setModalPresentationStyle:UIModalPresentationFormSheet];
     [addStudentModal setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentModalViewController:addStudentModal animated:YES];

@@ -121,16 +121,16 @@
     
     UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:self.segmentedControl];
     
-    UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
+    /*UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
                                initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                                     target:self 
-                                                    action:@selector(didTouchEditBtn)];
+                                                    action:@selector(didTouchEditBtn)];*/
     UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, segmentedButtons, flex, editBtn, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, flex, segmentedButtons, nil]];
     [coursesBtn release];
     [segmentedButtons release];
     [flex release];
-    [editBtn release];
+    //[editBtn release];
     
     self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
                                                            self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
@@ -182,6 +182,8 @@
                                                                        dateStyle:NSDateFormatterLongStyle 
                                                                        timeStyle:NSDateFormatterNoStyle]];
     [self.header.subtitleLabel setText:self.course.courseTitle];
+    self.header.maintitleLabel.textColor = [Theme getTextColorForColor:self.header.backgroundColor];
+    self.header.subtitleLabel.textColor = [Theme getTextColorForColor:self.header.backgroundColor];
 	
     [self setStudentsMutableArray:[CoreDataHelperFunctions fetchStudentsForCourse:self.course]];
     int len = [self.studentsMutableArray count];

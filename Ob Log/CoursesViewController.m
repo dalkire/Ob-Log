@@ -57,8 +57,7 @@
 
 - (void)didTouchEdit
 {
-    NSLog(@"DID TOUCH EDIT");
-    EditCoursesViewController *editCoursesViewController = [[EditCoursesViewController alloc] initWithStyle:UITableViewStylePlain];
+    EditCoursesViewController *editCoursesViewController = [[EditCoursesViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
     EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editCoursesViewController];
     [editCoursesViewController setCoursesArray:self.coursesArray];
@@ -66,13 +65,14 @@
     //[editCoursesViewController.tableView setEditing:YES];
     UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
     
-    [editPop presentPopoverFromRect:[self.view bounds] 
-                             inView:self.view
-           permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [editPop presentPopoverFromRect:CGRectMake(self.toolbar.frame.origin.x + self.toolbar.frame.size.width - 80, 
+                                               50, 
+                                               0, 
+                                               0)
+                             inView:self.toolbar
+           permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
     [editNavController setDelegate:self];
-    
-    //[editCoursesViewController release];
-    //[editPop release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -141,7 +141,7 @@
                                                                50)];
     [self.toolbar setBarStyle:UIBarStyleDefault];
     self.toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
-    [self.toolbar setItems:[NSArray arrayWithObjects:settingsBtn, segmentedButtons, flex, editBtn, addBtn, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:settingsBtn, editBtn, flex, segmentedButtons, nil]];
     
     self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
                                                            self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 

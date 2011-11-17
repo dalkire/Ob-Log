@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "CoreDataHelperFunctions.h"
 #import "AddStudentViewController.h"
+#import "EditNavController.h"
+#import "EditStudentsTableViewController.h"
 #import "Header.h"
 #import "ClickRow.h"
 #import "ColorTag.h"
