@@ -1,0 +1,50 @@
+//
+//  EditCoursesCellContentView.m
+//  Ob Log
+//
+//  Created by David Alkire on 11/25/11.
+//  Copyright (c) 2011 Harvard Medical School. All rights reserved.
+//
+
+#import "EditCoursesCellContentView.h"
+
+@implementation EditCoursesCellContentView
+
+@synthesize course = _course;
+@synthesize colorSquare = _colorSquare;
+@synthesize titleField = _titleField;
+
+- (id)initWithCourse:(Course *)crse
+{
+    self = [super initWithFrame:CGRectMake(0, 
+                                           0, 
+                                           200, 
+                                           30)];
+    if (self) {
+        _colorSquare = [[EditCoursesCellContentColorView alloc] 
+                          initWithRed:[[crse colorR] floatValue]/255.0
+                                green:[[crse colorG] floatValue]/255.0
+                                 blue:[[crse colorB] floatValue]/255.0
+                                alpha:1.0];
+        [self addSubview:_colorSquare];
+        
+        _titleField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
+                                                                    0, 
+                                                                    130, 
+                                                                    30)];
+        [_titleField setText:@"texttext"];
+        [self addSubview:_titleField];
+    }
+    return self;
+}
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
+
+@end

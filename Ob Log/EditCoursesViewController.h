@@ -7,13 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "CoreDataHelperFunctions.h"
 #import "Course.h"
+#import "EditCoursesCellContentView.h"
 
-@interface EditCoursesViewController : UITableViewController
+@interface EditCoursesViewController : UITableViewController <UITextFieldDelegate>
 {
+    NSManagedObjectContext *managedObjectContext;
     NSMutableArray *coursesArray;
+    NSMutableArray *coursesCoreDataArray;
+    BOOL mayAddRow;
 }
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSMutableArray *coursesArray;
+@property (nonatomic, retain) NSMutableArray *coursesCoreDataArray;
+@property BOOL mayAddRow;
+
+- (void)didTouchEditButton;
+- (void)didTouchDoneButton;
+- (void)saveCourses;
 
 @end

@@ -12,6 +12,7 @@
 
 @implementation Course
 
+@dynamic position;
 @dynamic colorB;
 @dynamic colorG;
 @dynamic colorR;

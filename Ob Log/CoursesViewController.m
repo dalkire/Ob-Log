@@ -60,12 +60,11 @@
     EditCoursesViewController *editCoursesViewController = [[EditCoursesViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
     EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editCoursesViewController];
-    [editCoursesViewController setCoursesArray:self.coursesArray];
     [editCoursesViewController.tableView reloadData];
     //[editCoursesViewController.tableView setEditing:YES];
     UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
     
-    [editPop presentPopoverFromRect:CGRectMake(self.toolbar.frame.origin.x + self.toolbar.frame.size.width - 80, 
+    [editPop presentPopoverFromRect:CGRectMake(80, 
                                                50, 
                                                0, 
                                                0)

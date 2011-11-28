@@ -6,20 +6,41 @@
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
+#define TEXTFIELD_OLD      223164
+#define TEXTFIELD_TEMP     223165
+#define TEXTFIELD_NEW      223166
+
 #import "EditCoursesViewController.h"
 
 @implementation EditCoursesViewController
 
-@synthesize coursesArray;
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize coursesArray = _coursesArray;
+@synthesize coursesCoreDataArray = _coursesCoreDataArray;
+@synthesize mayAddRow = _mayAddRow;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.coursesArray = [[NSMutableArray alloc] initWithCapacity:0];
+        _managedObjectContext = [CoreDataHelperFunctions managedObjectContext];
+        _coursesArray = [[NSMutableArray alloc] initWithCapacity:0];
+        _coursesCoreDataArray = [[NSMutableArray alloc] initWithArray:[CoreDataHelperFunctions fetchCourses]];
+        
+        int len = [_coursesCoreDataArray count];
+        for (int i = 0; i < len; i++) {
+            [_coursesArray addObject:[[_coursesCoreDataArray objectAtIndex:i] courseTitle]];
+        }
+        NSLog(@":: %@", _coursesCoreDataArray);
         self.navigationItem.title = @"Edit Courses";
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
+        
+        UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                target:self 
+                                                                                action:@selector(didTouchEditButton)];
+        [self.navigationItem setRightBarButtonItem:editBtn];
+        [self.tableView setEditing:NO];
     }
     return self;
 }
@@ -30,6 +51,63 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)didTouchEditButton
+{
+    NSLog(@"DID touch edit btn");
+    //[self.tableView setEditing:YES animated:YES];
+    UIBarButtonItem *doneBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                            target:self 
+                                                                            action:@selector(didTouchDoneButton)];
+    [self.navigationItem setRightBarButtonItem:doneBtn];
+    [doneBtn release];
+    
+    NSArray *row = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:[_coursesArray count] inSection:0], nil];
+    [_coursesArray addObject:@"zzzAdd_Coursezzz"];
+    Course *course = (Course *)[NSEntityDescription 
+                                   insertNewObjectForEntityForName:@"Course" 
+                                   inManagedObjectContext:_managedObjectContext];
+    [course setCourseTitle:@""];
+    [_coursesCoreDataArray addObject:course];
+    [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView setEditing:YES];
+    [self.tableView reloadData];
+}
+
+- (void)didTouchDoneButton
+{
+    int len = [self.tableView numberOfRowsInSection:0];
+    for (int i = 0; i < len; i++) {
+        NSString *str = @"";
+        if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]) {
+            str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text : @""];
+            [_coursesArray replaceObjectAtIndex:i withObject:str];
+            [(Course *)[_coursesCoreDataArray objectAtIndex:i] setCourseTitle:str];
+        }
+        else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_TEMP]) {
+            str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_TEMP]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_TEMP]).text : @""];
+            [_coursesArray replaceObjectAtIndex:i withObject:str];
+            [(Course *)[_coursesCoreDataArray objectAtIndex:i] setCourseTitle:str];
+        }
+        else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]) {
+            str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]).text : @""];
+            if ([str isEqualToString:@""]) {
+                [_coursesArray removeObjectAtIndex:i];
+                [_managedObjectContext deleteObject:(Course *)[_coursesCoreDataArray objectAtIndex:i]];
+                [_coursesCoreDataArray removeObjectAtIndex:i];
+            }
+        }
+    }
+    UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                            target:self 
+                                                                            action:@selector(didTouchEditButton)];
+    [self.navigationItem setRightBarButtonItem:editBtn];
+    [editBtn release];
+    [self.tableView setEditing:NO];
+    [self.tableView reloadData];
+    [self saveCourses];
+    NSLog(@"OpCD: %@", _coursesCoreDataArray);
 }
 
 #pragma mark - View lifecycle
@@ -94,85 +172,182 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"asking for tableview data");
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
+    NSLog(@"coursesArray: %@", _coursesArray);
+    [cell.textLabel setText:[_coursesArray objectAtIndex:indexPath.row]];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    float red   = [(NSNumber *)((Course *)[coursesArray objectAtIndex:indexPath.row]).colorR floatValue]/255;
-    float green = [(NSNumber *)((Course *)[coursesArray objectAtIndex:indexPath.row]).colorG floatValue]/255;
-    float blue  = [(NSNumber *)((Course *)[coursesArray objectAtIndex:indexPath.row]).colorB floatValue]/255;
-    imageView.backgroundColor = [UIColor colorWithRed:red 
-                                                green:green 
-                                                 blue:blue 
-                                                alpha:1];
-    //cell.imageView = imageView
-    cell.textLabel.text = ((Course *)[coursesArray objectAtIndex:indexPath.row]).courseTitle;
+    if (self.tableView.editing) {
+        //[_optionsArray replaceObjectAtIndex:indexPath.row withObject:@""];
+        //[cell.textLabel setText:@""];
+        UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(10, 
+                                                                        11, 
+                                                                        262, 
+                                                                        24)];
+        [tf setBackgroundColor:[UIColor colorWithRed:(float)0xF7/0xFF 
+                                               green:(float)0xF7/0xFF 
+                                                blue:(float)0xF7/0xFF 
+                                               alpha:1]];
+        [tf setFont:[UIFont boldSystemFontOfSize:17]];
+        if ([[_coursesArray objectAtIndex:indexPath.row] isEqualToString:@"zzzAdd_Coursezzz"]) {
+            [tf setPlaceholder:@"Add Course"];
+            [tf setText:@""];
+            [tf setTag:TEXTFIELD_NEW];
+        }
+        else {
+            [tf setText:[_coursesArray objectAtIndex:indexPath.row]];
+            [tf setTag:TEXTFIELD_OLD];
+        }
+        [tf setDelegate:self];
+        [cell.contentView addSubview:tf];
+    }
+    else {
+        if ([cell viewWithTag:TEXTFIELD_OLD]) {
+            [[cell viewWithTag:TEXTFIELD_OLD] removeFromSuperview];
+        }
+        else if ([cell viewWithTag:TEXTFIELD_TEMP]) {
+            [[cell viewWithTag:TEXTFIELD_TEMP] removeFromSuperview];
+        }
+        else if ([cell viewWithTag:TEXTFIELD_NEW]) {
+            [[cell viewWithTag:TEXTFIELD_NEW] removeFromSuperview];
+        }
+        [cell setShowsReorderControl:NO];
+    }
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return cell;
-}
-
-// Override to support conditional editing of the table view.
+}// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewCellEditingStyleDelete;
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.tableView.editing) {
+        return UITableViewCellEditingStyleNone;
+    }
+    return UITableViewCellEditingStyleDelete;
+}
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [self.coursesArray removeObjectAtIndex:indexPath.row];
+        [_coursesArray removeObjectAtIndex:indexPath.row];
+        [_managedObjectContext deleteObject:[_coursesCoreDataArray objectAtIndex:indexPath.row]];
+        [_coursesCoreDataArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        [self saveCourses];
+        NSLog(@"-OpCD: %@", _coursesCoreDataArray);
+    }
 }
 
-- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView reloadData];
-}
-
-/*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    [_coursesArray exchangeObjectAtIndex:[fromIndexPath indexAtPosition:1] withObjectAtIndex:[toIndexPath indexAtPosition:1]];
+    [_coursesCoreDataArray exchangeObjectAtIndex:[fromIndexPath indexAtPosition:1] withObjectAtIndex:[toIndexPath indexAtPosition:1]];
+    
+    int len = [_coursesCoreDataArray count];
+    for (int i = 0; i < len; i++) {
+        [(Course *)[_coursesCoreDataArray objectAtIndex:i] setPosition:[NSNumber numberWithInt:i]];
+    }
 }
-*/
 
-/*
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    //[tableView reloadData];
+}
+
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
+    
     return YES;
 }
-*/
 
-#pragma mark - Table view delegate
+#pragma mark - UITextField delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    int news = 0;
+    int len = [self.tableView numberOfRowsInSection:0];
+    for (int i = 0; i < len; i++) {
+        if ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW]) {
+            news++;
+        }
+    }
+    if (textField.tag == TEXTFIELD_NEW) {// && news < 1) {
+        _mayAddRow = YES;
+    }
+    else {
+        _mayAddRow = NO;
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (_mayAddRow) {
+        int pos = [_coursesArray count];
+        NSArray *row = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:pos inSection:0], nil];
+        [_coursesArray addObject:@"zzzAdd_Coursezzz"];
+        Course *course = (Course *)[NSEntityDescription 
+                                        insertNewObjectForEntityForName:@"Course" 
+                                        inManagedObjectContext:_managedObjectContext];
+        [course setCourseTitle:@""];
+        [course setPosition:[NSNumber numberWithInt:pos]];
+        [_coursesCoreDataArray addObject:course];
+        [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationBottom];
+        _mayAddRow = NO;
+    }
+    NSMutableString *str = [NSMutableString stringWithString:[textField text]];
+    [str replaceCharactersInRange:range withString:string];
+    if ([str isEqualToString:@""]) {
+        [textField setTag:TEXTFIELD_NEW];
+        int len = [self.tableView numberOfRowsInSection:0];
+        for (int i = 0; i < len; i++) {
+            UITextField *tf = (UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_NEW];
+            if (tf && ![tf isEqual:textField]) {
+                [_coursesArray removeObjectAtIndex:i];
+                [_coursesCoreDataArray removeObjectAtIndex:i];
+                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                _mayAddRow = YES;
+            }
+        }
+    }
+    else {
+        [textField setTag:TEXTFIELD_TEMP];
+    }
+    
+    return TRUE;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSLog(@"DID END EDITING");
+    [self saveCourses];
+    NSLog(@"~OpCD: %@", _coursesCoreDataArray);
+}
+
+#pragma mark - Save data
+
+- (void)saveCourses
+{
+    NSError *error = nil;
+    if (![_managedObjectContext save:&error]) {
+        NSLog(@"An error occurred while attempting to save data.");
+    }
 }
 
 @end
