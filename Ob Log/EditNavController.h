@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EditCoursesViewController.h"
+#import "EditCoursesTableViewController.h"
 
 @interface EditNavController : UINavigationController
 

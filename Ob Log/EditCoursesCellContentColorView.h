@@ -10,6 +10,6 @@
 
 @interface EditCoursesCellContentColorView : UIView
 
-- (id)initWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
+- (id)initWithColor:(UIColor *)color;
 
 @end

@@ -10,13 +10,18 @@
 
 @implementation EditCoursesCellContentColorView
 
-- (id)initWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
+- (id)initWithColor:(UIColor *)color
 {
-    self = [super initWithFrame:CGRectMake(0, 0, 20, 20)];
+    self = [super initWithFrame:CGRectMake(14, 10, 24, 24)];
     if (self) {
-        [self setBackgroundColor:[UIColor colorWithRed:red green:green blue:blue alpha:alpha]];
+        [self setBackgroundColor:color];
     }
     return self;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touched COLOR");
 }
 
 /*

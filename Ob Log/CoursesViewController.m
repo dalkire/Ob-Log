@@ -57,7 +57,7 @@
 
 - (void)didTouchEdit
 {
-    EditCoursesViewController *editCoursesViewController = [[EditCoursesViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    EditCoursesTableViewController *editCoursesViewController = [[EditCoursesTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
     EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editCoursesViewController];
     [editCoursesViewController.tableView reloadData];

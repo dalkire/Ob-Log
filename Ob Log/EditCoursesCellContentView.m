@@ -18,22 +18,27 @@
 {
     self = [super initWithFrame:CGRectMake(0, 
                                            0, 
-                                           200, 
-                                           30)];
+                                           300, 
+                                           43)];
     if (self) {
-        _colorSquare = [[EditCoursesCellContentColorView alloc] 
-                          initWithRed:[[crse colorR] floatValue]/255.0
-                                green:[[crse colorG] floatValue]/255.0
-                                 blue:[[crse colorB] floatValue]/255.0
-                                alpha:1.0];
+        UIColor *color = ([crse colorR] && [crse colorG] && [crse colorB]) ? [UIColor colorWithRed:[[crse colorR] floatValue]/255.0 
+                                                                                             green:[[crse colorG] floatValue]/255.0 
+                                                                                              blue:[[crse colorB] floatValue]/255.0 
+                                                                                             alpha:1.0] 
+                                                                            : [Theme getThemeColor];
+        
+        _colorSquare = [[EditCoursesCellContentColorView alloc] initWithColor:color];
         [self addSubview:_colorSquare];
         
-        _titleField = [[UITextField alloc] initWithFrame:CGRectMake(30, 
-                                                                    0, 
-                                                                    130, 
+        _titleField = [[UITextField alloc] initWithFrame:CGRectMake(50, 
+                                                                    11, 
+                                                                    200, 
                                                                     30)];
-        [_titleField setText:@"texttext"];
+        [_titleField setFont:[UIFont boldSystemFontOfSize:17]];
+        [_titleField setText:[crse courseTitle]];
+        [_titleField setPlaceholder:[crse courseTitle]];
         [self addSubview:_titleField];
+        [self setUserInteractionEnabled:NO];
     }
     return self;
 }

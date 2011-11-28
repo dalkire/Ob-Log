@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Course.h"
 #import "EditCoursesCellContentColorView.h"
+#import "Theme.h"
 
 @interface EditCoursesCellContentView : UIView
 {

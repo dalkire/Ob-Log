@@ -17,7 +17,7 @@
 #import "DailyEditViewController.h"
 #import "AddStudentViewController.h"
 #import "EditNavController.h"
-#import "EditCoursesViewController.h"
+#import "EditCoursesTableViewController.h"
 #import "SettingsTableViewController.h"
 #import "SettingsNavigationController.h"
 #import "OptionPickersTableViewController.h"
