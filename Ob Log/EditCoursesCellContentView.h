@@ -11,7 +11,7 @@
 #import "EditCoursesCellContentColorView.h"
 #import "Theme.h"
 
-@interface EditCoursesCellContentView : UIView
+@interface EditCoursesCellContentView : UIView <EditCoursesCellContentColorDelegate>
 {
     Course *course;
     EditCoursesCellContentColorView *colorSquare;

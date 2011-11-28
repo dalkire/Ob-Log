@@ -9,7 +9,18 @@
 #import <UIKit/UIKit.h>
 
 @interface EditCoursesCellContentColorView : UIView
+{
+    id *delegate;
+}
+
+@property (nonatomic, assign) id delegate;
 
 - (id)initWithColor:(UIColor *)color;
+
+@end
+
+@protocol EditCoursesCellContentColorDelegate <NSObject>
+
+- (void)didTouchColor;
 
 @end

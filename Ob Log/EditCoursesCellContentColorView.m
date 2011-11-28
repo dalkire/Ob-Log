@@ -10,6 +10,8 @@
 
 @implementation EditCoursesCellContentColorView
 
+@synthesize delegate = _delegate;
+
 - (id)initWithColor:(UIColor *)color
 {
     self = [super initWithFrame:CGRectMake(14, 10, 24, 24)];
@@ -21,7 +23,7 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"touched COLOR");
+    [_delegate didTouchColor];
 }
 
 /*

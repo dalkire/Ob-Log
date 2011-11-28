@@ -28,6 +28,8 @@
                                                                             : [Theme getThemeColor];
         
         _colorSquare = [[EditCoursesCellContentColorView alloc] initWithColor:color];
+        [_colorSquare setDelegate:self];
+        
         [self addSubview:_colorSquare];
         
         _titleField = [[UITextField alloc] initWithFrame:CGRectMake(50, 
@@ -43,6 +45,11 @@
     return self;
 }
 
+- (void)didTouchColor
+{
+    NSLog(@"TOUCHEDCOLOR");
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -51,5 +58,11 @@
     // Drawing code
 }
 */
+
+
+// Color picker:
+// 100 [1] 101 [2] 001 [3] 011 [4] 010 [5] 110 [6] 100
+// Six segments, e.g. 0-102, 17 wide. If 87, 87/17 = 5.117...
+// In segment 5 btw 010 and 110, .117... = percentage for 1'10
 
 @end

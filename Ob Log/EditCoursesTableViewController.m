@@ -200,20 +200,8 @@
     }
     
     NSLog(@"coursesArray: %@", _coursesArray);
-    //[cell.textLabel setText:[_coursesArray objectAtIndex:indexPath.row]];
     
     if (self.tableView.editing) {
-        //[_optionsArray replaceObjectAtIndex:indexPath.row withObject:@""];
-        //[cell.textLabel setText:@""];
-        /*UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(10, 
-                                                                        11, 
-                                                                        262, 
-                                                                        24)];
-        [tf setBackgroundColor:[UIColor colorWithRed:(float)0xF7/0xFF 
-                                               green:(float)0xF7/0xFF 
-                                                blue:(float)0xF7/0xFF 
-                                               alpha:1]];
-        [tf setFont:[UIFont boldSystemFontOfSize:17]];*/
         if ([[_coursesArray objectAtIndex:indexPath.row] isEqualToString:@"zzzAdd_Coursezzz"]) {
             [((EditCoursesCellContentView *)[cell viewWithTag:CELL_CONTENT_VIEW]).titleField setPlaceholder:@"Add Course"];
             [((EditCoursesCellContentView *)[cell viewWithTag:CELL_CONTENT_VIEW]).titleField setText:@""];
@@ -227,15 +215,6 @@
         [(EditCoursesCellContentView *)[cell viewWithTag:CELL_CONTENT_VIEW] setUserInteractionEnabled:YES];
     }
     else {
-        /*if ([cell viewWithTag:TEXTFIELD_OLD]) {
-            [[cell viewWithTag:TEXTFIELD_OLD] removeFromSuperview];
-        }
-        else if ([cell viewWithTag:TEXTFIELD_TEMP]) {
-            [[cell viewWithTag:TEXTFIELD_TEMP] removeFromSuperview];
-        }
-        else if ([cell viewWithTag:TEXTFIELD_NEW]) {
-            [[cell viewWithTag:TEXTFIELD_NEW] removeFromSuperview];
-        }*/
         [cell setShowsReorderControl:NO];
         [(EditCoursesCellContentView *)[cell viewWithTag:CELL_CONTENT_VIEW] setUserInteractionEnabled:NO];
     }
@@ -328,6 +307,15 @@
                                         insertNewObjectForEntityForName:@"Course" 
                                         inManagedObjectContext:_managedObjectContext];
         [course setCourseTitle:@""];
+        
+        const float *colorComponents = CGColorGetComponents([Theme getThemeColor].CGColor);
+        float r = colorComponents[0]*255;
+        float g = colorComponents[1]*255;
+        float b = colorComponents[2]*255;
+        
+        [course setColorR:[NSNumber numberWithFloat:r]];
+        [course setColorG:[NSNumber numberWithFloat:g]];
+        [course setColorB:[NSNumber numberWithFloat:b]];
         [course setPosition:[NSNumber numberWithInt:pos]];
         [_coursesCoreDataArray addObject:course];
         [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationBottom];
