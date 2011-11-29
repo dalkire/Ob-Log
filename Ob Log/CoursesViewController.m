@@ -267,15 +267,6 @@
     [self.delegate loadDailyEditViewForCourse:clickRow.course andDate:[NSDate date]];
 }
 
-- (void)addCourseModal
-{
-    AddCourseViewController *addClassModal = [[AddCourseViewController alloc] initWithNibName:nil bundle:nil];
-    [addClassModal setDelegate:self];
-    [addClassModal setModalPresentationStyle:UIModalPresentationFormSheet];
-    [addClassModal setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    [self presentModalViewController:addClassModal animated:YES];
-}
-
 - (void)addCourseWithTitle:(NSString *)courseTitle andRed:(float)red green:(float)green blue:(float)blue
 {
     Course *course = (Course *)[NSEntityDescription 

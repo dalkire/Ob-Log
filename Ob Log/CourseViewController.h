@@ -14,7 +14,6 @@
 #import "EditStudentsTableViewController.h"
 #import "Header.h"
 #import "ClickRow.h"
-#import "ColorTag.h"
 
 @interface CourseViewController : UIViewController <ClickRowDelegate, AddStudentDelegate>
 {

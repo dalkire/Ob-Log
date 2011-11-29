@@ -33,13 +33,16 @@
 		897AF166144DF319005D71E9 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF165144DF319005D71E9 /* SettingsTableViewController.m */; };
 		897AF16B144E09FA005D71E9 /* SettingsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF16A144E09FA005D71E9 /* SettingsNavigationController.m */; };
 		897AF16E144E0BCC005D71E9 /* OptionPickersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF16D144E0BCC005D71E9 /* OptionPickersTableViewController.m */; };
-		897B847B143BC6F50013D2CA /* ColorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 897B847A143BC6F50013D2CA /* ColorTag.m */; };
 		898B2276143F844400D883DF /* EditNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898B2275143F844300D883DF /* EditNavController.m */; };
 		898B2279143F846E00D883DF /* EditCoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898B2278143F846E00D883DF /* EditCoursesTableViewController.m */; };
 		8991C089148043E300E7EDE1 /* EditCoursesCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8991C088148043E300E7EDE1 /* EditCoursesCellContentView.m */; };
 		8991C08C148047C600E7EDE1 /* EditCoursesCellContentColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8991C08B148047C600E7EDE1 /* EditCoursesCellContentColorView.m */; };
 		8991C09414845B1000E7EDE1 /* ColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8991C09314845B1000E7EDE1 /* ColorPicker.m */; };
 		8999441F14505C64000D244D /* EditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8999441E14505C64000D244D /* EditableTableViewCell.m */; };
+		899C5B52148536B100FCADDC /* CloseBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C5B51148536B000FCADDC /* CloseBtn.m */; };
+		899C5B55148538C300FCADDC /* icon-x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899C5B54148538C300FCADDC /* icon-x.png */; };
+		899C5B5814856E3800FCADDC /* ColorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 899C5B5714856E3800FCADDC /* ColorTag.m */; };
+		899C5B5D148573D500FCADDC /* icon-slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 899C5B5C148573D500FCADDC /* icon-slider.png */; };
 		89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */; };
 		89C4B51F142B6C1000D035BA /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B510142B6C1000D035BA /* ActionButton.m */; };
 		89C4B520142B6C1000D035BA /* ActionsSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B512142B6C1000D035BA /* ActionsSlider.m */; };
@@ -53,7 +56,6 @@
 		89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4EF143158A70035CE24 /* SelectionTable.m */; };
 		89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */; };
 		89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */; };
-		89C9F56D143A4B6F00ED2E4A /* ColorPicker_.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9F56C143A4B6F00ED2E4A /* ColorPicker_.m */; };
 		89DCB10F1444B6E100F847C4 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB10E1444B6E100F847C4 /* Entry.m */; };
 		89DCB1121444B6E200F847C4 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB1111444B6E200F847C4 /* Student.m */; };
 		89DCB1151444B6E200F847C4 /* OptionChoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB1141444B6E200F847C4 /* OptionChoice.m */; };
@@ -61,8 +63,6 @@
 		89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF84751438ADB400D5F444 /* DailyEditViewController.m */; };
 		89DF847C1438F66900D5F444 /* Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF847B1438F66800D5F444 /* Header.m */; };
 		89DF848514390D1A00D5F444 /* ClickRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848414390D0F00D5F444 /* ClickRow.m */; };
-		89DF848814393EBF00D5F444 /* AddCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DF848714393EBF00D5F444 /* AddCourseViewController.m */; };
-		89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E320AD143B42C600A6D54E /* ColorSlider.m */; };
 		89E44CDC1448AB280052A24B /* icon-settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 89E44CDB1448AB280052A24B /* icon-settings.png */; };
 		89E44CDE1448BE6A0052A24B /* icon-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 89E44CDD1448BE6A0052A24B /* icon-add.png */; };
 /* End PBXBuildFile section */
@@ -115,8 +115,6 @@
 		897AF16A144E09FA005D71E9 /* SettingsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNavigationController.m; sourceTree = "<group>"; };
 		897AF16C144E0BCC005D71E9 /* OptionPickersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionPickersTableViewController.h; sourceTree = "<group>"; };
 		897AF16D144E0BCC005D71E9 /* OptionPickersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionPickersTableViewController.m; sourceTree = "<group>"; };
-		897B8479143BC6F50013D2CA /* ColorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTag.h; sourceTree = "<group>"; };
-		897B847A143BC6F50013D2CA /* ColorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTag.m; sourceTree = "<group>"; };
 		898B2274143F844300D883DF /* EditNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNavController.h; sourceTree = "<group>"; };
 		898B2275143F844300D883DF /* EditNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNavController.m; sourceTree = "<group>"; };
 		898B2277143F846E00D883DF /* EditCoursesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCoursesTableViewController.h; sourceTree = "<group>"; };
@@ -129,6 +127,12 @@
 		8991C09314845B1000E7EDE1 /* ColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPicker.m; sourceTree = "<group>"; };
 		8999441D14505C64000D244D /* EditableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableTableViewCell.h; sourceTree = "<group>"; };
 		8999441E14505C64000D244D /* EditableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableTableViewCell.m; sourceTree = "<group>"; };
+		899C5B50148536B000FCADDC /* CloseBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseBtn.h; sourceTree = "<group>"; };
+		899C5B51148536B000FCADDC /* CloseBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseBtn.m; sourceTree = "<group>"; };
+		899C5B54148538C300FCADDC /* icon-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-x.png"; sourceTree = "<group>"; };
+		899C5B5614856E3800FCADDC /* ColorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTag.h; sourceTree = "<group>"; };
+		899C5B5714856E3800FCADDC /* ColorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTag.m; sourceTree = "<group>"; };
+		899C5B5C148573D500FCADDC /* icon-slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-slider.png"; sourceTree = "<group>"; };
 		89C15DEA142C86CF001C125C /* PickerOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerOptionsViewController.h; sourceTree = "<group>"; };
 		89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerOptionsViewController.m; sourceTree = "<group>"; };
 		89C4B50F142B6C1000D035BA /* ActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionButton.h; sourceTree = "<group>"; };
@@ -152,8 +156,6 @@
 		89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionTableRow.m; sourceTree = "<group>"; };
 		89C9F564143A205F00ED2E4A /* OptionsPopoverTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsPopoverTableViewController.h; sourceTree = "<group>"; };
 		89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsPopoverTableViewController.m; sourceTree = "<group>"; };
-		89C9F56B143A4B6F00ED2E4A /* ColorPicker_.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPicker_.h; sourceTree = "<group>"; };
-		89C9F56C143A4B6F00ED2E4A /* ColorPicker_.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPicker_.m; sourceTree = "<group>"; };
 		89DCB10D1444B6E100F847C4 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
 		89DCB10E1444B6E100F847C4 /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entry.m; sourceTree = "<group>"; };
 		89DCB1101444B6E200F847C4 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
@@ -168,10 +170,6 @@
 		89DF847B1438F66800D5F444 /* Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Header.m; sourceTree = "<group>"; };
 		89DF848314390D0D00D5F444 /* ClickRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickRow.h; sourceTree = "<group>"; };
 		89DF848414390D0F00D5F444 /* ClickRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickRow.m; sourceTree = "<group>"; };
-		89DF848614393EBF00D5F444 /* AddCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCourseViewController.h; sourceTree = "<group>"; };
-		89DF848714393EBF00D5F444 /* AddCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCourseViewController.m; sourceTree = "<group>"; };
-		89E320AC143B42C600A6D54E /* ColorSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSlider.h; sourceTree = "<group>"; };
-		89E320AD143B42C600A6D54E /* ColorSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSlider.m; sourceTree = "<group>"; };
 		89E44CDB1448AB280052A24B /* icon-settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-settings.png"; sourceTree = "<group>"; };
 		89E44CDD1448BE6A0052A24B /* icon-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -263,6 +261,8 @@
 		892C96A9142B67E000994EAB /* Ob Log */ = {
 			isa = PBXGroup;
 			children = (
+				899C5B50148536B000FCADDC /* CloseBtn.h */,
+				899C5B51148536B000FCADDC /* CloseBtn.m */,
 				8991C09214845B1000E7EDE1 /* ColorPicker.h */,
 				8991C09314845B1000E7EDE1 /* ColorPicker.m */,
 				8991C087148043E300E7EDE1 /* EditCoursesCellContentView.h */,
@@ -285,12 +285,6 @@
 				892C96AA142B67E000994EAB /* Supporting Files */,
 				89DF848314390D0D00D5F444 /* ClickRow.h */,
 				89DF848414390D0F00D5F444 /* ClickRow.m */,
-				89C9F56B143A4B6F00ED2E4A /* ColorPicker_.h */,
-				89C9F56C143A4B6F00ED2E4A /* ColorPicker_.m */,
-				89E320AC143B42C600A6D54E /* ColorSlider.h */,
-				89E320AD143B42C600A6D54E /* ColorSlider.m */,
-				897B8479143BC6F50013D2CA /* ColorTag.h */,
-				897B847A143BC6F50013D2CA /* ColorTag.m */,
 			);
 			path = "Ob Log";
 			sourceTree = "<group>";
@@ -298,10 +292,14 @@
 		892C96AA142B67E000994EAB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				899C5B5C148573D500FCADDC /* icon-slider.png */,
+				899C5B54148538C300FCADDC /* icon-x.png */,
 				89E44CDD1448BE6A0052A24B /* icon-add.png */,
 				89E44CDB1448AB280052A24B /* icon-settings.png */,
 				8970EA5F143CD40800C5AC69 /* icon.png */,
 				89417F871430BDBA002EABBA /* Theme.h */,
+				899C5B5614856E3800FCADDC /* ColorTag.h */,
+				899C5B5714856E3800FCADDC /* ColorTag.m */,
 				89417F881430BDBA002EABBA /* Theme.m */,
 				892C96AB142B67E000994EAB /* Ob Log-Info.plist */,
 				892C96AC142B67E000994EAB /* InfoPlist.strings */,
@@ -357,8 +355,6 @@
 				89DF84751438ADB400D5F444 /* DailyEditViewController.m */,
 				895B5D97142EB99A007D7B9C /* EditModalViewController.h */,
 				895B5D98142EB99A007D7B9C /* EditModalViewController.m */,
-				89DF848614393EBF00D5F444 /* AddCourseViewController.h */,
-				89DF848714393EBF00D5F444 /* AddCourseViewController.m */,
 				89C9F564143A205F00ED2E4A /* OptionsPopoverTableViewController.h */,
 				89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */,
 				895FE63E143EA21E00D6D8A6 /* CourseViewController.h */,
@@ -433,6 +429,8 @@
 				8970EA60143CD40900C5AC69 /* icon.png in Resources */,
 				89E44CDC1448AB280052A24B /* icon-settings.png in Resources */,
 				89E44CDE1448BE6A0052A24B /* icon-add.png in Resources */,
+				899C5B55148538C300FCADDC /* icon-x.png in Resources */,
+				899C5B5D148573D500FCADDC /* icon-slider.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,11 +461,7 @@
 				89DF84761438ADB400D5F444 /* DailyEditViewController.m in Sources */,
 				89DF847C1438F66900D5F444 /* Header.m in Sources */,
 				89DF848514390D1A00D5F444 /* ClickRow.m in Sources */,
-				89DF848814393EBF00D5F444 /* AddCourseViewController.m in Sources */,
 				89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */,
-				89C9F56D143A4B6F00ED2E4A /* ColorPicker_.m in Sources */,
-				89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */,
-				897B847B143BC6F50013D2CA /* ColorTag.m in Sources */,
 				8970EA55143CC24200C5AC69 /* AddStudentViewController.m in Sources */,
 				8970EA66143CE7C800C5AC69 /* CoursesViewController.m in Sources */,
 				8970EA69143CEEB200C5AC69 /* Toolbar.m in Sources */,
@@ -490,6 +484,8 @@
 				8991C089148043E300E7EDE1 /* EditCoursesCellContentView.m in Sources */,
 				8991C08C148047C600E7EDE1 /* EditCoursesCellContentColorView.m in Sources */,
 				8991C09414845B1000E7EDE1 /* ColorPicker.m in Sources */,
+				899C5B52148536B100FCADDC /* CloseBtn.m in Sources */,
+				899C5B5814856E3800FCADDC /* ColorTag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

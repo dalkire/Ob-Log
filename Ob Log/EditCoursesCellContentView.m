@@ -10,10 +10,12 @@
 
 @implementation EditCoursesCellContentView
 
+@synthesize delegate = _delegate;
 @synthesize course = _course;
 @synthesize colorSquare = _colorSquare;
 @synthesize titleField = _titleField;
 @synthesize colorPicker = _colorPicker;
+@synthesize closeBtn = _closeBtn;
 
 - (id)initWithCourse:(Course *)crse
 {
@@ -42,21 +44,52 @@
         [_titleField setPlaceholder:[crse courseTitle]];
         [self addSubview:_titleField];
         
-        _colorPicker = [[ColorPicker alloc] initWithFrame:CGRectMake(10, 
-                                                                     8, 
-                                                                     280, 
-                                                                     36)];
+        _colorPicker = [[ColorPicker alloc] initWithFrame:CGRectMake(47, 
+                                                                     10, 
+                                                                     186, 
+                                                                     24)];
+        [_colorPicker setDelegate:self];
         [_colorPicker setHidden:YES];
         [self addSubview:_colorPicker];
+        
+        _closeBtn = [[CloseBtn alloc] init];
+        [_closeBtn setFrame:CGRectMake(240, 12, _closeBtn.frame.size.width, _closeBtn.frame.size.height)];
+        [_closeBtn setDelegate:self];
+        [_closeBtn setHidden:YES];
+        [self addSubview:_closeBtn];
         
         [self setUserInteractionEnabled:NO];
     }
     return self;
 }
 
-- (void)didTouchColor
+- (void)didTouchColorSquare
 {
-    NSLog(@"TOUCHEDCOLOR");
+    [self showColorPicker];
+}
+
+- (void)didTouchCloseBtn
+{
+    [self hideColorPicker];
+}
+
+- (void)showColorPicker
+{
+    [_colorPicker setHidden:NO];
+    [_closeBtn setHidden:NO];
+    [_titleField setHidden:YES];
+}
+
+- (void)hideColorPicker
+{
+    [_colorPicker setHidden:YES];
+    [_closeBtn setHidden:YES];
+    [_titleField setHidden:NO];
+}
+
+- (void)selectedColor:(UIColor *)color
+{
+    [_colorSquare setBackgroundColor:color];
 }
 
 /*
@@ -67,11 +100,5 @@
     // Drawing code
 }
 */
-
-
-// Color picker:
-// 100 [1] 101 [2] 001 [3] 011 [4] 010 [5] 110 [6] 100
-// Six segments, e.g. 0-102, 17 wide. If 87, 87/17 = 5.117...
-// In segment 5 btw 010 and 110, .117... = percentage for 1'10
 
 @end

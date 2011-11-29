@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "CoreDataHelperFunctions.h"
-#import "AddCourseViewController.h"
 #import "Header.h"
 #import "ClickRow.h"
-#import "ColorTag.h"
 #import "Toolbar.h"
+#import "ColorTag.h"
 #import "DailyEditViewController.h"
 #import "AddStudentViewController.h"
 #import "EditNavController.h"
@@ -22,7 +21,7 @@
 #import "SettingsNavigationController.h"
 #import "OptionPickersTableViewController.h"
 
-@interface CoursesViewController : UIViewController <ClickRowDelegate, AddCourseDelegate, UINavigationControllerDelegate, SettingsTableViewControllerDelegate>
+@interface CoursesViewController : UIViewController <ClickRowDelegate, UINavigationControllerDelegate, SettingsTableViewControllerDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
     NSUInteger nextCourseId;
@@ -56,7 +55,6 @@
 - (void)initCourses;
 - (void)didTouchSettings;
 - (void)didTouchSegmentedControl;
-- (void)addCourseModal;
 
 @end
 

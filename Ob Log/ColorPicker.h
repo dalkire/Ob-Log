@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Theme.h"
 
 @interface ColorPicker : UIView
+{
+    id delegate;
+    UIImageView *slider;
+}
+
+@property (nonatomic, retain) id delegate;
+@property (nonatomic, retain) UIImageView *slider;
+
+@end
+
+@protocol ColorPickerDelegate <NSObject>
+
+- (void)selectedColor:(UIColor *)color;
 
 @end

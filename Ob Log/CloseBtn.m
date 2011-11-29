@@ -1,29 +1,31 @@
 //
-//  EditCoursesCellContentColorView.m
+//  CloseBtn.m
 //  Ob Log
 //
-//  Created by David Alkire on 11/25/11.
+//  Created by David Alkire on 11/29/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
-#import "EditCoursesCellContentColorView.h"
+#import "CloseBtn.h"
 
-@implementation EditCoursesCellContentColorView
+@implementation CloseBtn
 
 @synthesize delegate = _delegate;
 
-- (id)initWithColor:(UIColor *)color
+- (id)init
 {
-    self = [super initWithFrame:CGRectMake(14, 10, 24, 24)];
+    self = [super initWithFrame:CGRectMake(0, 0, 19, 19)];
     if (self) {
-        [self setBackgroundColor:color];
+        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon-x.png"]];
+        [self addSubview:iv];
     }
     return self;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [_delegate didTouchColorSquare];
+    NSLog(@"CLOSE");
+    [_delegate didTouchCloseBtn];
 }
 
 /*

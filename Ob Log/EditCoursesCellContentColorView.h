@@ -10,7 +10,7 @@
 
 @interface EditCoursesCellContentColorView : UIView
 {
-    id *delegate;
+    id delegate;
 }
 
 @property (nonatomic, assign) id delegate;
@@ -21,6 +21,6 @@
 
 @protocol EditCoursesCellContentColorDelegate <NSObject>
 
-- (void)didTouchColor;
+- (void)didTouchColorSquare;
 
 @end

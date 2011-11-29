@@ -95,10 +95,10 @@
                                initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                target:self 
                                action:@selector(didTouchEdit)];
-    UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add Student" 
+    /*UIBarButtonItem *addBtn =[[UIBarButtonItem alloc] initWithTitle:@"Add Student" 
                                                               style:UIBarButtonItemStyleBordered 
                                                              target:self 
-                                                             action:@selector(addStudentModal)];  
+                                                             action:@selector(addStudentModal)]; */ 
     UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 

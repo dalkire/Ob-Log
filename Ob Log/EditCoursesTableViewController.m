@@ -89,6 +89,7 @@
 {
     int len = [self.tableView numberOfRowsInSection:0];
     for (int i = 0; i < len; i++) {
+        [(EditCoursesCellContentView *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:CELL_CONTENT_VIEW] hideColorPicker];
         NSString *str = @"";
         if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]) {
             str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text : @""];
@@ -191,6 +192,7 @@
     
     EditCoursesCellContentView *content = [[EditCoursesCellContentView alloc] initWithCourse:[_coursesCoreDataArray objectAtIndex:indexPath.row]];
     [content setTag:CELL_CONTENT_VIEW];
+    [content setDelegate:self];
     
     if (![cell viewWithTag:CELL_CONTENT_VIEW]) {
         [cell.contentView addSubview:content];
@@ -213,6 +215,7 @@
         }
         [((EditCoursesCellContentView *)[cell viewWithTag:CELL_CONTENT_VIEW]).titleField setDelegate:self];
         [(EditCoursesCellContentView *)[cell viewWithTag:CELL_CONTENT_VIEW] setUserInteractionEnabled:YES];
+        NSLog(@"self: %@", [self description]);
     }
     else {
         [cell setShowsReorderControl:NO];
