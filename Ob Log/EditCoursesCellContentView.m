@@ -13,6 +13,7 @@
 @synthesize course = _course;
 @synthesize colorSquare = _colorSquare;
 @synthesize titleField = _titleField;
+@synthesize colorPicker = _colorPicker;
 
 - (id)initWithCourse:(Course *)crse
 {
@@ -40,6 +41,14 @@
         [_titleField setText:[crse courseTitle]];
         [_titleField setPlaceholder:[crse courseTitle]];
         [self addSubview:_titleField];
+        
+        _colorPicker = [[ColorPicker alloc] initWithFrame:CGRectMake(10, 
+                                                                     8, 
+                                                                     280, 
+                                                                     36)];
+        [_colorPicker setHidden:YES];
+        [self addSubview:_colorPicker];
+        
         [self setUserInteractionEnabled:NO];
     }
     return self;

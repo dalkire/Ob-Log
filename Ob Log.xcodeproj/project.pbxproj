@@ -38,6 +38,7 @@
 		898B2279143F846E00D883DF /* EditCoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898B2278143F846E00D883DF /* EditCoursesTableViewController.m */; };
 		8991C089148043E300E7EDE1 /* EditCoursesCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8991C088148043E300E7EDE1 /* EditCoursesCellContentView.m */; };
 		8991C08C148047C600E7EDE1 /* EditCoursesCellContentColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8991C08B148047C600E7EDE1 /* EditCoursesCellContentColorView.m */; };
+		8991C09414845B1000E7EDE1 /* ColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8991C09314845B1000E7EDE1 /* ColorPicker.m */; };
 		8999441F14505C64000D244D /* EditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8999441E14505C64000D244D /* EditableTableViewCell.m */; };
 		89C15DEC142C86CF001C125C /* PickerOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C15DEB142C86CF001C125C /* PickerOptionsViewController.m */; };
 		89C4B51F142B6C1000D035BA /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4B510142B6C1000D035BA /* ActionButton.m */; };
@@ -52,7 +53,7 @@
 		89C7C4F0143158A80035CE24 /* SelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4EF143158A70035CE24 /* SelectionTable.m */; };
 		89C7C4F414316ADC0035CE24 /* SelectionTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */; };
 		89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */; };
-		89C9F56D143A4B6F00ED2E4A /* ColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9F56C143A4B6F00ED2E4A /* ColorPicker.m */; };
+		89C9F56D143A4B6F00ED2E4A /* ColorPicker_.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9F56C143A4B6F00ED2E4A /* ColorPicker_.m */; };
 		89DCB10F1444B6E100F847C4 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB10E1444B6E100F847C4 /* Entry.m */; };
 		89DCB1121444B6E200F847C4 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB1111444B6E200F847C4 /* Student.m */; };
 		89DCB1151444B6E200F847C4 /* OptionChoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB1141444B6E200F847C4 /* OptionChoice.m */; };
@@ -118,12 +119,14 @@
 		897B847A143BC6F50013D2CA /* ColorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTag.m; sourceTree = "<group>"; };
 		898B2274143F844300D883DF /* EditNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNavController.h; sourceTree = "<group>"; };
 		898B2275143F844300D883DF /* EditNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNavController.m; sourceTree = "<group>"; };
-		898B2277143F846E00D883DF /* EditCoursesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EditCoursesTableViewController.h; sourceTree = "<group>"; };
+		898B2277143F846E00D883DF /* EditCoursesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCoursesTableViewController.h; sourceTree = "<group>"; };
 		898B2278143F846E00D883DF /* EditCoursesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCoursesTableViewController.m; sourceTree = "<group>"; };
 		8991C087148043E300E7EDE1 /* EditCoursesCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCoursesCellContentView.h; sourceTree = "<group>"; };
 		8991C088148043E300E7EDE1 /* EditCoursesCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCoursesCellContentView.m; sourceTree = "<group>"; };
 		8991C08A148047C600E7EDE1 /* EditCoursesCellContentColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCoursesCellContentColorView.h; sourceTree = "<group>"; };
 		8991C08B148047C600E7EDE1 /* EditCoursesCellContentColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCoursesCellContentColorView.m; sourceTree = "<group>"; };
+		8991C09214845B1000E7EDE1 /* ColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPicker.h; sourceTree = "<group>"; };
+		8991C09314845B1000E7EDE1 /* ColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPicker.m; sourceTree = "<group>"; };
 		8999441D14505C64000D244D /* EditableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableTableViewCell.h; sourceTree = "<group>"; };
 		8999441E14505C64000D244D /* EditableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableTableViewCell.m; sourceTree = "<group>"; };
 		89C15DEA142C86CF001C125C /* PickerOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerOptionsViewController.h; sourceTree = "<group>"; };
@@ -149,8 +152,8 @@
 		89C7C4F314316ADB0035CE24 /* SelectionTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionTableRow.m; sourceTree = "<group>"; };
 		89C9F564143A205F00ED2E4A /* OptionsPopoverTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsPopoverTableViewController.h; sourceTree = "<group>"; };
 		89C9F565143A205F00ED2E4A /* OptionsPopoverTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsPopoverTableViewController.m; sourceTree = "<group>"; };
-		89C9F56B143A4B6F00ED2E4A /* ColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPicker.h; sourceTree = "<group>"; };
-		89C9F56C143A4B6F00ED2E4A /* ColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPicker.m; sourceTree = "<group>"; };
+		89C9F56B143A4B6F00ED2E4A /* ColorPicker_.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPicker_.h; sourceTree = "<group>"; };
+		89C9F56C143A4B6F00ED2E4A /* ColorPicker_.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPicker_.m; sourceTree = "<group>"; };
 		89DCB10D1444B6E100F847C4 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
 		89DCB10E1444B6E100F847C4 /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entry.m; sourceTree = "<group>"; };
 		89DCB1101444B6E200F847C4 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
@@ -260,6 +263,8 @@
 		892C96A9142B67E000994EAB /* Ob Log */ = {
 			isa = PBXGroup;
 			children = (
+				8991C09214845B1000E7EDE1 /* ColorPicker.h */,
+				8991C09314845B1000E7EDE1 /* ColorPicker.m */,
 				8991C087148043E300E7EDE1 /* EditCoursesCellContentView.h */,
 				8991C088148043E300E7EDE1 /* EditCoursesCellContentView.m */,
 				8991C08A148047C600E7EDE1 /* EditCoursesCellContentColorView.h */,
@@ -280,8 +285,8 @@
 				892C96AA142B67E000994EAB /* Supporting Files */,
 				89DF848314390D0D00D5F444 /* ClickRow.h */,
 				89DF848414390D0F00D5F444 /* ClickRow.m */,
-				89C9F56B143A4B6F00ED2E4A /* ColorPicker.h */,
-				89C9F56C143A4B6F00ED2E4A /* ColorPicker.m */,
+				89C9F56B143A4B6F00ED2E4A /* ColorPicker_.h */,
+				89C9F56C143A4B6F00ED2E4A /* ColorPicker_.m */,
 				89E320AC143B42C600A6D54E /* ColorSlider.h */,
 				89E320AD143B42C600A6D54E /* ColorSlider.m */,
 				897B8479143BC6F50013D2CA /* ColorTag.h */,
@@ -460,7 +465,7 @@
 				89DF848514390D1A00D5F444 /* ClickRow.m in Sources */,
 				89DF848814393EBF00D5F444 /* AddCourseViewController.m in Sources */,
 				89C9F566143A205F00ED2E4A /* OptionsPopoverTableViewController.m in Sources */,
-				89C9F56D143A4B6F00ED2E4A /* ColorPicker.m in Sources */,
+				89C9F56D143A4B6F00ED2E4A /* ColorPicker_.m in Sources */,
 				89E320AE143B42C600A6D54E /* ColorSlider.m in Sources */,
 				897B847B143BC6F50013D2CA /* ColorTag.m in Sources */,
 				8970EA55143CC24200C5AC69 /* AddStudentViewController.m in Sources */,
@@ -484,6 +489,7 @@
 				896066DA14759C2B001C28CD /* EditStudentsTableViewController.m in Sources */,
 				8991C089148043E300E7EDE1 /* EditCoursesCellContentView.m in Sources */,
 				8991C08C148047C600E7EDE1 /* EditCoursesCellContentColorView.m in Sources */,
+				8991C09414845B1000E7EDE1 /* ColorPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

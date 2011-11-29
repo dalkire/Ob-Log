@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Course.h"
 #import "EditCoursesCellContentColorView.h"
+#import "ColorPicker.h"
 #import "Theme.h"
 
 @interface EditCoursesCellContentView : UIView <EditCoursesCellContentColorDelegate>
@@ -16,11 +17,13 @@
     Course *course;
     EditCoursesCellContentColorView *colorSquare;
     UITextField *titleField;
+    ColorPicker *colorPicker;
 }
 
 @property (nonatomic, retain) Course *course;
 @property (nonatomic, retain) EditCoursesCellContentColorView *colorSquare;
 @property (nonatomic, retain) UITextField *titleField;
+@property (nonatomic, retain) ColorPicker *colorPicker;
 
 - (id)initWithCourse:(Course *)crse;
 

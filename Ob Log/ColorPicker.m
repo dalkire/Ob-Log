@@ -2,7 +2,7 @@
 //  ColorPicker.m
 //  Ob Log
 //
-//  Created by David Alkire on 10/3/11.
+//  Created by David Alkire on 11/28/11.
 //  Copyright (c) 2011 Harvard Medical School. All rights reserved.
 //
 
@@ -10,66 +10,16 @@
 
 @implementation ColorPicker
 
-@synthesize delegate;
-
-@synthesize rSlider;
-@synthesize gSlider;
-@synthesize bSlider;
-
-- (id)init
+- (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:CGRectMake(0, 0, 300, 160)];
+    self = [super initWithFrame:frame];
     if (self) {
-        self.rSlider = [[ColorSlider alloc] initWithFrame:CGRectMake(0, 
-                                                                     20, 
-                                                                     300, 
-                                                                     20)];
-        self.gSlider = [[ColorSlider alloc] initWithFrame:CGRectMake(0, 
-                                                                     70, 
-                                                                     300, 
-                                                                     20)];
-        self.bSlider = [[ColorSlider alloc] initWithFrame:CGRectMake(0, 
-                                                                     120, 
-                                                                     300, 
-                                                                     20)];
-        
-        [self.rSlider setDelegate:self];
-        [self.gSlider setDelegate:self];
-        [self.bSlider setDelegate:self];
-        
-        [self.rSlider setContinuous:NO];
-        [self.gSlider setContinuous:NO];
-        [self.bSlider setContinuous:NO];
-        
-        [self.rSlider setMaximumValue:255];
-        [self.gSlider setMaximumValue:255];
-        [self.bSlider setMaximumValue:255];
-        
-        const float *themeColors = CGColorGetComponents([Theme getThemeColor].CGColor);
-        
-        [self.rSlider setValue:themeColors[0]*255];
-        [self.gSlider setValue:themeColors[1]*255];
-        [self.bSlider setValue:themeColors[2]*255];
-        
-        self.rSlider.colorLabel.text = @"Red";
-        self.gSlider.colorLabel.text = @"Green";
-        self.bSlider.colorLabel.text = @"Blue";
-        self.rSlider.valueLabel.text = [NSString stringWithFormat:@"%d", (int)self.rSlider.value];
-        self.gSlider.valueLabel.text = [NSString stringWithFormat:@"%d", (int)self.gSlider.value];
-        self.bSlider.valueLabel.text = [NSString stringWithFormat:@"%d", (int)self.bSlider.value];
-        
-        [self addSubview:self.rSlider];
-        [self addSubview:self.gSlider];
-        [self addSubview:self.bSlider];
+        // Initialization code
+        int w = frame.size.width;
+        int segLen = (float)w/6;
+        NSLog(@"SegLen: %d", segLen);
     }
     return self;
-}
-- (void)movedSlider
-{
-    self.rSlider.valueLabel.text = [NSString stringWithFormat:@"%d", (int)self.rSlider.value];
-    self.gSlider.valueLabel.text = [NSString stringWithFormat:@"%d", (int)self.gSlider.value];
-    self.bSlider.valueLabel.text = [NSString stringWithFormat:@"%d", (int)self.bSlider.value];
-    [delegate didSelectRed:self.rSlider.value/255.0 green:self.gSlider.value/255.0 blue:self.bSlider.value/255.0];
 }
 
 /*

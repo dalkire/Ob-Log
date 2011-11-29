@@ -60,7 +60,7 @@
     [textField setFont:[UIFont fontWithName:@"Helvetica" size:26]];
     [textField setPlaceholder:@"Course title"];
     
-    colorPicker = [[ColorPicker alloc] init];
+    colorPicker = [[ColorPicker_ alloc] init];
     [colorPicker setDelegate:self];
     colorPicker.center = CGPointMake(270, 250);
     
