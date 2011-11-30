@@ -79,20 +79,26 @@
 {
     int len = [self.tableView numberOfRowsInSection:0];
     for (int i = 0; i < len; i++) {
-        NSString *str = @"";
+        NSString *strFirst = @"";
+        NSString *strLast = @"";
         if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_OLD]) {
-            str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_OLD]).text : @""];
-            [_studentsArray replaceObjectAtIndex:i withObject:str];
-            [(Student *)[_studentsCoreDataArray objectAtIndex:i] setFirstName:str];
+            strFirst = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_OLD]).text : @""];
+            strLast = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_OLD]).text : @""];
+            [_studentsArray replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%@, %@", strLast, strFirst]];
+            [(Student *)[_studentsCoreDataArray objectAtIndex:i] setFirstName:strFirst];
+            [(Student *)[_studentsCoreDataArray objectAtIndex:i] setLastName:strLast];
         }
         else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_TEMP]) {
-            str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_TEMP]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_TEMP]).text : @""];
-            [_studentsArray replaceObjectAtIndex:i withObject:str];
-            [(Student *)[_studentsCoreDataArray objectAtIndex:i] setFirstName:str];
+            strFirst = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_TEMP]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_TEMP]).text : @""];
+            strLast = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_TEMP]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_TEMP]).text : @""];
+            [_studentsArray replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%@, %@", strLast, strFirst]];
+            [(Student *)[_studentsCoreDataArray objectAtIndex:i] setFirstName:strFirst];
+            [(Student *)[_studentsCoreDataArray objectAtIndex:i] setLastName:strLast];
         }
         else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW]) {
-            str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW]).text : @""];
-            if ([str isEqualToString:@""]) {
+            strFirst = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_NEW]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_NEW]).text : @""];
+            strLast = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW]).text : @""];
+            if ([strFirst isEqualToString:@""] && [strLast isEqualToString:@""]) {
                 [_studentsArray removeObjectAtIndex:i];
                 [_managedObjectContext deleteObject:(Student *)[_studentsCoreDataArray objectAtIndex:i]];
                 [_studentsCoreDataArray removeObjectAtIndex:i];
@@ -213,18 +219,22 @@
                                                     alpha:1]];
         [tfLast setFont:[UIFont boldSystemFontOfSize:17]];
         if ([[_studentsArray objectAtIndex:indexPath.row] isEqualToString:@"zzzAdd_Studentzzz"]) {
+            [cell.textLabel setHidden:YES];
             [tfFirst setPlaceholder:@"First Name"];
             [tfFirst setText:@""];
-            [tfFirst setTag:TEXTFIELD_LAST_NEW];
+            [tfFirst setTag:TEXTFIELD_FIRST_NEW];
             [tfLast setPlaceholder:@"Last Name"];
             [tfLast setText:@""];
             [tfLast setTag:TEXTFIELD_LAST_NEW];
         }
         else {
+            [cell.textLabel setHidden:NO];
             [tfFirst setText:[_studentsArray objectAtIndex:indexPath.row]];
             [tfFirst setTag:TEXTFIELD_FIRST_OLD];
             [tfLast setText:[_studentsArray objectAtIndex:indexPath.row]];
             [tfLast setTag:TEXTFIELD_LAST_OLD];
+            [tfFirst setHidden:YES];
+            [tfLast setHidden:YES];
         }
         [tfFirst setDelegate:self];
         [cell.contentView addSubview:tfFirst];
@@ -327,7 +337,7 @@
             news++;
         }
     }
-    if (textField.tag == TEXTFIELD_LAST_NEW) {// && news < 1) {
+    if (textField.tag == TEXTFIELD_LAST_NEW) {
         _mayAddRow = YES;
     }
     else {
@@ -353,11 +363,18 @@
     NSMutableString *str = [NSMutableString stringWithString:[textField text]];
     [str replaceCharactersInRange:range withString:string];
     if ([str isEqualToString:@""]) {
-        [textField setTag:TEXTFIELD_LAST_NEW];
+        if (textField.tag == TEXTFIELD_FIRST_OLD || textField.tag == TEXTFIELD_FIRST_TEMP) {
+            [textField setTag:TEXTFIELD_FIRST_NEW];
+        }
+        else {
+            [textField setTag:TEXTFIELD_LAST_NEW];
+        }
+        
         int len = [self.tableView numberOfRowsInSection:0];
         for (int i = 0; i < len; i++) {
-            UITextField *tf = (UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW];
-            if (tf && ![tf isEqual:textField]) {
+            UITextField *tfF = (UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_NEW];
+            UITextField *tfL = (UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW];
+            if (tfF && tfL && ![tfF isEqual:textField] && ![tfL isEqual:textField]) {
                 [_studentsArray removeObjectAtIndex:i];
                 [_studentsCoreDataArray removeObjectAtIndex:i];
                 [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
