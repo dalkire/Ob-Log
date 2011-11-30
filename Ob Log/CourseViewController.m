@@ -206,7 +206,6 @@
 
 - (void)didTouchEdit
 {
-    NSLog(@"TOUCHED EDIT");
     EditStudentsTableViewController *editStudentsTableViewController = [[EditStudentsTableViewController alloc] 
                                                                         initWithStyle:UITableViewStyleGrouped
                                                                         andCourse:self.course];
@@ -214,10 +213,7 @@
     EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editStudentsTableViewController];
     UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
     
-    [editPop presentPopoverFromRect:CGRectMake(self.toolbar.frame.origin.x + self.toolbar.frame.size.width - 80, 
-                                               50, 
-                                               0, 
-                                               0)
+    [editPop presentPopoverFromRect:CGRectMake(108, 50, 0, 0)
                              inView:self.toolbar
            permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];

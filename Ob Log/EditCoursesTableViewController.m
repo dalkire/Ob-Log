@@ -90,6 +90,16 @@
     int len = [self.tableView numberOfRowsInSection:0];
     for (int i = 0; i < len; i++) {
         [(EditCoursesCellContentView *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:CELL_CONTENT_VIEW] hideColorPicker];
+        UIColor *courseColor = [(EditCoursesCellContentView *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:CELL_CONTENT_VIEW] colorSquare].backgroundColor;
+        const float *colorComponents = CGColorGetComponents(courseColor.CGColor);
+        float red = colorComponents[0];
+        float green = colorComponents[1];
+        float blue = colorComponents[2];
+        
+        [(Course *)[_coursesCoreDataArray objectAtIndex:i] setColorR:[NSNumber numberWithFloat:red*255]];
+        [(Course *)[_coursesCoreDataArray objectAtIndex:i] setColorG:[NSNumber numberWithFloat:green*255]];
+        [(Course *)[_coursesCoreDataArray objectAtIndex:i] setColorB:[NSNumber numberWithFloat:blue*255]];
+        [(Course *)[_coursesCoreDataArray objectAtIndex:i] setPosition:[NSNumber numberWithInt:i]];
         NSString *str = @"";
         if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]) {
             str = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_OLD]).text : @""];

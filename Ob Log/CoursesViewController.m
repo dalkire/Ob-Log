@@ -71,7 +71,14 @@
                              inView:self.toolbar
            permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
+    [editPop setDelegate:self];
     [editNavController setDelegate:self];
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    [self loadView];
+    [self initCourses];
 }
 
 - (void)didReceiveMemoryWarning

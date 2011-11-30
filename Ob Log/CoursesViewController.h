@@ -21,7 +21,7 @@
 #import "SettingsNavigationController.h"
 #import "OptionPickersTableViewController.h"
 
-@interface CoursesViewController : UIViewController <ClickRowDelegate, UINavigationControllerDelegate, SettingsTableViewControllerDelegate>
+@interface CoursesViewController : UIViewController <ClickRowDelegate, UINavigationControllerDelegate, SettingsTableViewControllerDelegate, UIPopoverControllerDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
     NSUInteger nextCourseId;
