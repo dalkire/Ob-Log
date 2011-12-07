@@ -13,11 +13,12 @@
 #import "NameCell.h"
 #import "NoteCell.h"
 #import "Header.h"
-#import "EditModalViewController.h"
+#import "EditStudentsTableViewController.h"
+#import "EditNavController.h"
 #import "OptionPicker.h"
 #import "OptionsPopoverTableViewController.h"
 
-@interface DailyEditViewController : UIViewController
+@interface DailyEditViewController : UIViewController <UIPopoverControllerDelegate>
 {
     id delegate;
     
@@ -29,9 +30,8 @@
     UIImageView *bg;
     UIScrollView *scrollView;
     Header *header;
-    EditModalViewController *editModal;
-    
     Course *course;
+    NSDate *date;
 }
 
 @property (nonatomic, assign) id delegate;
@@ -44,14 +44,13 @@
 @property (nonatomic, retain) UIImageView *bg;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) Header *header;
-@property (nonatomic, retain) EditModalViewController *editModal;
-
 @property (nonatomic, retain) Course *course;
+@property (nonatomic, retain) NSDate *date;
 
-- (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)date;
+- (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)dat;
 - (void)didTouchCoursesBtn;
+- (void)didTouchStudentsBtn;
 - (void)didTouchSegmentedControl;
-- (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date;
 - (void)showOptionsForPicker:(OptionPicker *)picker;
 
 @end

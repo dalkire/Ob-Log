@@ -12,9 +12,8 @@
 #define NOTE_CELL           776585
 #define CELL_HEIGHT         70
 
-#define SEGMENT_STUDENTS    0
-#define SEGMENT_TODAY       1
-#define SEGMENT_HISTORY     2
+#define SEGMENT_TODAY       0
+#define SEGMENT_HISTORY     1
 
 #import "DailyEditViewController.h"
 
@@ -30,9 +29,8 @@
 @synthesize bg;
 @synthesize scrollView;
 @synthesize header;
-@synthesize editModal;
-
-@synthesize course;
+@synthesize course = _course;
+@synthesize date = _date;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,7 +44,7 @@
         self.entriesArray = ea;
         [ea release];
         
-        self.course = nil;
+        _course = nil;
     }
     return self;
 }
@@ -105,7 +103,7 @@
                                                                  action:@selector(didTouchCoursesBtn)];
     
     UISegmentedControl *sc = [[UISegmentedControl alloc] 
-                              initWithItems:[NSArray arrayWithObjects:@"Students", @"Today", @"History", nil]];
+                              initWithItems:[NSArray arrayWithObjects:@"Today", @"History", nil]];
     self.segmentedControl = sc;
     [sc release];
     
@@ -121,12 +119,13 @@
     
     UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:self.segmentedControl];
     
-    /*UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] 
-                               initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
-                                                    target:self 
-                                                    action:@selector(didTouchEditBtn)];*/
+    UIBarButtonItem *studentsBtn =[[UIBarButtonItem alloc] initWithTitle:@"Students"
+                                                               style:UIBarButtonItemStyleBordered
+                                                              target:self 
+                                                              action:@selector(didTouchStudentsBtn)];
+     
     UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, flex, segmentedButtons, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, flex, studentsBtn, segmentedButtons, nil]];
     [coursesBtn release];
     [segmentedButtons release];
     [flex release];
@@ -136,9 +135,9 @@
                                                            self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 
                                                            view.frame.size.width, 
                                                            90)];
-    UIColor *bgc = [[UIColor alloc] initWithRed:[self.course.colorR floatValue]/255 
-                                          green:[self.course.colorG floatValue]/255 
-                                           blue:[self.course.colorB floatValue]/255 
+    UIColor *bgc = [[UIColor alloc] initWithRed:[_course.colorR floatValue]/255 
+                                          green:[_course.colorG floatValue]/255 
+                                           blue:[_course.colorB floatValue]/255 
                                           alpha:1];
     [self.header setBackgroundColor:bgc];
     [bgc release];
@@ -165,27 +164,29 @@
     [view release];
 }
 
-- (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)date
+- (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)dat
 {
-    [self setCourse:crse];
+    _date = dat;
+    _course = crse;
     
     
     [self.toolbar setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                green:[self.course.colorG floatValue]/255 
                                                 blue:[self.course.colorB floatValue]/255 
                                                alpha:1]];*/
-    [self.header setBackgroundColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                    green:[self.course.colorG floatValue]/255 
-                                                     blue:[self.course.colorB floatValue]/255 
+    [self.header setBackgroundColor:[UIColor colorWithRed:[_course.colorR floatValue]/255 
+                                                    green:[_course.colorG floatValue]/255 
+                                                     blue:[_course.colorB floatValue]/255 
                                                     alpha:1]];
-    [self.header.maintitleLabel setText:[NSDateFormatter localizedStringFromDate:date 
+    NSLog(@"DATE: %@", _date);
+    [self.header.maintitleLabel setText:[NSDateFormatter localizedStringFromDate:_date
                                                                        dateStyle:NSDateFormatterLongStyle 
                                                                        timeStyle:NSDateFormatterNoStyle]];
-    [self.header.subtitleLabel setText:self.course.courseTitle];
+    [self.header.subtitleLabel setText:_course.courseTitle];
     self.header.maintitleLabel.textColor = [Theme getTextColorForColor:self.header.backgroundColor];
     self.header.subtitleLabel.textColor = [Theme getTextColorForColor:self.header.backgroundColor];
 	
-    [self setStudentsMutableArray:[CoreDataHelperFunctions fetchStudentsForCourse:self.course]];
+    [self setStudentsMutableArray:[CoreDataHelperFunctions fetchStudentsForCourse:_course]];
     int len = [self.studentsMutableArray count];
     for (int i = 0; i < len; i++) {
         NSLog(@"## student %@", (Student *)[studentsMutableArray objectAtIndex:i]);
@@ -194,8 +195,8 @@
                                                                            self.view.frame.size.width, 
                                                                            CELL_HEIGHT)
                                                      andStudent:(Student *)[studentsMutableArray objectAtIndex:i] 
-                                                       inCourse:crse 
-                                                        forDate:date];
+                                                       inCourse:_course 
+                                                        forDate:_date];
         [row setTag:i];
         [row setDelegate:self];
         [row setHighlightColor:self.header.backgroundColor];
@@ -205,9 +206,9 @@
         for (int j = 0; j < length; j++) {
             [(OptionPicker *)[row.optionPickers objectAtIndex:j] setDailyEditRow:row];
             [(OptionPicker *)[row.optionPickers objectAtIndex:j] 
-             setHighlightColor:[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                               green:[self.course.colorG floatValue]/255 
-                                                blue:[self.course.colorB floatValue]/255 
+             setHighlightColor:[UIColor colorWithRed:[_course.colorR floatValue]/255 
+                                               green:[_course.colorG floatValue]/255 
+                                                blue:[_course.colorB floatValue]/255 
                                                alpha:1]];
             NSLog(@"Setting devc as delegate for OP: %@", (OptionPicker *)[row.optionPickers objectAtIndex:j]);
         }
@@ -223,13 +224,31 @@
     [self.delegate loadCoursesViewController];
 }
 
+- (void)didTouchStudentsBtn
+{
+    EditStudentsTableViewController *editStudentsTableViewController = [[EditStudentsTableViewController alloc] 
+                                                                        initWithStyle:UITableViewStyleGrouped
+                                                                        andCourse:_course];
+    
+    EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editStudentsTableViewController];
+    UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
+    
+    [editPop presentPopoverFromRect:CGRectMake(600, 50, 0, 0)
+                             inView:self.toolbar
+           permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
+    [editPop setDelegate:self];
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    [self loadView];
+    [self loadStudentsForCourse:_course andDate:_date];
+}
+
 - (void)didTouchSegmentedControl
 {
     switch ([self.segmentedControl selectedSegmentIndex]) {
-        case SEGMENT_STUDENTS:
-            NSLog(@"touched segment list");
-            [delegate loadCourseViewControllerForCourse:self.course];
-            break;
         case SEGMENT_TODAY:
             NSLog(@"touched segment today");
             break;
@@ -239,14 +258,6 @@
         default:
             break;
     }
-}
-
-- (void)initModalForUser:(NSUInteger)uid andDate:(NSDate *)date
-{
-    NSLog(@"%d // %@", uid, date);
-    self.editModal = [[EditModalViewController alloc] initWithNibName:nil bundle:nil];
-    self.editModal.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentModalViewController:editModal animated:YES];
 }
 
 - (void)showOptionsForPicker:(OptionPicker *)picker

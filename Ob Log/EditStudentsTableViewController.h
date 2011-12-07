@@ -14,6 +14,7 @@
 @interface EditStudentsTableViewController : UITableViewController <UITextFieldDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
+    Course *course;
     NSMutableArray *studentsArray;
     NSMutableArray *studentsCoreDataArray;
     BOOL myEditing;
@@ -21,12 +22,13 @@
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) Course *course;
 @property (nonatomic, retain) NSMutableArray *studentsArray;
 @property (nonatomic, retain) NSMutableArray *studentsCoreDataArray;
 @property BOOL mayAddRow;
 
 - (id)initWithStyle:(UITableViewStyle)style andCourse:(Course *)crs;
-- (void)loadOptionPickers;
+- (void)loadStudentsArray;
 - (void)didTouchEditButton;
 - (void)didTouchDoneButton;
 - (void)saveStudents;

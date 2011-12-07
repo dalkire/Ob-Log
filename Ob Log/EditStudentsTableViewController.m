@@ -18,6 +18,7 @@
 @implementation EditStudentsTableViewController
 
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize course = _course;
 @synthesize studentsArray = _studentsArray;
 @synthesize studentsCoreDataArray = _studentsCoreDataArray;
 @synthesize mayAddRow = _mayAddRow;
@@ -29,17 +30,19 @@
         _managedObjectContext = [CoreDataHelperFunctions managedObjectContext];
         _studentsArray = [[NSMutableArray alloc] initWithCapacity:0];
         _studentsCoreDataArray = [[NSMutableArray alloc] initWithArray:[CoreDataHelperFunctions fetchStudentsForCourse:crs]];
+        _course = crs;
+        [self loadStudentsArray];
         UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                                 target:self 
                                                                                 action:@selector(didTouchEditButton)];
         [self.navigationItem setRightBarButtonItem:editBtn];
-        [self setTitle:[crs courseTitle]];
+        [self.navigationItem setTitle:[crs courseTitle]];
         [self.tableView setEditing:NO];
     }
     return self;
 }
 
-- (void)loadOptionPickers
+- (void)loadStudentsArray
 {
     NSMutableArray *stu = [[NSMutableArray alloc] initWithCapacity:0];
     int len = [_studentsCoreDataArray count];
@@ -69,6 +72,7 @@
                                             inManagedObjectContext:_managedObjectContext];
     [student setFirstName:@""];
     [student setLastName:@""];
+    [student addCoursesObject:_course];
     [_studentsCoreDataArray addObject:student];
     [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView setEditing:YES];
@@ -81,29 +85,36 @@
     for (int i = 0; i < len; i++) {
         NSString *strFirst = @"";
         NSString *strLast = @"";
-        if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_OLD]) {
-            strFirst = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_OLD]).text : @""];
-            strLast = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_OLD]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_OLD]).text : @""];
+        
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        
+        if ([cell viewWithTag:TEXTFIELD_LAST_OLD]) {
+            strFirst = [NSString stringWithFormat:@"%@", ((UITextField *)[cell viewWithTag:TEXTFIELD_FIRST_OLD]).text ? ((UITextField *)[cell viewWithTag:TEXTFIELD_FIRST_OLD]).text : @""];
+            strLast = [NSString stringWithFormat:@"%@", ((UITextField *)[cell viewWithTag:TEXTFIELD_LAST_OLD]).text ? ((UITextField *)[cell viewWithTag:TEXTFIELD_LAST_OLD]).text : @""];
             [_studentsArray replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%@, %@", strLast, strFirst]];
             [(Student *)[_studentsCoreDataArray objectAtIndex:i] setFirstName:strFirst];
             [(Student *)[_studentsCoreDataArray objectAtIndex:i] setLastName:strLast];
         }
-        else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_TEMP]) {
-            strFirst = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_TEMP]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_TEMP]).text : @""];
-            strLast = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_TEMP]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_TEMP]).text : @""];
+        else if ([cell viewWithTag:TEXTFIELD_LAST_TEMP]) {
+            strFirst = [NSString stringWithFormat:@"%@", ((UITextField *)[cell viewWithTag:TEXTFIELD_FIRST_TEMP]).text ? ((UITextField *)[cell viewWithTag:TEXTFIELD_FIRST_TEMP]).text : @""];
+            strLast = [NSString stringWithFormat:@"%@", ((UITextField *)[cell viewWithTag:TEXTFIELD_LAST_TEMP]).text ? ((UITextField *)[cell viewWithTag:TEXTFIELD_LAST_TEMP]).text : @""];
             [_studentsArray replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%@, %@", strLast, strFirst]];
             [(Student *)[_studentsCoreDataArray objectAtIndex:i] setFirstName:strFirst];
             [(Student *)[_studentsCoreDataArray objectAtIndex:i] setLastName:strLast];
         }
         else if ([[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW]) {
-            strFirst = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_NEW]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_FIRST_NEW]).text : @""];
-            strLast = [NSString stringWithFormat:@"%@", ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW]).text ? ((UITextField *)[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] viewWithTag:TEXTFIELD_LAST_NEW]).text : @""];
+            strFirst = [NSString stringWithFormat:@"%@", ((UITextField *)[cell viewWithTag:TEXTFIELD_FIRST_NEW]).text ? ((UITextField *)[cell viewWithTag:TEXTFIELD_FIRST_NEW]).text : @""];
+            strLast = [NSString stringWithFormat:@"%@", ((UITextField *)[cell viewWithTag:TEXTFIELD_LAST_NEW]).text ? ((UITextField *)[cell viewWithTag:TEXTFIELD_LAST_NEW]).text : @""];
             if ([strFirst isEqualToString:@""] && [strLast isEqualToString:@""]) {
                 [_studentsArray removeObjectAtIndex:i];
                 [_managedObjectContext deleteObject:(Student *)[_studentsCoreDataArray objectAtIndex:i]];
                 [_studentsCoreDataArray removeObjectAtIndex:i];
             }
         }
+        NSLog(@">>FIRST: %@, LAST: %@", strFirst, strLast);
+        
+        [cell.textLabel setHidden:NO];
+        //[cell release];
     }
     UIBarButtonItem *editBtn =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                             target:self 
@@ -150,7 +161,6 @@
     
     NSLog(@"VIEW WILL APPEAR");
     [self setContentSizeForViewInPopover:CGSizeMake(320, 440)];
-    [self loadOptionPickers];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -198,60 +208,74 @@
     [cell.textLabel setText:[_studentsArray objectAtIndex:indexPath.row]];
     
     if (self.tableView.editing) {
-        //[_optionsArray replaceObjectAtIndex:indexPath.row withObject:@""];
-        //[cell.textLabel setText:@""];
+        [cell.textLabel setHidden:YES];
+        
+        if ([cell viewWithTag:TEXTFIELD_FIRST_OLD]) {
+            NSLog(@"found textfield first old");
+        }
+        
         UITextField *tfFirst = [[UITextField alloc] initWithFrame:CGRectMake(10, 
-                                                                        11, 
-                                                                        121, 
-                                                                        24)];
-        [tfFirst setBackgroundColor:[UIColor colorWithRed:(float)0xF7/0xFF 
-                                               green:(float)0xF7/0xFF 
-                                                blue:(float)0xF7/0xFF 
-                                               alpha:1]];
-        [tfFirst setFont:[UIFont boldSystemFontOfSize:17]];
-        UITextField *tfLast = [[UITextField alloc] initWithFrame:CGRectMake(141, 
                                                                              11, 
                                                                              121, 
                                                                              24)];
-        [tfLast setBackgroundColor:[UIColor colorWithRed:(float)0xF7/0xFF 
+        [tfFirst setBackgroundColor:[UIColor colorWithRed:(float)0xF7/0xFF 
                                                     green:(float)0xF7/0xFF 
                                                      blue:(float)0xF7/0xFF 
                                                     alpha:1]];
+        [tfFirst setFont:[UIFont boldSystemFontOfSize:17]];
+        UITextField *tfLast = [[UITextField alloc] initWithFrame:CGRectMake(141, 
+                                                                            11, 
+                                                                            121, 
+                                                                            24)];
+        [tfLast setBackgroundColor:[UIColor colorWithRed:(float)0xF7/0xFF 
+                                                   green:(float)0xF7/0xFF 
+                                                    blue:(float)0xF7/0xFF 
+                                                   alpha:1]];
         [tfLast setFont:[UIFont boldSystemFontOfSize:17]];
+        
+        [tfFirst setPlaceholder:@"First Name"];
+        [tfFirst setTag:TEXTFIELD_FIRST_NEW];
+        [tfLast setPlaceholder:@"Last Name"];
+        [tfLast setTag:TEXTFIELD_LAST_NEW];
+        
         if ([[_studentsArray objectAtIndex:indexPath.row] isEqualToString:@"zzzAdd_Studentzzz"]) {
-            [cell.textLabel setHidden:YES];
-            [tfFirst setPlaceholder:@"First Name"];
+            NSLog(@"FOUND ADD STUDENT CELL");
             [tfFirst setText:@""];
-            [tfFirst setTag:TEXTFIELD_FIRST_NEW];
-            [tfLast setPlaceholder:@"Last Name"];
             [tfLast setText:@""];
-            [tfLast setTag:TEXTFIELD_LAST_NEW];
         }
         else {
-            [cell.textLabel setHidden:NO];
-            [tfFirst setText:[_studentsArray objectAtIndex:indexPath.row]];
+            [tfFirst setText:[(Student *)[_studentsCoreDataArray objectAtIndex:indexPath.row] firstName]];
             [tfFirst setTag:TEXTFIELD_FIRST_OLD];
-            [tfLast setText:[_studentsArray objectAtIndex:indexPath.row]];
+            [tfLast setText:[(Student *)[_studentsCoreDataArray objectAtIndex:indexPath.row] lastName]];
             [tfLast setTag:TEXTFIELD_LAST_OLD];
-            [tfFirst setHidden:YES];
-            [tfLast setHidden:YES];
         }
+        
         [tfFirst setDelegate:self];
         [cell.contentView addSubview:tfFirst];
         [tfLast setDelegate:self];
         [cell.contentView addSubview:tfLast];
+        
         [cell setAccessoryType:UITableViewCellAccessoryNone];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     else {
         if ([cell viewWithTag:TEXTFIELD_LAST_OLD]) {
-            [[cell viewWithTag:TEXTFIELD_LAST_OLD] removeFromSuperview];
+            [[cell viewWithTag:TEXTFIELD_LAST_OLD] setHidden:YES];
         }
         else if ([cell viewWithTag:TEXTFIELD_LAST_TEMP]) {
-            [[cell viewWithTag:TEXTFIELD_LAST_TEMP] removeFromSuperview];
+            [[cell viewWithTag:TEXTFIELD_LAST_TEMP] setHidden:YES];
         }
         else if ([cell viewWithTag:TEXTFIELD_LAST_NEW]) {
-            [[cell viewWithTag:TEXTFIELD_LAST_NEW] removeFromSuperview];
+            [[cell viewWithTag:TEXTFIELD_LAST_NEW] setHidden:YES];
+        }
+        if ([cell viewWithTag:TEXTFIELD_FIRST_OLD]) {
+            [[cell viewWithTag:TEXTFIELD_FIRST_OLD] setHidden:YES];
+        }
+        else if ([cell viewWithTag:TEXTFIELD_FIRST_TEMP]) {
+            [[cell viewWithTag:TEXTFIELD_FIRST_TEMP] setHidden:YES];
+        }
+        else if ([cell viewWithTag:TEXTFIELD_FIRST_NEW]) {
+            [[cell viewWithTag:TEXTFIELD_FIRST_NEW] setHidden:YES];
         }
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
@@ -347,6 +371,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    NSLog(@"TEXTFIELD CHANGE TAG = %d", textField.tag);
     if (_mayAddRow) {
         int pos = [_studentsArray count];
         NSArray *row = [[NSArray alloc] initWithObjects:[NSIndexPath indexPathForRow:pos inSection:0], nil];
@@ -356,6 +381,7 @@
                                             inManagedObjectContext:_managedObjectContext];
         [student setFirstName:@""];
         [student setLastName:@""];
+        [student addCoursesObject:_course];
         [_studentsCoreDataArray addObject:student];
         [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationBottom];
         _mayAddRow = NO;
@@ -363,12 +389,12 @@
     NSMutableString *str = [NSMutableString stringWithString:[textField text]];
     [str replaceCharactersInRange:range withString:string];
     if ([str isEqualToString:@""]) {
-        if (textField.tag == TEXTFIELD_FIRST_OLD || textField.tag == TEXTFIELD_FIRST_TEMP) {
+        /*if (textField.tag == TEXTFIELD_FIRST_OLD || textField.tag == TEXTFIELD_FIRST_TEMP || textField.tag == TEXTFIELD_FIRST_NEW) {
             [textField setTag:TEXTFIELD_FIRST_NEW];
         }
         else {
             [textField setTag:TEXTFIELD_LAST_NEW];
-        }
+        }*/
         
         int len = [self.tableView numberOfRowsInSection:0];
         for (int i = 0; i < len; i++) {
@@ -383,7 +409,12 @@
         }
     }
     else {
-        [textField setTag:TEXTFIELD_LAST_TEMP];
+        if (textField.tag == TEXTFIELD_FIRST_OLD || textField.tag == TEXTFIELD_FIRST_NEW) {
+            [textField setTag:TEXTFIELD_FIRST_TEMP];
+        }
+        else if (textField.tag == TEXTFIELD_LAST_OLD || textField.tag == TEXTFIELD_LAST_NEW) {
+            [textField setTag:TEXTFIELD_LAST_TEMP];
+        }
     }
     
     return TRUE;

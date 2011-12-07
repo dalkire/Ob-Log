@@ -15,7 +15,7 @@
 #import "Header.h"
 #import "ClickRow.h"
 
-@interface CourseViewController : UIViewController <ClickRowDelegate, AddStudentDelegate>
+@interface CourseViewController : UIViewController <ClickRowDelegate, AddStudentDelegate, UIPopoverControllerDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
     
