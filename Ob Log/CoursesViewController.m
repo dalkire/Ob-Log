@@ -64,10 +64,7 @@
     //[editCoursesViewController.tableView setEditing:YES];
     UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
     
-    [editPop presentPopoverFromRect:CGRectMake(80, 
-                                               50, 
-                                               0, 
-                                               0)
+    [editPop presentPopoverFromRect:CGRectMake(80, 33, 0, 0)
                              inView:self.toolbar
            permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
@@ -252,7 +249,7 @@
     [settingsPopTVC setTitle:@"Settings"];
     self.settingsNavController = [[SettingsNavigationController alloc] initWithRootViewController:settingsPopTVC];
     self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:settingsNavController];
-    [self.settingsPopoverController presentPopoverFromRect:CGRectMake(10, 50, 0, 0) 
+    [self.settingsPopoverController presentPopoverFromRect:CGRectMake(10, 33, 0, 0) 
                                                    inView:self.toolbar
                                   permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     [self.settingsPopoverController setPopoverContentSize:CGSizeMake(320, 480) animated:NO];

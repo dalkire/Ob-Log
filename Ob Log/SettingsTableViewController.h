@@ -18,6 +18,7 @@
 
 @property (nonatomic, assign) __weak id delegate;
 @property (nonatomic, retain) NSArray *settingsArray;
+@property (nonatomic, retain) NSArray *basicsArray;
 @property (nonatomic, retain) NSMutableArray *optionsArray;
 
 @end

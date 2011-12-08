@@ -10,17 +10,19 @@
 
 @implementation SettingsTableViewController
 
-@synthesize settingsArray = _settingsArray;
-@synthesize optionsArray = _optionsArray;
+@synthesize settingsArray   = _settingsArray;
+@synthesize basicsArray     = _basicsArray;
+@synthesize optionsArray    = _optionsArray;
 @synthesize delegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        NSArray *basicsArray = [[NSArray alloc] initWithObjects:@"About", @"Help", nil];
+        
         _optionsArray = [[NSMutableArray alloc] initWithObjects:@"Option Sets", @"Row 2", @"Row 3", nil];
-        _settingsArray = [[NSArray alloc] initWithObjects:basicsArray, _optionsArray, nil];
+        _basicsArray = [[NSArray alloc] initWithObjects:@"About", @"Help", nil];
+        _settingsArray = [[NSArray alloc] initWithObjects:_optionsArray, _basicsArray, nil];
         [self.tableView setDataSource:self];
         [self.tableView setDelegate:self];
     }
@@ -154,7 +156,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath indexAtPosition:0] == 1 && [indexPath indexAtPosition:1] == 0) {
+    if ([indexPath indexAtPosition:0] == 0 && [indexPath indexAtPosition:1] == 0) {
         [self.delegate selectedOptionPickersRow];
     }
 }

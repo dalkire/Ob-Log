@@ -213,7 +213,7 @@
     EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editStudentsTableViewController];
     UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
     
-    [editPop presentPopoverFromRect:CGRectMake(108, 50, 0, 0)
+    [editPop presentPopoverFromRect:CGRectMake(108, 33, 0, 0)
                              inView:self.toolbar
            permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];

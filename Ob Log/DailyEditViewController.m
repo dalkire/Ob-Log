@@ -45,6 +45,7 @@
         [ea release];
         
         _course = nil;
+        _date = [[NSDate alloc] init];
     }
     return self;
 }
@@ -178,6 +179,7 @@
                                                     green:[_course.colorG floatValue]/255 
                                                      blue:[_course.colorB floatValue]/255 
                                                     alpha:1]];
+    NSLog(@"Before date printout");
     NSLog(@"DATE: %@", _date);
     [self.header.maintitleLabel setText:[NSDateFormatter localizedStringFromDate:_date
                                                                        dateStyle:NSDateFormatterLongStyle 
@@ -233,7 +235,7 @@
     EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editStudentsTableViewController];
     UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
     
-    [editPop presentPopoverFromRect:CGRectMake(600, 50, 0, 0)
+    [editPop presentPopoverFromRect:CGRectMake(604, 33, 0, 0)
                              inView:self.toolbar
            permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
@@ -242,8 +244,9 @@
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-    [self loadView];
-    [self loadStudentsForCourse:_course andDate:_date];
+    //[self loadView];
+    //NSLog(@"POPOVER DATE: %@", _date ? _date : @"-not found-");
+    //[self loadStudentsForCourse:_course andDate:[NSDate date]];
 }
 
 - (void)didTouchSegmentedControl
