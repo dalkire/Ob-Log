@@ -38,6 +38,7 @@
         [self.navigationItem setRightBarButtonItem:editBtn];
         [self.navigationItem setTitle:[crs courseTitle]];
         [self.tableView setEditing:NO];
+        [self didTouchEditButton];
     }
     return self;
 }

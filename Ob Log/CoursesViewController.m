@@ -64,7 +64,7 @@
     //[editCoursesViewController.tableView setEditing:YES];
     UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
     
-    [editPop presentPopoverFromRect:CGRectMake(80, 33, 0, 0)
+    [editPop presentPopoverFromRect:CGRectMake(618, 33, 0, 0)
                              inView:self.toolbar
            permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
@@ -144,7 +144,7 @@
                                                                50)];
     [self.toolbar setBarStyle:UIBarStyleDefault];
     self.toolbar.tintColor = [Theme getThemeColor];//self.navigationController.navigationBar.backgroundColor;
-    [self.toolbar setItems:[NSArray arrayWithObjects:settingsBtn, editBtn, flex, segmentedButtons, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:settingsBtn, flex, editBtn, segmentedButtons, nil]];
     
     self.header = [[Header alloc] initWithFrame:CGRectMake(0, 
                                                            self.toolbar.frame.origin.y + self.toolbar.frame.size.height, 

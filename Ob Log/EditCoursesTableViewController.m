@@ -42,6 +42,7 @@
                                                                                 action:@selector(didTouchEditButton)];
         [self.navigationItem setRightBarButtonItem:editBtn];
         [self.tableView setEditing:NO];
+        [self didTouchEditButton];
     }
     return self;
 }
