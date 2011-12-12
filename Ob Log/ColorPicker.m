@@ -20,7 +20,7 @@
         // Initialization code
         [self setBackgroundColor:[UIColor clearColor]];
         _slider = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon-slider.png"]];
-        [_slider setFrame:CGRectMake(0, -2, _slider.frame.size.width, _slider.frame.size.height)];
+        [_slider setFrame:CGRectMake(75, -2, _slider.frame.size.width, _slider.frame.size.height)];
         [self addSubview:_slider];
     }
     return self;
@@ -164,6 +164,7 @@
     x = x > self.frame.size.width - 5 ? self.frame.size.width - 5 : x;
     
     [_slider setFrame:CGRectMake(x, _slider.frame.origin.y, _slider.frame.size.width, _slider.frame.size.height)];
+    NSLog(@"_slider x: %f", _slider.frame.origin.x);
     
     float pct = self.frame.size.width/6;
     pct = (x + 4)/pct;

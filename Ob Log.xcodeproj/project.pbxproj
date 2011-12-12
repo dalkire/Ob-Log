@@ -29,6 +29,7 @@
 		8970EA60143CD40900C5AC69 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8970EA5F143CD40800C5AC69 /* icon.png */; };
 		8970EA66143CE7C800C5AC69 /* CoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA65143CE7C800C5AC69 /* CoursesViewController.m */; };
 		8970EA69143CEEB200C5AC69 /* Toolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970EA68143CEEB100C5AC69 /* Toolbar.m */; };
+		897722901496A4F700B1FC50 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8977228F1496A4F700B1FC50 /* Default-Portrait~ipad.png */; };
 		897728DA1430212D00B6D985 /* NameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 897728D91430212D00B6D985 /* NameCell.m */; };
 		89786491144F0B2200B76EB9 /* OptionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 89786490144F0B2200B76EB9 /* OptionHeader.m */; };
 		897AF166144DF319005D71E9 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF165144DF319005D71E9 /* SettingsTableViewController.m */; };
@@ -107,6 +108,7 @@
 		8970EA65143CE7C800C5AC69 /* CoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursesViewController.m; sourceTree = "<group>"; };
 		8970EA67143CEEB100C5AC69 /* Toolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toolbar.h; sourceTree = "<group>"; };
 		8970EA68143CEEB100C5AC69 /* Toolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toolbar.m; sourceTree = "<group>"; };
+		8977228F1496A4F700B1FC50 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		897728D81430212D00B6D985 /* NameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameCell.h; sourceTree = "<group>"; };
 		897728D91430212D00B6D985 /* NameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameCell.m; sourceTree = "<group>"; };
 		8978648F144F0B2200B76EB9 /* OptionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionHeader.h; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		892C9694142B67E000994EAB = {
 			isa = PBXGroup;
 			children = (
+				8977228F1496A4F700B1FC50 /* Default-Portrait~ipad.png */,
 				89217A95142F84A5003FEC33 /* CoreData.framework */,
 				89C4B53A142BA87C00D035BA /* QuartzCore.framework */,
 				892C96A9142B67E000994EAB /* Ob Log */,
@@ -435,6 +438,7 @@
 				899C5B55148538C300FCADDC /* icon-x.png in Resources */,
 				899C5B5D148573D500FCADDC /* icon-slider.png in Resources */,
 				8908476014955C5E00304A36 /* icon-home.png in Resources */,
+				897722901496A4F700B1FC50 /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
