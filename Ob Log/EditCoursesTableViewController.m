@@ -72,14 +72,16 @@
                                    inManagedObjectContext:_managedObjectContext];
     [course setCourseTitle:@""];
     
-    const float *colorComponents = CGColorGetComponents([Theme getThemeColor].CGColor);
-    float r = colorComponents[0]*255;
-    float g = colorComponents[1]*255;
-    float b = colorComponents[2]*255;
+    //const float *colorComponents = CGColorGetComponents([Theme getThemeColor].CGColor);
+    //float r = colorComponents[0]*255;
+    //float g = colorComponents[1]*255;
+    //float b = colorComponents[2]*255;
+    //(float)115.16/255.0 
+//blue:(float)255.0/255.0 
     
-    [course setColorR:[NSNumber numberWithFloat:r]];
-    [course setColorG:[NSNumber numberWithFloat:g]];
-    [course setColorB:[NSNumber numberWithFloat:b]];
+    [course setColorR:[NSNumber numberWithInt:0]];
+    [course setColorG:[NSNumber numberWithInt:115]];
+    [course setColorB:[NSNumber numberWithInt:255]];
     [_coursesCoreDataArray addObject:course];
     [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView setEditing:YES];
@@ -194,12 +196,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    //NSString *CellIdentifier = [[NSString alloc] initWithFormat:@"Cell-%d", indexPath.row];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //if (cell == nil) {
+        UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+    //}
     
     EditCoursesCellContentView *content = [[EditCoursesCellContentView alloc] initWithCourse:[_coursesCoreDataArray objectAtIndex:indexPath.row]];
     [content setTag:CELL_CONTENT_VIEW];

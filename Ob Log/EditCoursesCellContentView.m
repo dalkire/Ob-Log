@@ -28,7 +28,11 @@
                                                                                              green:[[crse colorG] floatValue]/255.0 
                                                                                               blue:[[crse colorB] floatValue]/255.0 
                                                                                              alpha:1.0] 
-                                                                            : [Theme getThemeColor];
+                                                                            : [UIColor colorWithRed:(float)0 
+                                                                                              green:(float)115.16/255.0 
+                                                                                               blue:(float)255.0/255.0 
+                                                                                              alpha:1.0];
+        NSLog(@"init with course: %@", crse);
         
         _colorSquare = [[EditCoursesCellContentColorView alloc] initWithColor:color];
         [_colorSquare setDelegate:self];

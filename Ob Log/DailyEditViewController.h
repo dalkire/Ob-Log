@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "CoreDataHelperFunctions.h"
 #import "DailyEditRow.h"
+#import "ClickRow.h"
 #import "NameCell.h"
 #import "NoteCell.h"
 #import "Header.h"
@@ -48,7 +49,7 @@
 @property (nonatomic, retain) NSDate *date;
 
 - (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)dat;
-- (void)didTouchCoursesBtn;
+- (void)didTouchHomeBtn;
 - (void)didTouchStudentsBtn;
 - (void)didTouchSegmentedControl;
 - (void)showOptionsForPicker:(OptionPicker *)picker;

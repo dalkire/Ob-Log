@@ -17,6 +17,7 @@
     self = [super initWithFrame:CGRectMake(14, 10, 24, 24)];
     if (self) {
         [self setBackgroundColor:color];
+        NSLog(@"init With Color: %@", color);
     }
     return self;
 }

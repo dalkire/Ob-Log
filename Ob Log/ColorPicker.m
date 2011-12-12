@@ -100,6 +100,58 @@
     x = x > self.frame.size.width - 5 ? self.frame.size.width - 5 : x;
     
     [_slider setFrame:CGRectMake(currentTouchPosition.x - 5, _slider.frame.origin.y, _slider.frame.size.width, _slider.frame.size.height)];
+    
+    float pct = self.frame.size.width/6;
+    pct = (x + 4)/pct;
+    
+    int section = (int)pct;
+    pct = pct - section;
+    
+    UIColor *color = [Theme getThemeColor];
+    
+    switch (section) {
+        case 0:
+            color = [UIColor colorWithRed:(float)1 
+                                    green:(float)0 
+                                     blue:(float)pct
+                                    alpha:(float)1];
+            break;
+        case 1:
+            color = [UIColor colorWithRed:(float)1 - pct 
+                                    green:(float)0 
+                                     blue:(float)1
+                                    alpha:(float)1];
+            break;
+        case 2:
+            color = [UIColor colorWithRed:(float)0 
+                                    green:(float)pct 
+                                     blue:(float)1
+                                    alpha:(float)1];
+            break;
+        case 3:
+            color = [UIColor colorWithRed:(float)0 
+                                    green:(float)1 
+                                     blue:(float)1 - pct
+                                    alpha:(float)1];
+            break;
+        case 4:
+            color = [UIColor colorWithRed:(float)pct 
+                                    green:(float)1
+                                     blue:(float)0
+                                    alpha:(float)1];
+            break;
+        case 5:
+            color = [UIColor colorWithRed:(float)1 
+                                    green:(float)1 - pct 
+                                     blue:(float)0
+                                    alpha:(float)1];
+            break;
+            
+        default:
+            break;
+    }
+    
+    [_delegate selectedColor:color];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

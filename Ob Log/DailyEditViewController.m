@@ -103,6 +103,11 @@
                                                                  target:self 
                                                                  action:@selector(didTouchCoursesBtn)];
     
+    UIBarButtonItem *homeBtn =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-home.png"] 
+                                                                   style:UIBarButtonItemStyleBordered 
+                                                                  target:self 
+                                                                  action:@selector(didTouchHomeBtn)];
+    
     UISegmentedControl *sc = [[UISegmentedControl alloc] 
                               initWithItems:[NSArray arrayWithObjects:@"Today", @"History", nil]];
     self.segmentedControl = sc;
@@ -126,7 +131,7 @@
                                                               action:@selector(didTouchStudentsBtn)];
      
     UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [self.toolbar setItems:[NSArray arrayWithObjects:coursesBtn, flex, studentsBtn, segmentedButtons, nil]];
+    [self.toolbar setItems:[NSArray arrayWithObjects:homeBtn, flex, studentsBtn, segmentedButtons, nil]];
     [coursesBtn release];
     [segmentedButtons release];
     [flex release];
@@ -170,6 +175,19 @@
     _date = dat;
     _course = crse;
     
+    
+    UIView *linesbg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20*CELL_HEIGHT)];
+    for (int i = 0; i < 20; i++) {
+        Row *crBG = [[Row alloc] initWithFrame:CGRectMake(0, 
+                                                                    i*CELL_HEIGHT, 
+                                                                    self.view.frame.size.width, 
+                                                                    CELL_HEIGHT)];
+        [crBG setUserInteractionEnabled:NO];
+        [linesbg addSubview:crBG];
+    }
+    
+    [scrollView addSubview:linesbg];
+    [linesbg release];
     
     [self.toolbar setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                green:[self.course.colorG floatValue]/255 
@@ -221,7 +239,7 @@
     }
 }
 
-- (void)didTouchCoursesBtn
+- (void)didTouchHomeBtn
 {
     [self.delegate loadCoursesViewController];
 }

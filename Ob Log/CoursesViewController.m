@@ -180,22 +180,19 @@
 
 - (void)initCourses
 {
-    /*NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:_managedObjectContext];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"courseTitle" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [request setEntity:entity];
-    [request setSortDescriptors:sortDescriptors];
     
-    NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[_managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResults == nil) {
-        NSLog(@"fetchResults error");
+    UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20*CELL_HEIGHT)];
+    for (int i = 0; i < 20; i++) {
+        ClickRow *crBG = [[ClickRow alloc] initWithFrame:CGRectMake(0, 
+                                                                    i*CELL_HEIGHT, 
+                                                                    self.view.frame.size.width, 
+                                                                    CELL_HEIGHT)];
+        [crBG setUserInteractionEnabled:NO];
+        [bg addSubview:crBG];
     }
-    else {
-        NSLog(@"fetchResults Success..");
-    }*/
     
+    [scrollView addSubview:bg];
+    [bg release];
     
     NSMutableArray *fetchResults = [CoreDataHelperFunctions fetchCourses];
     
