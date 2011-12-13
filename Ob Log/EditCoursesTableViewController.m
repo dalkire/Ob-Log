@@ -324,14 +324,10 @@
                                         inManagedObjectContext:_managedObjectContext];
         [course setCourseTitle:@""];
         
-        const float *colorComponents = CGColorGetComponents([Theme getThemeColor].CGColor);
-        float r = colorComponents[0]*255;
-        float g = colorComponents[1]*255;
-        float b = colorComponents[2]*255;
+        [course setColorR:[NSNumber numberWithInt:0]];
+        [course setColorG:[NSNumber numberWithInt:115]];
+        [course setColorB:[NSNumber numberWithInt:255]];
         
-        [course setColorR:[NSNumber numberWithFloat:r]];
-        [course setColorG:[NSNumber numberWithFloat:g]];
-        [course setColorB:[NSNumber numberWithFloat:b]];
         [course setPosition:[NSNumber numberWithInt:pos]];
         [_coursesCoreDataArray addObject:course];
         [self.tableView insertRowsAtIndexPaths:row withRowAnimation:UITableViewRowAnimationBottom];
