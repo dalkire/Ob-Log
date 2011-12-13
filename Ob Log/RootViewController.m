@@ -10,6 +10,7 @@
 #define VIEW_CONTROLLER_COURSE      1
 #define VIEW_CONTROLLER_DAILYEDIT   2
 #define SPLASH                      77
+#define CON                         88
 
 #import "RootViewController.h"
 
@@ -32,6 +33,7 @@
                                                            self.coursesViewController.view.frame.size.width, 
                                                            self.coursesViewController.view.frame.size.height);
         [self setCurrentViewController:VIEW_CONTROLLER_COURSES];
+        NSLog(@"initWithNibName");
     }
     return self;
 }
@@ -56,13 +58,21 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 768, 1004)];
+    NSLog(@"loadView");
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 768, 1024)];
     [view setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
     
     UIImageView *splash = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default-Portrait~ipad.png"]];
     splash.frame = CGRectMake(splash.frame.origin.x, splash.frame.origin.y - 20, splash.frame.size.width, splash.frame.size.height);
     [splash setTag:SPLASH];
+    [splash setUserInteractionEnabled:YES];
+    [splash addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(curlAway)]];
     
+    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 300, 300)];
+    [container setTag:CON];
+    [container setClipsToBounds:YES];
+    
+    [container addSubview:splash];
     [view addSubview:self.coursesViewController.view];
     [view addSubview:splash];
     
@@ -70,19 +80,21 @@
     [view release];
 }
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    NSLog(@"VDL");
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
+    NSLog(@"VDA and [self.view viewWithTag:SPLASH]: %@", [self.view viewWithTag:SPLASH]);
+    NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
-- (void)timerFireMethod:(NSTimer *)theTimer
+- (void)timerFireMethod:(NSTimer*)theTimer
 {
-    NSLog(@"FIRE TIMER: %@", theTimer);
-    [[self.view viewWithTag:SPLASH] removeFromSuperview];
+    NSLog(@"curl away");
+    [UIView transitionWithView:self.view 
+                      duration:.6
+                       options:UIViewAnimationOptionTransitionCurlUp | UIViewAnimationOptionCurveEaseInOut
+                    animations:^ { [[self.view viewWithTag:SPLASH] removeFromSuperview]; }
+                    completion:nil];
 }
 
 - (void)viewDidUnload
@@ -109,7 +121,7 @@
 
 #pragma mark - delegation
 
-- (void)loadCourseViewControllerForCourse:(Course *)course
+/*- (void)loadCourseViewControllerForCourse:(Course *)course
 {
     self.courseViewController = nil;
     if (self.courseViewController == nil)
@@ -125,14 +137,14 @@
         [self.courseViewController setDelegate:self];
     }
     
-    [UIView beginAnimations:@"View Flip" context:nil];
-    [UIView setAnimationDuration:.5];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    //[UIView beginAnimations:@"View Flip" context:nil];
+    //[UIView setAnimationDuration:.6];
+    //[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     
     UIViewController *coming = nil;
     UIViewController *going = nil;
-    UIViewAnimationTransition transition;
-    transition = UIViewAnimationTransitionCurlUp;
+    UIViewAnimationOptions transition;
+    transition = UIViewAnimationOptionTransitionCurlUp;
     coming = self.courseViewController;
     switch (self.currentViewController) {
         case VIEW_CONTROLLER_COURSES:
@@ -140,24 +152,31 @@
             break;
         case VIEW_CONTROLLER_DAILYEDIT:
             going = self.dailyEditViewController;
-            transition = UIViewAnimationTransitionCurlDown;
+            transition = UIViewAnimationOptionTransitionCurlDown;
             break;
             
         default:
             break;
     }
     
-    [UIView setAnimationTransition: transition forView:self.view cache:YES];
-    [coming viewWillAppear:YES];
-    [going viewWillDisappear:YES];
-    [going.view removeFromSuperview];
-    [self.view insertSubview: coming.view atIndex:0];
-    [going viewDidDisappear:YES];
-    [coming viewDidAppear:YES];
     
-    [UIView commitAnimations];
+    [UIView transitionWithView:self.view 
+                      duration:.6
+                       options:transition
+                    animations:^ { [self.view insertSubview: coming.view atIndex:0]; [going.view removeFromSuperview]; }
+                    completion:nil];
+    
+    //[UIView setAnimationTransition: transition forView:self.view cache:YES];
+    //[coming viewWillAppear:YES];
+    //[going viewWillDisappear:YES];
+    //[going.view removeFromSuperview];
+    //[self.view insertSubview: coming.view atIndex:0];
+    //[going viewDidDisappear:YES];
+    //[coming viewDidAppear:YES];
+    
+    //[UIView commitAnimations];
     [self setCurrentViewController:VIEW_CONTROLLER_COURSE];
-}
+}*/
 
 - (void)didTouchCoursesList
 {
@@ -170,7 +189,7 @@
     [self.dailyEditViewController setManagedObjectContext:self.managedObjectContext];
     
     [UIView beginAnimations:@"View Flip" context:nil];
-    [UIView setAnimationDuration:.5];
+    [UIView setAnimationDuration:.6];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     
     UIViewController *coming = nil;
@@ -216,7 +235,7 @@
     }
     
     [UIView beginAnimations:@"View Flip" context:nil];
-    [UIView setAnimationDuration:.5];
+    [UIView setAnimationDuration:.6];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     
     UIViewController *coming = nil;
@@ -250,23 +269,15 @@
 
 - (void)loadDailyEditViewForCourse:(Course *)course andDate:(NSDate *)date
 {
-    self.dailyEditViewController = nil;
+    NSLog(@"loadload--");
     self.dailyEditViewController = [[DailyEditViewController alloc] initWithNibName:nil bundle:nil];
-    self.dailyEditViewController.view.frame = CGRectMake(0, 
-                                                         0, 
-                                                         self.dailyEditViewController.view.frame.size.width, 
-                                                         self.dailyEditViewController.view.frame.size.height);
     [self.dailyEditViewController setManagedObjectContext:self.managedObjectContext];
     [self.dailyEditViewController loadStudentsForCourse:course andDate:date];
     [self.dailyEditViewController setDelegate:self];
     
-    [UIView beginAnimations:@"View Flip" context:nil];
-    [UIView setAnimationDuration:.5];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    
     UIViewController *coming = nil;
     UIViewController *going = nil;
-    UIViewAnimationTransition transition;
+    UIViewAnimationOptions transition;
     coming = self.dailyEditViewController;
     switch (self.currentViewController) {
         case VIEW_CONTROLLER_COURSE:
@@ -279,17 +290,14 @@
         default:
             break;
     }
-    transition = UIViewAnimationTransitionCurlUp;
+    transition = UIViewAnimationOptionTransitionCurlUp | UIViewAnimationOptionCurveEaseInOut;
     
-    [UIView setAnimationTransition: transition forView:self.view cache:YES];
-    [coming viewWillAppear:YES];
-    [going viewWillDisappear:YES];
-    [going.view removeFromSuperview];
-    [self.view insertSubview: coming.view atIndex:0];
-    [going viewDidDisappear:YES];
-    [coming viewDidAppear:YES];
+    [UIView transitionWithView:self.view 
+                      duration:.6
+                       options:transition
+                    animations:^ { [self.view insertSubview: coming.view atIndex:0]; [going.view removeFromSuperview]; }
+                    completion:nil];
     
-    [UIView commitAnimations];
     [self setCurrentViewController:VIEW_CONTROLLER_DAILYEDIT];
 }
 
