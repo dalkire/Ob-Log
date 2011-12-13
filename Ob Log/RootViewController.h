@@ -10,9 +10,8 @@
 #import "CoursesViewController.h"
 #import "DailyEditViewController.h"
 #import "CourseViewController.h"
-#import "HistoryEditViewController.h"
 
-@interface RootViewController : UIViewController <CoursesViewControllerDelegate, CourseViewControllerDelegate, DailyEditViewControllerDelegate, HistoryEditViewControllerDelegate>
+@interface RootViewController : UIViewController <CoursesViewControllerDelegate, CourseViewControllerDelegate, DailyEditViewControllerDelegate>
 {
     NSManagedObjectContext *managedObjectContext;
     
@@ -20,7 +19,6 @@
     CoursesViewController *coursesViewController;
     DailyEditViewController *dailyEditViewController;
     CourseViewController *courseViewController;
-    HistoryEditViewController *historyEditViewController;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -29,7 +27,6 @@
 @property (nonatomic, retain) CoursesViewController *coursesViewController;
 @property (nonatomic, retain) DailyEditViewController *dailyEditViewController;
 @property (nonatomic, retain) CourseViewController *courseViewController;
-@property (nonatomic, retain) HistoryEditViewController *historyEditViewController;
 
 - (void)initContext;
 

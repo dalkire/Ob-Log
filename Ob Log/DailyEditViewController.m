@@ -93,9 +93,9 @@
                                                                50)];
     [_toolbar setBarStyle:UIBarStyleDefault];
     [_toolbar setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                               green:[self.course.colorG floatValue]/255 
-                                                blue:[self.course.colorB floatValue]/255 
-                                               alpha:1]];*/
+                                                       green:[self.course.colorG floatValue]/255 
+                                                       blue:[self.course.colorB floatValue]/255 
+                                                       alpha:1]];*/
     
     UIBarButtonItem *coursesBtn =[[UIBarButtonItem alloc] initWithTitle:@"Courses"
                                                                   style:UIBarButtonItemStyleBordered
@@ -103,24 +103,24 @@
                                                                  action:@selector(didTouchCoursesBtn)];
     
     UIBarButtonItem *homeBtn =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-home.png"] 
-                                                                   style:UIBarButtonItemStyleBordered 
-                                                                  target:self 
-                                                                  action:@selector(didTouchHomeBtn)];
+                                                               style:UIBarButtonItemStyleBordered 
+                                                              target:self 
+                                                              action:@selector(didTouchHomeBtn)];
     
     UISegmentedControl *sc = [[UISegmentedControl alloc] 
                               initWithItems:[NSArray arrayWithObjects:@"Today", @"History", nil]];
     _segmentedControl = sc;
-    [sc release];
+    //[sc release];
     
-    [_segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    _segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
     [_segmentedControl setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                                        green:[self.course.colorG floatValue]/255 
-                                                         blue:[self.course.colorB floatValue]/255 
-                                                        alpha:1]];*/
+                                                                green:[self.course.colorG floatValue]/255 
+                                                                blue:[self.course.colorB floatValue]/255 
+                                                                alpha:1]];*/
     [_segmentedControl setSelectedSegmentIndex:SEGMENT_TODAY];
     [_segmentedControl addTarget:self
-                          action:@selector(didTouchSegmentedControl)
-                forControlEvents:UIControlEventValueChanged];
+                              action:@selector(didTouchSegmentedControl)
+                    forControlEvents:UIControlEventValueChanged];
     
     UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:_segmentedControl];
     
@@ -128,7 +128,7 @@
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:self 
                                                                   action:@selector(didTouchStudentsBtn)];
-     
+    
     UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [_toolbar setItems:[NSArray arrayWithObjects:homeBtn, flex, studentsBtn, segmentedButtons, nil]];
     [coursesBtn release];
@@ -137,9 +137,9 @@
     //[editBtn release];
     
     _header = [[Header alloc] initWithFrame:CGRectMake(0, 
-                                                       _toolbar.frame.origin.y + _toolbar.frame.size.height, 
-                                                       view.frame.size.width, 
-                                                       90)];
+                                                           _toolbar.frame.origin.y + _toolbar.frame.size.height, 
+                                                           view.frame.size.width, 
+                                                           90)];
     UIColor *bgc = [[UIColor alloc] initWithRed:[_course.colorR floatValue]/255 
                                           green:[_course.colorG floatValue]/255 
                                            blue:[_course.colorB floatValue]/255 
@@ -147,8 +147,7 @@
     [_header setBackgroundColor:bgc];
     [bgc release];
     
-    [_header.maintitleLabel setTextColor:[Theme getTextColorForColor:_header.backgroundColor]];
-    [_header.subtitleLabel setTextColor:[Theme getTextColorForColor:_header.backgroundColor]];
+    _header.maintitleLabel.textColor = _header.subtitleLabel.textColor = [Theme getTextColorForColor:_header.backgroundColor];
     
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0,  
                                                                       _header.frame.origin.y + _header.frame.size.height, 
@@ -158,8 +157,6 @@
                                                                       _header.frame.size.height -
                                                                       [UIApplication sharedApplication].statusBarFrame.size.height)];
     _scrollView = sv;
-    [sv release];
-    
     _scrollView.contentSize = CGSizeMake(view.frame.size.width, 0);
     _scrollView.backgroundColor = [UIColor clearColor];
     
@@ -179,20 +176,20 @@
     UIView *linesbg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20*CELL_HEIGHT)];
     for (int i = 0; i < 20; i++) {
         Row *crBG = [[Row alloc] initWithFrame:CGRectMake(0, 
-                                                                    i*CELL_HEIGHT, 
-                                                                    self.view.frame.size.width, 
-                                                                    CELL_HEIGHT)];
+                                                          i*CELL_HEIGHT, 
+                                                          self.view.frame.size.width, 
+                                                          CELL_HEIGHT)];
         [crBG setUserInteractionEnabled:NO];
         [linesbg addSubview:crBG];
     }
     
-    [scrollView addSubview:linesbg];
+    [_scrollView addSubview:linesbg];
     [linesbg release];
     
     [_toolbar setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
-                                               green:[self.course.colorG floatValue]/255 
-                                                blue:[self.course.colorB floatValue]/255 
-                                               alpha:1]];*/
+                                                       green:[self.course.colorG floatValue]/255 
+                                                       blue:[self.course.colorB floatValue]/255 
+                                                       alpha:1]];*/
     [_header setBackgroundColor:[UIColor colorWithRed:[_course.colorR floatValue]/255 
                                                     green:[_course.colorG floatValue]/255 
                                                      blue:[_course.colorB floatValue]/255 
@@ -203,18 +200,18 @@
                                                                        dateStyle:NSDateFormatterLongStyle 
                                                                        timeStyle:NSDateFormatterNoStyle]];
     [_header.subtitleLabel setText:_course.courseTitle];
-    [_header.maintitleLabel setTextColor:[Theme getTextColorForColor:_header.backgroundColor]];
-    [_header.subtitleLabel setTextColor:[Theme getTextColorForColor:_header.backgroundColor]];
-	
-    [self setStudentsMutableArray:[CoreDataHelperFunctions fetchStudentsForCourse:_course]];
+    _header.maintitleLabel.textColor = [Theme getTextColorForColor:_header.backgroundColor];
+    _header.subtitleLabel.textColor = [Theme getTextColorForColor:_header.backgroundColor];
+    
+    _studentsMutableArray = [CoreDataHelperFunctions fetchStudentsForCourse:_course];
     int len = [_studentsMutableArray count];
     for (int i = 0; i < len; i++) {
-        NSLog(@"## student %@", (Student *)[studentsMutableArray objectAtIndex:i]);
+        NSLog(@"## student %@", (Student *)[_studentsMutableArray objectAtIndex:i]);
         DailyEditRow *row = [[DailyEditRow alloc] initWithFrame:CGRectMake(0, 
                                                                            i*CELL_HEIGHT, 
                                                                            self.view.frame.size.width, 
                                                                            CELL_HEIGHT)
-                                                     andStudent:(Student *)[studentsMutableArray objectAtIndex:i] 
+                                                     andStudent:(Student *)[_studentsMutableArray objectAtIndex:i] 
                                                        inCourse:_course 
                                                         forDate:_date];
         [row setTag:i];
@@ -275,7 +272,6 @@
             break;
         case SEGMENT_HISTORY:
             NSLog(@"touched segment history");
-            [_delegate loadHistoryEditViewControllerForCourse:_course];
             break;
         default:
             break;
@@ -311,12 +307,12 @@
 }
 
 /*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
+ // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+ - (void)viewDidLoad
+ {
+ [super viewDidLoad];
+ }
+ */
 
 - (void)viewDidUnload
 {
@@ -326,18 +322,18 @@
 }
 
 /*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    switch (interfaceOrientation) {
-        case UIInterfaceOrientationPortrait:
-            return YES;
-            break;
-            
-        default:
-            return NO;
-            break;
-    }
-    
-	return NO;
-}*/
+ {
+ switch (interfaceOrientation) {
+ case UIInterfaceOrientationPortrait:
+ return YES;
+ break;
+ 
+ default:
+ return NO;
+ break;
+ }
+ 
+ return NO;
+ }*/
 
 @end

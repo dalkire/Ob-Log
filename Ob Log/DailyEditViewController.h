@@ -60,6 +60,5 @@
 
 - (void)loadCoursesViewController;
 - (void)loadCourseViewControllerForCourse:(Course *)crse;
-- (void)loadHistoryEditViewControllerForCourse:(Course *)crse;
 
 @end
