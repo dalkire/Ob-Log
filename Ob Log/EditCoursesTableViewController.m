@@ -33,7 +33,7 @@
             [_coursesArray addObject:[[_coursesCoreDataArray objectAtIndex:i] courseTitle]];
         }
         NSLog(@":: %@", _coursesCoreDataArray);
-        self.navigationItem.title = @"Edit Courses";
+        self.navigationItem.title = @"Edit Classes";
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         

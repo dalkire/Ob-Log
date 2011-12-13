@@ -1,5 +1,5 @@
 //
-//  DailyEditViewController.h
+//  HistoryEditViewController.h
 //  Ob Log
 //
 //  Created by David Alkire on 10/2/11.
@@ -19,7 +19,7 @@
 #import "OptionPicker.h"
 #import "OptionsPopoverTableViewController.h"
 
-@interface DailyEditViewController : UIViewController <UIPopoverControllerDelegate>
+@interface HistoryEditViewController : UIViewController <UIPopoverControllerDelegate>
 {
     id delegate;
     
@@ -48,6 +48,7 @@
 @property (nonatomic, retain) Course *course;
 @property (nonatomic, retain) NSDate *date;
 
+- (id)initWithCourse:(Course *)crse;
 - (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)dat;
 - (void)didTouchHomeBtn;
 - (void)didTouchStudentsBtn;
@@ -56,10 +57,9 @@
 
 @end
 
-@protocol DailyEditViewControllerDelegate <NSObject>
+@protocol HistoryEditViewControllerDelegate <NSObject>
 
 - (void)loadCoursesViewController;
 - (void)loadCourseViewControllerForCourse:(Course *)crse;
-- (void)loadHistoryEditViewControllerForCourse:(Course *)crse;
 
 @end

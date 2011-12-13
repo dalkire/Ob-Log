@@ -9,30 +9,32 @@
 #define VIEW_CONTROLLER_COURSES     0
 #define VIEW_CONTROLLER_COURSE      1
 #define VIEW_CONTROLLER_DAILYEDIT   2
+#define VIEW_CONTROLLER_HISTORYEDIT 3
 
 #import "RootViewController.h"
 
 @implementation RootViewController
 
-@synthesize managedObjectContext;
+@synthesize managedObjectContext = _managedObjectContext;
 
-@synthesize currentViewController;
-@synthesize coursesViewController;
-@synthesize dailyEditViewController;
-@synthesize courseViewController;
+@synthesize currentViewController       = _currentViewController;
+@synthesize coursesViewController       = _coursesViewController;
+@synthesize dailyEditViewController     = _dailyEditViewController;
+@synthesize courseViewController        = _courseViewController;
+@synthesize historyEditViewController   = _historyEditViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
-        self.coursesViewController = [[CoursesViewController alloc] initWithNibName:nil bundle:nil];
+        _coursesViewController = [[CoursesViewController alloc] initWithNibName:nil bundle:nil];
         //[self.coursesViewController loadView];
-        self.coursesViewController.view.frame = CGRectMake(0, 
-                                                           0, 
-                                                           self.coursesViewController.view.frame.size.width, 
-                                                           self.coursesViewController.view.frame.size.height);
-        [self.view addSubview:self.coursesViewController.view];
+        _coursesViewController.view.frame = CGRectMake(0, 
+                                                       0, 
+                                                       _coursesViewController.view.frame.size.width, 
+                                                       _coursesViewController.view.frame.size.height);
+        [self.view addSubview:_coursesViewController.view];
         [self setCurrentViewController:VIEW_CONTROLLER_COURSES];
     }
     return self;
@@ -40,7 +42,7 @@
 
 - (void)initContext
 {
-    [self.coursesViewController setManagedObjectContext:self.managedObjectContext];
+    [self.coursesViewController setManagedObjectContext:_managedObjectContext];
     [self.coursesViewController initCourses];
     [self.coursesViewController setDelegate:self];
 }
@@ -95,18 +97,18 @@
 
 - (void)loadCourseViewControllerForCourse:(Course *)course
 {
-    self.courseViewController = nil;
-    if (self.courseViewController == nil)
+    _courseViewController = nil;
+    if (_courseViewController == nil)
     {
-        self.courseViewController = [[CourseViewController alloc]
+        _courseViewController = [[CourseViewController alloc]
                                         initWithCourse:course];
-        [self.courseViewController setManagedObjectContext:self.managedObjectContext];
-        [self.courseViewController initStudents];
-        self.courseViewController.view.frame = CGRectMake(0, 
-                                                          0, 
-                                                          self.courseViewController.view.frame.size.width, 
-                                                          self.courseViewController.view.frame.size.height);
-        [self.courseViewController setDelegate:self];
+        [_courseViewController setManagedObjectContext:_managedObjectContext];
+        [_courseViewController initStudents];
+        _courseViewController.view.frame = CGRectMake(0, 
+                                                      0, 
+                                                      _courseViewController.view.frame.size.width, 
+                                                      _courseViewController.view.frame.size.height);
+        [_courseViewController setDelegate:self];
     }
     
     [UIView beginAnimations:@"View Flip" context:nil];
@@ -117,13 +119,13 @@
     UIViewController *going = nil;
     UIViewAnimationTransition transition;
     transition = UIViewAnimationTransitionCurlUp;
-    coming = self.courseViewController;
-    switch (self.currentViewController) {
+    coming = _courseViewController;
+    switch (_currentViewController) {
         case VIEW_CONTROLLER_COURSES:
-            going = self.coursesViewController;
+            going = _coursesViewController;
             break;
         case VIEW_CONTROLLER_DAILYEDIT:
-            going = self.dailyEditViewController;
+            going = _dailyEditViewController;
             transition = UIViewAnimationTransitionCurlDown;
             break;
             
@@ -141,6 +143,49 @@
     
     [UIView commitAnimations];
     [self setCurrentViewController:VIEW_CONTROLLER_COURSE];
+}
+
+- (void)loadHistoryEditViewControllerForCourse:(Course *)crse
+{
+    _historyEditViewController = nil;
+    _historyEditViewController = [[HistoryEditViewController alloc] initWithCourse:crse];
+    [_historyEditViewController setManagedObjectContext:_managedObjectContext];
+    //[_historyEditViewController initStudents];
+    [_historyEditViewController.view setFrame:CGRectMake(0, 
+                                                         0, 
+                                                         _historyEditViewController.view.frame.size.width, 
+                                                         _historyEditViewController.view.frame.size.height)];
+    [_historyEditViewController setDelegate:self];
+    
+    [UIView beginAnimations:@"View Flip" context:nil];
+    [UIView setAnimationDuration:.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    
+    UIViewController *coming = nil;
+    UIViewController *going = nil;
+    UIViewAnimationTransition transition;
+    transition = UIViewAnimationTransitionCurlUp;
+    coming = _historyEditViewController;
+    switch (_currentViewController) {
+        case VIEW_CONTROLLER_DAILYEDIT:
+            going = _dailyEditViewController;
+            transition = UIViewAnimationTransitionCurlDown;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [UIView setAnimationTransition: transition forView:self.view cache:YES];
+    [coming viewWillAppear:YES];
+    [going viewWillDisappear:YES];
+    [going.view removeFromSuperview];
+    [self.view insertSubview: coming.view atIndex:0];
+    [going viewDidDisappear:YES];
+    [coming viewDidAppear:YES];
+    
+    [UIView commitAnimations];
+    [self setCurrentViewController:VIEW_CONTROLLER_HISTORYEDIT];
 }
 
 - (void)didTouchCoursesList

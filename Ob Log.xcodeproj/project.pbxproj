@@ -35,6 +35,7 @@
 		897AF166144DF319005D71E9 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF165144DF319005D71E9 /* SettingsTableViewController.m */; };
 		897AF16B144E09FA005D71E9 /* SettingsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF16A144E09FA005D71E9 /* SettingsNavigationController.m */; };
 		897AF16E144E0BCC005D71E9 /* OptionPickersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AF16D144E0BCC005D71E9 /* OptionPickersTableViewController.m */; };
+		897C9D2414979A8000EEB605 /* HistoryEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897C9D2314979A8000EEB605 /* HistoryEditViewController.m */; };
 		898B2276143F844400D883DF /* EditNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898B2275143F844300D883DF /* EditNavController.m */; };
 		898B2279143F846E00D883DF /* EditCoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898B2278143F846E00D883DF /* EditCoursesTableViewController.m */; };
 		8991C089148043E300E7EDE1 /* EditCoursesCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8991C088148043E300E7EDE1 /* EditCoursesCellContentView.m */; };
@@ -119,6 +120,8 @@
 		897AF16A144E09FA005D71E9 /* SettingsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNavigationController.m; sourceTree = "<group>"; };
 		897AF16C144E0BCC005D71E9 /* OptionPickersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionPickersTableViewController.h; sourceTree = "<group>"; };
 		897AF16D144E0BCC005D71E9 /* OptionPickersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionPickersTableViewController.m; sourceTree = "<group>"; };
+		897C9D2214979A8000EEB605 /* HistoryEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryEditViewController.h; sourceTree = "<group>"; };
+		897C9D2314979A8000EEB605 /* HistoryEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryEditViewController.m; sourceTree = "<group>"; };
 		898B2274143F844300D883DF /* EditNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNavController.h; sourceTree = "<group>"; };
 		898B2275143F844300D883DF /* EditNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNavController.m; sourceTree = "<group>"; };
 		898B2277143F846E00D883DF /* EditCoursesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCoursesTableViewController.h; sourceTree = "<group>"; };
@@ -359,6 +362,8 @@
 				8970EA65143CE7C800C5AC69 /* CoursesViewController.m */,
 				89DF84741438ADB400D5F444 /* DailyEditViewController.h */,
 				89DF84751438ADB400D5F444 /* DailyEditViewController.m */,
+				897C9D2214979A8000EEB605 /* HistoryEditViewController.h */,
+				897C9D2314979A8000EEB605 /* HistoryEditViewController.m */,
 				895B5D97142EB99A007D7B9C /* EditModalViewController.h */,
 				895B5D98142EB99A007D7B9C /* EditModalViewController.m */,
 				89C9F564143A205F00ED2E4A /* OptionsPopoverTableViewController.h */,
@@ -494,6 +499,7 @@
 				8991C09414845B1000E7EDE1 /* ColorPicker.m in Sources */,
 				899C5B52148536B100FCADDC /* CloseBtn.m in Sources */,
 				899C5B5814856E3800FCADDC /* ColorTag.m in Sources */,
+				897C9D2414979A8000EEB605 /* HistoryEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

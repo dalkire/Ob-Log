@@ -1,5 +1,5 @@
 //
-//  DailyEditViewController.m
+//  HistoryEditViewController.m
 //  Ob Log
 //
 //  Created by David Alkire on 10/2/11.
@@ -15,9 +15,9 @@
 #define SEGMENT_TODAY       0
 #define SEGMENT_HISTORY     1
 
-#import "DailyEditViewController.h"
+#import "HistoryEditViewController.h"
 
-@implementation DailyEditViewController
+@implementation HistoryEditViewController
 
 @synthesize delegate                = _delegate;
 @synthesize studentsMutableArray    = _studentsMutableArray;
@@ -31,9 +31,9 @@
 @synthesize course                  = _course;
 @synthesize date                    = _date;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCourse:(Course *)crse
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
         NSMutableArray *sma = [[NSMutableArray alloc] initWithCapacity:0];
         _studentsMutableArray = sma;
@@ -112,22 +112,22 @@
     _segmentedControl = sc;
     [sc release];
     
-    [_segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    _segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
     [_segmentedControl setTintColor:[Theme getThemeColor]];/*[UIColor colorWithRed:[self.course.colorR floatValue]/255 
                                                         green:[self.course.colorG floatValue]/255 
                                                          blue:[self.course.colorB floatValue]/255 
                                                         alpha:1]];*/
     [_segmentedControl setSelectedSegmentIndex:SEGMENT_TODAY];
     [_segmentedControl addTarget:self
-                          action:@selector(didTouchSegmentedControl)
-                forControlEvents:UIControlEventValueChanged];
+                              action:@selector(didTouchSegmentedControl)
+                    forControlEvents:UIControlEventValueChanged];
     
-    UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:_segmentedControl];
+    UIBarButtonItem *segmentedButtons = [[UIBarButtonItem alloc] initWithCustomView:self.segmentedControl];
     
     UIBarButtonItem *studentsBtn =[[UIBarButtonItem alloc] initWithTitle:@"Students"
-                                                                   style:UIBarButtonItemStyleBordered
-                                                                  target:self 
-                                                                  action:@selector(didTouchStudentsBtn)];
+                                                               style:UIBarButtonItemStyleBordered
+                                                              target:self 
+                                                              action:@selector(didTouchStudentsBtn)];
      
     UIBarButtonItem	*flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [_toolbar setItems:[NSArray arrayWithObjects:homeBtn, flex, studentsBtn, segmentedButtons, nil]];
@@ -137,9 +137,9 @@
     //[editBtn release];
     
     _header = [[Header alloc] initWithFrame:CGRectMake(0, 
-                                                       _toolbar.frame.origin.y + _toolbar.frame.size.height, 
-                                                       view.frame.size.width, 
-                                                       90)];
+                                                           _toolbar.frame.origin.y + _toolbar.frame.size.height, 
+                                                           view.frame.size.width, 
+                                                           90)];
     UIColor *bgc = [[UIColor alloc] initWithRed:[_course.colorR floatValue]/255 
                                           green:[_course.colorG floatValue]/255 
                                            blue:[_course.colorB floatValue]/255 
@@ -203,8 +203,8 @@
                                                                        dateStyle:NSDateFormatterLongStyle 
                                                                        timeStyle:NSDateFormatterNoStyle]];
     [_header.subtitleLabel setText:_course.courseTitle];
-    [_header.maintitleLabel setTextColor:[Theme getTextColorForColor:_header.backgroundColor]];
-    [_header.subtitleLabel setTextColor:[Theme getTextColorForColor:_header.backgroundColor]];
+    [_header.maintitleLabel setTextColor:[Theme getTextColorForColor:self.header.backgroundColor]];
+    [_header.subtitleLabel setTextColor:[Theme getTextColorForColor:self.header.backgroundColor]];
 	
     [self setStudentsMutableArray:[CoreDataHelperFunctions fetchStudentsForCourse:_course]];
     int len = [_studentsMutableArray count];
@@ -241,7 +241,7 @@
 
 - (void)didTouchHomeBtn
 {
-    [_delegate loadCoursesViewController];
+    [self.delegate loadCoursesViewController];
 }
 
 - (void)didTouchStudentsBtn
@@ -275,7 +275,7 @@
             break;
         case SEGMENT_HISTORY:
             NSLog(@"touched segment history");
-            [_delegate loadHistoryEditViewControllerForCourse:_course];
+            
             break;
         default:
             break;

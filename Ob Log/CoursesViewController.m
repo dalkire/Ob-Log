@@ -151,7 +151,7 @@
                                                            view.frame.size.width, 
                                                            80)];
     self.header.backgroundColor = [Theme getThemeColor];
-    [self.header.maintitleLabel setText:@"Courses"];
+    [self.header.maintitleLabel setText:@"Classes"];
     [self.header setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     self.header.maintitleLabel.textColor = [Theme getTextColorForColor:[Theme getThemeColor]];
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 
