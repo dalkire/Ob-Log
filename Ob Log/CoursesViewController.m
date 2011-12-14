@@ -188,6 +188,7 @@
                                                                     self.view.frame.size.width, 
                                                                     CELL_HEIGHT)];
         [crBG setUserInteractionEnabled:NO];
+        [crBG.marginLine setHidden:NO];
         [bg addSubview:crBG];
     }
     
@@ -223,6 +224,7 @@
         [row setDelegate:self];
         [row setCourse:(Course *)[fetchResults objectAtIndex:i]];
         [row setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        [row.marginLine setHidden:NO];
         [scrollView addSubview:row];
         
         [colorTag release];

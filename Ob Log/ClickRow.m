@@ -44,7 +44,7 @@
                                      mainLabel.frame.size.height);
         [cell addSubview:mainLabel];
         [self addSubview:cell];
-        super.marginLine.hidden = YES;
+        marginLine.hidden = YES;
     }
     return self;
 }
