@@ -36,6 +36,7 @@
     
     UIPopoverController *settingsPopoverController;
     SettingsNavigationController *settingsNavController;
+    BOOL popoverShowing;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -51,6 +52,7 @@
 
 @property (nonatomic, retain) UIPopoverController *settingsPopoverController;
 @property (nonatomic, retain) SettingsNavigationController *settingsNavController;
+@property BOOL popoverShowing;
 
 - (void)initCourses;
 - (void)didTouchSettings;

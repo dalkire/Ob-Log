@@ -26,6 +26,7 @@
 
 @synthesize settingsPopoverController;
 @synthesize settingsNavController;
+@synthesize popoverShowing = _popoverShowing;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,6 +34,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.coursesArray = [[NSMutableArray alloc] initWithCapacity:0];
+        _popoverShowing = NO;
     }
     return self;
 }
@@ -57,25 +59,25 @@
 
 - (void)didTouchEdit
 {
-    EditCoursesTableViewController *editCoursesViewController = [[EditCoursesTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    if (!_popoverShowing) {
+        EditCoursesTableViewController *editCoursesViewController = [[EditCoursesTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
-    EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editCoursesViewController];
-    [editCoursesViewController.tableView reloadData];
-    //[editCoursesViewController.tableView setEditing:YES];
-    UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
-    [editPop presentPopoverFromBarButtonItem:[[toolbar items] objectAtIndex:2] permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    /*[editPop presentPopoverFromRect:CGRectMake(618, 33, 0, 0)
-                             inView:self.toolbar
-           permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];*/
-    [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
-    [editPop setDelegate:self];
-    [editNavController setDelegate:self];
+        EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editCoursesViewController];
+        [editCoursesViewController.tableView reloadData];
+        UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
+        [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
+        [editPop setDelegate:self];
+        [editPop presentPopoverFromBarButtonItem:[[toolbar items] objectAtIndex:2] permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        _popoverShowing = YES;
+        [editNavController setDelegate:self];
+    }
 }
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     [self loadView];
     [self initCourses];
+    _popoverShowing = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -244,15 +246,18 @@
  
 - (void)didTouchSettings
 {
-    SettingsTableViewController *settingsPopTVC = [[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    [settingsPopTVC setTitle:@"Settings"];
-    self.settingsNavController = [[SettingsNavigationController alloc] initWithRootViewController:settingsPopTVC];
-    self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:settingsNavController];
-    [self.settingsPopoverController presentPopoverFromBarButtonItem:[[toolbar items] objectAtIndex:0] 
+    if (!_popoverShowing) {
+        SettingsTableViewController *settingsPopTVC = [[SettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [settingsPopTVC setTitle:@"Settings"];
+        self.settingsNavController = [[SettingsNavigationController alloc] initWithRootViewController:settingsPopTVC];
+        self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:settingsNavController];
+        [self.settingsPopoverController setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
+        [settingsPopTVC setDelegate:self];
+        [self.settingsPopoverController presentPopoverFromBarButtonItem:[[toolbar items] objectAtIndex:0] 
                                            permittedArrowDirections:UIPopoverArrowDirectionUp 
                                                            animated:YES];
-    [self.settingsPopoverController setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
-    [settingsPopTVC setDelegate:self];
+        _popoverShowing = YES;
+    }
 }
 
 - (void)selectedOptionPickersRow

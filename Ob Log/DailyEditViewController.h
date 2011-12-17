@@ -33,6 +33,7 @@
     Header *header;
     Course *course;
     NSDate *date;
+    BOOL popoverShowing;
 }
 
 @property (nonatomic, assign) id delegate;
@@ -47,6 +48,7 @@
 @property (nonatomic, retain) Header *header;
 @property (nonatomic, retain) Course *course;
 @property (nonatomic, retain) NSDate *date;
+@property BOOL popoverShowing;
 
 - (void)loadStudentsForCourse:(Course *)crse andDate:(NSDate *)dat;
 - (void)didTouchHomeBtn;

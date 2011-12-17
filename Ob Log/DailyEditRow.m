@@ -38,6 +38,7 @@
 @synthesize currentIndexPath;
 @synthesize previousIndex;
 @synthesize highlightColor = _highlightColor;
+@synthesize popoverShowing = _popoverShowing;
 
 - (id)initWithFrame:(CGRect)frame andStudent:(Student *)iStudent inCourse:(Course *)iCourse forDate:(NSDate *)iDate
 {
@@ -66,22 +67,25 @@
 
 - (void)didSelectOptionPicker:(OptionPicker *)picker
 {
-    [picker selectPicker];
-    if (_activePicker) {
-        [_activePicker deselectPicker];
-    }
-    _activePicker = picker;
+    if (!_popoverShowing) {
+        [picker selectPicker];
+        if (_activePicker) {
+            [_activePicker deselectPicker];
+        }
+        _activePicker = picker;
     
-    NSLog(@"didSelectOptionPickerin row: %@", picker.dailyEditRow);
-    OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    [optionsPopTVC setOptionsArray:picker.options];
-    _optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsPopTVC];
-    [_optionsPopoverController setPopoverContentSize:CGSizeMake(200, 200) 
+        NSLog(@"didSelectOptionPickerin row: %@", picker.dailyEditRow);
+        OptionsPopoverTableViewController *optionsPopTVC = [[OptionsPopoverTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [optionsPopTVC setOptionsArray:picker.options];
+        _optionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:optionsPopTVC];
+        [_optionsPopoverController setPopoverContentSize:CGSizeMake(200, 200) 
                                                 animated:YES];
-    [_optionsPopoverController presentPopoverFromRect:[picker bounds] 
+        [_optionsPopoverController presentPopoverFromRect:[picker bounds] 
                                                    inView:picker
                                  permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    [optionsPopTVC setDelegate:self];
+        [optionsPopTVC setDelegate:self];
+        _popoverShowing = YES;
+    }
 }
 
 - (void)didSelectOptionRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,6 +93,7 @@
     NSLog(@"%@", indexPath);
     [_optionsPopoverController dismissPopoverAnimated:YES];
     _activePicker.headerLabel.text = [_activePicker.options objectAtIndex:[indexPath indexAtPosition:1]];
+    _popoverShowing = NO;
 }
 
 - (void)dealloc

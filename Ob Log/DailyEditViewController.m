@@ -30,6 +30,7 @@
 @synthesize header                  = _header;
 @synthesize course                  = _course;
 @synthesize date                    = _date;
+@synthesize popoverShowing          = _popoverShowing;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -243,18 +244,20 @@
 
 - (void)didTouchStudentsBtn
 {
-    EditStudentsTableViewController *editStudentsTableViewController = [[EditStudentsTableViewController alloc] 
+    if (!_popoverShowing) {
+        EditStudentsTableViewController *editStudentsTableViewController = [[EditStudentsTableViewController alloc] 
                                                                         initWithStyle:UITableViewStyleGrouped
                                                                         andCourse:_course];
     
-    EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editStudentsTableViewController];
-    UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
-    
-    [editPop presentPopoverFromBarButtonItem:[[_toolbar items] objectAtIndex:2] 
+        EditNavController *editNavController = [[EditNavController alloc] initWithRootViewController:editStudentsTableViewController];
+        UIPopoverController *editPop = [[UIPopoverController alloc] initWithContentViewController:editNavController];
+        [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
+        [editPop setDelegate:self];
+        [editPop presentPopoverFromBarButtonItem:[[_toolbar items] objectAtIndex:2] 
                     permittedArrowDirections:UIPopoverArrowDirectionUp 
                                     animated:YES];
-    [editPop setPopoverContentSize:CGSizeMake(320, 480) animated:NO];
-    [editPop setDelegate:self];
+        _popoverShowing = YES;
+    }
 }
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController

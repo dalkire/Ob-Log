@@ -54,6 +54,7 @@
     NSIndexPath *currentIndexPath;
     NSInteger previousIndex;
     UIColor *highlightColor;
+    BOOL popoverShowing;
 }
 
 
@@ -85,6 +86,7 @@
 @property (nonatomic, retain) NSIndexPath *currentIndexPath;
 @property NSInteger previousIndex;
 @property (nonatomic, retain) UIColor *highlightColor;
+@property BOOL popoverShowing;
 
 - (id)initWithFrame:(CGRect)frame andStudent:(Student *)iStudent inCourse:(Course *)iCourse forDate:(NSDate *)iDate;
 - (void)assignOptionsArray:(NSMutableArray *)options;
